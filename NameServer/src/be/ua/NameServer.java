@@ -1,17 +1,38 @@
-package com.company;
+package be.ua;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Iterator;
 
 public class NameServer implements NameServerInterface {
     protected NameServer() throws RemoteException {
         super();
     }
 
-    public String getIP(String fileName) throws RemoteException {
-        return fileName;
+    public String getFileIp(String fileName) throws RemoteException {
+        int hash = getHashOfName(fileName);
+        int mapKey = 0;
+
+        Iterator keys = nodeMap.entrySet().iterator();
+        if(hash < nodeMap.firstKey()){
+            mapKey = nodeMap.lastKey();
+        }
+
+        while (keys.hasNext()) {
+            int key = keys.next();
+            if(key < hash || key == hash)
+            {
+                mapKey = key;
+            }
+        }
+        System.out.println("IP of node: " + nodeMap.get(mapKey) + "\n");
+        return nodeMap.get(mapKey);
+    }
+
+    public static int getHashOfName(String name) {
+        return Math.abs(name.hashCode() % 32769);
     }
 
     public static void main(String[] args) {

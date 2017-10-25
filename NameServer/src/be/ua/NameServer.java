@@ -41,7 +41,7 @@ public class NameServer implements NameServerInterface {
         return nodeMap.get(mapKey);
     }
 
-    public void addNode(String nodeName, String nodeIP) {
+    public void addNode(String nodeName, String nodeIP){
         try {
             int hash = getHashOfName(nodeName);
             if (nodeMap.get(hash) == null) {                    //check if already exists
@@ -53,7 +53,10 @@ public class NameServer implements NameServerInterface {
             } else {
                 System.out.println("This node already exists: "+ nodeName);
             }
-        } catch (Exception e) { }
+        } catch (Exception e) {
+            System.out.println("Nameserver - addNode error: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public void deleteNode(String nodeName){
@@ -69,7 +72,10 @@ public class NameServer implements NameServerInterface {
                 System.out.println("This node doesn't exist and therefore can't be deleted: " + nodeName);
             }
         }
-        catch( Exception e){}
+        catch( Exception e){
+            System.out.println("Nameserver - deleteNode error: " + e.getMessage());
+            e.printStackTrace();
+        }
     };
 
     public void printNodeMap(){

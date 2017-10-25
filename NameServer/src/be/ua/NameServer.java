@@ -1,6 +1,7 @@
 package be.ua;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -38,7 +39,7 @@ public class NameServer implements NameServerInterface {
         return nodeMap.get(mapKey);
     }
 
-    public void addNode(String nodeName, String nodeIP) {
+    public void addNode(String nodeName, String nodeIP){
         try {
             int hash = getHashOfName(nodeName);
             if (nodeMap.get(hash) == null) { //check if already exists
@@ -50,7 +51,10 @@ public class NameServer implements NameServerInterface {
             } else {
                 System.out.println(nodeName + " already exists");
             }
-        } catch (Exception e) { }
+        } catch (Exception e) {
+            System.out.println("Nameserver - addNode error: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public void deleteNode(String nodeName){
@@ -66,7 +70,10 @@ public class NameServer implements NameServerInterface {
                 System.out.println(nodeName + " doesn't exist and therefore can't be deleted.");
             }
         }
-        catch( Exception e){}
+        catch( Exception e){
+            System.out.println("Nameserver - deleteNode error: " + e.getMessage());
+            e.printStackTrace();
+        }
     };
 
     public void printNodeMap(){

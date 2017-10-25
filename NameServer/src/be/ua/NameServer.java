@@ -99,15 +99,6 @@ public class NameServer implements NameServerInterface {
             registry.bind(registryName, stub);
             System.out.println("Nameserver bound");
 
-
-            //test add, delete and print nodemap
-            ns.addNode("name","192.168.1.1");
-            ns.addNode("name","192.168.1.1");
-            ns.addNode("naame","192.168.1.1");
-            ns.printNodeMap();
-            ns.deleteNode("naame");
-            ns.printNodeMap();
-
         }
         catch (Exception e)
         {
@@ -115,6 +106,5 @@ public class NameServer implements NameServerInterface {
             e.printStackTrace();
         }
     }
-
     //src: http://www.tutorialspoint.com/java/java_serialization.htm
 }

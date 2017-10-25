@@ -7,6 +7,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class NameServer implements NameServerInterface {
@@ -15,25 +16,27 @@ public class NameServer implements NameServerInterface {
 
     protected NameServer() throws RemoteException {
         super();
-        nodeMap = new TreeMap<Integer, String>(); //create map
+        nodeMap = new TreeMap<>();                              //create map
     }
 
     public String getFileIp(String fileName) throws RemoteException {
         int hash = getHashOfName(fileName);
         int mapKey = 0;
 
-        Iterator keys = nodeMap.entrySet().iterator();
-        if(hash < nodeMap.firstKey()){
-            mapKey = nodeMap.lastKey();
+        Iterator<Map.Entry<Integer, String>> keys = nodeMap.entrySet().iterator();
+        if(hash < nodeMap.firstKey())                           //if the hash is smaller than the smallest node hash
+        {
+            mapKey = nodeMap.lastKey();                         //then it goes to the last node
         }
 
-        //while (keys.hasNext()) {
-//            int key = keys.next();
-//            if(key < hash || key == hash)
-//            {
-//                mapKey = key;
-//            }
-        //}
+        while (keys.hasNext()) {
+            Map.Entry<Integer, String> key = keys.next();
+            int keyHash = key.getKey();
+            if(keyHash < hash || keyHash == hash)
+            {
+                mapKey = keyHash;
+            }
+        }
         System.out.println("IP of node: " + nodeMap.get(mapKey) + "\n");
         return nodeMap.get(mapKey);
     }
@@ -41,14 +44,14 @@ public class NameServer implements NameServerInterface {
     public void addNode(String nodeName, String nodeIP) {
         try {
             int hash = getHashOfName(nodeName);
-            if (nodeMap.get(hash) == null) { //check if already exists
+            if (nodeMap.get(hash) == null) {                    //check if already exists
                 nodeMap.put(hash, nodeIP);
                 ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("./nodeMap.ser"));
                 out.writeObject(nodeMap);
                 out.close();
-                System.out.println("Succesfully added " + nodeName);
+                System.out.println("Succesfully added: " + nodeName);
             } else {
-                System.out.println(nodeName + " already exists");
+                System.out.println("This node already exists: "+ nodeName);
             }
         } catch (Exception e) { }
     }
@@ -56,14 +59,14 @@ public class NameServer implements NameServerInterface {
     public void deleteNode(String nodeName){
         try {
             int hash = getHashOfName(nodeName);
-            if (nodeMap.get(hash) != null) { //the to be deleted file exists
+            if (nodeMap.get(hash) != null) {                    //the to be deleted file exists
                 nodeMap.remove(hash);
                 ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("./nodeMap.ser"));
                 out.writeObject(nodeMap);
                 out.close();
-                System.out.println("Succesfully deleted " + nodeName);
+                System.out.println("Succesfully deleted: " + nodeName);
             }else  {
-                System.out.println(nodeName + " doesn't exist and therefore can't be deleted.");
+                System.out.println("This node doesn't exist and therefore can't be deleted: " + nodeName);
             }
         }
         catch( Exception e){}
@@ -95,10 +98,12 @@ public class NameServer implements NameServerInterface {
 
             //test add, delete and print nodemap
             ns.addNode("name","192.168.1.1");
-            ns.addNode("name","192.168.1.1");
-            ns.addNode("naame","192.168.1.1");
+            ns.addNode("name","192.168.1.2");
+            ns.addNode("myfile","192.168.1.3");
+            ns.addNode("naame","192.168.1.4");
             ns.printNodeMap();
             ns.deleteNode("naame");
+            ns.getFileIp("file");
             ns.printNodeMap();
 
         }
@@ -108,6 +113,4 @@ public class NameServer implements NameServerInterface {
             e.printStackTrace();
         }
     }
-
-    //src: http://www.tutorialspoint.com/java/java_serialization.htm
 }

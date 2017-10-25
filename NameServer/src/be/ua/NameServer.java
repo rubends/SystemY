@@ -14,12 +14,14 @@ public class NameServer implements NameServerInterface {
 
     private TreeMap<Integer, String> nodeMap;
 
-    protected NameServer() throws RemoteException {
+    protected NameServer() throws RemoteException
+    {
         super();
         nodeMap = new TreeMap<>();                              //create map
     }
 
-    public String getFileIp(String fileName) throws RemoteException {
+    public String getFileIp(String fileName) throws RemoteException
+    {
         int hash = getHashOfName(fileName);
         int mapKey = 0;
 
@@ -29,7 +31,8 @@ public class NameServer implements NameServerInterface {
             mapKey = nodeMap.lastKey();                         //then it goes to the last node
         }
 
-        while (keys.hasNext()) {
+        while (keys.hasNext())
+        {
             Map.Entry<Integer, String> key = keys.next();
             int keyHash = key.getKey();
             if(keyHash < hash || keyHash == hash)
@@ -41,7 +44,8 @@ public class NameServer implements NameServerInterface {
         return nodeMap.get(mapKey);
     }
 
-    public void addNode(String nodeName, String nodeIP){
+    public void addNode(String nodeName, String nodeIP)
+    {
         try {
             int hash = getHashOfName(nodeName);
             if (nodeMap.get(hash) == null) {                    //check if already exists
@@ -59,7 +63,8 @@ public class NameServer implements NameServerInterface {
         }
     }
 
-    public void deleteNode(String nodeName){
+    public void deleteNode(String nodeName)
+    {
         try {
             int hash = getHashOfName(nodeName);
             if (nodeMap.get(hash) != null) {                    //the to be deleted file exists
@@ -78,7 +83,8 @@ public class NameServer implements NameServerInterface {
         }
     };
 
-    public void printNodeMap(){
+    public void printNodeMap()
+    {
         System.out.println("\nList of nodes in the node map:");
         Iterator<Integer> keySetIterator = nodeMap.keySet().iterator();
         while (keySetIterator.hasNext()) {
@@ -91,7 +97,8 @@ public class NameServer implements NameServerInterface {
         return Math.abs(name.hashCode() % 32769);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         String registryName = "nodeNames";
         try
         {
@@ -100,17 +107,6 @@ public class NameServer implements NameServerInterface {
             Registry registry = LocateRegistry.createRegistry(1099);
             registry.bind(registryName, stub);
             System.out.println("Nameserver bound");
-
-
-            //test add, delete and print nodemap
-            ns.addNode("name","192.168.1.1");
-            ns.addNode("name","192.168.1.2");
-            ns.addNode("myfile","192.168.1.3");
-            ns.addNode("naame","192.168.1.4");
-            ns.printNodeMap();
-            ns.deleteNode("naame");
-            ns.getFileIp("myfile.jpg");
-            ns.printNodeMap();
 
         }
         catch (Exception e)

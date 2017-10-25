@@ -2,9 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc44581d-03de-460c-97ad-c5e98caa1672" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/hamcrest-core-1.3.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/junit-4.12.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/junit-jupiter-api-5.0.0-M4.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opentest4j-1.0.0-M2.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/NameServer/be/ua/TestingNameServer.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/junit_junit_4_12.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/be/ua/TestingNameServer.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/java_json.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/java_json1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/NameServer/Main.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/NameServer/Node.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/NameServer/com/company/NameServer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/NameServer/com/company/NameServerInterface.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nodeMap.ser" afterPath="$PROJECT_DIR$/nodeMap.ser" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/NameServer/be/ua/NameServer.class" afterPath="$PROJECT_DIR$/out/production/NameServer/be/ua/NameServer.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NameServer.iml" afterPath="$PROJECT_DIR$/NameServer.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/be/ua/NameServer.java" afterPath="$PROJECT_DIR$/src/be/ua/NameServer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/be/ua/NameServerInterface.java" afterPath="$PROJECT_DIR$/src/be/ua/NameServerInterface.java" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,11 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="NameServerInterface.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NameServerInterface.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/be/ua/NameServerInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="37" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="37" />
+            <state relative-caret-position="153">
+              <caret line="9" column="39" lean-forward="false" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -26,16 +42,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NameServer.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/be/ua/NameServer.java">
+      <file leaf-file-name="TestingNameServer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/be/ua/TestingNameServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1548">
-              <caret line="108" column="37" lean-forward="false" selection-start-line="108" selection-start-column="37" selection-end-line="108" selection-end-column="37" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1508927436722" expanded="false" signature="3370:3381" ph=" { " />
-                <marker date="1508927436722" expanded="false" signature="3422:3428" ph=" }" />
-              </folding>
+            <state relative-caret-position="187">
+              <caret line="11" column="39" lean-forward="true" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -44,8 +56,20 @@
         <entry file="file://$PROJECT_DIR$/src/be/ua/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
-              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NameServer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/be/ua/NameServer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1717">
+              <caret line="103" column="9" lean-forward="true" selection-start-line="103" selection-start-column="9" selection-end-line="103" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -54,9 +78,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getFileIp</find>
-      <find>addNode</find>
-      <find>TreeMap</find>
       <find>IOException</find>
     </findStrings>
   </component>
@@ -66,14 +87,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/src/be/ua/TestingNameServer.java" />
         <option value="$PROJECT_DIR$/src/be/ua/NameServer.java" />
+        <option value="$PROJECT_DIR$/src/be/ua/NameServerInterface.java" />
       </list>
     </option>
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="width" value="974" />
-    <option name="height" value="1057" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -99,6 +117,11 @@
             <path>
               <item name="NameServer" type="b2602c69:ProjectViewProjectNode" />
               <item name="NameServer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NameServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NameServer" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NameServer" type="b2602c69:ProjectViewProjectNode" />
@@ -332,8 +355,6 @@
           <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1508927436722" expanded="false" signature="3370:3381" ph=" { " />
-            <marker date="1508927436722" expanded="false" signature="3422:3428" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -348,29 +369,35 @@
     <entry file="file://$PROJECT_DIR$/src/be/ua/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/be/ua/NameServerInterface.java">
+    <entry file="file://$PROJECT_DIR$/src/be/ua/TestingNameServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="37" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="37" />
+        <state relative-caret-position="187">
+          <caret line="11" column="39" lean-forward="true" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/be/ua/NameServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1717">
+          <caret line="103" column="9" lean-forward="true" selection-start-line="103" selection-start-column="9" selection-end-line="103" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/be/ua/NameServer.java">
+    <entry file="file://$PROJECT_DIR$/src/be/ua/NameServerInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1548">
-          <caret line="108" column="37" lean-forward="false" selection-start-line="108" selection-start-column="37" selection-end-line="108" selection-end-column="37" />
+        <state relative-caret-position="153">
+          <caret line="9" column="39" lean-forward="false" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1508927436722" expanded="false" signature="3370:3381" ph=" { " />
-            <marker date="1508927436722" expanded="false" signature="3422:3428" ph=" }" />
           </folding>
         </state>
       </provider>

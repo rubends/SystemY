@@ -109,7 +109,7 @@ public class NameServer implements NameServerInterface {
             ns.addNode("naame","192.168.1.4");
             ns.printNodeMap();
             ns.deleteNode("naame");
-            ns.getFileIp("file");
+            ns.getFileIp("myfile.jpg");
             ns.printNodeMap();
 
         }

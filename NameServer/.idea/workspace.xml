@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc44581d-03de-460c-97ad-c5e98caa1672" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/NameServer/be/ua/NameServer.class" afterPath="$PROJECT_DIR$/out/production/NameServer/be/ua/NameServer.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/be/ua/NameServer.java" afterPath="$PROJECT_DIR$/src/be/ua/NameServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/be/ua/NameServerInterface.java" afterPath="$PROJECT_DIR$/src/be/ua/NameServerInterface.java" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +17,8 @@
       <file leaf-file-name="NameServerInterface.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/be/ua/NameServerInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+            <state relative-caret-position="119">
+              <caret line="7" column="37" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -29,12 +29,12 @@
       <file leaf-file-name="NameServer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/be/ua/NameServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="16" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+            <state relative-caret-position="1548">
+              <caret line="108" column="37" lean-forward="false" selection-start-line="108" selection-start-column="37" selection-end-line="108" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1508926335026" expanded="false" signature="3370:3381" ph=" { " />
-                <marker date="1508926335026" expanded="false" signature="3422:3428" ph=" }" />
+                <marker date="1508927436722" expanded="false" signature="3370:3381" ph=" { " />
+                <marker date="1508927436722" expanded="false" signature="3422:3428" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -70,6 +70,11 @@
       </list>
     </option>
   </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-7" />
+    <option name="width" value="974" />
+    <option name="height" value="1057" />
+  </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -93,29 +98,6 @@
           <expand>
             <path>
               <item name="NameServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NameServer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NameServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NameServer" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NameServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NameServer" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NameServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NameServer" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NameServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NameServer" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
               <item name="NameServer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -350,8 +332,8 @@
           <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1508926335026" expanded="false" signature="3370:3381" ph=" { " />
-            <marker date="1508926335026" expanded="false" signature="3422:3428" ph=" }" />
+            <marker date="1508927436722" expanded="false" signature="3370:3381" ph=" { " />
+            <marker date="1508927436722" expanded="false" signature="3422:3428" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -363,16 +345,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/be/ua/NameServerInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -381,14 +353,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/be/ua/NameServer.java">
+    <entry file="file://$PROJECT_DIR$/src/be/ua/NameServerInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="16" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+        <state relative-caret-position="119">
+          <caret line="7" column="37" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1508926335026" expanded="false" signature="3370:3381" ph=" { " />
-            <marker date="1508926335026" expanded="false" signature="3422:3428" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/be/ua/NameServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1548">
+          <caret line="108" column="37" lean-forward="false" selection-start-line="108" selection-start-column="37" selection-end-line="108" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1508927436722" expanded="false" signature="3370:3381" ph=" { " />
+            <marker date="1508927436722" expanded="false" signature="3422:3428" ph=" }" />
           </folding>
         </state>
       </provider>

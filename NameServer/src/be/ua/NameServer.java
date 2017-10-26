@@ -85,7 +85,7 @@ public class NameServer implements NameServerInterface {
 
     public void printNodeMap()
     {
-        System.out.println("\nList of nodes in the node map:");
+        System.out.println("List of nodes in the node map:");
         Iterator<Integer> keySetIterator = nodeMap.keySet().iterator();
         while (keySetIterator.hasNext()) {
             int key = keySetIterator.next();

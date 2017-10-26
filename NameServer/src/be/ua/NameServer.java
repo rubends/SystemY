@@ -100,6 +100,11 @@ public class NameServer implements NameServerInterface {
     public static void main(String[] args)
     {
         String registryName = "nodeNames";
+        if (System.getSecurityManager() == null) {
+            System.setProperty("java.security.policy", "file:src/server.policy");
+            System.setProperty("java.rmi.server.hostname", "127.0.0.1");
+            System.setSecurityManager(new SecurityManager());
+        }
         try
         {
             NameServerInterface ns = new NameServer();

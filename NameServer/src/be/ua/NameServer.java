@@ -22,6 +22,7 @@ public class NameServer implements NameServerInterface {
 
     public String getFileIp(String fileName) throws RemoteException
     {
+        System.out.println("received: " +fileName);
         int hash = getHashOfName(fileName);
         int mapKey = 0;
 
@@ -42,6 +43,7 @@ public class NameServer implements NameServerInterface {
         }
         System.out.println("IP of node: " + nodeMap.get(mapKey) + "\n");
         return nodeMap.get(mapKey);
+      //  return fileName;
     }
 
     public void addNode(String nodeName, String nodeIP)
@@ -105,6 +107,7 @@ public class NameServer implements NameServerInterface {
             System.setProperty("java.rmi.server.hostname", "127.0.0.1");
             System.setSecurityManager(new SecurityManager());
         }
+
         try
         {
             NameServerInterface ns = new NameServer();

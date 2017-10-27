@@ -2,7 +2,7 @@ package be.ua;
 import org.junit.jupiter.api.Test;
 
 
-class TestingNameServer {
+public class TestingNameServer {
 
     @Test
     void mappingTest(){

@@ -12,7 +12,6 @@ public class UserInterface {
         input = new Scanner(System.in);
         System.out.println("Startup of node");
         setup(serverPort);
-        System.out.println("Hier");
         startUI();
     }
 

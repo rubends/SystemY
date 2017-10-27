@@ -113,6 +113,19 @@ public class NameServer implements NameServerInterface {
             registry.bind(registryName, stub);
             System.out.println("Nameserver bound");
 
+
+
+
+            // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
+            ns.addNode("node nr 1","192.168.1.1");
+            ns.addNode("node nr 1","192.168.1.1");
+            ns.addNode("node2","192.168.1.2");
+            ns.addNode("myfile","192.168.1.3");
+            ns.printNodeMap();
+            ns.deleteNode("node nr 2");
+            ns.deleteNode("node nr 3");
+            // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
+
         }
         catch (Exception e)
         {

@@ -1,4 +1,5 @@
 package be.ua;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.lang.String;
@@ -27,6 +28,7 @@ public class UserInterface {
 
             try {
                 String fileName = input.next();
+                System.out.println("\t Input =" + fileName);
                 AskServer(fileName);
             }
 
@@ -50,7 +52,7 @@ public class UserInterface {
         catch (Exception e) {
             // clear buffer
             input.nextLine();
-            System.out.println("Wrong Input");
+            System.out.println("No good connection");
         }
     }
 }

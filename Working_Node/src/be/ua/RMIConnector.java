@@ -8,6 +8,7 @@ public class RMIConnector {
     private NameServerInterface NameServerInterface;
 
     public RMIConnector(String serverPort) {
+
         try {
             String name = "nodeNames";
             Registry registry = LocateRegistry.getRegistry(1099);

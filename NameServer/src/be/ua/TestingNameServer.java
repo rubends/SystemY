@@ -16,10 +16,13 @@ class TestingNameServer {
             NameServerInterface ns = new NameServer();
             ns.addNode("node nr 1","192.168.1.1");
             ns.addNode("node nr 1","192.168.1.1");
-            ns.addNode("node nr 2","192.168.1.1");
+            ns.addNode("node nr 2","192.168.1.2");
+            ns.addNode("myfile","192.168.1.3");
             ns.printNodeMap();
             ns.deleteNode("node nr 2");
             ns.deleteNode("node nr 3");
+
+            ns.getFileIp("myfile.jpg");
             ns.printNodeMap();
         }
         catch (Exception e){}

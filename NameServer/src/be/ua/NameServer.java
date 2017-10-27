@@ -14,12 +14,14 @@ public class NameServer implements NameServerInterface {
 
     private TreeMap<Integer, String> nodeMap;
 
-    protected NameServer() throws RemoteException {
+    protected NameServer() throws RemoteException
+    {
         super();
         nodeMap = new TreeMap<>();                              //create map
     }
 
-    public String getFileIp(String fileName) throws RemoteException {
+    public String getFileIp(String fileName) throws RemoteException
+    {
         int hash = getHashOfName(fileName);
         int mapKey = 0;
 
@@ -29,7 +31,8 @@ public class NameServer implements NameServerInterface {
             mapKey = nodeMap.lastKey();                         //then it goes to the last node
         }
 
-        while (keys.hasNext()) {
+        while (keys.hasNext())
+        {
             Map.Entry<Integer, String> key = keys.next();
             int keyHash = key.getKey();
             if(keyHash < hash || keyHash == hash)
@@ -41,7 +44,8 @@ public class NameServer implements NameServerInterface {
         return nodeMap.get(mapKey);
     }
 
-    public void addNode(String nodeName, String nodeIP){
+    public void addNode(String nodeName, String nodeIP)
+    {
         try {
             int hash = getHashOfName(nodeName);
             if (nodeMap.get(hash) == null) {                    //check if already exists
@@ -59,7 +63,8 @@ public class NameServer implements NameServerInterface {
         }
     }
 
-    public void deleteNode(String nodeName){
+    public void deleteNode(String nodeName)
+    {
         try {
             int hash = getHashOfName(nodeName);
             if (nodeMap.get(hash) != null) {                    //the to be deleted file exists
@@ -78,8 +83,9 @@ public class NameServer implements NameServerInterface {
         }
     };
 
-    public void printNodeMap(){
-        System.out.println("\nList of nodes in the node map:");
+    public void printNodeMap()
+    {
+        System.out.println("List of nodes in the node map:");
         Iterator<Integer> keySetIterator = nodeMap.keySet().iterator();
         while (keySetIterator.hasNext()) {
             int key = keySetIterator.next();
@@ -91,8 +97,14 @@ public class NameServer implements NameServerInterface {
         return Math.abs(name.hashCode() % 32769);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         String registryName = "nodeNames";
+        if (System.getSecurityManager() == null) {
+            System.setProperty("java.security.policy", "file:src/server.policy");
+            System.setProperty("java.rmi.server.hostname", "127.0.0.1");
+            System.setSecurityManager(new SecurityManager());
+        }
         try
         {
             NameServerInterface ns = new NameServer();
@@ -108,5 +120,4 @@ public class NameServer implements NameServerInterface {
             e.printStackTrace();
         }
     }
-    //src: http://www.tutorialspoint.com/java/java_serialization.htm
 }

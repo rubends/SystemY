@@ -1,11 +1,12 @@
 package be.ua;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.lang.String;
 
 public class UserInterface {
     private Scanner input;
-    private NameServerInterface NameServerInterface;
+    private Inode Inode;
 
     public UserInterface(String serverPort) {
         input = new Scanner(System.in);
@@ -17,7 +18,7 @@ public class UserInterface {
 
     private void setup(String serverPort) {
         RMIConnector connector =new RMIConnector(serverPort);
-        NameServerInterface = connector.getNameServer();
+        Inode = connector.getNameServer();
     }
 
     public void startUI() {
@@ -27,6 +28,7 @@ public class UserInterface {
 
             try {
                 String fileName = input.next();
+                System.out.println("\t Input =" + fileName);
                 AskServer(fileName);
             }
 
@@ -42,7 +44,7 @@ public class UserInterface {
 
     private void  AskServer(String fileName) {
         try {
-            String Ipa = NameServerInterface.getFileIp(fileName);
+            String Ipa = Inode.getFileIp(fileName);
             System.out.println("------------------------");
             System.out.println("fileName '" + fileName + "' at IP "+Ipa);
         }
@@ -50,7 +52,7 @@ public class UserInterface {
         catch (Exception e) {
             // clear buffer
             input.nextLine();
-            System.out.println("Wrong Input");
+            System.out.println("No good connection");
         }
     }
 }

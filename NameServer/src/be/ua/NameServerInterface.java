@@ -8,4 +8,5 @@ public interface NameServerInterface extends Remote{
     void addNode(String nodeName, String nodeIP) throws RemoteException;
     void deleteNode(String nodeName) throws RemoteException;
     void printNodeMap() throws RemoteException;
+    void loadTreeMap() throws RemoteException;
 }

@@ -1,7 +1,9 @@
 package be.ua;
 
 import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -42,6 +44,21 @@ public class NameServer implements NameServerInterface {
         }
         System.out.println("IP of node: " + nodeMap.get(mapKey) + "\n");
         return nodeMap.get(mapKey);
+    }
+
+    public void loadTreeMap()
+    {
+        FileInputStream fs;
+        ObjectInputStream is;
+        try
+        {
+            fs = new FileInputStream("./nodeMap.ser");
+            is = new ObjectInputStream(fs);
+            nodeMap = (TreeMap<Integer, String>) is.readObject();
+            fs.close();
+            is.close();
+
+        }catch(Exception e){}
     }
 
     public void addNode(String nodeName, String nodeIP)
@@ -112,6 +129,7 @@ public class NameServer implements NameServerInterface {
             Registry registry = LocateRegistry.createRegistry(1099);
             registry.bind(registryName, stub);
             System.out.println("Nameserver bound");
+
 
         }
         catch (Exception e)

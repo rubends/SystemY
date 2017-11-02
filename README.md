@@ -2,8 +2,8 @@
 
 Made by
 - Ruben De Swaef
-	- Name Server: RMI server
+	- RMI server, Multicast
 - Sam Peetermans
-	- Name Server: RMI client
+	- RMI client, Node order
 - Stijn Dirickx
-	- Name server: Node mapping
+	- Node mapping, ...

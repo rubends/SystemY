@@ -4,16 +4,15 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
-public class Multicast extends Thread{
-
+public class MulticastThread extends Thread{
     protected String inetAddress = "228.5.6.7";
     protected int MulticastSocket = 6789;
+
 
     public void run() {
         super.run();
 
         try {
-            String msg = "Hello";
             byte[] buf = new byte[1000];
 
             //as long as thread is not interrupted
@@ -32,8 +31,8 @@ public class Multicast extends Thread{
                 System.out.println("new node name: " + nodeName + " on ip: " + nodeIp);
 
                 //send to group
+                String msg = "Hello";
                 DatagramPacket hi = new DatagramPacket(msg.getBytes(), msg.length(), group, MulticastSocket);
-
                 MCsocket.send(hi);
 
             }

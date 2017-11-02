@@ -4,11 +4,11 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
-public class Multicast extends Thread{
+public class MulticastThread extends Thread{
     protected String inetAddress = "228.5.6.7";
     protected int MulticastSocket = 6789;
 
-    public void Connect() {
+    public void run() {
         try {
             String name = "myname";
 

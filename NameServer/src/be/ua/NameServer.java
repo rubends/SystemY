@@ -14,6 +14,7 @@ public class NameServer implements NameServerInterface {
 
     private TreeMap<Integer, String> nodeMap;
 
+
     protected NameServer() throws RemoteException
     {
         super();
@@ -99,6 +100,9 @@ public class NameServer implements NameServerInterface {
 
     public static void main(String[] args)
     {
+        MulticastThread multicastThread = new MulticastThread();
+        multicastThread.start();
+
         String registryName = "nodeNames";
         if (System.getSecurityManager() == null) {
             System.setProperty("java.security.policy", "file:src/server.policy");
@@ -117,13 +121,12 @@ public class NameServer implements NameServerInterface {
 
 
             // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
-            ns.addNode("node nr 1","192.168.1.1");
-            ns.addNode("node nr 1","192.168.1.1");
-            ns.addNode("node2","192.168.1.2");
+            ns.addNode("node1","192.168.1.1");
+            ns.addNode("secondnode","192.168.1.2");
+            ns.addNode("nodefiles","192.168.1.2");
             ns.addNode("myfile","192.168.1.3");
             ns.printNodeMap();
-            ns.deleteNode("node nr 2");
-            ns.deleteNode("node nr 3");
+            ns.deleteNode("secondnode");
             // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
 
         }

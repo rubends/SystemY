@@ -7,10 +7,13 @@ import java.lang.String;
 public class UserInterface {
     private Scanner input;
     private NameServerInterface NameServerInterface;
+    public  MulticastThread multicastThread;
+
 
     public UserInterface(String serverPort) {
         input = new Scanner(System.in);
         System.out.println("Startup of node");
+
         setup(serverPort);
         startUI();
     }
@@ -22,6 +25,8 @@ public class UserInterface {
 
     public void startUI() {
         while(true) {
+            getAmountOfNodes();
+
             System.out.println("\t Enter file name then press 'Enter' to get the IP ");
             System.out.print("> ");
 
@@ -52,6 +57,25 @@ public class UserInterface {
             // clear buffer
             input.nextLine();
             System.out.println("No good connection");
+        }
+    }
+    private void  getAmountOfNodes() {
+        try{
+            int passedNodesAmount= multicastThread.getAmountOfNodes();
+            System.out.println("passedNodesAmount = " + passedNodesAmount);
+
+            if(passedNodesAmount < 1){
+                int nextNode = 0;
+                int prevNode = 0;
+            }
+            else if(passedNodesAmount >= 1){
+                //??
+            }
+        }
+        catch(java.lang.NullPointerException np){
+            System.out.println("//------------------------------------------------------------//");
+            System.out.println("//Nullpointer op fetch van multicastThread.getAmountOfNodes() //");
+            System.out.println("//------------------------------------------------------------//");
         }
     }
 }

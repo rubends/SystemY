@@ -27,7 +27,7 @@ public class MulticastThread extends Thread{
                 byte[] buf = new byte[1000];
                 DatagramPacket newMsg = new DatagramPacket(buf, buf.length);
                 MCsocket.receive(newMsg);
-
+                MCsocket.receive(newMsg);
                 String msg = new String(buf, 0, newMsg.getLength());
                 amountOfNodes = new BigInteger(msg).intValue();
                 System.out.println(msg);

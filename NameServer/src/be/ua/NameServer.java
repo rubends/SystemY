@@ -3,14 +3,12 @@ package be.ua;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class NameServer implements NameServerInterface {
+public class NameServer extends UnicastRemoteObject implements NameServerInterface {
 
     private TreeMap<Integer, String> nodeMap;
 
@@ -94,46 +92,14 @@ public class NameServer implements NameServerInterface {
         }
     }
 
-    public static int getHashOfName(String name) {
-        return Math.abs(name.hashCode() % 32769);
+    public int getNodeCount()
+    {
+        int nodeCount = nodeMap.size();
+        System.out.println("Number of nodes: " + nodeCount);
+        return nodeCount;
     }
 
-    public static void main(String[] args)
-    {
-        MulticastThread multicastThread = new MulticastThread();
-        multicastThread.start();
-
-        String registryName = "nodeNames";
-        if (System.getSecurityManager() == null) {
-            System.setProperty("java.security.policy", "file:src/server.policy");
-            System.setProperty("java.rmi.server.hostname", "127.0.0.1");
-            System.setSecurityManager(new SecurityManager());
-        }
-        try
-        {
-            NameServerInterface ns = new NameServer();
-            NameServerInterface stub = (NameServerInterface) UnicastRemoteObject.exportObject(ns, 0);
-            Registry registry = LocateRegistry.createRegistry(1099);
-            registry.bind(registryName, stub);
-            System.out.println("Nameserver bound");
-
-
-
-
-            // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
-            ns.addNode("node1","192.168.1.1");
-            ns.addNode("secondnode","192.168.1.2");
-            ns.addNode("nodefiles","192.168.1.2");
-            ns.addNode("myfile","192.168.1.3");
-            ns.printNodeMap();
-            ns.deleteNode("secondnode");
-            // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        }
-        catch (Exception e)
-        {
-            System.out.println("Nameserver error: " + e.getMessage());
-            e.printStackTrace();
-        }
+    public static int getHashOfName(String name) {
+        return Math.abs(name.hashCode() % 32769);
     }
 }

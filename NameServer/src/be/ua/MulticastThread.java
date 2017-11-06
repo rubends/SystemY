@@ -13,27 +13,26 @@ public class MulticastThread extends Thread{
         super.run();
 
         try {
-            byte[] buf = new byte[1000];
+            //open socket and join group
+            InetAddress group = InetAddress.getByName(inetAddress);
+            MulticastSocket MCsocket = new MulticastSocket(MulticastSocket);
+            MCsocket.joinGroup(group);
 
             //as long as thread is not interrupted
             while (!interrupted()) {
-                //open socket and join group
-                InetAddress group = InetAddress.getByName(inetAddress);
-                MulticastSocket MCsocket = new MulticastSocket(MulticastSocket);
-                MCsocket.joinGroup(group);
-
                 //receive new node
+                byte[] buf = new byte[1000];
                 DatagramPacket newNode = new DatagramPacket(buf, buf.length);
                 MCsocket.receive(newNode);
 
                 InetAddress nodeIp = newNode.getAddress();
                 String nodeName = new String(buf, 0, newNode.getLength());
-                System.out.println("new node name: " + nodeName + " on ip: " + nodeIp);
+                String addedNode = "New node name: " + nodeName + " on ip: " + nodeIp;
+                System.out.println(addedNode);
 
                 //send to group
-                String msg = "Hello";
-                DatagramPacket hi = new DatagramPacket(msg.getBytes(), msg.length(), group, MulticastSocket);
-                MCsocket.send(hi);
+                DatagramPacket addedNodeMsg = new DatagramPacket(addedNode.getBytes(), addedNode.length(), group, MulticastSocket);
+                MCsocket.send(addedNodeMsg);
 
             }
         } catch(Exception e) {

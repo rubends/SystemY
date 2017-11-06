@@ -20,8 +20,26 @@ public class MulticastThread extends Thread{
             //send node info
             DatagramPacket node = new DatagramPacket(name.getBytes(), name.length(), group, MulticastSocket);
             MCsocket.send(node);
+
+            while (!interrupted()) {
+                byte[] buf = new byte[1000];
+                DatagramPacket newMsg = new DatagramPacket(buf, buf.length);
+                MCsocket.receive(newMsg);
+
+                String msg = new String(buf, 0, newMsg.getLength());
+                System.out.println(msg);
+            }
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void release() {
+    }
+
+    @Override
+    public void interrupt() {
+        super.interrupt();
+        release();
     }
 }

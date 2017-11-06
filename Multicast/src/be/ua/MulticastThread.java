@@ -15,13 +15,13 @@ public class MulticastThread extends Thread{
             String msg = "Hello";
             byte[] buf = new byte[1000];
 
+            //open socket and join group
+            InetAddress group = InetAddress.getByName(inetAddress);
+            MulticastSocket MCsocket = new MulticastSocket(MulticastSocket);
+            MCsocket.joinGroup(group);
+
             //as long as thread is not interrupted
             while (!interrupted()) {
-                //open socket and join group
-                InetAddress group = InetAddress.getByName(inetAddress);
-                MulticastSocket MCsocket = new MulticastSocket(MulticastSocket);
-                MCsocket.joinGroup(group);
-
                 //receive new node
                 DatagramPacket newNode = new DatagramPacket(buf, buf.length);
                 MCsocket.receive(newNode);
@@ -34,7 +34,6 @@ public class MulticastThread extends Thread{
                 DatagramPacket hi = new DatagramPacket(msg.getBytes(), msg.length(), group, MulticastSocket);
 
                 MCsocket.send(hi);
-
             }
         } catch(Exception e) {
             if(interrupted()) {

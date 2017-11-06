@@ -100,8 +100,8 @@ public class NameServer implements NameServerInterface {
 
     public static void main(String[] args)
     {
-        MulticastThread multicastThread = new MulticastThread();
-        multicastThread.start();
+        //MulticastThread multicastThread = new MulticastThread();
+        //multicastThread.start();
 
         String registryName = "nodeNames";
         if (System.getSecurityManager() == null) {

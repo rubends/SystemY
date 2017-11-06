@@ -8,7 +8,7 @@ public class MulticastThread extends Thread{
     protected String inetAddress = "228.5.6.7";
     protected int MulticastSocket = 6789;
 
-
+    String replyNodeCount = "8"; //TEST DATA
     public void run() {
         super.run();
 
@@ -34,6 +34,12 @@ public class MulticastThread extends Thread{
                 DatagramPacket addedNodeMsg = new DatagramPacket(addedNode.getBytes(), addedNode.length(), group, MulticastSocket);
                 MCsocket.send(addedNodeMsg);
 
+                //reply to new node
+                byte[] b = replyNodeCount.getBytes();
+                System.out.println("reply node count = " + replyNodeCount);
+                //DatagramPacket howManyNodes = new DatagramPacket(b, b.length, newNode.getAddress(), newNode.getPort());
+                DatagramPacket howManyNodes = new DatagramPacket(b, b.length, group, MulticastSocket);
+                MCsocket.send(howManyNodes);
             }
         } catch(Exception e) {
             if(interrupted()) {

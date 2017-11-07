@@ -7,7 +7,7 @@ public class RMIConnector {
 
     private NameServerInterface NameServerInterface;
 
-    public RMIConnector(String serverPort) {
+    public RMIConnector() {
 
         try {
             String name = "nodeNames";

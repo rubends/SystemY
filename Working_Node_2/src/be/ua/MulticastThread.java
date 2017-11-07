@@ -50,15 +50,16 @@ public class MulticastThread extends Thread{
             /*int id = nodeInfo.getId();
             int nextNode = nodeInfo.getNextNode();
             int previousId = nodeInfo.getPreviousNode();*/
-
+            try{
                 setupRMI("3000",name);//COMM START WITH OTHER NODE
                 int RETURN = INode.getPreviousNode();
                 System.out.println("getting return from other node '" + RETURN);
 
+            }
+            catch(NotBoundException nb){
+                System.out.println("NOT BOUND!");
 
-
-
-
+            }
 
         }
         catch(IOException e){
@@ -76,7 +77,7 @@ public class MulticastThread extends Thread{
         return amountOfNodes;
     }
 
-    private void setupRMI(String serverPort,String name) {
+    private void setupRMI(String serverPort,String name) throws NotBoundException {
         RMIConnector connector =new RMIConnector(serverPort,name);
         INode = connector.getINode();
     }

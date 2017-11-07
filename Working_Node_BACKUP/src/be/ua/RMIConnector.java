@@ -4,9 +4,11 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class RMIConnector {
+
     private NameServerInterface NameServerInterface;
-    public INode INode;
+
     public RMIConnector(String serverPort) {
+
         try {
             String name = "nodeNames";
             Registry registry = LocateRegistry.getRegistry(1099);
@@ -15,21 +17,8 @@ public class RMIConnector {
             e.printStackTrace();
         }
     }
-    public RMIConnector(String serverPort,String name) {
-        try {
-            System.out.print("> TRYING TO GET CONNECTION ON PORT: "+serverPort);
-
-            Registry registry = LocateRegistry.getRegistry(serverPort);
-            INode = (INode) registry.lookup(name);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public NameServerInterface getNameServer() {
         return NameServerInterface;
-    }
-    public INode getINode() {
-        return INode;
     }
 }

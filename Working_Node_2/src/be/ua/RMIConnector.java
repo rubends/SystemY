@@ -17,7 +17,6 @@ public class RMIConnector {
     }
     public RMIConnector(String serverPort,String name) {
         try {
-            System.out.print("> TRYING TO GET CONNECTION ON PORT: "+serverPort);
 
             Registry registry = LocateRegistry.getRegistry(serverPort);
             INode = (INode) registry.lookup(name);

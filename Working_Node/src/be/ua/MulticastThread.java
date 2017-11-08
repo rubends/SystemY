@@ -5,7 +5,7 @@ import java.net.*;
 public class MulticastThread extends Thread{
     MulticastSocket MCsocket;
     DatagramSocket Dsocket;
-    public int nodeCount;
+    public int nodeCount = 0;
 
     public void run() {
         String inetAddress = "224.0.1.6";

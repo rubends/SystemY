@@ -5,6 +5,7 @@ import java.net.*;
 public class MulticastThread extends Thread{
     private NameServer nameServer;
     MulticastSocket MCsocket;
+    DatagramSocket Dsocket;
 
     public MulticastThread(NameServer ns) {
         nameServer = ns;
@@ -12,7 +13,8 @@ public class MulticastThread extends Thread{
 
     public void run() {
         String inetAddress = "224.0.1.6";
-        int MulticastSocket = 6790;
+        int MulticastSocketPort = 6790;
+        int DsocketPort = 6791;
 
         try {
 
@@ -20,7 +22,7 @@ public class MulticastThread extends Thread{
             while (!interrupted()) {
                 //open socket and join group
                 InetAddress group = InetAddress.getByName(inetAddress);
-                MCsocket = new MulticastSocket(MulticastSocket);
+                MCsocket = new MulticastSocket(MulticastSocketPort);
                 MCsocket.setReuseAddress(true);
                 MCsocket.joinGroup(group);
 
@@ -36,9 +38,10 @@ public class MulticastThread extends Thread{
                 nameServer.addNode(nodeName, nodeIp.toString());
 
                 //get number of nodes in network
+                Dsocket = new DatagramSocket();
                 String nodeCount = Integer.toString(nameServer.getNodeCount());
-                DatagramPacket nodecountPacket = new DatagramPacket(nodeCount.getBytes(), nodeCount.length(), group, MulticastSocket);
-                MCsocket.send(nodecountPacket);
+                DatagramPacket nodecountPacket = new DatagramPacket(nodeCount.getBytes(), nodeCount.length(), nodeIp, DsocketPort);
+                Dsocket.send(nodecountPacket);
             }
         } catch(Exception e) {
             if(interrupted()) {
@@ -57,7 +60,7 @@ public class MulticastThread extends Thread{
     public void interrupt() {
         super.interrupt();
         release();
-
+        Dsocket.close();
         MCsocket.close();
     }
 }

@@ -22,7 +22,7 @@ public class Main {
             Registry registry = LocateRegistry.createRegistry(1099);
             registry.bind(registryName, nsI);
             System.out.println("Nameserver bound");
-
+            nsI.getNodeCount();
             // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
 //            nsI.addNode("node1","192.168.1.1");
 //            nsI.addNode("secondnode","192.168.1.2");

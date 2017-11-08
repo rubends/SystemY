@@ -11,7 +11,7 @@ public class UserInterface {
     public UserInterface() {
         input = new Scanner(System.in);
         System.out.println("Startup of node");
-
+        startUI();
         setup();
     }
 

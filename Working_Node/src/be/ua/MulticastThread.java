@@ -5,6 +5,7 @@ import java.net.*;
 public class MulticastThread extends Thread{
     MulticastSocket MCsocket;
     DatagramSocket Dsocket;
+    public int nodeCount;
 
     public void run() {
         String inetAddress = "224.0.1.6";
@@ -27,7 +28,8 @@ public class MulticastThread extends Thread{
             byte[] buf = new byte[1000];
             DatagramPacket nodeCountPacket = new DatagramPacket(buf, buf.length);
             Dsocket.receive(nodeCountPacket);
-            String nodeCount = new String(buf, 0, nodeCountPacket.getLength());
+            String nodeCountS = new String(buf, 0, nodeCountPacket.getLength());
+            nodeCount = Integer.parseInt(nodeCountS);
             System.out.println(nodeCount);
         } catch(Exception e) {
             e.printStackTrace();

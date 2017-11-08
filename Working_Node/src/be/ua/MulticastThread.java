@@ -47,12 +47,12 @@ public class MulticastThread extends Thread{
             //--------------------------------------------------------------------------------------------//
             //--------------------------------------------------------------------------------------------//
             //--------------------------------------------------------------------------------------------//
-            /*int id = nodeInfo.getId();
-            int nextNode = nodeInfo.getNextNode();
+            /*int id = nodeInfo.getCurrId();
+            int nextNode = nodeInfo.getNextId();
             int previousId = nodeInfo.getPreviousNode();*/
 
                 setupRMI("3000",name);//COMM START WITH OTHER NODE
-                int RETURN = INode.getPreviousNode();
+                int RETURN = INode.getPrevId();
                 System.out.println("getting return from other node '" + RETURN);
 
 

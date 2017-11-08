@@ -95,6 +95,14 @@ public class NameServer implements NameServerInterface {
         }
     }
 
+    public int getLastId() throws RemoteException {
+        return  nodeMap.lastKey();
+    }
+
+    public int getFirstId() throws RemoteException {
+        return  nodeMap.firstKey();
+    }
+
     public static int getHashOfName(String name) {
         return Math.abs(name.hashCode() % 32769);
     }

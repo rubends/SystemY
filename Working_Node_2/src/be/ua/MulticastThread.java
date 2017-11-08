@@ -23,7 +23,7 @@ public class MulticastThread extends Thread{
     public void run() {
         try {
 
-            String name = "FirstNode";
+            String name = "SecondNode";
 
             //join group
             InetAddress group = InetAddress.getByName(inetAddress);

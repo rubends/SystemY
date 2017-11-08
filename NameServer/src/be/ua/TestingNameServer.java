@@ -24,6 +24,9 @@ public class TestingNameServer {
 
             ns.getFileIp("myfile.jpg");
             ns.printNodeMap();
+
+            System.out.println(ns.getFirstId());
+            System.out.println(ns.getLastId());
         }
         catch (Exception e){}
     }

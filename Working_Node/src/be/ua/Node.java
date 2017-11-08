@@ -3,44 +3,63 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 public class Node extends UnicastRemoteObject implements INode{
-    private volatile int mPrevious = 10;
-    private volatile int mNext = 15;
-    private volatile int mId= 20;
+    private volatile int PrevId;
+    private volatile int NextId;
+    private volatile int CurrId;
+    private NameServerInterface ns;
 
+    //constructor
     public Node(int id) throws RemoteException {
-        this.mId = id;
-        this.mPrevious = id;
-        this.mNext = id;
+        PrevId = NextId = CurrId = id;
     }
 
-
-    public void updateNeighbour(int newPrevious, int newNext)
-    {
-        this.mNext = newNext;
-        this.mPrevious = newPrevious;
+    //setters
+    public void updateNeighbours(int newPrev, int newNext) {
+        NextId = newNext;
+        PrevId = newPrev;
     }
 
     public void updateNextNode(int newNext) {
-        this.mNext = newNext;
-
+        NextId = newNext;
+        try {
+            if(ns.getFirstId() == CurrId)
+            {
+                try {
+                    PrevId = ns.getLastId();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     public void updatePrevNode(int newPrev) {
-        this.mPrevious = newPrev;
-
+        PrevId = newPrev;
+        try {
+            if(ns.getLastId() == CurrId)
+            {
+                try {
+                    PrevId = ns.getFirstId();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
-
-    public int getPreviousNode() {
-        return mPrevious;
+    //getters
+    public int getPrevId() {
+        return PrevId;
     }
-
-    public int getNextNode(){
-        return mNext;
+    public int getNextId(){
+        return NextId;
     }
-
-    public int getId(){
-        return mId;
+    public int getCurrId(){
+        return CurrId;
     }
 
 }

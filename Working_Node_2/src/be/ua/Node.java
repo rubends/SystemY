@@ -1,5 +1,7 @@
 package be.ua;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 public class Node extends UnicastRemoteObject implements INode{
@@ -12,6 +14,8 @@ public class Node extends UnicastRemoteObject implements INode{
         this.mPrevious = id;
         this.mNext = id;
     }
+
+
 
 
     public void updateNeighbour(int newPrevious, int newNext)

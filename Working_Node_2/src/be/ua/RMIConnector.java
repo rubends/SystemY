@@ -1,11 +1,16 @@
 package be.ua;
 
+import java.rmi.AlreadyBoundException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+
+
 
 public class RMIConnector {
     private NameServerInterface NameServerInterface;
     public INode INode;
+
     public RMIConnector(String serverPort) {
         try {
             String name = "nodeNames";
@@ -15,20 +20,26 @@ public class RMIConnector {
             e.printStackTrace();
         }
     }
-    public RMIConnector(String serverPort,String name) {
-        try {
+    public RMIConnector(String IP,String name,Node Node) {
 
-            Registry registry = LocateRegistry.getRegistry(serverPort);
-            INode = (INode) registry.lookup(name);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            System.setProperty("java.rmi.server.hostname", IP);
+            try {
+                String serverName = name;
+                INode stub = (INode) UnicastRemoteObject.exportObject(Node, 0);
+                Registry registry = LocateRegistry.createRegistry(1099);
+                registry.rebind(serverName, stub);
+                System.out.println("RMI bound");
+            } catch (Exception e) {
+                System.err.println("Exception while setting up RMI:");
+                e.printStackTrace();
+            }
     }
 
-    public NameServerInterface getNameServer() {
-        return NameServerInterface;
-    }
+
+
+    public NameServerInterface getNameServer() { return NameServerInterface; }
     public INode getINode() {
         return INode;
     }
+
 }

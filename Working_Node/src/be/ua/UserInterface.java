@@ -25,7 +25,7 @@ public class UserInterface {
 
     public void startUI() {
         while(true) {
-            getAmountOfNodes();
+            //getAmountOfNodes();
 
             System.out.println("\t Enter file name then press 'Enter' to get the IP ");
             System.out.print("> ");

@@ -2,6 +2,7 @@ package be.ua;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
 public class RMIConnector {
     private NameServerInterface NameServerInterface;
@@ -15,11 +16,12 @@ public class RMIConnector {
             e.printStackTrace();
         }
     }
-    public RMIConnector(String serverPort,String name) {
+    public RMIConnector(int serverPort,String name) {
+
         try {
             System.out.print("> TRYING TO GET CONNECTION ON PORT: "+serverPort);
 
-            Registry registry = LocateRegistry.getRegistry(serverPort);
+            Registry registry = LocateRegistry.getRegistry(serverPort);//moet serverport zijn
             INode = (INode) registry.lookup(name);
         } catch (Exception e) {
             e.printStackTrace();

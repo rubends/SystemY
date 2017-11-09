@@ -11,14 +11,17 @@ import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.*;
+import be.ua.Node;
+import be.ua.INode;
 
 public class MulticastThread extends Thread{
     protected String inetAddress = "228.5.6.7";
     protected int MulticastSocket = 6789;
     protected int amountOfNodes = 0; //receive from nameserver //FOR TEST
 
-    //public Node nodeInfo;
+
     public INode INode;
+    //public Node Node;
 
     public void run() {
         try {
@@ -33,33 +36,30 @@ public class MulticastThread extends Thread{
             //send node info
             DatagramPacket node = new DatagramPacket(name.getBytes(), name.length(), group, MulticastSocket);
             MCsocket.send(node);
-            //while (!interrupted()) {
-            byte[] buf = new byte[1000];
-            DatagramPacket newMsg = new DatagramPacket(buf, buf.length);
-            MCsocket.receive(newMsg);
-            MCsocket.receive(newMsg);
-            String msg = new String(buf, 0, newMsg.getLength());
-            amountOfNodes = new BigInteger(msg).intValue();
-            System.out.println(msg);
-            //}
 
+            String name1 = "NodeConnection";
 
-            //--------------------------------------------------------------------------------------------//
-            //--------------------------------------------------------------------------------------------//
-            //--------------------------------------------------------------------------------------------//
-            /*int id = nodeInfo.getId();
-            int nextNode = nodeInfo.getNextNode();
-            int previousId = nodeInfo.getPreviousNode();*/
-            try{
-                setupRMI("3000",name);//COMM START WITH OTHER NODE
-                int RETURN = INode.getPreviousNode();
-                System.out.println("getting return from other node '" + RETURN);
-
+            while (!interrupted()) {
+                byte[] buf = new byte[1000];
+                DatagramPacket newMsg = new DatagramPacket(buf, buf.length);
+                //MCsocket.receive(newMsg);
+                MCsocket.receive(newMsg);
+                String msg = new String(buf, 0, newMsg.getLength());
+                //amountOfNodes = new BigInteger(msg).intValue();
+                System.out.println(msg);
+                try{
+                    setupRMI(1099,name1);//COMM START WITH OTHER NODE
+                    //int RETURN = INode.getPreviousNode();
+                    //System.out.println("getting return from other node '" + RETURN);
+                             }
+                catch(NotBoundException nb){
+                    System.out.println("NOT BOUND!");
+                }
             }
-            catch(NotBoundException nb){
-                System.out.println("NOT BOUND!");
 
-            }
+
+
+
 
         }
         catch(IOException e){
@@ -68,18 +68,27 @@ public class MulticastThread extends Thread{
     }
 
 
-        //--------------------------------------------------------------------------------------------//
-        //--------------------------------------------------------------------------------------------//
-        //--------------------------------------------------------------------------------------------//
-
-
     public int getAmountOfNodes() {
         return amountOfNodes;
     }
 
-    private void setupRMI(String serverPort,String name) throws NotBoundException {
-        RMIConnector connector =new RMIConnector(serverPort,name);
-        INode = connector.getINode();
+    private void setupRMI(int serverPort,String name) throws NotBoundException {
+
+        //RMIConnector connector =new RMIConnector(serverPort,name);
+        //INode = connector.getINode();
+        String NodeIP = "192.168.1.50";
+        String rmiName = "TEST";
+
+        try {
+            Node setupNode = new Node(5);
+            RMIConnector connectorNode =new RMIConnector(NodeIP,rmiName,setupNode);
+            INode = connectorNode.getINode();
+        }
+        catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 

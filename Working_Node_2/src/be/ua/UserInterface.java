@@ -8,7 +8,7 @@ public class UserInterface {
     private Scanner input;
     private NameServerInterface NameServerInterface;
     public  MulticastThread multicastThread;
-
+    private INode INode;
 
     public UserInterface(String serverPort) {
         input = new Scanner(System.in);
@@ -21,11 +21,12 @@ public class UserInterface {
     private void setup(String serverPort) {
         RMIConnector connector =new RMIConnector(serverPort);
         NameServerInterface = connector.getNameServer();
+
     }
 
     public void startUI() {
         while(true) {
-            getAmountOfNodes();
+            //getAmountOfNodes();
 
             System.out.println("\t Enter file name then press 'Enter' to get the IP ");
             System.out.print("> ");

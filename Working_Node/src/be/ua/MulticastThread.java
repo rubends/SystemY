@@ -23,7 +23,7 @@ public class MulticastThread extends Thread{
     public void run() {
         try {
 
-            String name = "FirstNode";
+            String name = "SecondNode";
 
             //join group
             InetAddress group = InetAddress.getByName(inetAddress);
@@ -33,32 +33,37 @@ public class MulticastThread extends Thread{
             //send node info
             DatagramPacket node = new DatagramPacket(name.getBytes(), name.length(), group, MulticastSocket);
             MCsocket.send(node);
-            //while (!interrupted()) {
-            byte[] buf = new byte[1000];
-            DatagramPacket newMsg = new DatagramPacket(buf, buf.length);
-            MCsocket.receive(newMsg);
-            MCsocket.receive(newMsg);
-            String msg = new String(buf, 0, newMsg.getLength());
-            amountOfNodes = new BigInteger(msg).intValue();
-            System.out.println(msg);
-            //}
+            String oldmsg = "";
+            String msg = "";
+            String name1 = "NodeConnection";
 
+            while (!interrupted()) {
 
-            //--------------------------------------------------------------------------------------------//
-            //--------------------------------------------------------------------------------------------//
-            //--------------------------------------------------------------------------------------------//
-            /*int id = nodeInfo.getId();
-            int nextNode = nodeInfo.getNextNode();
-            int previousId = nodeInfo.getPreviousNode();*/
+                byte[] buf = new byte[1000];
+                DatagramPacket newMsg = new DatagramPacket(buf, buf.length);
+                MCsocket.receive(newMsg);
+                MCsocket.receive(newMsg);
+                msg = new String(buf, 0, newMsg.getLength());
+                //amountOfNodes = new BigInteger(msg).intValue();
+                System.out.println(msg);
 
-                setupRMI("3000",name);//COMM START WITH OTHER NODE
-                int RETURN = INode.getPreviousNode();
-                System.out.println("getting return from other node '" + RETURN);
+                setupRMI(1099,name1);//COMM START WITH OTHER NODE
+                //int RETURN = INode.getPreviousNode();
+                //System.out.println("getting return from other node '" + RETURN);
+            }
 
+            if(msg.equals(oldmsg)){
 
+            }
+            else {
+                //System.out.println("getting return from other node '" + RETURN);
+                System.out.println("HERE");
 
-
-
+                setupRMI(3000,name1);//COMM START WITH OTHER NODE
+                //int RETURN = INode.getPreviousNode();
+                //System.out.println("getting return from other node '" + RETURN);
+            }
+            oldmsg = msg;
 
         }
         catch(IOException e){
@@ -67,16 +72,11 @@ public class MulticastThread extends Thread{
     }
 
 
-        //--------------------------------------------------------------------------------------------//
-        //--------------------------------------------------------------------------------------------//
-        //--------------------------------------------------------------------------------------------//
-
-
     public int getAmountOfNodes() {
         return amountOfNodes;
     }
 
-    private void setupRMI(String serverPort,String name) {
+    private void setupRMI(int serverPort,String name) {
         RMIConnector connector =new RMIConnector(serverPort,name);
         INode = connector.getINode();
     }

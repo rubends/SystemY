@@ -119,8 +119,6 @@ public class NameServer implements NameServerInterface {
             System.out.println("Nameserver bound");
 
 
-
-
             // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
             ns.addNode("node1","192.168.1.1");
             ns.addNode("secondnode","192.168.1.2");

@@ -1,15 +1,17 @@
 package be.ua;
+
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class Node extends UnicastRemoteObject implements INode{
+public class Node implements INode{
     private volatile int mPrevious;
     private volatile int mNext;
     private volatile int mId;
 
     public Node(int id) throws RemoteException {
+        super();
         this.mId = id;
         this.mPrevious = id;
         this.mNext = id;

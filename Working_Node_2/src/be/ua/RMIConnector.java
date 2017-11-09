@@ -20,12 +20,13 @@ public class RMIConnector {
             e.printStackTrace();
         }
     }
-    public RMIConnector(String IP,String name,Node Node) {
+    public RMIConnector(String IP,String name, int nodeId) {
 
             System.setProperty("java.rmi.server.hostname", IP);
             try {
                 String serverName = name;
-                INode stub = (INode) UnicastRemoteObject.exportObject(Node, 0);
+                INode node = new Node(nodeId);
+                INode stub = (INode) UnicastRemoteObject.exportObject(node, 0);
                 Registry registry = LocateRegistry.createRegistry(1099);
                 registry.rebind(serverName, stub);
                 System.out.println("RMI bound");

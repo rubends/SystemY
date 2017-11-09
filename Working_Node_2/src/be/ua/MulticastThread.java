@@ -21,7 +21,7 @@ public class MulticastThread extends Thread{
 
 
     public INode INode;
-    //public Node Node;
+    public Node Node;
 
     public void run() {
         try {

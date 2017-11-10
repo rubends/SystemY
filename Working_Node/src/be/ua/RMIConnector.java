@@ -7,12 +7,13 @@ public class RMIConnector {
 
     private NameServerInterface NameServerInterface;
     private INode INode;
+    private int Port = 1099;
 
     public RMIConnector() { //to nameserver
 
         try {
             String name = "nodeNames";
-            Registry registry = LocateRegistry.getRegistry(1099);
+            Registry registry = LocateRegistry.getRegistry(Port);
             NameServerInterface = (NameServerInterface) registry.lookup(name);
         } catch (Exception e) {
             e.printStackTrace();
@@ -24,7 +25,7 @@ public class RMIConnector {
         System.setProperty("java.rmi.server.hostname", IP);
         try {
             INode = new Node();
-            Registry registry = LocateRegistry.getRegistry(1099);
+            Registry registry = LocateRegistry.getRegistry(Port);
             registry.bind(name, INode);
             System.out.println("RMI bound");
         } catch (Exception e) {
@@ -33,9 +34,9 @@ public class RMIConnector {
         }
     }
 
-    public RMIConnector(int serverPort, String name) { //get node RMI
+    public RMIConnector(String name) { //get node RMI
         try {
-            Registry registry = LocateRegistry.getRegistry(serverPort);
+            Registry registry = LocateRegistry.getRegistry(Port);
             INode = (INode) registry.lookup(name);
         } catch (Exception e) {
             e.printStackTrace();

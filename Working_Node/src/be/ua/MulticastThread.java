@@ -15,7 +15,6 @@ public class MulticastThread extends Thread{
         int DsocketPort = 6791;
         try {
             String name = "mynode";
-            String ConnName = "NodeConnection";
 
             //join group
             InetAddress group = InetAddress.getByName(inetAddress);
@@ -37,14 +36,15 @@ public class MulticastThread extends Thread{
             System.out.println(nodeCount);
 
             //setup RMI connection
-            setupRMI(ConnName);
+            setupRMI(name+"Connection");
 
             //listen to new nodes
             while(true){
                 byte[] bufN = new byte[1000];
                 DatagramPacket newNode = new DatagramPacket(bufN, bufN.length);
                 MCsocket.receive(newNode);
-                //listenNodeRMi(1099,ConnName);
+                String newNodeName = new String(buf, 0, newNode.getLength());
+                listenNodeRMi(newNodeName);
             }
         } catch(Exception e) {
             e.printStackTrace();
@@ -58,8 +58,8 @@ public class MulticastThread extends Thread{
         INode = connectorNode.getINode();
     }
 
-    private void listenNodeRMi(int serverPort,String name) {
-        RMIConnector connector =new RMIConnector(serverPort,name);
+    private void listenNodeRMi(String name) {
+        RMIConnector connector =new RMIConnector(name);
         INode = connector.getINode();
     }
 

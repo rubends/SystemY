@@ -8,14 +8,17 @@ public class MulticastThread extends Thread{
     DatagramSocket Dsocket;
     public int nodeCount = 0;
     public INode INode;
+    String name;
+
+    public MulticastThread(String nodeName) {
+        name = nodeName;
+    }
 
     public void run() {
         String inetAddress = "224.0.1.6";
         int MulticastSocketPort = 6790;
         int DsocketPort = 6791;
         try {
-            String name = "mynode";
-
             //join group
             InetAddress group = InetAddress.getByName(inetAddress);
             MCsocket = new MulticastSocket(MulticastSocketPort);

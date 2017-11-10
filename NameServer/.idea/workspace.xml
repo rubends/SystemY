@@ -3,10 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="a0ac623c-7834-448a-9eac-62ff94c0d934" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nodeMap.ser" afterPath="$PROJECT_DIR$/nodeMap.ser" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Main.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/MulticastThread.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/MulticastThread.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/RMIConnector.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/RMIConnector.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Main.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/MulticastThread.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/MulticastThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/RMIConnector.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/RMIConnector.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,8 +43,8 @@
       <file leaf-file-name="MulticastThread.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/be/ua/MulticastThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="34" column="16" lean-forward="false" selection-start-line="34" selection-start-column="16" selection-end-line="34" selection-end-column="74" />
+            <state relative-caret-position="153">
+              <caret line="9" column="4" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="11" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -792,8 +794,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/MulticastThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="34" column="16" lean-forward="false" selection-start-line="34" selection-start-column="16" selection-end-line="34" selection-end-column="74" />
+        <state relative-caret-position="153">
+          <caret line="9" column="4" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="11" selection-end-column="5" />
           <folding />
         </state>
       </provider>

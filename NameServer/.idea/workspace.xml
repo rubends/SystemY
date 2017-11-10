@@ -2,27 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f30d5ac5-6e93-42ed-af24-494afc6afe1e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/NameServer/be/ua/NameServerInterface 2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/NameServer/be/ua/TestingNameServer 2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/be/ua/TestingNameServer 2.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Working_Node_2/.idea/compiler.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/NameServer/be/ua/MulticastThread.class" afterPath="$PROJECT_DIR$/out/production/NameServer/be/ua/MulticastThread.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/NameServer/be/ua/NameServer.class" afterPath="$PROJECT_DIR$/out/production/NameServer/be/ua/NameServer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/NameServer/be/ua/TestingNameServer.class" afterPath="$PROJECT_DIR$/out/production/NameServer/be/ua/TestingNameServer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Main.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/RMIConnector.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/RMIConnector.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/UserInterface.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/UserInterface.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Working_Node/.idea/compiler.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/.idea/misc.xml" afterPath="$PROJECT_DIR$/../Working_Node/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Node.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Node.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node_2/.idea/misc.xml" afterPath="$PROJECT_DIR$/../Working_Node_2/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node_2/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Working_Node_2/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node_2/src/be/ua/Main.java" afterPath="$PROJECT_DIR$/../Working_Node_2/src/be/ua/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node_2/src/be/ua/MulticastThread.java" afterPath="$PROJECT_DIR$/../Working_Node_2/src/be/ua/MulticastThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node_2/src/be/ua/Node.java" afterPath="$PROJECT_DIR$/../Working_Node_2/src/be/ua/Node.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node_2/src/be/ua/RMIConnector.java" afterPath="$PROJECT_DIR$/../Working_Node_2/src/be/ua/RMIConnector.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

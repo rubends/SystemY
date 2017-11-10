@@ -3,11 +3,11 @@ package be.ua;
 import java.net.*;
 
 public class MulticastThread extends Thread{
-    private NameServer nameServer;
+    private NameServerInterface nameServer;
     MulticastSocket MCsocket;
     DatagramSocket Dsocket;
 
-    public MulticastThread(NameServer ns) {
+    public MulticastThread(NameServerInterface ns) {
         nameServer = ns;
     }
 

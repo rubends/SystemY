@@ -99,7 +99,7 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
         return nodeCount;
     }
 
-    public static int getHashOfName(String name) {
+    public int getHashOfName(String name) {
         return Math.abs(name.hashCode() % 32769);
     }
 }

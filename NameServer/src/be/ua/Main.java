@@ -14,22 +14,22 @@ public class Main {
         }
         try
         {
-            NameServer ns = new NameServer();
+            NameServerInterface ns = new NameServer();
             MulticastThread multicastThread = new MulticastThread(ns);
             multicastThread.start();
 
-            NameServerInterface nsI = new NameServer();
             Registry registry = LocateRegistry.createRegistry(1099);
-            registry.bind(registryName, nsI);
+            registry.bind(registryName, ns);
             System.out.println("Nameserver bound");
-            nsI.getNodeCount();
+
             // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
-//            nsI.addNode("node1","192.168.1.1");
-//            nsI.addNode("secondnode","192.168.1.2");
-//            nsI.addNode("nodefiles","192.168.1.2");
-//            nsI.addNode("myfile","192.168.1.3");
-//            nsI.printNodeMap();
-//            nsI.deleteNode("secondnode");
+            ns.addNode("testNode","192.168.1.1");
+            ns.getNodeCount();
+//            ns.addNode("secondnode","192.168.1.2");
+//            ns.addNode("nodefiles","192.168.1.2");
+//            ns.addNode("myfile","192.168.1.3");
+//            ns.printNodeMap();
+//            ns.deleteNode("secondnode");
             // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
 
         }

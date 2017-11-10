@@ -11,12 +11,13 @@ public class UserInterface {
     public UserInterface() {
         input = new Scanner(System.in);
         System.out.println("Startup of node");
-        startUI();
         setup();
+        getNodeCount(); //RMI TEST
+        startUI();
     }
 
     private void setup() {
-        RMIConnector connector =new RMIConnector();
+        RMIConnector connector = new RMIConnector();
         NameServerInterface = connector.getNameServer();
     }
 

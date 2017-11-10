@@ -6,8 +6,9 @@ import java.rmi.registry.Registry;
 public class RMIConnector {
 
     private NameServerInterface NameServerInterface;
+    private INode INode;
 
-    public RMIConnector() {
+    public RMIConnector() { //to nameserver
 
         try {
             String name = "nodeNames";
@@ -18,7 +19,33 @@ public class RMIConnector {
         }
     }
 
+    public RMIConnector(String IP, String name) { //create own rmi
+
+        System.setProperty("java.rmi.server.hostname", IP);
+        try {
+            INode = new Node();
+            Registry registry = LocateRegistry.getRegistry(1099);
+            registry.bind(name, INode);
+            System.out.println("RMI bound");
+        } catch (Exception e) {
+            System.err.println("Exception while setting up RMI:");
+            e.printStackTrace();
+        }
+    }
+
+    public RMIConnector(int serverPort, String name) { //get node RMI
+        try {
+            Registry registry = LocateRegistry.getRegistry(serverPort);
+            INode = (INode) registry.lookup(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public NameServerInterface getNameServer() {
         return NameServerInterface;
+    }
+    public INode getINode() {
+        return INode;
     }
 }

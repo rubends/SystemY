@@ -1,11 +1,13 @@
 package be.ua;
 
 import java.net.*;
+import java.rmi.NotBoundException;
 
 public class MulticastThread extends Thread{
     MulticastSocket MCsocket;
     DatagramSocket Dsocket;
     public int nodeCount = 0;
+    public INode INode;
 
     public void run() {
         String inetAddress = "224.0.1.6";
@@ -13,6 +15,8 @@ public class MulticastThread extends Thread{
         int DsocketPort = 6791;
         try {
             String name = "mynode";
+            String ConnName = "NodeConnection";
+
             //join group
             InetAddress group = InetAddress.getByName(inetAddress);
             MCsocket = new MulticastSocket(MulticastSocketPort);
@@ -31,9 +35,32 @@ public class MulticastThread extends Thread{
             String nodeCountS = new String(buf, 0, nodeCountPacket.getLength());
             nodeCount = Integer.parseInt(nodeCountS);
             System.out.println(nodeCount);
+
+            //setup RMI connection
+            setupRMI(ConnName);
+
+            //listen to new nodes
+            while(true){
+                byte[] bufN = new byte[1000];
+                DatagramPacket newNode = new DatagramPacket(bufN, bufN.length);
+                MCsocket.receive(newNode);
+                //listenNodeRMi(1099,ConnName);
+            }
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void setupRMI(String ConnName) throws NotBoundException {
+        String NodeIP = "192.168.1.50";
+
+        RMIConnector connectorNode = new RMIConnector(NodeIP, ConnName);
+        INode = connectorNode.getINode();
+    }
+
+    private void listenNodeRMi(int serverPort,String name) {
+        RMIConnector connector =new RMIConnector(serverPort,name);
+        INode = connector.getINode();
     }
 
     public void release() {

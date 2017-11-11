@@ -5,10 +5,9 @@ import java.rmi.registry.Registry;
 
 public class RMIConnector {
 
-    private NameServerInterface ns;
     private int Port = 1099;
 
-    public RMIConnector() {
+    public RMIConnector(NameServerInterface ns) {
         String registryName = "nodeNames";
         if (System.getSecurityManager() == null) {
             System.setProperty("java.security.policy", "file:server.policy");
@@ -17,10 +16,6 @@ public class RMIConnector {
         }
         try
         {
-            ns = new NameServer();
-            MulticastThread multicastThread = new MulticastThread(ns);
-            multicastThread.start();
-
             Registry registry = LocateRegistry.createRegistry(Port);
             registry.bind(registryName, ns);
             System.out.println("Nameserver bound");
@@ -42,9 +37,5 @@ public class RMIConnector {
             e.printStackTrace();
         }
 
-    }
-
-    public NameServerInterface getNameServer() {
-        return ns;
     }
 }

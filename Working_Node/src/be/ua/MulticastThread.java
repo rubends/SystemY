@@ -9,9 +9,11 @@ public class MulticastThread extends Thread{
     public int nodeCount = 0;
     public INode INode;
     String name;
+    NameServerInterface INameServer;
 
-    public MulticastThread(String nodeName) {
+    public MulticastThread(String nodeName, NameServerInterface ns) {
         name = nodeName;
+        INameServer = ns;
     }
 
     public void run() {
@@ -60,12 +62,12 @@ public class MulticastThread extends Thread{
     private void setupRMI(String nodeName, int nodeCount) throws NotBoundException {
         String NodeIP = "192.168.56.1";
 
-        RMIConnector connectorNode = new RMIConnector(NodeIP, nodeName, nodeCount);
+        RMIConnector connectorNode = new RMIConnector(INameServer, NodeIP, nodeName, nodeCount);
         INode = connectorNode.getINode();
     }
 
     private void listenNodeRMi(String name) {
-        RMIConnector connector =new RMIConnector(name);
+        RMIConnector connector =new RMIConnector(INameServer, name);
         INode = connector.getINode();
     }
 

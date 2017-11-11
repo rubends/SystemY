@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -101,5 +102,14 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
 
     public int getHashOfName(String name) {
         return Math.abs(name.hashCode() % 32769);
+    }
+
+    public ArrayList getNeighbourNodes(int hash){
+        ArrayList<Integer> neighbours = new ArrayList<>();
+
+        neighbours.add(nodeMap.lowerKey(hash));
+        neighbours.add(nodeMap.higherKey(hash));
+
+        return neighbours;
     }
 }

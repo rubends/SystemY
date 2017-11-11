@@ -9,14 +9,12 @@ public class Node extends UnicastRemoteObject implements INode{
     private volatile int mId;
     private volatile int nodeCount;
     private volatile String nodeName;
-    private NameServerInterface NameServerInterface;
 
-    protected Node(int nc, String name, NameServerInterface NSI) throws RemoteException
+    protected Node(int nc, int hash) throws RemoteException
     {
         super();
         nodeCount = nc;
-        nodeName = name;
-        NameServerInterface = NSI;
+        mId = hash;
     }
 
     public void updateNeighbour(int newPrevious, int newNext)
@@ -44,7 +42,6 @@ public class Node extends UnicastRemoteObject implements INode{
     }
 
     public int getId(){
-        mId = NameServerInterface.getHashOfName(nodeName);
         return mId;
     }
 

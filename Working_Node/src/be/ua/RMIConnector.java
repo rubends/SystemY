@@ -5,7 +5,7 @@ import java.rmi.registry.Registry;
 
 public class RMIConnector {
 
-    private NameServerInterface NameServerInterface;
+    private NameServerInterface INameServer;
     private INode INode;
     private INode INodeNew;
     private int Port = 1099;
@@ -20,16 +20,17 @@ public class RMIConnector {
         try {
             String name = "nodeNames";
             Registry registry = LocateRegistry.getRegistry(Port);
-            NameServerInterface = (NameServerInterface) registry.lookup(name);
+            INameServer = (NameServerInterface) registry.lookup(name);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public RMIConnector(String IP, String nodeName, int nodeCount) { //create own rmi
+    public RMIConnector(NameServerInterface INameServer, String IP, String nodeName, int nodeCount) { //create own rmi
         try {
-            INode = new Node(nodeCount, nodeName, NameServerInterface);
-            String connName = nodeName+"Conn";
+            int hash = INameServer.getHashOfName(nodeName);
+            INode = new Node(nodeCount, hash);
+            String connName = Integer.toString(hash);
             try {
                 Registry registry = LocateRegistry.getRegistry(NodePort);
                 registry.bind(connName, INode);
@@ -45,12 +46,14 @@ public class RMIConnector {
         }
     }
 
-    public RMIConnector(String name) { //get node RMI
+    public RMIConnector(NameServerInterface INameServer, String nodeName) { //get node RMI
+        int hash = INameServer.getHashOfName(nodeName);
+        String connName = Integer.toString(hash);
         boolean gettingConnection = true;
         while(gettingConnection) {
             try {
                 Registry registry = LocateRegistry.getRegistry(NodePort);
-                INodeNew = (INode) registry.lookup(name+"Conn");
+                INodeNew = (INode) registry.lookup(connName);
                 ////// !! TO DO: NameServerInterface.getHash(name) --> INode.getNewNode(hash)
                 ////// INodeNew.updateNextNode etc ....
                 gettingConnection = false;
@@ -58,14 +61,13 @@ public class RMIConnector {
         }
         try {
             System.out.println("node RMI connected");
-            System.out.println("new node hash: " + INodeNew.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public NameServerInterface getNameServer() {
-        return NameServerInterface;
+        return INameServer;
     }
     public INode getINode() {
         return INode;

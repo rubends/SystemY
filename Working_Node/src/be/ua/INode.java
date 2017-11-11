@@ -8,4 +8,5 @@ public interface INode extends Remote {
     void updatePrevNode(int newPrev) throws RemoteException;
     void updateNextNode(int newNext) throws RemoteException;
     int getPreviousNode() throws RemoteException;
+    int getId() throws RemoteException;
 }

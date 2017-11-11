@@ -28,7 +28,7 @@ public class RMIConnector {
 
     public RMIConnector(String IP, String nodeName, int nodeCount) { //create own rmi
         try {
-            INode = new Node(nodeCount);
+            INode = new Node(nodeCount, nodeName, NameServerInterface);
             String connName = nodeName+"Conn";
             try {
                 Registry registry = LocateRegistry.getRegistry(NodePort);
@@ -53,9 +53,14 @@ public class RMIConnector {
                 INodeNew = (INode) registry.lookup(name+"Conn");
                 ////// !! TO DO: NameServerInterface.getHash(name) --> INode.getNewNode(hash)
                 ////// INodeNew.updateNextNode etc ....
-                System.out.println("node RMI connected");
                 gettingConnection = false;
             } catch (Exception e) {}
+        }
+        try {
+            System.out.println("node RMI connected");
+            System.out.println("new node hash: " + INodeNew.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -42,4 +42,8 @@ public class Node extends UnicastRemoteObject implements INode{
     public int getId(){
         return mId;
     }
+
+    public void getNewNode (int hash) {
+
+    }
 }

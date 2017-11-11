@@ -31,12 +31,12 @@ public class MulticastThread extends Thread{
 
             //get number of nodes via datagram
             Dsocket = new DatagramSocket(DsocketPort);
+            Dsocket.setReuseAddress(true);
             byte[] buf = new byte[100];
             DatagramPacket nodeCountPacket = new DatagramPacket(buf, buf.length);
             Dsocket.receive(nodeCountPacket);
             String nodeCountS = new String(buf, 0, nodeCountPacket.getLength());
             nodeCount = Integer.parseInt(nodeCountS);
-            System.out.println(nodeCount);
             Dsocket.close();
 
             //setup RMI connection
@@ -48,8 +48,9 @@ public class MulticastThread extends Thread{
                 DatagramPacket newNode = new DatagramPacket(bufN, bufN.length);
                 MCsocket.receive(newNode);
                 String newNodeName = new String(bufN, 0, newNode.getLength());
-                System.out.println("new node:" + newNodeName);
-                listenNodeRMi(newNodeName);
+                if(!newNodeName.equals(name)) {
+                    listenNodeRMi(newNodeName);
+                }
             }
         } catch(Exception e) {
             e.printStackTrace();

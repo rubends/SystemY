@@ -29,24 +29,26 @@ public class MulticastThread extends Thread{
             DatagramPacket node = new DatagramPacket(name.getBytes(), name.length(), group, MulticastSocketPort);
             MCsocket.send(node);
 
-            //get number of nodes
+            //get number of nodes via datagram
             Dsocket = new DatagramSocket(DsocketPort);
-            byte[] buf = new byte[1000];
+            byte[] buf = new byte[100];
             DatagramPacket nodeCountPacket = new DatagramPacket(buf, buf.length);
             Dsocket.receive(nodeCountPacket);
             String nodeCountS = new String(buf, 0, nodeCountPacket.getLength());
             nodeCount = Integer.parseInt(nodeCountS);
             System.out.println(nodeCount);
+            Dsocket.close();
 
             //setup RMI connection
-            setupRMI(name+"Connection");
+            setupRMI(name, nodeCount);
 
             //listen to new nodes
             while(true){
                 byte[] bufN = new byte[1000];
                 DatagramPacket newNode = new DatagramPacket(bufN, bufN.length);
                 MCsocket.receive(newNode);
-                String newNodeName = new String(buf, 0, newNode.getLength());
+                String newNodeName = new String(bufN, 0, newNode.getLength());
+                System.out.println("new node:" + newNodeName);
                 listenNodeRMi(newNodeName);
             }
         } catch(Exception e) {
@@ -54,10 +56,10 @@ public class MulticastThread extends Thread{
         }
     }
 
-    private void setupRMI(String ConnName) throws NotBoundException {
-        String NodeIP = "192.168.1.50";
+    private void setupRMI(String nodeName, int nodeCount) throws NotBoundException {
+        String NodeIP = "192.168.56.1";
 
-        RMIConnector connectorNode = new RMIConnector(NodeIP, ConnName);
+        RMIConnector connectorNode = new RMIConnector(NodeIP, nodeName, nodeCount);
         INode = connectorNode.getINode();
     }
 
@@ -74,6 +76,5 @@ public class MulticastThread extends Thread{
         super.interrupt();
         release();
         MCsocket.close();
-        Dsocket.close();
     }
 }

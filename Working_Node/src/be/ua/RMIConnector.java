@@ -10,7 +10,11 @@ public class RMIConnector {
     private int Port = 1099;
 
     public RMIConnector() { //to nameserver
-
+        if (System.getSecurityManager() == null) {
+            System.setProperty("java.security.policy", "file:src/server.policy");
+            System.setProperty("java.rmi.server.hostname", "127.0.0.1");
+            System.setSecurityManager(new SecurityManager());
+        }
         try {
             String name = "nodeNames";
             Registry registry = LocateRegistry.getRegistry(Port);
@@ -20,13 +24,18 @@ public class RMIConnector {
         }
     }
 
-    public RMIConnector(String IP, String name) { //create own rmi
+    public RMIConnector(String IP, String nodeName, int nodeCount) { //create own rmi
 
-        System.setProperty("java.rmi.server.hostname", IP);
+        if (System.getSecurityManager() == null) {
+            System.setProperty("java.security.policy", "file:src/server.policy");
+            System.setProperty("java.rmi.server.hostname", "127.0.0.1");
+            System.setSecurityManager(new SecurityManager());
+        }
         try {
-            INode = new Node();
+            INode = new Node(nodeCount);
             Registry registry = LocateRegistry.getRegistry(Port);
-            registry.bind(name, INode);
+            String connName = nodeName+"Conn";
+            registry.bind(connName, INode);
             System.out.println("RMI bound");
         } catch (Exception e) {
             System.err.println("Exception while setting up RMI:");
@@ -35,6 +44,10 @@ public class RMIConnector {
     }
 
     public RMIConnector(String name) { //get node RMI
+        if (System.getSecurityManager() == null) {
+            System.setProperty("java.security.policy","file:src/client.policy");
+            System.setSecurityManager(new SecurityManager());
+        }
         try {
             Registry registry = LocateRegistry.getRegistry(Port);
             INode = (INode) registry.lookup(name);

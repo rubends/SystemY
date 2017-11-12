@@ -45,7 +45,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RMIConnector.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RMIConnector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/be/ua/RMIConnector.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="538">
@@ -80,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NameServerInterface.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NameServerInterface.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/be/ua/NameServerInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+            <state relative-caret-position="238">
+              <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -118,13 +118,13 @@
       <list>
         <option value="$PROJECT_DIR$/src/server.policy" />
         <option value="$PROJECT_DIR$/src/be/ua/INode.java" />
-        <option value="$PROJECT_DIR$/src/be/ua/NameServerInterface.java" />
         <option value="$PROJECT_DIR$/src/be/ua/Node.java" />
         <option value="$PROJECT_DIR$/src/be/ua/NameServer.java" />
         <option value="$PROJECT_DIR$/src/be/ua/Main.java" />
         <option value="$PROJECT_DIR$/src/be/ua/UserInterface.java" />
         <option value="$PROJECT_DIR$/src/be/ua/MulticastThread.java" />
         <option value="$PROJECT_DIR$/src/be/ua/RMIConnector.java" />
+        <option value="$PROJECT_DIR$/src/be/ua/NameServerInterface.java" />
       </list>
     </option>
   </component>
@@ -300,12 +300,12 @@
       <updated>1509003544820</updated>
       <workItem from="1509003546459" duration="3537000" />
       <workItem from="1509047390094" duration="557000" />
-      <workItem from="1510485153702" duration="648000" />
+      <workItem from="1510485153702" duration="662000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="648000" />
+    <option name="totallyTimeSpent" value="662000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="392" y="0" width="974" height="788" extended-state="0" />
@@ -612,14 +612,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/be/ua/NameServerInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/UserInterface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -645,6 +637,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="538">
           <caret line="74" column="1" lean-forward="false" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/be/ua/NameServerInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
           <folding />
         </state>
       </provider>

@@ -96,19 +96,18 @@ public class RMIConnector {
             try {
                 Registry registry = LocateRegistry.getRegistry(NodePort);
                 INodeNew = (INode) registry.lookup(connName);
+
+
                 ////// !! TO DO: NameServerInterface.getHash(name) --> INode.getNewNode(hash)
                 ////// INodeNew.updateNextNode etc ....
-
-
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(INameServer.getHashOfName(nodeName));
                 INodeNew.updateNeighbour(ids.get(0), ids.get(1));
+
+
 
                 gettingConnection = false;
             } catch (Exception e) {            failure.ActOnFailure(); }
         }
-
-
-
     }
 
     public NameServerInterface getNameServer() {

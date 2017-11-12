@@ -88,4 +88,16 @@ public class Node extends UnicastRemoteObject implements INode{
     }
 
     public void getNewNode (int hash) { }
+
+    public void shutdown() throws RemoteException{
+
+
+        RMIConnector rmi = new RMIConnector();
+        //rmi.getINode(mPrevious).updateNextNode(mNext);
+        //rmi.getINode(mNext).updatePrevNode(mPrevious);
+        rmi.getNameServer().deleteNode(this.nodeName);
+        System.exit(0);
+
+
+    }
 }

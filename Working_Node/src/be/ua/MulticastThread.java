@@ -2,12 +2,14 @@ package be.ua;
 
 import java.net.*;
 import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 
 public class MulticastThread extends Thread{
     MulticastSocket MCsocket;
     DatagramSocket Dsocket;
     public int nodeCount = 0;
     public INode INode;
+   // public Node Node;
     String name;
     NameServerInterface INameServer;
 
@@ -43,7 +45,6 @@ public class MulticastThread extends Thread{
 
             //setup RMI connection
             setupRMI(name, nodeCount);
-
             //listen to new nodes
             while(true){
                 byte[] bufN = new byte[1000];
@@ -52,6 +53,7 @@ public class MulticastThread extends Thread{
                 String newNodeName = new String(bufN, 0, newNode.getLength());
                 if(!newNodeName.equals(name)) {
                     listenNodeRMi(newNodeName);
+
                 }
             }
         } catch(Exception e) {
@@ -67,8 +69,14 @@ public class MulticastThread extends Thread{
     }
 
     private void listenNodeRMi(String name) {
-        RMIConnector connector =new RMIConnector(INameServer, name);
-        INode = connector.getINode();
+        try{
+            RMIConnector connector =new RMIConnector(INameServer, name);
+            INode = connector.getINode();
+        }
+        catch (RemoteException e){
+
+        }
+
     }
 
     public void release() {

@@ -64,15 +64,10 @@ public class UserInterface {
         }
     }
 
-    protected void getNodeCount(){
-        try{
-            int nodeCount = NameServerInterface.getNodeCount();
-            System.out.println("Nodecount: " + nodeCount);
-        }
-        catch(RemoteException e){
-            e.printStackTrace();
-        }
 
+    protected void getNodeCount() throws RemoteException{
+        int nodeCount = NameServerInterface.getNodeCount();
+        System.out.println("Nodecount: " + nodeCount);
 
     }
 }

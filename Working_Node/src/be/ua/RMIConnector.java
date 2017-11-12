@@ -1,7 +1,9 @@
 package be.ua;
 
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 
 public class RMIConnector {
 
@@ -46,7 +48,7 @@ public class RMIConnector {
         }
     }
 
-    public RMIConnector(NameServerInterface INameServer, String nodeName) { //get node RMI
+    public RMIConnector(NameServerInterface INameServer, String nodeName) throws RemoteException{ //get node RMI
         int hash = INameServer.getHashOfName(nodeName);
         String connName = Integer.toString(hash);
         boolean gettingConnection = true;
@@ -56,6 +58,12 @@ public class RMIConnector {
                 INodeNew = (INode) registry.lookup(connName);
                 ////// !! TO DO: NameServerInterface.getHash(name) --> INode.getNewNode(hash)
                 ////// INodeNew.updateNextNode etc ....
+
+
+                ArrayList<Integer> ids = INameServer.getNeighbourNodes(INameServer.getHashOfName(nodeName));
+                INodeNew.updateNeighbour(ids.get(0), ids.get(1));
+                
+
                 gettingConnection = false;
             } catch (Exception e) {}
         }

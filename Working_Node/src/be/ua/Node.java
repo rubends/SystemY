@@ -9,6 +9,7 @@ public class Node extends UnicastRemoteObject implements INode{
     private volatile int mId;
     private volatile int nodeCount;
     private volatile String nodeName;
+    private NameServerInterface ns;
 
     protected Node(int nc, int hash) throws RemoteException
     {
@@ -25,11 +26,26 @@ public class Node extends UnicastRemoteObject implements INode{
 
     public void updateNextNode(int newNext) {
         this.mNext = newNext;
-
+        try {
+            if(ns.getFirstId() == mId)
+            {
+                mPrevious = ns.getLastId();
+            }
+        } catch (RemoteException e) {
+        e.printStackTrace();
+        }
     }
 
     public void updatePrevNode(int newPrev) {
         this.mPrevious = newPrev;
+        try {
+            if(ns.getLastId() == mId)
+            {
+                mNext = ns.getFirstId();
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
 
     }
 

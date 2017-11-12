@@ -3,14 +3,13 @@ package be.ua;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class NameServer implements NameServerInterface {
+public class NameServer extends UnicastRemoteObject implements NameServerInterface {
 
     private TreeMap<Integer, String> nodeMap;
 
@@ -92,48 +91,56 @@ public class NameServer implements NameServerInterface {
             int key = keySetIterator.next();
             System.out.println("Hash: " + key + "\tIP: " + nodeMap.get(key));
         }
+        System.out.println(); //extra line for clean format
     }
 
-    public static int getHashOfName(String name) {
+    public int getNodeCount()
+    {
+        int nodeCount = nodeMap.size();
+        System.out.println("Number of nodes: " + nodeCount);
+        return nodeCount;
+    }
+
+    public int getHashOfName(String name) {
         return Math.abs(name.hashCode() % 32769);
     }
 
-    public static void main(String[] args)
-    {
-        MulticastThread multicastThread = new MulticastThread();
-        multicastThread.start();
+    public ArrayList getNeighbourNodes(int hash) throws RemoteException{
+        ArrayList<Integer> neighbours = new ArrayList<>();
 
-        String registryName = "nodeNames";
-        if (System.getSecurityManager() == null) {
-            System.setProperty("java.security.policy", "file:src/server.policy");
-            System.setProperty("java.rmi.server.hostname", "127.0.0.1");
-            System.setSecurityManager(new SecurityManager());
+        //hash is the first node
+        if (nodeMap.lowerKey(hash) == null && nodeMap.higherKey(hash) != null){
+            neighbours.add(getLastId());
+            neighbours.add(nodeMap.higherKey(hash));
         }
-        try
-        {
-            NameServerInterface ns = new NameServer();
-            NameServerInterface stub = (NameServerInterface) UnicastRemoteObject.exportObject(ns, 0);
-            Registry registry = LocateRegistry.createRegistry(1099);
-            registry.bind(registryName, stub);
-            System.out.println("Nameserver bound");
 
-
-
-
-            // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
-            ns.addNode("node1","192.168.1.1");
-            ns.addNode("secondnode","192.168.1.2");
-            ns.addNode("nodefiles","192.168.1.2");
-            ns.addNode("myfile","192.168.1.3");
-            ns.printNodeMap();
-            ns.deleteNode("secondnode");
-            // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
-
+        //hash is the last node
+        else if(nodeMap.lowerKey(hash) != null && nodeMap.higherKey(hash) == null){
+            neighbours.add(nodeMap.lowerKey(hash));
+            neighbours.add(getLastId());
         }
-        catch (Exception e)
-        {
-            System.out.println("Nameserver error: " + e.getMessage());
-            e.printStackTrace();
+
+        //hash is the only node
+        else if(nodeMap.lowerKey(hash) == null && nodeMap.higherKey(hash) == null){
+            neighbours.add(hash);
+            neighbours.add(hash);
         }
+
+        //hash is in the middle of nodemap
+        else{
+            neighbours.add(nodeMap.lowerKey(hash)); //hash is in the middle
+            neighbours.add(nodeMap.higherKey(hash));
+        }
+
+
+        return neighbours;
+    }
+
+    public int getLastId() throws RemoteException {
+        return  nodeMap.lastKey();
+    }
+
+    public int getFirstId() throws RemoteException {
+        return  nodeMap.firstKey();
     }
 }

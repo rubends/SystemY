@@ -7,33 +7,36 @@ import java.lang.String;
 public class UserInterface {
     private Scanner input;
     private NameServerInterface NameServerInterface;
-    public  MulticastThread multicastThread;
 
-
-    public UserInterface(String serverPort) {
+    public UserInterface() {
         input = new Scanner(System.in);
         System.out.println("Startup of node");
-
-        setup(serverPort);
-        startUI();
+        setup();
     }
 
-    private void setup(String serverPort) {
-        RMIConnector connector =new RMIConnector(serverPort);
+    private void setup() {
+        RMIConnector connector = new RMIConnector();
         NameServerInterface = connector.getNameServer();
+    }
+
+    public void startMulticast(){
+        System.out.println("\t Enter the name for the new node");
+        System.out.print("> ");
+        String nodeName = new Scanner(System.in).next();
+
+        MulticastThread multicastThread = new MulticastThread(nodeName, NameServerInterface);
+        multicastThread.start();
     }
 
     public void startUI() {
         while(true) {
-            getAmountOfNodes();
-
             System.out.println("\t Enter file name then press 'Enter' to get the IP ");
             System.out.print("> ");
 
             try {
                 String fileName = input.next();
                 System.out.println("\t Input =" + fileName);
-                AskServer(fileName);
+                askServer(fileName);
             }
 
             catch (InputMismatchException e) {
@@ -46,7 +49,7 @@ public class UserInterface {
         }
     }
 
-    private void  AskServer(String fileName) {
+    private void  askServer(String fileName) {
         try {
             String Ipa = NameServerInterface.getFileIp(fileName);
             System.out.println("------------------------");
@@ -59,23 +62,9 @@ public class UserInterface {
             System.out.println("No good connection");
         }
     }
-    private void  getAmountOfNodes() {
-        try{
-            int passedNodesAmount= multicastThread.getAmountOfNodes();
-            System.out.println("passedNodesAmount = " + passedNodesAmount);
 
-            if(passedNodesAmount < 1){
-                int nextNode = 0;
-                int prevNode = 0;
-            }
-            else if(passedNodesAmount >= 1){
-                //??
-            }
-        }
-        catch(java.lang.NullPointerException np){
-            System.out.println("//------------------------------------------------------------//");
-            System.out.println("//Nullpointer op fetch van multicastThread.getAmountOfNodes() //");
-            System.out.println("//------------------------------------------------------------//");
-        }
+    protected void getNodeCount(){
+        int nodeCount = NameServerInterface.getNodeCount();
+        System.out.println("Nodecount: " + nodeCount);
     }
 }

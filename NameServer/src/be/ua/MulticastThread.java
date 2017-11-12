@@ -1,25 +1,31 @@
 package be.ua;
 
-import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
+import java.net.*;
 
 public class MulticastThread extends Thread{
-    protected String inetAddress = "228.5.6.7";
-    protected int MulticastSocket = 6789;
+    private NameServerInterface nameServer;
+    MulticastSocket MCsocket;
+    DatagramSocket Dsocket;
 
-    String replyNodeCount = "8"; //TEST DATA
+    public MulticastThread(NameServerInterface ns) {
+        nameServer = ns;
+    }
+
     public void run() {
-        super.run();
+        String inetAddress = "224.0.1.6";
+        int MulticastSocketPort = 6790;
+        int DsocketPort = 6791;
 
         try {
-            //open socket and join group
-            InetAddress group = InetAddress.getByName(inetAddress);
-            MulticastSocket MCsocket = new MulticastSocket(MulticastSocket);
-            MCsocket.joinGroup(group);
 
             //as long as thread is not interrupted
             while (!interrupted()) {
+                //open socket and join group
+                InetAddress group = InetAddress.getByName(inetAddress);
+                MCsocket = new MulticastSocket(MulticastSocketPort);
+                MCsocket.setReuseAddress(true);
+                MCsocket.joinGroup(group);
+
                 //receive new node
                 byte[] buf = new byte[1000];
                 DatagramPacket newNode = new DatagramPacket(buf, buf.length);
@@ -27,19 +33,15 @@ public class MulticastThread extends Thread{
 
                 InetAddress nodeIp = newNode.getAddress();
                 String nodeName = new String(buf, 0, newNode.getLength());
-                String addedNode = "New node name: " + nodeName + " on ip: " + nodeIp;
-                System.out.println(addedNode);
+                System.out.println("New node name: " + nodeName + " on ip: " + nodeIp);
 
-                //send to group
-                DatagramPacket addedNodeMsg = new DatagramPacket(addedNode.getBytes(), addedNode.length(), group, MulticastSocket);
-                MCsocket.send(addedNodeMsg);
+                nameServer.addNode(nodeName, nodeIp.toString());
 
-                //reply to new node
-                byte[] b = replyNodeCount.getBytes();
-                System.out.println("reply node count = " + replyNodeCount);
-                //DatagramPacket howManyNodes = new DatagramPacket(b, b.length, newNode.getAddress(), newNode.getPort());
-                DatagramPacket howManyNodes = new DatagramPacket(b, b.length, group, MulticastSocket);
-                MCsocket.send(howManyNodes);
+                //get number of nodes in network
+                Dsocket = new DatagramSocket();
+                String nodeCount = Integer.toString(nameServer.getNodeCount());
+                DatagramPacket nodecountPacket = new DatagramPacket(nodeCount.getBytes(), nodeCount.length(), nodeIp, DsocketPort);
+                Dsocket.send(nodecountPacket);
             }
         } catch(Exception e) {
             if(interrupted()) {
@@ -48,6 +50,7 @@ public class MulticastThread extends Thread{
                 e.printStackTrace();
             release();
         }
+
     }
 
     public void release() {
@@ -57,5 +60,7 @@ public class MulticastThread extends Thread{
     public void interrupt() {
         super.interrupt();
         release();
+        Dsocket.close();
+        MCsocket.close();
     }
 }

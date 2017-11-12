@@ -40,7 +40,7 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
                 mapKey = keyHash;
             }
         }
-        System.out.println("IP of node: " + nodeMap.get(mapKey) + "\n");
+        System.out.println("Filename: '" + fileName + "' is located at the node with IP: " + nodeMap.get(mapKey) + "\n");
         return nodeMap.get(mapKey);
     }
 

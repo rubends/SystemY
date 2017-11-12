@@ -40,7 +40,7 @@ public class RMIConnector {
                 registry.bind(connName, INode);
             }
             ////// !!! TO DO: INode check nodecount en zet huidige, volgende en vorige node
-            System.out.println("RMI bound");
+            System.out.println("RMI bound to server");
         } catch (Exception e) {
             System.err.println("Exception while setting up RMI:");
             e.printStackTrace();

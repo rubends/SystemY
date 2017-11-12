@@ -91,6 +91,7 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
             int key = keySetIterator.next();
             System.out.println("Hash: " + key + "\tIP: " + nodeMap.get(key));
         }
+        System.out.println(); //extra line for clean format
     }
 
     public int getNodeCount()
@@ -104,12 +105,42 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
         return Math.abs(name.hashCode() % 32769);
     }
 
-    public ArrayList getNeighbourNodes(int hash){
+    public ArrayList getNeighbourNodes(int hash) throws RemoteException{
         ArrayList<Integer> neighbours = new ArrayList<>();
 
-        neighbours.add(nodeMap.lowerKey(hash));
-        neighbours.add(nodeMap.higherKey(hash));
+        //hash is the first node
+        if (nodeMap.lowerKey(hash) == null && nodeMap.higherKey(hash) != null){
+            neighbours.add(getLastId());
+            neighbours.add(nodeMap.higherKey(hash));
+        }
+
+        //hash is the last node
+        else if(nodeMap.lowerKey(hash) != null && nodeMap.higherKey(hash) == null){
+            neighbours.add(nodeMap.lowerKey(hash));
+            neighbours.add(getLastId());
+        }
+
+        //hash is the only node
+        else if(nodeMap.lowerKey(hash) == null && nodeMap.higherKey(hash) == null){
+            neighbours.add(hash);
+            neighbours.add(hash);
+        }
+
+        //hash is in the middle of nodemap
+        else{
+            neighbours.add(nodeMap.lowerKey(hash)); //hash is in the middle
+            neighbours.add(nodeMap.higherKey(hash));
+        }
+
 
         return neighbours;
+    }
+
+    public int getLastId() throws RemoteException {
+        return  nodeMap.lastKey();
+    }
+
+    public int getFirstId() throws RemoteException {
+        return  nodeMap.firstKey();
     }
 }

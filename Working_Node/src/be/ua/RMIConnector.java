@@ -1,5 +1,6 @@
 package be.ua;
 
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -47,23 +48,31 @@ public class RMIConnector {
     }
 
     public RMIConnector(NameServerInterface INameServer, String nodeName) { //get node RMI
-        int hash = INameServer.getHashOfName(nodeName);
-        String connName = Integer.toString(hash);
-        boolean gettingConnection = true;
-        while(gettingConnection) {
+        try{
+            int hash = INameServer.getHashOfName(nodeName);
+            String connName = Integer.toString(hash);
+            boolean gettingConnection = true;
+            while(gettingConnection) {
+                try {
+                    Registry registry = LocateRegistry.getRegistry(NodePort);
+                    INodeNew = (INode) registry.lookup(connName);
+                    ////// !! TO DO: NameServerInterface.getHash(name) --> INode.getNewNode(hash)
+                    ////// INodeNew.updateNextNode etc ....
+                    gettingConnection = false;
+                } catch (Exception e) {}
+            }
             try {
-                Registry registry = LocateRegistry.getRegistry(NodePort);
-                INodeNew = (INode) registry.lookup(connName);
-                ////// !! TO DO: NameServerInterface.getHash(name) --> INode.getNewNode(hash)
-                ////// INodeNew.updateNextNode etc ....
-                gettingConnection = false;
-            } catch (Exception e) {}
+                System.out.println("node RMI connected");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        try {
-            System.out.println("node RMI connected");
-        } catch (Exception e) {
+        catch(RemoteException e){
             e.printStackTrace();
         }
+
+
+
     }
 
     public NameServerInterface getNameServer() {

@@ -31,6 +31,7 @@ public class MulticastThread extends Thread{
             DatagramPacket node = new DatagramPacket(name.getBytes(), name.length(), group, MulticastSocketPort);
             MCsocket.send(node);
 
+/*
             while (!interrupted()) {
                 byte[] buf = new byte[1000];
                 DatagramPacket newMsg = new DatagramPacket(buf, buf.length);
@@ -39,7 +40,8 @@ public class MulticastThread extends Thread{
                 String msg = new String(buf, 0, newMsg.getLength());
                 amountOfNodes = new BigInteger(msg).intValue();
                 System.out.println(msg);
-            }
+            }*/
+
 
             //get number of nodes via datagram
             Dsocket = new DatagramSocket(DsocketPort);

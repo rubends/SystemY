@@ -1,5 +1,6 @@
 package be.ua;
 
+import java.rmi.RemoteException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.lang.String;
@@ -64,7 +65,14 @@ public class UserInterface {
     }
 
     protected void getNodeCount(){
-        int nodeCount = NameServerInterface.getNodeCount();
-        System.out.println("Nodecount: " + nodeCount);
+        try{
+            int nodeCount = NameServerInterface.getNodeCount();
+            System.out.println("Nodecount: " + nodeCount);
+        }
+        catch(RemoteException e){
+            e.printStackTrace();
+        }
+
+
     }
 }

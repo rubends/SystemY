@@ -62,7 +62,7 @@ public class RMIConnector {
 
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(INameServer.getHashOfName(nodeName));
                 INodeNew.updateNeighbour(ids.get(0), ids.get(1));
-                
+
 
                 gettingConnection = false;
             } catch (Exception e) {}

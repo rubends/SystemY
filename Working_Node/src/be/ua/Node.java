@@ -2,6 +2,8 @@ package be.ua;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Node extends UnicastRemoteObject implements INode{
     private volatile int mPrevious;
@@ -9,13 +11,16 @@ public class Node extends UnicastRemoteObject implements INode{
     private volatile int mId;
     private volatile int nodeCount;
     private volatile String nodeName;
-    private NameServerInterface ns;
+    private volatile NameServerInterface INameServer;
+    private volatile Map<Integer, INode> nodeMap;
 
-    protected Node(int nc, int hash) throws RemoteException
+    protected Node(int nc, int hash, Map otherNodes, NameServerInterface ns) throws RemoteException
     {
         super();
         nodeCount = nc;
         mId = hash;
+        nodeMap = otherNodes;
+        INameServer = ns;
     }
     public void nodeInit(int ID)
     {
@@ -24,7 +29,7 @@ public class Node extends UnicastRemoteObject implements INode{
         this.mPrevious = ID;
         //System.out.println("mId,mNext,mPrev = " + ID);
     }
-    public void updateNeighbour(int newPrevious, int newNext)
+    public void updateNeighbours(int newPrevious, int newNext)
     {
         this.mNext = newNext;
         this.mPrevious = newPrevious;
@@ -33,9 +38,9 @@ public class Node extends UnicastRemoteObject implements INode{
     public void updateNextNode(int newNext) {
         this.mNext = newNext;
         try {
-            if(ns.getFirstId() == mId)
+            if(INameServer.getFirstId() == mId)
             {
-                mPrevious = ns.getLastId();
+                mPrevious = INameServer.getLastId();
             }
         } catch (RemoteException e) {
         e.printStackTrace();
@@ -45,9 +50,9 @@ public class Node extends UnicastRemoteObject implements INode{
     public void updatePrevNode(int newPrev) {
         this.mPrevious = newPrev;
         try {
-            if(ns.getLastId() == mId)
+            if(INameServer.getLastId() == mId)
             {
-                mNext = ns.getFirstId();
+                mNext = INameServer.getFirstId();
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -62,15 +67,8 @@ public class Node extends UnicastRemoteObject implements INode{
         return mPrevious;
     }
 
-    public int getNextNode(){
-        return mNext;
-    }
-
     public int getId(){
         return mId;
-    }
-    public String getName(){
-        return nodeName;
     }
 
     public void setPreviousNodeLocal(int prevNode) {
@@ -87,17 +85,14 @@ public class Node extends UnicastRemoteObject implements INode{
         System.out.println("ID of node = " + mId);
     }
 
-    public void getNewNode (int hash) { }
-
     public void shutdown() throws RemoteException{
+        INode previousNode = nodeMap.get(mPrevious);
+        previousNode.updateNextNode(mNext);
 
+        INode nextNode = nodeMap.get(mNext);
+        nextNode.updatePrevNode(mPrevious);
 
-        RMIConnector rmi = new RMIConnector();
-        //rmi.getINode(mPrevious).updateNextNode(mNext);
-        //rmi.getINode(mNext).updatePrevNode(mPrevious);
-        rmi.getNameServer().deleteNode(this.nodeName);
+        INameServer.deleteNode(this.nodeName);
         System.exit(0);
-
-
     }
 }

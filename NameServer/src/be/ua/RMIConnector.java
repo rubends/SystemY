@@ -21,7 +21,7 @@ public class RMIConnector {
             System.out.println("Nameserver bound");
 
             // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
-            ns.addNode("testNode","192.168.1.1");
+            //ns.addNode("testNode","192.168.1.1"); //For test
             ns.getNodeCount();
 //            ns.addNode("secondnode","192.168.1.2");
 //            ns.addNode("nodefiles","192.168.1.2");

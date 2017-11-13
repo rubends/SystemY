@@ -62,9 +62,7 @@ public class MulticastThread extends Thread{
     }
 
     private void setupRMI(String nodeName, int nodeCount) throws NotBoundException {
-        String NodeIP = "192.168.56.1";
-
-        RMIConnector connectorNode = new RMIConnector(INameServer, NodeIP, nodeName, nodeCount);
+        RMIConnector connectorNode = new RMIConnector(INameServer, nodeName, nodeCount);
         INode = connectorNode.getINode();
     }
 

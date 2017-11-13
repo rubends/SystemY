@@ -63,18 +63,17 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
         }
     }
 
-    public void deleteNode(String nodeName)
+    public void deleteNode(int hash)
     {
         try {
-            int hash = getHashOfName(nodeName);
             if (nodeMap.get(hash) != null) {                    //the to be deleted file exists
                 nodeMap.remove(hash);
                 ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("./nodeMap.ser"));
                 out.writeObject(nodeMap);
                 out.close();
-                System.out.println("Succesfully deleted: " + nodeName);
+                System.out.println("Succesfully deleted: " + hash);
             }else  {
-                System.out.println("This node doesn't exist and therefore can't be deleted: " + nodeName);
+                System.out.println("This node doesn't exist and therefore can't be deleted: " + hash);
             }
         }
         catch( Exception e){

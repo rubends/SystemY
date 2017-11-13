@@ -27,7 +27,7 @@ public class RMIConnector {
 //            ns.addNode("nodefiles","192.168.1.2");
 //            ns.addNode("myfile","192.168.1.3");
 //            ns.printNodeMap();
-//            ns.deleteNode("secondnode");
+//            ns.deleteNode(hash van testNode);
             // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
 
         }

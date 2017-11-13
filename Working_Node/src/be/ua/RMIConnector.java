@@ -4,8 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.TreeMap;
 
 public class RMIConnector {
 
@@ -15,12 +14,9 @@ public class RMIConnector {
 
     private int Port = 1099;
     private int NodePort = 1098;
-    Map<Integer, INode> nodeMap = new HashMap<>();
-
-    private Failure failure;
+    private TreeMap<Integer, INode> nodeMap = new TreeMap<>();
 
     public RMIConnector() { //to nameserver
-        this.failure = new Failure(INameServer,INode);
         if (System.getSecurityManager() == null) {
             System.setProperty("java.security.policy", "file:server.policy");
             System.setProperty("java.rmi.server.hostname", "127.0.0.1");
@@ -32,15 +28,13 @@ public class RMIConnector {
             INameServer = (NameServerInterface) registry.lookup(name);
         } catch (Exception e) {
             e.printStackTrace();
-            //failure.ActOnFailure(INameServer, INode);
         }
     }
 
-    public RMIConnector(NameServerInterface INameServer, String IP, String nodeName, int nodeCount) { //create own rmi
-        this.failure = new Failure(INameServer,INode);
+    public RMIConnector(NameServerInterface INameServer, String nodeName, int nodeCount) { //create own rmi
         try {
             int hash = INameServer.getHashOfName(nodeName);
-            INode = new Node(nodeCount, hash, nodeMap, INameServer);
+            INode = new Node(hash, nodeMap, INameServer);
             String connName = Integer.toString(hash);
             try {
                 Registry registry = LocateRegistry.getRegistry(NodePort);
@@ -50,16 +44,10 @@ public class RMIConnector {
                 registry.bind(connName, INode);
                 //failure.ActOnFailure(INameServer, INode);
             }
-            ////// !!! TO DO: INode check nodecount en zet huidige, volgende en vorige node
-//-----------------------------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------------------------------
-            INode.actOnNodeCount(hash,nodeCount,INode);
-
             System.out.println("serverRMI bound to server");
         } catch (Exception e) {
             System.err.println("Exception while setting up RMI:");
             e.printStackTrace();
-            //failure.ActOnFailure(INameServer, INode);
         }
 //-----------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------
@@ -67,7 +55,6 @@ public class RMIConnector {
 
 
     public RMIConnector(NameServerInterface INameServer, String nodeName) throws RemoteException{ //get node RMI
-        this.failure = new Failure(INameServer,INode);
         int hash = INameServer.getHashOfName(nodeName);
         String connName = Integer.toString(hash);
         boolean gettingConnection = true;
@@ -75,30 +62,23 @@ public class RMIConnector {
             try {
                 Registry registry = LocateRegistry.getRegistry(NodePort);
                 INodeNew = (INode) registry.lookup(connName);
-
                 nodeMap.put(hash, INodeNew);
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);
                 INodeNew.updateNeighbours(ids.get(0), ids.get(1));
                 gettingConnection = false;
-            } catch (Exception e) {//failure.ActOnFailure(INameServer, INode);
-                }
-
+            } catch (Exception e) {}
         }
     }
 
-    public NameServerInterface getNameServer() {
-        return INameServer;
-    }
-    public INode getINode() {
-        return INode;
-    }
-
-    public Map getNodeMap(){
-        return nodeMap;
-    }
-
-    public Failure getFailure()
+    public void nodeFailure(NameServerInterface INameServer, int hash)
     {
-        return this.failure;
+        try {
+            ArrayList<Integer> failbourNodes = INameServer.getNeighbourNodes(hash);
+            INameServer.deleteNode(hash);
+            INode prevNode = nodeMap.get(failbourNodes.get(0));
+            prevNode.updateNextNode(failbourNodes.get(0));
+            INode nextNode = nodeMap.get(failbourNodes.get(1));
+            nextNode.updatePrevNode(failbourNodes.get(2));
+        } catch (Exception e) { e.printStackTrace(); }
     }
 }

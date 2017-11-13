@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public interface NameServerInterface extends Remote{
     String getFileIp(String fileName) throws RemoteException;
     void addNode(String nodeName, String nodeIP) throws RemoteException;
-    void deleteNode(String nodeName) throws RemoteException;
+    void deleteNode(int hash) throws RemoteException;
     void printNodeMap() throws RemoteException;
     int getNodeCount() throws RemoteException;
     int getHashOfName(String name) throws RemoteException;

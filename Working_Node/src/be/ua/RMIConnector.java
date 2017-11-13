@@ -42,15 +42,12 @@ public class RMIConnector {
             } catch (Exception e) {
                 Registry registry = LocateRegistry.createRegistry(NodePort);
                 registry.bind(connName, INode);
-                //failure.ActOnFailure(INameServer, INode);
             }
             System.out.println("serverRMI bound to server");
         } catch (Exception e) {
             System.err.println("Exception while setting up RMI:");
             e.printStackTrace();
         }
-//-----------------------------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------------------------------
     }
 
 
@@ -81,4 +78,5 @@ public class RMIConnector {
             nextNode.updatePrevNode(failbourNodes.get(2));
         } catch (Exception e) { e.printStackTrace(); }
     }
+    public NameServerInterface getNameServer(){ return INameServer;}
 }

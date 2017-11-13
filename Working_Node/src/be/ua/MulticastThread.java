@@ -57,19 +57,18 @@ public class MulticastThread extends Thread{
                 }
             }
         } catch(Exception e) {
+            MCsocket.close();
             e.printStackTrace();
         }
     }
 
     private void setupRMI(String nodeName, int nodeCount) throws NotBoundException {
         RMIConnector connectorNode = new RMIConnector(INameServer, nodeName, nodeCount);
-        INode = connectorNode.getINode();
     }
 
     private void listenNodeRMi(String name) {
         try{
             RMIConnector connector =new RMIConnector(INameServer, name);
-            INode = connector.getINode();
         }
         catch (RemoteException e){
 

@@ -23,8 +23,6 @@ public class TestingNameServer {
             ns.addNode("node nr 5","192.168.1.5");
             ns.addNode("myfile","192.168.1.3");
             ns.printNodeMap();
-            ns.deleteNode("node nr 2");
-            ns.deleteNode("node nr 3");
 
             ns.getFileIp("myfile.jpg");
 

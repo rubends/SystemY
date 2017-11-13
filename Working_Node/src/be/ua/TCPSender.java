@@ -15,6 +15,7 @@ public class TCPSender {
         Socket socket = new Socket(InetAddress.getByName(ip), Port);
         DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream());
         byte[] fileArray = Files.readAllBytes(file.toPath());
+        outToServer.writeUTF(file.getName());
         outToServer.write(fileArray);
         socket.close();
     }

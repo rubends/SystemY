@@ -8,16 +8,15 @@ import java.util.ArrayList;
 public class RMIConnector {
 
     private NameServerInterface INameServer;
-    private INode INode;        //Why??
-    private INode INodeNew;     //Why??
-    private Node NodeInfo;
+    private INode INode;
+    private INode INodeNew;
     private int Port = 1099;
     private int NodePort = 1098;
 
     private Failure failure;
 
     public RMIConnector() { //to nameserver
-        this.failure = new Failure();
+        this.failure = new Failure(INameServer,INode);
         if (System.getSecurityManager() == null) {
             System.setProperty("java.security.policy", "file:server.policy");
             System.setProperty("java.rmi.server.hostname", "127.0.0.1");
@@ -29,12 +28,12 @@ public class RMIConnector {
             INameServer = (NameServerInterface) registry.lookup(name);
         } catch (Exception e) {
             e.printStackTrace();
-            failure.ActOnFailure();
+            //failure.ActOnFailure(INameServer, INode);
         }
     }
 
     public RMIConnector(NameServerInterface INameServer, String IP, String nodeName, int nodeCount) { //create own rmi
-        this.failure = new Failure();
+        this.failure = new Failure(INameServer,INode);
         try {
             int hash = INameServer.getHashOfName(nodeName);
             INode = new Node(nodeCount, hash);
@@ -45,42 +44,18 @@ public class RMIConnector {
             } catch (Exception e) {
                 Registry registry = LocateRegistry.createRegistry(NodePort);
                 registry.bind(connName, INode);
-                failure.ActOnFailure();
-
+                //failure.ActOnFailure(INameServer, INode);
             }
             ////// !!! TO DO: INode check nodecount en zet huidige, volgende en vorige node
 //-----------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------
-            System.out.println("nodeCount = " + nodeCount);
+            INode.actOnNodeCount(hash,nodeCount,INode);
 
-                if ((nodeCount-1) <1){//gives nullpointer back, cannot find nodeInfo?
-                    //Node.setNextNodeLocal(hash);
-                    //Node.setPreviousNodeLocal(hash);
-                    //Node.setIdLocal(hash);
-                    //of
-                    NodeInfo.nodeInit(hash);
-                }
-                else if((nodeCount-1) >= 1){//gives nullpointer back, cannot find nodeInfo?
-                    try{
-                        int nextNode = INode.getPreviousNodeNext();
-                        int prevNode = INode.getPreviousNodePrev();
-                        System.out.println("got from new node: nextNode = " + nextNode + "prevNode = " + prevNode);
-                        NodeInfo.setNextNodeLocal(nextNode);
-                        NodeInfo.setPreviousNodeLocal(prevNode);
-                        NodeInfo.setIdLocal(hash);
-                    }
-                    catch(RemoteException e){
-                        failure.ActOnFailure();
-                    }
-                }else
-                {
-
-                }
             System.out.println("serverRMI bound to server");
         } catch (Exception e) {
             System.err.println("Exception while setting up RMI:");
             e.printStackTrace();
-            failure.ActOnFailure();
+            //failure.ActOnFailure(INameServer, INode);
         }
 //-----------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------
@@ -88,7 +63,7 @@ public class RMIConnector {
 
 
     public RMIConnector(NameServerInterface INameServer, String nodeName) throws RemoteException{ //get node RMI
-        this.failure = new Failure();
+        this.failure = new Failure(INameServer,INode);
         int hash = INameServer.getHashOfName(nodeName);
         String connName = Integer.toString(hash);
         boolean gettingConnection = true;
@@ -99,12 +74,13 @@ public class RMIConnector {
                 ////// !! TO DO: NameServerInterface.getHash(name) --> INode.getNewNode(hash)
                 ////// INodeNew.updateNextNode etc ....
 
-
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(INameServer.getHashOfName(nodeName));
                 INodeNew.updateNeighbour(ids.get(0), ids.get(1));
 
                 gettingConnection = false;
-            } catch (Exception e) {            failure.ActOnFailure(); }
+            } catch (Exception e) {
+                //failure.ActOnFailure(INameServer, INodeNew);
+            }
         }
 
 
@@ -116,9 +92,6 @@ public class RMIConnector {
     }
     public INode getINode() {
         return INode;
-    }
-    public Node getNode() {
-        return NodeInfo;
     }
     public Failure getFailure()
     {

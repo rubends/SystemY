@@ -11,6 +11,8 @@ public class Node extends UnicastRemoteObject implements INode{
     private volatile String nodeName;
     private NameServerInterface ns;
 
+
+
     protected Node(int nc, int hash) throws RemoteException
     {
         super();
@@ -32,33 +34,37 @@ public class Node extends UnicastRemoteObject implements INode{
 
     public void updateNextNode(int newNext) {
         this.mNext = newNext;
-        try {
+        System.out.println("next of node = " + mNext);
+
+       /* try {
             if(ns.getFirstId() == mId)
             {
                 mPrevious = ns.getLastId();
             }
         } catch (RemoteException e) {
         e.printStackTrace();
-        }
+        }*/
     }
 
     public void updatePrevNode(int newPrev) {
         this.mPrevious = newPrev;
-        try {
+        System.out.println("prev of node = " + mPrevious);
+    /*    try {
             if(ns.getLastId() == mId)
             {
                 mNext = ns.getFirstId();
             }
         } catch (RemoteException e) {
             e.printStackTrace();
-        }
-
+        }*/
     }
 
     public int getPreviousNodeNext() {
+        System.out.println("Got from new node: nextNode = " + mNext );
         return mNext;
     }
     public int getPreviousNodePrev() {
+        System.out.println("Got from new node: prevNode = " + mPrevious );
         return mPrevious;
     }
 
@@ -72,20 +78,42 @@ public class Node extends UnicastRemoteObject implements INode{
     public String getName(){
         return nodeName;
     }
-
-    public void setPreviousNodeLocal(int prevNode) {
-        this.mPrevious=prevNode;
-        System.out.println("prevNode on node = " + mPrevious + "="+ prevNode);
-    }
-    public void setNextNodeLocal(int nextNode){
-        this.mNext=nextNode;
-        System.out.println("nextNode on node = " + mNext);
-
-    }
     public void setIdLocal(int id){
-         this.mId=id;
+        this.mId=id;
         System.out.println("ID of node = " + mId);
     }
+    public void actOnNodeCount(int hash,int nodeCount,INode INode)
+    {
+        System.out.println("nodeCount = " + nodeCount);
+        if ((nodeCount-1) <1){
+            try{
+                System.out.println("HERE = " + nodeCount);
 
+                INode.updatePrevNode(hash);
+                INode.updateNextNode(hash);
+                INode.setIdLocal(hash);
+            }
+            catch(RemoteException e){
+                //failure.ActOnFailure(INameServer, INode);
+            }
+        }
+        else if((nodeCount-1) >= 1){
+            try{
+                int nextNode = INode.getPreviousNodeNext();
+                int prevNode = INode.getPreviousNodePrev();
+                System.out.println("Got from new node: nextNode = " + nextNode + " prevNode = " + prevNode);
+                INode.updatePrevNode(prevNode);
+                INode.updateNextNode(nextNode);
+                INode.setIdLocal(hash);
+            }
+            catch(RemoteException e){
+                //failure.ActOnFailure(INameServer, INode);
+            }
+        }else
+        {
+
+        }
+
+    }
     public void getNewNode (int hash) { }
 }

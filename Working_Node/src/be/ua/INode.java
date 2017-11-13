@@ -10,4 +10,8 @@ public interface INode extends Remote {
     int getPreviousNodeNext() throws RemoteException;
     int getPreviousNodePrev() throws RemoteException;
     int getId() throws RemoteException;
+
+    //for testing , is local!
+    void setIdLocal(int id) throws RemoteException;
+    void actOnNodeCount(int hash,int nodeCount,INode INode) throws RemoteException;
 }

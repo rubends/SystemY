@@ -4,14 +4,18 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RMIConnector {
 
     private NameServerInterface INameServer;
     private INode INode;
     private INode INodeNew;
+
     private int Port = 1099;
     private int NodePort = 1098;
+    Map<Integer, INode> nodeMap = new HashMap<>();
 
     private Failure failure;
 
@@ -36,7 +40,7 @@ public class RMIConnector {
         this.failure = new Failure(INameServer,INode);
         try {
             int hash = INameServer.getHashOfName(nodeName);
-            INode = new Node(nodeCount, hash);
+            INode = new Node(nodeCount, hash, nodeMap, INameServer);
             String connName = Integer.toString(hash);
             try {
                 Registry registry = LocateRegistry.getRegistry(NodePort);
@@ -71,20 +75,15 @@ public class RMIConnector {
             try {
                 Registry registry = LocateRegistry.getRegistry(NodePort);
                 INodeNew = (INode) registry.lookup(connName);
-                ////// !! TO DO: NameServerInterface.getHash(name) --> INode.getNewNode(hash)
-                ////// INodeNew.updateNextNode etc ....
 
-                ArrayList<Integer> ids = INameServer.getNeighbourNodes(INameServer.getHashOfName(nodeName));
-                INodeNew.updateNeighbour(ids.get(0), ids.get(1));
-
+                nodeMap.put(hash, INodeNew);
+                ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);
+                INodeNew.updateNeighbours(ids.get(0), ids.get(1));
                 gettingConnection = false;
-            } catch (Exception e) {
-                //failure.ActOnFailure(INameServer, INodeNew);
-            }
+            } catch (Exception e) {//failure.ActOnFailure(INameServer, INode);
+                }
+
         }
-
-
-
     }
 
     public NameServerInterface getNameServer() {
@@ -93,6 +92,11 @@ public class RMIConnector {
     public INode getINode() {
         return INode;
     }
+
+    public Map getNodeMap(){
+        return nodeMap;
+    }
+
     public Failure getFailure()
     {
         return this.failure;

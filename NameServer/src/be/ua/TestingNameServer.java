@@ -16,14 +16,12 @@ public class TestingNameServer {
 
         try{
             NameServerInterface ns = new NameServer();
-            ns.addNode("node nr 1","192.168.1.1");
-            ns.addNode("node nr 1","192.168.1.1");
-            ns.addNode("node nr 2","192.168.1.2");
-            ns.addNode("node nr 4","192.168.1.4");
-            ns.addNode("node nr 5","192.168.1.5");
+            ns.addNode("node1","192.168.1.1");
+            ns.addNode("node1","192.168.1.1");
+            ns.addNode("node2","192.168.1.2");
             ns.addNode("myfile","192.168.1.3");
             ns.printNodeMap();
-
+            ns.deleteNode(ns.getHashOfName("node1"));
             ns.getFileIp("myfile.jpg");
 
             ns.printNodeMap();

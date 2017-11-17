@@ -35,7 +35,7 @@ public class MulticastThread extends Thread{
                 String nodeName = new String(buf, 0, newNode.getLength());
                 System.out.println("New node name: " + nodeName + " on ip: " + nodeIp);
 
-                nameServer.addNode(nodeName, nodeIp.toString());
+                nameServer.addNode(nodeName, nodeIp.getHostAddress());
 
                 //get number of nodes in network
                 Dsocket = new DatagramSocket();

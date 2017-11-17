@@ -5,20 +5,20 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        UserInterface ui = new UserInterface();
-        ui.startMulticast();
-        //ui.startUI();
+        RMIConnector connector = new RMIConnector();
+        NameServerInterface NameServerInterface = connector.getNameServer();
+
+        UserInterface ui = new UserInterface(NameServerInterface);
+
+        System.out.println("\t Enter the name for the new node");
+        System.out.print("> ");
+        String nodeName = new Scanner(System.in).next();
+        MulticastThread multicastThread = new MulticastThread(nodeName, NameServerInterface);
+        multicastThread.start();
+
         TCPReceiverThread tcpReceiverThread = new TCPReceiverThread();
         tcpReceiverThread.start();
 
-        TCPSender tcpSender = new TCPSender(7896);
-        try {
-            System.out.print("Enter a file: "); //D:\Ruben\Documents\EI\5-DistributedSystems\SystemY\Working_Node\Files\Local\test.txt
-            System.out.print("> ");
-            String filename = new Scanner(System.in).nextLine();
-            tcpSender.SendFile("192.168.56.1", filename);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Replication replication = new Replication(NameServerInterface);
     }
 }

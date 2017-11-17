@@ -9,24 +9,10 @@ public class UserInterface {
     private Scanner input;
     private NameServerInterface NameServerInterface;
 
-    public UserInterface() {
+    public UserInterface(NameServerInterface INameServer) {
+        NameServerInterface = INameServer;
         input = new Scanner(System.in);
         System.out.println("Startup of node");
-        setup();
-    }
-
-    private void setup() {
-        RMIConnector connector = new RMIConnector();
-        NameServerInterface = connector.getNameServer();
-    }
-
-    public void startMulticast(){
-        System.out.println("\t Enter the name for the new node");
-        System.out.print("> ");
-        String nodeName = new Scanner(System.in).next();
-
-        MulticastThread multicastThread = new MulticastThread(nodeName, NameServerInterface);
-        multicastThread.start();
     }
 
     public void startUI() {

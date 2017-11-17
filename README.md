@@ -2,8 +2,8 @@
 
 Made by
 - Ruben De Swaef
-	- RMI server, Multicast
+	- RMI server, Multicast, RMI-connection between nodes, Failure
 - Sam Peetermans
-	- RMI client, Node order
+	- RMI client, Node order, Node interface
 - Stijn Dirickx
-	- Node mapping, ...
+	- Node list mapping, Node placement, Shutdown, TCP-server

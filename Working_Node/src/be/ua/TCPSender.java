@@ -11,12 +11,18 @@ public class TCPSender {
         Port = portNumber;
     }
 
-    public void SendFile(File file, String ip) throws IOException{
-        Socket socket = new Socket(InetAddress.getByName(ip), Port);
-        DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream());
-        byte[] fileArray = Files.readAllBytes(file.toPath());
-        outToServer.writeUTF(file.getName());
-        outToServer.write(fileArray);
-        socket.close();
+    public void SendFile(String ip, String filename) throws IOException{
+        try {
+            File file = new File(filename);
+            Socket socket = new Socket(InetAddress.getByName(ip), Port);
+            DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream());
+            byte[] fileArray = Files.readAllBytes(file.toPath());
+            outToServer.writeUTF(file.getName());
+            outToServer.write(fileArray);
+            socket.close();
+        } catch (Exception e){
+            System.out.println("Something went wrong.");
+            e.printStackTrace();
+        }
     }
 }

@@ -62,7 +62,12 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
             e.printStackTrace();
         }
     }
-
+    public String getNode(int hash)
+    {
+        String nodeIP = nodeMap.get(hash);
+        System.out.println("getNode(" +hash+") = " + nodeIP);
+        return nodeIP;
+    }
     public void deleteNode(int hash)
     {
         try {
@@ -101,6 +106,7 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
     }
 
     public int getHashOfName(String name) {
+        System.out.println("getHashOfName("+ name +") = " + Math.abs(name.hashCode() % 32769));
         return Math.abs(name.hashCode() % 32769);
     }
 

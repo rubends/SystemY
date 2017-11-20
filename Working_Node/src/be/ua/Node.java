@@ -10,7 +10,7 @@ public class Node extends UnicastRemoteObject implements INode{
     private volatile int mId;
     private volatile NameServerInterface INameServer;
     private volatile TreeMap<Integer, INode> nodeMap;
-
+    private volatile FileMap Filemap;
 
 
     protected Node(int hash, TreeMap otherNodes, NameServerInterface ns) throws RemoteException
@@ -49,5 +49,12 @@ public class Node extends UnicastRemoteObject implements INode{
         INameServer.deleteNode(mId);
         System.exit(0);
     }
+    public void sendFileMap(String fileName){
+        int hashLocation = Filemap.getLocationLocal(fileName);
+        Filemap.passFiche(fileName,hashLocation,true);
+        hashLocation = Filemap.getLocationRepli(fileName);
+        Filemap.passFiche(fileName,hashLocation,false);
+    }
+
 
 }

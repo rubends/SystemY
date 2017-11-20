@@ -13,8 +13,8 @@ public class FileMap {
             In deze klasse worden alle locaties van bestanden bijgehouden
          */
     }
-    public void getLocationLocal(String fileName) {
-        FileLocationLocal.get(fileName);
+    public int getLocationLocal(String fileName) {
+        return FileLocationLocal.get(fileName);
     }
     public void addLocationLocal(String fileName, int hashLocation) {
         /*
@@ -23,8 +23,8 @@ public class FileMap {
          */
         FileLocationLocal.put(fileName,hashLocation);
     }
-    public void getLocationRepli(String fileName) {
-        FileLocationRepli.get(fileName);
+    public int getLocationRepli(String fileName) {
+        return FileLocationRepli.get(fileName);
     }
     public void addLocationRepli(String fileName, int hashLocation) {
         /*
@@ -33,12 +33,17 @@ public class FileMap {
          */
         FileLocationRepli.put(fileName,hashLocation);
     }
-    public void passFiche(String fileName) {
+    public void passFiche(String fileName,int hashLocation,boolean flag) {
         //Moet nog verder gedaan worden
         //Hiervoor RMI connectie opzetten, dan zie hieronder (nog niet af!)
         //Voor in node method aanmaken die fiche zal verzenden, functie oproepen. Hieronder .put
-        FileLocationRepli.get(fileName);
-        FileLocationLocal.get(fileName);
+
+        if(flag == true){
+            addLocationLocal(fileName,hashLocation);
+        }
+        else{
+            addLocationRepli(fileName,hashLocation);
+        }
 
     }
 }

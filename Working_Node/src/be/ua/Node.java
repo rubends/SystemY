@@ -66,5 +66,4 @@ public class Node extends UnicastRemoteObject implements INode{
         RMIConnector connectorNode = new RMIConnector(INameServer, nodeName, nodeCount);
     }
 
-
 }

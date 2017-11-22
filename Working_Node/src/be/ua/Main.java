@@ -8,11 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        UpdateFileMapThread t = new UpdateFileMapThread();
-        t.start();
 
-
-        /*
         RMIConnector connector = new RMIConnector();
         NameServerInterface NameServerInterface = connector.getNameServer();
 
@@ -32,9 +28,11 @@ public class Main {
 
         TCPReceiverThread tcpReceiverThread = new TCPReceiverThread();
         tcpReceiverThread.start();
+        UpdateFileMapThread updateFileMapThread = new UpdateFileMapThread();
+        updateFileMapThread.start();
 
         Replication replication = new Replication(NameServerInterface);
-        */
+
     }
 }
 

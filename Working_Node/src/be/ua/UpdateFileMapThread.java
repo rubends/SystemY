@@ -47,7 +47,7 @@ public class UpdateFileMapThread extends Thread{
 
                 //check if there is a different in lists
                 if (!currentKeys.equals(prevKeys)){
-                    System.out.println("Update detected");
+                    System.out.println("Change in local/replications files is detected by UpdateFileMapThread.java");
 
                     //TODO: Implement to give mynodefilelist to other class
                 }

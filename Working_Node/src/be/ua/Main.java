@@ -16,17 +16,12 @@ public class Main {
         String nodeName = new Scanner(System.in).next();
         MulticastThread multicastThread = new MulticastThread(nodeName, NameServerInterface);
         multicastThread.start();
-        try{
-            int hash = NameServerInterface.getHashOfName("Sam");
-            NameServerInterface.getNode(hash);
-        }
-        catch(Exception e){}
-
 
         TCPReceiverThread tcpReceiverThread = new TCPReceiverThread();
         tcpReceiverThread.start();
 
-        Replication replication = new Replication(NameServerInterface);
+        Replication replication = new Replication(nodeName, NameServerInterface);
+        replication.getFiles();
     }
 }
 

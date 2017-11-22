@@ -33,7 +33,6 @@ public class MulticastThread extends Thread{
 
                 InetAddress nodeIp = newNode.getAddress();
                 String nodeName = new String(buf, 0, newNode.getLength());
-                System.out.println("New node name: " + nodeName + " on ip: " + nodeIp);
 
                 nameServer.addNode(nodeName, nodeIp.getHostAddress());
 

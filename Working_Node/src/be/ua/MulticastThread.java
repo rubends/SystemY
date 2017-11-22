@@ -52,7 +52,7 @@ public class MulticastThread extends Thread{
                 MCsocket.receive(newNode);
                 String newNodeName = new String(bufN, 0, newNode.getLength());
                 if(!newNodeName.equals(name)) {
-                    listenNodeRMi(newNodeName);
+                    listenNodeRMi(newNodeName, name);
                 }
             }
         } catch(Exception e) {
@@ -65,12 +65,12 @@ public class MulticastThread extends Thread{
         RMIConnector connectorNode = new RMIConnector(INameServer, nodeName, nodeCount);
     }
 
-    private void listenNodeRMi(String name) {
+    private void listenNodeRMi(String newName, String name) {
         try{
-            RMIConnector connector =new RMIConnector(INameServer, name);
+            RMIConnector connector =new RMIConnector(INameServer, newName, name);
         }
         catch (RemoteException e){
-
+            e.printStackTrace();
         }
 
     }

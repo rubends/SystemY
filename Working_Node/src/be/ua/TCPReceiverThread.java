@@ -3,11 +3,12 @@ package be.ua;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketAddress;
 
 public class TCPReceiverThread extends Thread {
 
-    public final static int SOCKET_PORT = 7896;
-    public ServerSocket socket;
+    private final static int SOCKET_PORT = 7896;
+    private ServerSocket socket;
 
     public TCPReceiverThread() { }
 
@@ -15,8 +16,9 @@ public class TCPReceiverThread extends Thread {
     public void run(){
         try{
             socket = new ServerSocket(SOCKET_PORT);
+            socket.setReuseAddress(true);
         }catch(IOException e){
-            System.out.println("Exception in TCPReceiverThread:\n");
+            System.out.println("Could not connect to TCP port:\n");
             e.printStackTrace();
         }
 
@@ -27,7 +29,7 @@ public class TCPReceiverThread extends Thread {
                 InputStream is = receivedSocket.getInputStream();
                 String fileName = new DataInputStream(is).readUTF(); //get name from sender
                 String rootPath = new File("").getAbsolutePath();
-                String sep = System.getProperty("file.separator");
+                String sep = System.getProperty("file.separator");  // OS dependant
                 File receivedFile = new File(rootPath + sep + "Files" + sep + "Replication"+ sep + fileName);
                 FileOutputStream fos = new FileOutputStream(receivedFile);
                 int bufferLength = is.available();

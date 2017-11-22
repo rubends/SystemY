@@ -11,9 +11,9 @@ public interface NameServerInterface extends Remote{
     void printNodeMap() throws RemoteException;
     int getNodeCount() throws RemoteException;
     int getHashOfName(String name) throws RemoteException;
-    ArrayList getNeighbourNodes(int hash) throws RemoteException;
+    ArrayList<Integer> getNeighbourNodes(int hash) throws RemoteException;
     int getLastId() throws RemoteException;
     int getFirstId() throws RemoteException;
 
-    String getNode(int hash) throws RemoteException;
+    String getNodeIp(int hash) throws RemoteException;
 }

@@ -27,6 +27,7 @@ public class RMIConnector {
             Registry registry = LocateRegistry.getRegistry(Port);
             INameServer = (NameServerInterface) registry.lookup(name);
         } catch (Exception e) {
+            System.out.println("No nameserver found.");
             e.printStackTrace();
         }
     }
@@ -51,8 +52,8 @@ public class RMIConnector {
     }
 
 
-    public RMIConnector(NameServerInterface INameServer, String nodeName) throws RemoteException{ //get node RMI
-        int hash = INameServer.getHashOfName(nodeName);
+    public RMIConnector(NameServerInterface INameServer, String newNodeName, String nodeName) throws RemoteException{ //get node RMI
+        int hash = INameServer.getHashOfName(newNodeName);
         String connName = Integer.toString(hash);
         boolean gettingConnection = true;
         while(gettingConnection) {
@@ -62,6 +63,10 @@ public class RMIConnector {
                 nodeMap.put(hash, INodeNew);
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);
                 INodeNew.updateNeighbours(ids.get(0), ids.get(1));
+                if(ids.get(0) == INameServer.getHashOfName(nodeName)){
+                    Replication replication = new Replication(nodeName, INameServer);
+                    replication.getFiles();
+                }
                 gettingConnection = false;
             } catch (Exception e) {}
         }

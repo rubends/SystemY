@@ -1,7 +1,5 @@
 package be.ua;
 
-import java.io.File;
-import java.rmi.RemoteException;
 import java.util.Scanner;
 
 public class Main {

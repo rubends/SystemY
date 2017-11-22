@@ -1,5 +1,6 @@
 package be.ua;
 
+import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -19,13 +20,14 @@ public class RMIConnector {
     public RMIConnector() { //to nameserver
         if (System.getSecurityManager() == null) {
             System.setProperty("java.security.policy", "file:server.policy");
-            System.setProperty("java.rmi.server.hostname", "192.168.56.1");
+            System.setProperty("java.rmi.server.hostname", "169.254.62.119");
             System.setSecurityManager(new SecurityManager());
         }
         try {
             String name = "nodeNames";
-            Registry registry = LocateRegistry.getRegistry(Port);
-            INameServer = (NameServerInterface) registry.lookup(name);
+            //Registry registry = LocateRegistry.getRegistry(Port);
+            //INameServer = (NameServerInterface) registry.lookup(name);
+            Naming.lookup("//169.254.62.119/nodeNames");
         } catch (Exception e) {
             System.out.println("No nameserver found.");
             e.printStackTrace();

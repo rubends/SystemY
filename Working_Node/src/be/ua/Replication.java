@@ -56,6 +56,7 @@ public class Replication {
                 if(ipNextNode.equals(ipOwner)){
                     TCPSender tcpSender = new TCPSender(7896);
                     tcpSender.SendFile(ipNextNode, replicatedFiles[i].getName());
+                    //Dan ook nog de bestandsfiche invoegen!!
                 }
             }
             catch(IOException e){ }

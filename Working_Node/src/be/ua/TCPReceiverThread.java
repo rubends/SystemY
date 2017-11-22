@@ -3,7 +3,6 @@ package be.ua;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketAddress;
 
 public class TCPReceiverThread extends Thread {
 

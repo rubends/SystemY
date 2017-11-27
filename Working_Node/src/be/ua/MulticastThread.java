@@ -9,7 +9,7 @@ public class MulticastThread extends Thread{
     DatagramSocket Dsocket;
     public int nodeCount = 0;
     public INode INode;
-   // public Node Node;
+
     String name;
     NameServerInterface INameServer;
 

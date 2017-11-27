@@ -51,12 +51,6 @@ public class Node extends UnicastRemoteObject implements INode{
         System.exit(0);
     }
     public void sendFileMap(String fileName){
-        try{
-            String name = INameServer.getNode(mPrevious);
-            setupRMI(name,0);// nodeCount: Does nothing
-        }//Niet zeker of dit moet
-        catch(Exception e){}
-
         int hashLocation = Filemap.getLocationLocal(fileName);
         Filemap.passFiche(fileName,hashLocation,true);
         hashLocation = Filemap.getLocationRepli(fileName);

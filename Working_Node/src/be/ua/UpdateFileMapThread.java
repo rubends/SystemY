@@ -5,11 +5,18 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class UpdateFileMapThread extends Thread{
-    
+
+    public UpdateFileMapThread(String nodeName, NameServerInterface INameServer) {
+        this.INameServer = INameServer;
+        this.nodeName = nodeName;
+    }
+
     private static final int WAITTIME = 3;
     public List<File> fileList = new ArrayList<>();
     public TreeMap<String, Boolean> nodeFileList = new TreeMap<>(); //filename + isOwner/ornot
     public TreeMap<String, Boolean> prevNodeFileList = new TreeMap<>();
+    NameServerInterface INameServer;
+    String nodeName;
 
     @Override
     public void run() {
@@ -45,11 +52,11 @@ public class UpdateFileMapThread extends Thread{
                     prevKeys.add(entry.getKey());
                 }
 
-                //check if there is a different in lists
+                //check if there is a difference in the lists
                 if (!currentKeys.equals(prevKeys)){
-                    System.out.println("Change in local/replications files is detected by UpdateFileMapThread.java");
-
-                    //TODO: Implement to give mynodefilelist to other class
+                    System.out.println("Change in local/replications files is detected by UpdateFileMapThread.java" +
+                            "\n Starting replication.");
+                    new Replication(nodeName, INameServer).getFiles();
                 }
             }
 
@@ -71,5 +78,16 @@ public class UpdateFileMapThread extends Thread{
                 nodeFileList.put(f.getName(), isOwner);
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "UpdateFileMapThread{" +
+                "fileList=" + fileList +
+                ", nodeFileList=" + nodeFileList +
+                ", prevNodeFileList=" + prevNodeFileList +
+                ", INameServer=" + INameServer +
+                ", nodeName='" + nodeName + '\'' +
+                '}';
     }
 }

@@ -6,4 +6,4 @@ Made by
 - Sam Peetermans
 	- RMI client, Node order, Node interface
 - Stijn Dirickx
-	- Node list mapping, Node placement, Shutdown, TCP-server
+	- Node list mapping, Node placement, Shutdown, TCP-server, Update FileMap

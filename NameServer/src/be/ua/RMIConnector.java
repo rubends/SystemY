@@ -12,7 +12,7 @@ public class RMIConnector {
         if (System.getSecurityManager() == null) {
             System.setProperty("java.security.policy", "file:server.policy");
             //System.setProperty("java.rmi.server.hostname", "127.0.0.1");
-            System.setProperty("java.rmi.server.hostname", "169.254.62.119");
+            //System.setProperty("java.rmi.server.hostname", "169.254.62.119");
             System.setSecurityManager(new SecurityManager());
         }
         try
@@ -31,8 +31,6 @@ public class RMIConnector {
 //            ns.printNodeMap();
 //            ns.deleteNode(hash van testNode);
             // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
-
-            System.out.println("llx w w");
 
         }
         catch (Exception e)

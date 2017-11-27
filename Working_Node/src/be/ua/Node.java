@@ -52,7 +52,7 @@ public class Node extends UnicastRemoteObject implements INode{
     }
     public void sendFileMap(String fileName){
         try{
-            String name = INameServer.getNode(mPrevious);
+            String name = INameServer.getNodeIp(mPrevious);
             setupRMI(name,0);// nodeCount: Does nothing
         }//Niet zeker of dit moet
         catch(Exception e){}

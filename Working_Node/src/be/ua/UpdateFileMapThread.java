@@ -17,7 +17,7 @@ public class UpdateFileMapThread extends Thread{
         String rootPath = new File("").getAbsolutePath();
         String sep = System.getProperty("file.separator");
 
-        File fileReplDir = new File(rootPath + sep + "Files" + sep + "Replication" + sep);
+        //File fileReplDir = new File(rootPath + sep + "Files" + sep + "Replication" + sep);
         File fileLocDir = new File(rootPath + sep + "Files" + sep + "Local" + sep);
 
         while(true){
@@ -29,7 +29,7 @@ public class UpdateFileMapThread extends Thread{
             }
 
             //get new content for node file list
-            fillListWithFiles(fileReplDir, false);
+            //fillListWithFiles(fileReplDir, false);
             fillListWithFiles(fileLocDir, true);
 
             //Compare if previous is different than current node file list.

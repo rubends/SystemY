@@ -37,7 +37,7 @@ public class Replication {
             } else {
                 ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(ownHash);
                 int neighbourHash = neighbours.get(0);
-                System.out.println(neighbourHash);
+                System.out.println("neighbourHash = "+ neighbourHash);
                 String prevIp = INameServer.getNodeIp(neighbourHash);
                 tcpSender.SendFile(prevIp, location);
             }

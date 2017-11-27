@@ -16,6 +16,7 @@ public class RMIConnector {
         }
         try
         {
+
             Registry registry = LocateRegistry.createRegistry(Port);
             registry.bind(registryName, ns);
             System.out.println("Nameserver bound");

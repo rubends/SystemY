@@ -53,20 +53,22 @@ public class Node extends UnicastRemoteObject implements INode{
         INameServer.deleteNode(mId);
         System.exit(0);
     }
+<<<<<<< HEAD
 
     public void addNodeToMap(int hash, INode node){
         this.nodeMap.put(hash, node);
     }
 
+=======
+>>>>>>> d091786778760c72152aa3c01821e419c209c658
     public void sendFileMap(String fileName){
-        try{
-            String name = INameServer.getNodeIp(mPrevious);
-        }//Niet zeker of dit moet
-        catch(Exception e){}
-
         int hashLocation = Filemap.getLocationLocal(fileName);
         Filemap.passFiche(fileName,hashLocation,true);
         hashLocation = Filemap.getLocationRepli(fileName);
         Filemap.passFiche(fileName,hashLocation,false);
     }
+    private void setupRMI(String nodeName, int nodeCount) throws NotBoundException {
+        RMIConnector connectorNode = new RMIConnector(INameServer, nodeName, nodeCount);
+    }
+
 }

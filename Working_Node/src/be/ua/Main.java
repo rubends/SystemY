@@ -18,7 +18,7 @@ public class Main {
 
         TCPReceiverThread tcpReceiverThread = new TCPReceiverThread();
         tcpReceiverThread.start();
-        UpdateFileMapThread updateFileMapThread = new UpdateFileMapThread();
+        UpdateFileMapThread updateFileMapThread = new UpdateFileMapThread(nodeName, NameServerInterface);
         updateFileMapThread.start();
 
         Replication replication = new Replication(NameServerInterface);

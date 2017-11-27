@@ -22,6 +22,7 @@ public class RMIConnector {
             System.setProperty("java.security.policy", "file:server.policy");
             System.setProperty("java.rmi.server.hostname", "127.0.0.1");
             //System.setProperty("java.rmi.server.hostname", "169.254.62.119");
+
             System.setSecurityManager(new SecurityManager());
         }
         try {

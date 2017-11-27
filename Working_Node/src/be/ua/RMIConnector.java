@@ -28,7 +28,7 @@ public class RMIConnector {
             String name = "nodeNames";
             Registry registry = LocateRegistry.getRegistry(Port);
             INameServer = (NameServerInterface) registry.lookup(name);
-            //INameServer = Naming.lookup("//169.254.62.119/nodeNames");
+            //INameServer = (NameServerInterface) Naming.lookup("//169.254.62.119/nodeNames"); // WERKT NIET LOKAAL
         } catch (Exception e) {
             System.out.println("No nameserver found.");
             e.printStackTrace();
@@ -61,21 +61,24 @@ public class RMIConnector {
         boolean gettingConnection = true;
         while(gettingConnection) {
             try {
-                Registry registry = LocateRegistry.getRegistry(NodePort);
-                INodeNew = (INode) registry.lookup(connName);
+                //Registry registry = LocateRegistry.getRegistry(NodePort); LOKAAL
+                //INodeNew = (INode) registry.lookup(connName);
+                String NodeIp = INameServer.getNodeIp(hash);
+                INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);
                 nodeMap.put(hash, INodeNew);
+                INode.addNodeToMap(hash, INodeNew);
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);
                 INodeNew.updateNeighbours(ids.get(0), ids.get(1));
                 if(ids.get(0) == INameServer.getHashOfName(nodeName)){
-                    Replication replication = new Replication(nodeName, INameServer);
-                    replication.getFiles();
+                    Replication replication = new Replication(INameServer);
+                    replication.toNextNode(hash);
                 }
                 gettingConnection = false;
             } catch (Exception e) {}
         }
     }
 
-    public void nodeFailure(NameServerInterface INameServer, int hash)
+    public void nodeFailure(NameServerInterface INameServer, int hash) // BIJ ELKE NODE EXCEPTION
     {
         try {
             ArrayList<Integer> failbourNodes = INameServer.getNeighbourNodes(hash);

@@ -9,19 +9,17 @@ public class Replication {
     String nodeName;
     String rootPath = new File("").getAbsolutePath();
     String sep = System.getProperty("file.separator");
-    File[] localFiles;
-    File[] replicatedFiles;
+    File localFolder = new File(rootPath + sep + "Files" + sep + "Local");
+    File replicationFolder = new File(rootPath + sep + "Files" + sep + "Replication");
 
-    public Replication(String name, NameServerInterface ns) {
-        nodeName = name;
+    public Replication(NameServerInterface ns) {
         INameServer = ns;
     }
 
     public void getFiles() {
-        File folder = new File(rootPath + sep + "Files" + sep + "Local");
-        localFiles = folder.listFiles();
+        File[] localFiles = localFolder.listFiles();
         for (int i = 0; i < localFiles.length; i++) {
-            //!!!!!!!!!!!!!!!!!!!!! fotos werken nog niet
+            //@todo fotos fixen --> Ruben
             replicate(localFiles[i].getName(), localFiles[i].getAbsolutePath());
         }
     }
@@ -37,29 +35,53 @@ public class Replication {
             } else {
                 ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(ownHash);
                 int neighbourHash = neighbours.get(0);
-                System.out.println(neighbourHash);
                 String prevIp = INameServer.getNodeIp(neighbourHash);
                 tcpSender.SendFile(prevIp, location);
             }
+            //@todo BESTANDSFICHE UPDATEN --> Sam
         } catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public void prevNode(int hashNextNode){
-        File folder = new File(rootPath + sep + "Files" + sep + "Replication");
-        replicatedFiles = folder.listFiles();
-        for (int i = 0; i < replicatedFiles.length; i++) {
-            try{
+    public void toNextNode(int hashNextNode){
+        File[] replicatedFiles = replicationFolder.listFiles();
+        try {
+            String ipNextNode = INameServer.getNodeIp(hashNextNode);
+            TCPSender tcpSender = new TCPSender(7896);
+            for (int i = 0; i < replicatedFiles.length; i++) {
                 String ipOwner = INameServer.getFileIp(replicatedFiles[i].getName());
-                String ipNextNode = INameServer.getNodeIp(hashNextNode);
                 if(ipNextNode.equals(ipOwner)){
-                    TCPSender tcpSender = new TCPSender(7896);
-                    tcpSender.SendFile(ipNextNode, replicatedFiles[i].getName());
-                    //Dan ook nog de bestandsfiche invoegen!!
+                    tcpSender.SendFile(ipNextNode, replicatedFiles[i].getAbsolutePath());
+                    //replicatedFiles[i].delete(); nodig?
+                    //@todo BESTANDSFICHE UPDATEN --> Sam
                 }
             }
-            catch(IOException e){ }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
+    public void toPrevNode(int hashPrevNode){
+        File[] replicatedFiles = replicationFolder.listFiles();
+        try {
+            String ipPrevNode = INameServer.getNodeIp(hashPrevNode);
+            TCPSender tcpSender = new TCPSender(7896);
+            for (int i = 0; i < replicatedFiles.length; i++) {
+                tcpSender.SendFile(ipPrevNode, replicatedFiles[i].getAbsolutePath());
+            }
+            //@todo If file is lokaal op prevNode, doe naar prev prev node --> Ruben
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        File[] localFiles = localFolder.listFiles();
+        for (int i = 0; i < localFiles.length; i++) {
+
+        }
+
+    }
+
+    public void setNodeName(String name){
+        this.nodeName = name;
     }
 }

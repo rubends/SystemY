@@ -5,8 +5,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-
-
         RMIConnector connector = new RMIConnector();
         NameServerInterface NameServerInterface = connector.getNameServer();
 
@@ -23,7 +21,8 @@ public class Main {
         UpdateFileMapThread updateFileMapThread = new UpdateFileMapThread();
         updateFileMapThread.start();
 
-        Replication replication = new Replication(nodeName, NameServerInterface);
+        Replication replication = new Replication(NameServerInterface);
+        replication.setNodeName(nodeName);
         replication.getFiles();
     }
 }

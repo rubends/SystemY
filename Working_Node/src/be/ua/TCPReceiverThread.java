@@ -37,11 +37,11 @@ public class TCPReceiverThread extends Thread {
                 fos.write(data, 0, length);
 
                 System.out.println("TCPReceiverThread: filename: " + fileName);
-                receivedSocket.close();
+                //receivedSocket.close();
                 fos.close();
                 is.close();
 
-            }catch(IOException e){
+            }catch(Exception e){
             }
 
         }

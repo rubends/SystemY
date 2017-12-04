@@ -19,7 +19,6 @@ public class Replication {
     public void getFiles() {
         File[] localFiles = localFolder.listFiles();
         for (int i = 0; i < localFiles.length; i++) {
-            //@todo fotos fixen --> Ruben
             replicate(localFiles[i].getName(), localFiles[i].getAbsolutePath());
         }
     }

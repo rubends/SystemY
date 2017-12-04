@@ -21,7 +21,6 @@ public class Replication {
         File folder = new File(rootPath + sep + "Files" + sep + "Local");
         localFiles = folder.listFiles();
         for (int i = 0; i < localFiles.length; i++) {
-            //!!!!!!!!!!!!!!!!!!!!! fotos werken nog niet
             replicate(localFiles[i].getName(), localFiles[i].getAbsolutePath());
         }
     }
@@ -57,6 +56,8 @@ public class Replication {
                     TCPSender tcpSender = new TCPSender(7896);
                     tcpSender.SendFile(ipNextNode, replicatedFiles[i].getName());
                     //Dan ook nog de bestandsfiche invoegen!!
+
+
                 }
             }
             catch(IOException e){ }

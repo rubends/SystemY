@@ -34,9 +34,6 @@ public class FileMap {
         FileLocationRepli.put(fileName,hashLocation);
     }
     public void passFiche(String fileName,int hashLocation,boolean flag) {
-        //Moet nog verder gedaan worden
-        //Hiervoor RMI connectie opzetten, dan zie hieronder
-        //Voor in node method aanmaken die fiche zal verzenden
 
         if(flag == true){
             addLocationLocal(fileName,hashLocation);

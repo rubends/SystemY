@@ -54,6 +54,7 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
                 out.writeObject(nodeMap);
                 out.close();
                 System.out.println("Succesfully added: " + nodeName);
+                printNodeMap();
             } else {
                 System.out.println("This node already exists: "+ nodeName);
             }

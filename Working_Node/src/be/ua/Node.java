@@ -26,14 +26,18 @@ public class Node extends UnicastRemoteObject implements INode{
     {
         this.mNext = newNext;
         this.mPrevious = newPrevious;
+        System.out.println("neighbours next = "+mNext);
+        System.out.println("neighbours prev = "+mPrevious);
     }
 
     public void updateNextNode(int newNext) {
         this.mNext = newNext;
+        System.out.println("neighbours next = "+mNext);
     }
 
     public void updatePrevNode(int newPrev) {
         this.mPrevious = newPrev;
+        System.out.println("neighbours prev = "+mPrevious);
     }
 
     public int getId(){

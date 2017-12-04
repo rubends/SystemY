@@ -53,6 +53,7 @@ public class MulticastThread extends Thread{
                 String newNodeName = new String(bufN, 0, newNode.getLength());
                 if(!newNodeName.equals(name)) {
                     listenNodeRMi(newNodeName, name);
+
                 }
             }
         } catch(Exception e) {

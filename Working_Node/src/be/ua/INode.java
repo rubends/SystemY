@@ -8,6 +8,6 @@ public interface INode extends Remote {
     void updatePrevNode(int newPrev) throws RemoteException;
     void updateNextNode(int newNext) throws RemoteException;
     int getId() throws RemoteException;
-
+    void sendFileMap(String fileName)throws RemoteException;
     void shutdown() throws RemoteException;
 }

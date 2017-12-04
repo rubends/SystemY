@@ -47,9 +47,17 @@ public class Node extends UnicastRemoteObject implements INode{
         INode nextNode = nodeMap.get(mNext);
         nextNode.updatePrevNode(mPrevious);
 
+        Replication replication = new Replication(INameServer);
+        replication.toPrevNode(this.mPrevious);
+
         INameServer.deleteNode(mId);
         System.exit(0);
     }
+
+    public void addNodeToMap(int hash, INode node){
+        this.nodeMap.put(hash, node);
+    }
+
     public void sendFileMap(String fileName){
         int hashLocation = Filemap.getLocationLocal(fileName);
         Filemap.passFiche(fileName,hashLocation,true);

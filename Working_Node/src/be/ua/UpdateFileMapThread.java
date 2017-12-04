@@ -56,7 +56,9 @@ public class UpdateFileMapThread extends Thread{
                 if (!currentKeys.equals(prevKeys)){
                     System.out.println("Change in local/replications files is detected by UpdateFileMapThread.java" +
                             "\n Starting replication.");
-                    new Replication(nodeName, INameServer).getFiles();
+                    Replication replication = new Replication(INameServer);
+                    replication.setNodeName(nodeName);
+                    replication.getFiles();
                 }
             }
 

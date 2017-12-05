@@ -1,5 +1,6 @@
 package be.ua;
 
+import java.io.File;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -11,7 +12,7 @@ public class Node extends UnicastRemoteObject implements INode{
     private volatile int mId;
     private volatile NameServerInterface INameServer;
     private volatile TreeMap<Integer, INode> nodeMap;
-    private volatile FileMap Filemap;
+    public static volatile TreeMap<String, FileMap> ficheMap;
 
 
     protected Node(int hash, TreeMap otherNodes, NameServerInterface ns) throws RemoteException
@@ -59,13 +60,30 @@ public class Node extends UnicastRemoteObject implements INode{
     }
 
     public void sendFileMap(String fileName){
-        int hashLocation = Filemap.getLocationLocal(fileName);
-        Filemap.passFiche(fileName,hashLocation,true);
-        hashLocation = Filemap.getLocationRepli(fileName);
-        Filemap.passFiche(fileName,hashLocation,false);
+        //int hashLocation = Filemap.getLocationLocal(fileName);
+        //Filemap.passFiche(fileName,hashLocation,true);
+        //hashLocation = Filemap.getLocationRepli(fileName);
+        //Filemap.passFiche(fileName,hashLocation,false);
     }
+
     private void setupRMI(String nodeName, int nodeCount) throws NotBoundException {
         RMIConnector connectorNode = new RMIConnector(INameServer, nodeName, nodeCount);
     }
+    public void sendFiche(FileMap fiche){
+        ficheMap.put(fiche.getFilename(),fiche);
+        System.out.println("new item added to map" + fiche.getFilename());
+    }
 
+    public void updateFiche(String fileName, int id, String ipLocation){
+        if(ficheMap.containsKey(fileName)){
+            //fiche bestaat
+            ficheMap.get(fileName).addLocation(ipLocation,id);
+        }else{
+            //fiche bestaat niet
+            //fiche toevoegen
+            FileMap tmpFiche = new FileMap(fileName,"",0);
+            tmpFiche.addLocation(ipLocation,id);
+            ficheMap.put(fileName,tmpFiche);
+        }
+    }
 }

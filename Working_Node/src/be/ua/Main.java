@@ -24,6 +24,7 @@ public class Main {
         Replication replication = new Replication(NameServerInterface);
         replication.setNodeName(nodeName);
         replication.getFiles();
+        replication.createFicheOnStartup();
     }
 }
 

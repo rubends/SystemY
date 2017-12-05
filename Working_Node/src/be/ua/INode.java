@@ -9,6 +9,6 @@ public interface INode extends Remote {
     void updateNextNode(int newNext) throws RemoteException;
     void addNodeToMap(int hash, INode node) throws RemoteException;
     int getId() throws RemoteException;
-
+    void sendFiche(FileMap fiche) throws RemoteException;
     void shutdown() throws RemoteException;
 }

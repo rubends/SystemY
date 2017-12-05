@@ -1,13 +1,14 @@
 package be.ua;
 
-import java.rmi.RemoteException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.lang.String;
+import java.util.TreeMap;
 
 public class UserInterface {
     private Scanner input;
     private NameServerInterface NameServerInterface;
+    public static TreeMap<String, Boolean> fileList;
 
     public UserInterface(NameServerInterface INameServer) {
         NameServerInterface = INameServer;
@@ -48,12 +49,5 @@ public class UserInterface {
             input.nextLine();
             System.out.println("No good connection");
         }
-    }
-
-
-    protected void getNodeCount() throws RemoteException{
-        int nodeCount = NameServerInterface.getNodeCount();
-        System.out.println("Nodecount: " + nodeCount);
-
     }
 }

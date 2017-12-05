@@ -67,7 +67,7 @@ public class MulticastThread extends Thread{
 
     private void listenNodeRMi(String newName, String name) {
         try{
-            RMIConnector connector =new RMIConnector(INameServer, newName, name);
+            RMIConnector connector = new RMIConnector(INameServer, newName, name);
         }
         catch (RemoteException e){
             e.printStackTrace();

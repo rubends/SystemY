@@ -2,6 +2,7 @@ package be.ua;
 
 import java.io.File;
 import java.io.IOException;
+import java.rmi.Naming;
 import java.util.ArrayList;
 
 public class Replication {
@@ -67,15 +68,25 @@ public class Replication {
             String ipPrevNode = INameServer.getNodeIp(hashPrevNode);
             TCPSender tcpSender = new TCPSender(7896);
             for (int i = 0; i < replicatedFiles.length; i++) {
-                tcpSender.SendFile(ipPrevNode, replicatedFiles[i].getAbsolutePath());
+                if(INameServer.getFileIp(replicatedFiles[i].getName()).equals(ipPrevNode)){
+                    ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(hashPrevNode);
+                    String ipPrevPrevNode = INameServer.getNodeIp(neighbours.get(0));
+                    tcpSender.SendFile(ipPrevPrevNode, replicatedFiles[i].getAbsolutePath());
+                } else {
+                    tcpSender.SendFile(ipPrevNode, replicatedFiles[i].getAbsolutePath());
+                }
             }
-            //@todo If file is lokaal op prevNode, doe naar prev prev node --> Ruben
         } catch (Exception e) {
             e.printStackTrace();
         }
         File[] localFiles = localFolder.listFiles();
         for (int i = 0; i < localFiles.length; i++) {
-
+            String nodeIp = "123"; //@todo GET IP VAN FILE UIT BESTANDSFICHE --> Sam
+            try {
+                INode nodeRMI = (INode) Naming.lookup("//"+nodeIp+"/connect");
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
     }

@@ -40,13 +40,12 @@ public class RMIConnector {
         try {
             int hash = INameServer.getHashOfName(nodeName);
             INode = new Node(hash, nodeMap, INameServer);
-            String connName = Integer.toString(hash);
             try {
                 Registry registry = LocateRegistry.getRegistry(NodePort);
-                registry.bind(connName, INode);
+                registry.bind("connect", INode);
             } catch (Exception e) {
                 Registry registry = LocateRegistry.createRegistry(NodePort);
-                registry.bind(connName, INode);
+                registry.bind("connect", INode);
             }
             System.out.println("serverRMI bound to server");
         } catch (Exception e) {
@@ -58,14 +57,13 @@ public class RMIConnector {
 
     public RMIConnector(NameServerInterface INameServer, String newNodeName, String nodeName) throws RemoteException{ //get node RMI
         int hash = INameServer.getHashOfName(newNodeName);
-        String connName = Integer.toString(hash);
         boolean gettingConnection = true;
         while(gettingConnection) {
             try {
                 //Registry registry = LocateRegistry.getRegistry(NodePort); LOKAAL
                 //INodeNew = (INode) registry.lookup(connName);
                 String NodeIp = INameServer.getNodeIp(hash);
-                INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);
+                INodeNew = (INode) Naming.lookup("//"+NodeIp+"/connect");
                 nodeMap.put(hash, INodeNew);
                 INode.addNodeToMap(hash, INodeNew);
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);

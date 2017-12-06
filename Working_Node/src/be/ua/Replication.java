@@ -12,6 +12,8 @@ public class Replication {
     String sep = System.getProperty("file.separator");
     File localFolder = new File(rootPath + sep + "Files" + sep + "Local");
     File replicationFolder = new File(rootPath + sep + "Files" + sep + "Replication");
+    private int SOCKET_PORT = 7897;
+
 
     public Replication(NameServerInterface ns) {
         INameServer = ns;
@@ -29,7 +31,7 @@ public class Replication {
             String ip = INameServer.getFileIp(filename);
             int ownHash = INameServer.getHashOfName(nodeName);
             String ownIp = INameServer.getNodeIp(ownHash);
-            TCPSender tcpSender = new TCPSender(7896);
+            TCPSender tcpSender = new TCPSender(SOCKET_PORT);
             if(!ip.equals(ownIp)){
                 tcpSender.SendFile(ip, location);
             } else {
@@ -48,7 +50,7 @@ public class Replication {
         File[] replicatedFiles = replicationFolder.listFiles();
         try {
             String ipNextNode = INameServer.getNodeIp(hashNextNode);
-            TCPSender tcpSender = new TCPSender(7896);
+            TCPSender tcpSender = new TCPSender(SOCKET_PORT);
             for (int i = 0; i < replicatedFiles.length; i++) {
                 String ipOwner = INameServer.getFileIp(replicatedFiles[i].getName());
                 if(ipNextNode.equals(ipOwner)){
@@ -66,7 +68,7 @@ public class Replication {
         File[] replicatedFiles = replicationFolder.listFiles();
         try {
             String ipPrevNode = INameServer.getNodeIp(hashPrevNode);
-            TCPSender tcpSender = new TCPSender(7896);
+            TCPSender tcpSender = new TCPSender(SOCKET_PORT);
             for (int i = 0; i < replicatedFiles.length; i++) {
                 if(INameServer.getFileIp(replicatedFiles[i].getName()).equals(ipPrevNode)){
                     ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(hashPrevNode);
@@ -81,9 +83,13 @@ public class Replication {
         }
         File[] localFiles = localFolder.listFiles();
         for (int i = 0; i < localFiles.length; i++) {
-            String nodeIp = "123"; //@todo GET IP VAN FILE UIT BESTANDSFICHE --> Sam
+            String nodeIp = "123"; //@todo GET ALLE OWNER IP'S VAN FILE UIT BESTANDSFICHE --> Sam
+            int nodeHash = 3456; //@todo GET ALLE OWNER HASHED VAN FILE UIT BESTANDSFICHE --> Sam
+            //FOR LOOP
             try {
-                INode nodeRMI = (INode) Naming.lookup("//"+nodeIp+"/connect");
+                INode nodeRMI = (INode) Naming.lookup("//"+nodeIp+"/"+nodeHash);
+                int fileHash = INameServer.getHashOfName(localFiles[i].getName());
+                nodeRMI.nodeShutdownFiles(fileHash);
             } catch (Exception e){
                 e.printStackTrace();
             }

@@ -39,13 +39,14 @@ public class RMIConnector {
     public RMIConnector(NameServerInterface INameServer, String nodeName, int nodeCount) { //create own rmi
         try {
             int hash = INameServer.getHashOfName(nodeName);
+            String connName = Integer.toString(hash);
             INode = new Node(hash, nodeMap, INameServer);
             try {
                 Registry registry = LocateRegistry.getRegistry(NodePort);
-                registry.bind("connect", INode);
+                registry.bind(connName, INode);
             } catch (Exception e) {
                 Registry registry = LocateRegistry.createRegistry(NodePort);
-                registry.bind("connect", INode);
+                registry.bind(connName, INode);
             }
             System.out.println("serverRMI bound to server");
         } catch (Exception e) {
@@ -57,17 +58,17 @@ public class RMIConnector {
 
     public RMIConnector(NameServerInterface INameServer, String newNodeName, String nodeName) throws RemoteException{ //get node RMI
         int hash = INameServer.getHashOfName(newNodeName);
+        String connName = Integer.toString(hash);
         boolean gettingConnection = true;
         while(gettingConnection) {
             try {
-                //Registry registry = LocateRegistry.getRegistry(NodePort); LOKAAL
-                //INodeNew = (INode) registry.lookup(connName);
                 String NodeIp = INameServer.getNodeIp(hash);
-                INodeNew = (INode) Naming.lookup("//"+NodeIp+"/connect");
+                INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);
                 nodeMap.put(hash, INodeNew);
                 INode.addNodeToMap(hash, INodeNew);
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);
                 INodeNew.updateNeighbours(ids.get(0), ids.get(1));
+                System.out.println("New node id: " + INodeNew.getId());
                 if(ids.get(0) == INameServer.getHashOfName(nodeName)){
                     Replication replication = new Replication(INameServer);
                     replication.toNextNode(hash);
@@ -77,8 +78,8 @@ public class RMIConnector {
         }
     }
 
-    public void nodeFailure(NameServerInterface INameServer, int hash) // BIJ ELKE NODE EXCEPTION
-    {
+    public void nodeFailure(NameServerInterface INameServer, int hash) //BIJ ELKE NODE EXCEPTION
+    { //@todo OPROEPEN BIJ EXCEPTIONS
         try {
             ArrayList<Integer> failbourNodes = INameServer.getNeighbourNodes(hash);
             INameServer.deleteNode(hash);

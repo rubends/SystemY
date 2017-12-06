@@ -68,4 +68,8 @@ public class Node extends UnicastRemoteObject implements INode{
         RMIConnector connectorNode = new RMIConnector(INameServer, nodeName, nodeCount);
     }
 
+    public void nodeShutdownFiles(int hash) {
+        //@todo replication shutdown: update in filemap dat de eigenaar van 'hash' er niet meer is
+    }
+
 }

@@ -17,7 +17,7 @@ public class FileMap {
         return filename;
     }
 
-    public void addLocation(  String ip,int hash){
+    public void addLocation(String ip,int hash){
         FileLocation.put(hash,ip);
     }
 }

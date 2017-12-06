@@ -16,7 +16,6 @@ public class RMIConnector {
 
     private int Port = 1099;
     private int NodePort = 1098;
-    private TreeMap<Integer, INode> nodeMap = new TreeMap<>();
 
     public RMIConnector() { //to nameserver
         if (System.getSecurityManager() == null) {
@@ -41,7 +40,7 @@ public class RMIConnector {
     public RMIConnector(NameServerInterface INameServer, String nodeName, int nodeCount) { //create own rmi
         try {
             int hash = INameServer.getHashOfName(nodeName);
-            INode = new Node(hash, nodeMap, INameServer);
+            INode = Main.INode;
             String connName = Integer.toString(hash);
             try {
                 Registry registry = LocateRegistry.getRegistry(NodePort);
@@ -68,7 +67,7 @@ public class RMIConnector {
                 //INodeNew = (INode) registry.lookup(connName);
                 String NodeIp = INameServer.getNodeIp(hash);
                 INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);
-                nodeMap.put(hash, INodeNew);
+                Main.nodeMap.put(hash, INodeNew);
                 INode.addNodeToMap(hash, INodeNew);
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);
                 INodeNew.updateNeighbours(ids.get(0), ids.get(1));
@@ -86,9 +85,9 @@ public class RMIConnector {
         try {
             ArrayList<Integer> failbourNodes = INameServer.getNeighbourNodes(hash);
             INameServer.deleteNode(hash);
-            INode prevNode = nodeMap.get(failbourNodes.get(0));
+            INode prevNode = Main.nodeMap.get(failbourNodes.get(0));
             prevNode.updateNextNode(failbourNodes.get(0));
-            INode nextNode = nodeMap.get(failbourNodes.get(1));
+            INode nextNode = Main.nodeMap.get(failbourNodes.get(1));
             nextNode.updatePrevNode(failbourNodes.get(2));
         } catch (Exception e) { e.printStackTrace(); }
     }

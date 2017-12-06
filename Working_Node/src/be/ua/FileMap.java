@@ -1,48 +1,23 @@
 package be.ua;
 
 import java.util.TreeMap;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class FileMap {
-    /*
-        Om een onderscheid te maken tussen lokaal en gerepliceerd worden er twee maps gemaakt
-     */
-    private TreeMap<String, Integer> FileLocationLocal = new TreeMap<>();
-    private TreeMap<String, Integer> FileLocationRepli = new TreeMap<>();
-    FileMap(){
-        /*
-            In deze klasse worden alle locaties van bestanden bijgehouden
-         */
-    }
-    public int getLocationLocal(String fileName) {
-        return FileLocationLocal.get(fileName);
-    }
-    public void addLocationLocal(String fileName, int hashLocation) {
-        /*
-            De fileName is de naam van het bestand
-            De hashLocation is het IP adres van waar het bestand zich bevind
-         */
-        FileLocationLocal.put(fileName,hashLocation);
-    }
-    public int getLocationRepli(String fileName) {
-        return FileLocationRepli.get(fileName);
-    }
-    public void addLocationRepli(String fileName, int hashLocation) {
-        /*
-            De fileName is de naam van het bestand
-            De hashLocation is het IP adres van waar het bestand zich bevind
-         */
-        FileLocationRepli.put(fileName,hashLocation);
-    }
-    public void passFiche(String fileName,int hashLocation,boolean flag) {
-        //Moet nog verder gedaan worden
-        //Hiervoor RMI connectie opzetten, dan zie hieronder
-        //Voor in node method aanmaken die fiche zal verzenden
+    private String filename;
+    private HashMap<Integer, String> FileLocation = new HashMap<>();
 
-        if(flag == true){
-            addLocationLocal(fileName,hashLocation);
-        }
-        else{
-            addLocationRepli(fileName,hashLocation);
-        }
+    FileMap(String filename_, String localNodeip_, int localNodehash_){
+        filename = filename_;
+        addLocation(localNodeip_,localNodehash_);
+    }
+    public String getFilename() {
+        return filename;
+    }
+
+    public void addLocation(String ip,int hash){
+        FileLocation.put(hash,ip);
     }
 }

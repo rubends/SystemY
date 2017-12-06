@@ -58,12 +58,6 @@ public class Node extends UnicastRemoteObject implements INode{
         this.nodeMap.put(hash, node);
     }
 
-    public void sendFileMap(String fileName){
-        int hashLocation = Filemap.getLocationLocal(fileName);
-        Filemap.passFiche(fileName,hashLocation,true);
-        hashLocation = Filemap.getLocationRepli(fileName);
-        Filemap.passFiche(fileName,hashLocation,false);
-    }
     private void setupRMI(String nodeName, int nodeCount) throws NotBoundException {
         RMIConnector connectorNode = new RMIConnector(INameServer, nodeName, nodeCount);
     }

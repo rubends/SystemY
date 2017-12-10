@@ -11,7 +11,7 @@ public class Node extends UnicastRemoteObject implements INode{
     private volatile int mId;
     private volatile NameServerInterface INameServer;
     private volatile TreeMap<Integer, INode> nodeMap;
-    private volatile FileMap Filemap;
+    private static volatile FileMap Filemap;
 
 
     protected Node(int hash, TreeMap otherNodes, NameServerInterface ns) throws RemoteException
@@ -64,6 +64,25 @@ public class Node extends UnicastRemoteObject implements INode{
 
     public void nodeShutdownFiles(int hash) {
         //@todo replication shutdown: update in filemap dat de eigenaar van 'hash' er niet meer is
+        //updateFiche( fileName,  hash,  ipLocation)
+    }
+
+    public void sendFiche(FileMap fiche) {
+        Replication.fileMap.put(fiche.getFilename(),fiche);
+        System.out.println("nieuwe item toegevoegd aan map" + fiche.getFilename());
+    }
+
+    public void updateFiche(String fileName, int id, String ipLocation){
+        if(Replication.fileMap.containsKey(fileName)){
+            //fiche bestaat
+            Replication.fileMap.get(fileName).addLocation(ipLocation,id);
+        }else{
+            //fiche bestaat niet
+            //fiche toevoegen
+            FileMap tmpFiche = new FileMap(fileName,"",0);
+            tmpFiche.addLocation(ipLocation,id);
+            Replication.fileMap.put(fileName,tmpFiche);
+        }
     }
 
 }

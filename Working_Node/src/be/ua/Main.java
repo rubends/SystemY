@@ -33,8 +33,10 @@ public class Main {
         updateFileMapThread.start();
 
         Replication replication = new Replication(NameServerInterface);
+        replication.createFicheOnStartup();// Moet voor get files gebeuren
         replication.setNodeName(nodeName);
         replication.getFiles();
+
     }
 }
 

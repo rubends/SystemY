@@ -15,20 +15,22 @@ public class RMIConnector {
     private int Port = 1099;
     private int NodePort = 1098;
 
+    private String ipNameServer = "169.254.134.180";
+
     public RMIConnector() { //to nameserver
         if (System.getSecurityManager() == null) {
             System.setProperty("java.security.policy", "file:server.policy");
 
             //System.setProperty("java.rmi.server.hostname", "127.0.0.1");
-            System.setProperty("java.rmi.server.hostname", "169.254.134.180");
+            System.setProperty("java.rmi.server.hostname", ipNameServer);
 
             System.setSecurityManager(new SecurityManager());
         }
         try {
             String name = "nodeNames";
-            Registry registry = LocateRegistry.getRegistry(Port);
+            //Registry registry = LocateRegistry.getRegistry(Port);
             //INameServer = (NameServerInterface) registry.lookup(name);
-            INameServer = (NameServerInterface) Naming.lookup("//169.254.134.180/nodeNames");
+            INameServer = (NameServerInterface) Naming.lookup("//"+ipNameServer+"/"+name);
         } catch (Exception e) {
             System.out.println("No nameserver found.");
             e.printStackTrace();
@@ -66,6 +68,7 @@ public class RMIConnector {
                 INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);
 
                 Main.nodeMap.put(hash, INodeNew);
+                INodeNew.addNodeToMap(Main.INode.getId(), Main.INode);
                 INode.addNodeToMap(hash, INodeNew);
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);
                 INodeNew.updateNeighbours(ids.get(0), ids.get(1));

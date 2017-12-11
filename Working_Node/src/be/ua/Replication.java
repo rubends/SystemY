@@ -1,7 +1,6 @@
 package be.ua;
 
 import java.io.File;
-import java.io.IOException;
 import java.rmi.Naming;
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -45,6 +44,7 @@ public class Replication {
                 //nu fiche lokaal verwijderen ->is geen owner meer
                 System.out.println("REPLICATION: deleting '"+ fiche.getFilename() +"' from fichemap and sending to '"+ip+"'");
                 INode INodeNew = Main.nodeMap.get(hash);
+                System.out.println("size = " + Main.nodeMap.size());
                 INodeNew.sendFiche(fiche);
                 fileMap.remove(filename);
 
@@ -131,7 +131,7 @@ public class Replication {
 
     public void createFicheOnStartup(){
         try{
-            System.out.println("MAIN: creating fiches for local files");
+            System.out.println("creating fiches for local files");
             fileMap = new TreeMap<>();
             File[] listOfFiles = localFolder.listFiles();
             for (File file : listOfFiles) {
@@ -141,17 +141,17 @@ public class Replication {
                     fileMap.put(file.getName(),f); // voeg toe aan eigen fichemap
                 }
             }
-            System.out.println("MAIN: fiches on startup <" +fileMap+ ">");
-            fileMap.get("test7.txt").getIpOfLocation();
-            fileMap.get("test7.txt").getHashOfLocation();
-            fileMap.get("test7.txt").printLocation();
+            System.out.println("fiches on startup <" +fileMap+ ">");
+            //fileMap.get("test7.txt").getIpOfLocation();
+            //fileMap.get("test7.txt").getHashOfLocation();
+            //fileMap.get("test7.txt").printLocation();
         }
         catch(Exception e){}
     }
     public void passFiche(String file, String ownerIp){
-        System.out.println("PASSFICHE OPEGROEPEN");
+        System.out.println("PASSFICHE OPGEROEPEN");
         try {
-            int hash = 0; //HIER MOET DE HASH OPGEHAALD WORDEN DIE BIJ IP HOORT?
+            int hash = INameServer.getHashOfIp(ownerIp);; //HIER MOET DE HASH OPGEHAALD WORDEN DIE BIJ IP HOORT?
             fileMap.get(file).addLocation(ownerIp,hash);                  // add new owner to locations
             INode INodeNew = Main.nodeMap.get(hash);
             INodeNew.sendFiche(fileMap.get(file));            // send fiche to new owner

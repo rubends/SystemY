@@ -10,7 +10,6 @@ public class Node extends UnicastRemoteObject implements INode{
     private volatile int mNext;
     private volatile int mId;
     private volatile NameServerInterface INameServer;
-    private static volatile FileMap Filemap;
 
 
     protected Node(int hash, NameServerInterface ns) throws RemoteException

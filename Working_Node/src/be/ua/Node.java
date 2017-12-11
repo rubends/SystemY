@@ -7,7 +7,7 @@ import java.util.TreeMap;
 
 public class Node extends UnicastRemoteObject implements INode{
     private volatile int mPrevious;
-    private volatile int mNext;
+    public volatile int mNext;
     private volatile int mId;
     private volatile NameServerInterface INameServer;
     private volatile TreeMap<Integer, INode> nodeMap;

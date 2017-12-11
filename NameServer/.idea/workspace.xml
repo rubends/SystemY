@@ -4,21 +4,16 @@
     <list default="true" id="1451b244-5e82-4133-8e1b-1cb6ebd6cdde" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nodeMap.ser" afterPath="$PROJECT_DIR$/nodeMap.ser" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/NameServer/be/ua/NameServer.class" afterPath="$PROJECT_DIR$/out/production/NameServer/be/ua/NameServer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/FileMap.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/FileMap.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/INode.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/INode.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Main.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Node.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Node.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/NameServer/be/ua/NameServerInterface.class" afterPath="$PROJECT_DIR$/out/production/NameServer/be/ua/NameServerInterface.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/NameServerInterface.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/NameServerInterface.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/RMIConnector.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/RMIConnector.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Replication.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Replication.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/TCPReceiverThread.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/TCPReceiverThread.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/be/ua/NameServer.java" afterPath="$PROJECT_DIR$/src/be/ua/NameServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/.idea/misc.xml" afterPath="$PROJECT_DIR$/../Working_Node/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/be/ua/NameServerInterface.java" afterPath="$PROJECT_DIR$/src/be/ua/NameServerInterface.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/FileMap.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/FileMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/INode.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/INode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Main.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Node.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Node.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/NameServerInterface.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/NameServerInterface.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/RMIConnector.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/RMIConnector.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Replication.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Replication.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/TCPReceiverThread.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/TCPReceiverThread.java" />
@@ -46,7 +41,7 @@
       <file leaf-file-name="MulticastThread.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/be/ua/MulticastThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-159">
+            <state relative-caret-position="15">
               <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
               <folding />
             </state>
@@ -56,8 +51,8 @@
       <file leaf-file-name="RMIConnector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/be/ua/RMIConnector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="21" column="35" lean-forward="true" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+            <state relative-caret-position="300">
+              <caret line="21" column="35" lean-forward="false" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -66,8 +61,21 @@
       <file leaf-file-name="NameServer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/be/ua/NameServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="64" column="36" lean-forward="false" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="36" />
+            <state relative-caret-position="200">
+              <caret line="45" column="4" lean-forward="false" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="37" />
+              <folding>
+                <element signature="e#4231#4232#0" expanded="true" />
+                <element signature="e#4287#4288#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NameServerInterface.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/be/ua/NameServerInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -87,6 +95,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/be/ua/NameServer.java" />
+        <option value="$PROJECT_DIR$/src/be/ua/NameServerInterface.java" />
       </list>
     </option>
   </component>
@@ -117,9 +126,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -165,7 +175,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -301,15 +310,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1512861189963</updated>
-      <workItem from="1512861191648" duration="2979000" />
+      <workItem from="1512861191648" duration="3308000" />
+      <workItem from="1512987858823" duration="1234000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5618000" />
+    <option name="totallyTimeSpent" value="7181000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -319,12 +330,12 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32838982" sideWeight="0.54175365" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32285368" sideWeight="0.45824635" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32285368" sideWeight="0.45824635" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13233191" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13376252" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -406,7 +417,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1768">
           <caret line="104" column="0" lean-forward="true" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#4231#4232#0" expanded="true" />
+            <element signature="e#4287#4288#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -437,7 +451,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#4231#4232#0" expanded="true" />
+            <element signature="e#4287#4288#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -475,7 +492,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#4231#4232#0" expanded="true" />
+            <element signature="e#4287#4288#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -497,7 +517,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#4231#4232#0" expanded="true" />
+            <element signature="e#4287#4288#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -519,7 +542,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#4231#4232#0" expanded="true" />
+            <element signature="e#4287#4288#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -541,7 +567,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#4231#4232#0" expanded="true" />
+            <element signature="e#4287#4288#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -577,7 +606,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#4231#4232#0" expanded="true" />
+            <element signature="e#4287#4288#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -620,13 +652,6 @@
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_65/src.zip!/java/lang/ClassLoader.java" />
-    <entry file="file://$PROJECT_DIR$/src/be/ua/NameServerInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="20" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../old/Portfolio_SystemY_Groep7/Name Server Project/src/dfs7/dist/NameServer.java" />
     <entry file="file://$PROJECT_DIR$/../../old/Portfolio_SystemY_Groep7/Name Server Project/src/dfs7/dist/Main.java" />
     <entry file="file://$PROJECT_DIR$/../../old/Portfolio_SystemY_Groep7/Node Project/Gedistribueerde systemen Praktijk/src/dfs7/dist/Node.java" />
@@ -646,27 +671,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/be/ua/MulticastThread.java">
+    <entry file="file://$PROJECT_DIR$/src/be/ua/RMIConnector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-159">
-          <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+        <state relative-caret-position="300">
+          <caret line="21" column="35" lean-forward="false" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/be/ua/RMIConnector.java">
+    <entry file="file://$PROJECT_DIR$/src/be/ua/NameServerInterface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
-          <caret line="21" column="35" lean-forward="true" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/be/ua/MulticastThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/NameServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="64" column="36" lean-forward="false" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="36" />
-          <folding />
+        <state relative-caret-position="200">
+          <caret line="45" column="4" lean-forward="false" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="37" />
+          <folding>
+            <element signature="e#4231#4232#0" expanded="true" />
+            <element signature="e#4287#4288#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

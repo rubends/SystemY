@@ -12,7 +12,7 @@ public class RMIConnector {
 
     private NameServerInterface INameServer;
     public INode INode;//was private
-    public static INode INodeNew;//was private
+    //public static INode INodeNew;//was private
 
     private int Port = 1099;
     private int NodePort = 1098;
@@ -64,7 +64,7 @@ public class RMIConnector {
         while(gettingConnection) {
             try {
                 String NodeIp = INameServer.getNodeIp(hash);
-                INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);
+                INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);
                 Main.nodeMap.put(hash, INodeNew);
                 INode.addNodeToMap(hash, INodeNew);
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);

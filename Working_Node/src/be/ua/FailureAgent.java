@@ -28,6 +28,8 @@ public class FailureAgent implements Runnable, Serializable {
                 String failureIP = INameServer.getNodeIp(failureNode);
                 if(fileIP.equals(failureIP)){
                     System.out.println(name + " is owned by " + failureNode + " at " + failureIP);
+                    //get new owner
+
                 }
             } catch (Exception e) {e.printStackTrace();}
         }

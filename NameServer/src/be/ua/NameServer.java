@@ -120,7 +120,7 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
         //hash is the last node
         else if(nodeMap.lowerKey(hash) != null && nodeMap.higherKey(hash) == null){
             neighbours.add(nodeMap.lowerKey(hash));
-            neighbours.add(getLastId());
+            neighbours.add(getFirstId());
         }
 
         //hash is the only node

@@ -12,7 +12,7 @@ public class Replication {
     String sep = System.getProperty("file.separator");
     File localFolder = new File(rootPath + sep + "Files" + sep + "Local");
     File replicationFolder = new File(rootPath + sep + "Files" + sep + "Replication");
-    private int SOCKET_PORT = 7897;
+    private int SOCKET_PORT = 7896;
 
 
     public Replication(NameServerInterface ns) {
@@ -37,7 +37,6 @@ public class Replication {
             } else {
                 ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(ownHash);
                 int neighbourHash = neighbours.get(0);
-                System.out.println("neighbourHash = "+ neighbourHash);
                 String prevIp = INameServer.getNodeIp(neighbourHash);
                 tcpSender.SendFile(prevIp, location);
             }

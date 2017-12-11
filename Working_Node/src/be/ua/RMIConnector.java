@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class RMIConnector {
 
     private NameServerInterface INameServer;
-    private INode INode;
-    private INode INodeNew;
+    public INode INode;//was private
+    public static INode INodeNew;//was private
 
     private int Port = 1099;
     private int NodePort = 1098;

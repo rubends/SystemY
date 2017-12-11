@@ -11,4 +11,8 @@ public interface INode extends Remote {
     int getId() throws RemoteException;
     void nodeShutdownFiles(int hash) throws RemoteException;
     void shutdown() throws RemoteException;
+
+
+    void sendFiche(FileMap fiche) throws RemoteException;
+    void updateFiche(String fileName, int id, String ipLocation) throws RemoteException;
 }

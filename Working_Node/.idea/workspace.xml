@@ -35,8 +35,8 @@
       <file leaf-file-name="FailureAgent.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/be/ua/FailureAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="42" lean-forward="true" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
+            <state relative-caret-position="578">
+              <caret line="34" column="77" lean-forward="false" selection-start-line="34" selection-start-column="77" selection-end-line="34" selection-end-column="77" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -47,8 +47,8 @@
       <file leaf-file-name="FileAgent.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/be/ua/FileAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="12" column="30" lean-forward="true" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+            <state relative-caret-position="0">
+              <caret line="0" column="14" lean-forward="true" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -57,8 +57,8 @@
       <file leaf-file-name="Replication.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/be/ua/Replication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="49" column="47" lean-forward="false" selection-start-line="49" selection-start-column="39" selection-end-line="49" selection-end-column="47" />
+            <state relative-caret-position="-1054">
+              <caret line="46" column="55" lean-forward="true" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -67,8 +67,18 @@
       <file leaf-file-name="FailureAgent.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../old/Portfolio_SystemY_Groep7/Node Project/Gedistribueerde systemen Praktijk/src/dfs7/dist/FailureAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="67" column="62" lean-forward="false" selection-start-line="67" selection-start-column="55" selection-end-line="67" selection-end-column="62" />
+            <state relative-caret-position="434">
+              <caret line="71" column="64" lean-forward="false" selection-start-line="71" selection-start-column="62" selection-end-line="71" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileSystem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../old/Portfolio_SystemY_Groep7/Node Project/Gedistribueerde systemen Praktijk/src/dfs7/dist/FileSystem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="326" column="63" lean-forward="false" selection-start-line="326" selection-start-column="55" selection-end-line="326" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -77,18 +87,8 @@
       <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../old/Portfolio_SystemY_Groep7/Node Project/Gedistribueerde systemen Praktijk/src/dfs7/dist/Node.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
+            <state relative-caret-position="799">
               <caret line="97" column="55" lean-forward="true" selection-start-line="97" selection-start-column="55" selection-end-line="97" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AgentRMI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../old/Portfolio_SystemY_Groep7/Node Project/Gedistribueerde systemen Praktijk/src/dfs7/dist/AgentRMI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="62" column="57" lean-forward="false" selection-start-line="62" selection-start-column="43" selection-end-line="62" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -112,25 +112,15 @@
             <state relative-caret-position="587">
               <caret line="88" column="5" lean-forward="true" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
               <folding>
-                <marker date="1512992579551" expanded="true" signature="700:831" ph="{...}" />
-                <marker date="1512992579551" expanded="true" signature="900:975" ph="{...}" />
+                <element signature="e#1169#1170#0" expanded="true" />
+                <element signature="e#1195#1196#0" expanded="true" />
                 <marker date="1512992579551" expanded="false" signature="1020:1031" ph=" { " />
                 <marker date="1512992579551" expanded="false" signature="1052:1058" ph=" }" />
                 <marker date="1512992579551" expanded="false" signature="1103:1114" ph=" { " />
                 <marker date="1512992579551" expanded="false" signature="1139:1145" ph=" }" />
-                <marker date="1512992579551" expanded="true" signature="1169:1179" ph=" { " />
-                <marker date="1512992579551" expanded="true" signature="1190:1196" ph=" }" />
-                <marker date="1512992579551" expanded="true" signature="1247:1616" ph="{...}" />
                 <marker date="1512992579551" expanded="false" signature="1668:1678" ph=" { " />
                 <marker date="1512992579551" expanded="false" signature="1707:1713" ph=" }" />
-                <marker date="1512992579551" expanded="true" signature="1798:1894" ph="{...}" />
-                <marker date="1512992579551" expanded="true" signature="1940:2099" ph="{}" />
-                <marker date="1512992579551" expanded="true" signature="1950:2093" ph="//..." />
-                <marker date="1512992579551" expanded="true" signature="2142:2293" ph="{...}" />
-                <marker date="1512992579551" expanded="true" signature="2366:2782" ph="{...}" />
-                <marker date="1512992579551" expanded="true" signature="2552:2602" ph="//..." />
                 <marker date="1512992579551" expanded="true" signature="2776:2782" ph="{}" />
-                <marker date="1512992579551" expanded="true" signature="2821:2963" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -142,9 +132,17 @@
     <findStrings>
       <find>getIpOfNewOwner</find>
       <find>FileMap</find>
-      <find>mStartedNodeId</find>
       <find>fileList</find>
+      <find>nodeInfo</find>
+      <find>mStartedNodeId</find>
     </findStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/be/ua/FailureAgent.java" />
+      </list>
+    </option>
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -344,6 +342,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -358,7 +357,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -413,25 +412,15 @@
         <state relative-caret-position="901">
           <caret line="62" column="55" lean-forward="true" selection-start-line="62" selection-start-column="55" selection-end-line="62" selection-end-column="55" />
           <folding>
-            <marker date="1512992579551" expanded="true" signature="700:831" ph="{...}" />
-            <marker date="1512992579551" expanded="true" signature="900:975" ph="{...}" />
+            <element signature="e#1169#1170#0" expanded="true" />
+            <element signature="e#1195#1196#0" expanded="true" />
             <marker date="1512992579551" expanded="false" signature="1020:1031" ph=" { " />
             <marker date="1512992579551" expanded="false" signature="1052:1058" ph=" }" />
             <marker date="1512992579551" expanded="false" signature="1103:1114" ph=" { " />
             <marker date="1512992579551" expanded="false" signature="1139:1145" ph=" }" />
-            <marker date="1512992579551" expanded="true" signature="1169:1179" ph=" { " />
-            <marker date="1512992579551" expanded="true" signature="1190:1196" ph=" }" />
-            <marker date="1512992579551" expanded="true" signature="1247:1616" ph="{...}" />
             <marker date="1512992579551" expanded="false" signature="1668:1678" ph=" { " />
             <marker date="1512992579551" expanded="false" signature="1707:1713" ph=" }" />
-            <marker date="1512992579551" expanded="true" signature="1798:1894" ph="{...}" />
-            <marker date="1512992579551" expanded="true" signature="1940:2099" ph="{}" />
-            <marker date="1512992579551" expanded="true" signature="1950:2093" ph="//..." />
-            <marker date="1512992579551" expanded="true" signature="2142:2293" ph="{...}" />
-            <marker date="1512992579551" expanded="true" signature="2366:2782" ph="{...}" />
-            <marker date="1512992579551" expanded="true" signature="2552:2602" ph="//..." />
             <marker date="1512992579551" expanded="true" signature="2776:2782" ph="{}" />
-            <marker date="1512992579551" expanded="true" signature="2821:2963" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -674,13 +663,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../old/Portfolio_SystemY_Groep7/Node Project/Gedistribueerde systemen Praktijk/src/dfs7/dist/FileSystem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="26" column="47" lean-forward="false" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/FileMap.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -775,14 +757,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../old/Portfolio_SystemY_Groep7/Node Project/Gedistribueerde systemen Praktijk/src/dfs7/dist/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="97" column="55" lean-forward="true" selection-start-line="97" selection-start-column="55" selection-end-line="97" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/TCPSender.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -803,18 +777,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../old/Portfolio_SystemY_Groep7/Node Project/Gedistribueerde systemen Praktijk/src/dfs7/dist/FailureAgent.java">
+    <entry file="file://$PROJECT_DIR$/src/be/ua/INode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="67" column="62" lean-forward="false" selection-start-line="67" selection-start-column="55" selection-end-line="67" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/be/ua/Replication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="49" column="47" lean-forward="false" selection-start-line="49" selection-start-column="39" selection-end-line="49" selection-end-column="47" />
+        <state relative-caret-position="153">
+          <caret line="11" column="39" lean-forward="true" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -824,49 +790,63 @@
         <state relative-caret-position="587">
           <caret line="88" column="5" lean-forward="true" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
           <folding>
-            <marker date="1512992579551" expanded="true" signature="700:831" ph="{...}" />
-            <marker date="1512992579551" expanded="true" signature="900:975" ph="{...}" />
+            <element signature="e#1169#1170#0" expanded="true" />
+            <element signature="e#1195#1196#0" expanded="true" />
             <marker date="1512992579551" expanded="false" signature="1020:1031" ph=" { " />
             <marker date="1512992579551" expanded="false" signature="1052:1058" ph=" }" />
             <marker date="1512992579551" expanded="false" signature="1103:1114" ph=" { " />
             <marker date="1512992579551" expanded="false" signature="1139:1145" ph=" }" />
-            <marker date="1512992579551" expanded="true" signature="1169:1179" ph=" { " />
-            <marker date="1512992579551" expanded="true" signature="1190:1196" ph=" }" />
-            <marker date="1512992579551" expanded="true" signature="1247:1616" ph="{...}" />
             <marker date="1512992579551" expanded="false" signature="1668:1678" ph=" { " />
             <marker date="1512992579551" expanded="false" signature="1707:1713" ph=" }" />
-            <marker date="1512992579551" expanded="true" signature="1798:1894" ph="{...}" />
-            <marker date="1512992579551" expanded="true" signature="1940:2099" ph="{}" />
-            <marker date="1512992579551" expanded="true" signature="1950:2093" ph="//..." />
-            <marker date="1512992579551" expanded="true" signature="2142:2293" ph="{...}" />
-            <marker date="1512992579551" expanded="true" signature="2366:2782" ph="{...}" />
-            <marker date="1512992579551" expanded="true" signature="2552:2602" ph="//..." />
             <marker date="1512992579551" expanded="true" signature="2776:2782" ph="{}" />
-            <marker date="1512992579551" expanded="true" signature="2821:2963" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/be/ua/INode.java">
+    <entry file="file://$PROJECT_DIR$/../../old/Portfolio_SystemY_Groep7/Node Project/Gedistribueerde systemen Praktijk/src/dfs7/dist/FileSystem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="39" lean-forward="true" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+        <state relative-caret-position="292">
+          <caret line="326" column="63" lean-forward="false" selection-start-line="326" selection-start-column="55" selection-end-line="326" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../old/Portfolio_SystemY_Groep7/Node Project/Gedistribueerde systemen Praktijk/src/dfs7/dist/FailureAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="71" column="64" lean-forward="false" selection-start-line="71" selection-start-column="62" selection-end-line="71" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../old/Portfolio_SystemY_Groep7/Node Project/Gedistribueerde systemen Praktijk/src/dfs7/dist/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="97" column="55" lean-forward="true" selection-start-line="97" selection-start-column="55" selection-end-line="97" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/FileAgent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" column="30" lean-forward="true" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+        <state relative-caret-position="0">
+          <caret line="0" column="14" lean-forward="true" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/be/ua/Replication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1054">
+          <caret line="46" column="55" lean-forward="true" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/FailureAgent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="42" lean-forward="true" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
+        <state relative-caret-position="578">
+          <caret line="34" column="77" lean-forward="false" selection-start-line="34" selection-start-column="77" selection-end-line="34" selection-end-column="77" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

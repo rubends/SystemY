@@ -29,6 +29,7 @@ public class FailureAgent implements Runnable, Serializable {
             String name = file.getName();
             try {
                 String fileIP = INameServer.getFileIp(name);
+                int fileHash = INameServer.getHashOfName(name);
                 String failureIP = INameServer.getNodeIp(failureNode);
                 if(fileIP.equals(failureIP)){
                     System.out.println(name + " is owned by " + failureNode + " at " + failureIP);
@@ -39,7 +40,7 @@ public class FailureAgent implements Runnable, Serializable {
                         TCPSender tcpSender = new TCPSender(SOCKET_PORT);
                         tcpSender.SendFile(newOwnerIP, file.getAbsolutePath());
                     }
-                    //@todo update nodefiche
+                    newOwnerNode.updateFiche(name, fileHash, newOwnerIP); //@todo JUIST IP?
                 }
             } catch (Exception e) {e.printStackTrace();}
         }

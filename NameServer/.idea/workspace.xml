@@ -2,25 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94b1754b-5042-4ddf-abff-fb1718390934" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nodeMap.ser" afterPath="$PROJECT_DIR$/nodeMap.ser" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/NameServer/be/ua/NameServer.class" afterPath="$PROJECT_DIR$/out/production/NameServer/be/ua/NameServer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/FailureAgent.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/FailureAgent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/FileMap.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/FileMap.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/INode.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/INode.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Main.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Node.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Node.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/RMIConnector.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/RMIConnector.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Replication.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Replication.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/.idea/misc.xml" afterPath="$PROJECT_DIR$/../Working_Node/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/FileMap.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/FileMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/INode.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/INode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Main.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Node.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Node.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/RMIConnector.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/RMIConnector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Replication.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Replication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/TCPReceiverThread.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/TCPReceiverThread.java" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,21 +12,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="NameServer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NameServer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/be/ua/NameServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
+            <state relative-caret-position="1258">
               <caret line="81" column="9" lean-forward="true" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/be/ua/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="39" lean-forward="false" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
+            <state relative-caret-position="153">
+              <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -717,6 +699,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/be/ua/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/RMIConnector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -729,16 +719,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/NameServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
+        <state relative-caret-position="1258">
           <caret line="81" column="9" lean-forward="true" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/be/ua/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="39" lean-forward="false" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
           <folding />
         </state>
       </provider>

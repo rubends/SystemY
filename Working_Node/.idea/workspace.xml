@@ -10,11 +10,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/be/ua/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+            <state relative-caret-position="524">
+              <caret line="35" column="40" lean-forward="false" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -86,11 +86,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Replication.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Replication.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/be/ua/Replication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1050">
-              <caret line="55" column="64" lean-forward="true" selection-start-line="55" selection-start-column="64" selection-end-line="55" selection-end-column="64" />
+            <state relative-caret-position="133">
+              <caret line="133" column="38" lean-forward="true" selection-start-line="133" selection-start-column="38" selection-end-line="133" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -763,14 +763,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/be/ua/Replication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1050">
-          <caret line="55" column="64" lean-forward="true" selection-start-line="55" selection-start-column="64" selection-end-line="55" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/RMIConnector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
@@ -819,11 +811,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+        <state relative-caret-position="524">
+          <caret line="35" column="40" lean-forward="false" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/be/ua/Replication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="133" column="38" lean-forward="true" selection-start-line="133" selection-start-column="38" selection-end-line="133" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>

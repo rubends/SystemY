@@ -19,16 +19,16 @@ public class RMIConnector {
         if (System.getSecurityManager() == null) {
             System.setProperty("java.security.policy", "file:server.policy");
 
-            System.setProperty("java.rmi.server.hostname", "127.0.0.1");
-            //System.setProperty("java.rmi.server.hostname", "169.254.62.119");
+            //System.setProperty("java.rmi.server.hostname", "127.0.0.1");
+            System.setProperty("java.rmi.server.hostname", "169.254.134.180");
 
             System.setSecurityManager(new SecurityManager());
         }
         try {
             String name = "nodeNames";
             Registry registry = LocateRegistry.getRegistry(Port);
-            INameServer = (NameServerInterface) registry.lookup(name);
-            //INameServer = (NameServerInterface) Naming.lookup("//169.254.62.119/nodeNames");
+            //INameServer = (NameServerInterface) registry.lookup(name);
+            INameServer = (NameServerInterface) Naming.lookup("//169.254.134.180/nodeNames");
         } catch (Exception e) {
             System.out.println("No nameserver found.");
             e.printStackTrace();

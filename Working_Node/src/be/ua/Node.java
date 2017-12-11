@@ -53,6 +53,7 @@ public class Node extends UnicastRemoteObject implements INode{
     }
 
     public void addNodeToMap(int hash, INode node){
+        System.out.println("adding to node map: " + hash);
         Main.nodeMap.put(hash, node);
     }
 

@@ -12,24 +12,13 @@ public class RMIConnector {
     public INode INode;//was private
     //public static INode INodeNew;//was private
 
-    private int Port = 1099;
     private int NodePort = 1098;
 
-    private String ipNameServer = "169.254.134.180";
+    private String ipNameServer = "169.254.136.120"; //127.0.0.1
 
     public RMIConnector() { //to nameserver
-        if (System.getSecurityManager() == null) {
-            System.setProperty("java.security.policy", "file:server.policy");
-
-            //System.setProperty("java.rmi.server.hostname", "127.0.0.1");
-            System.setProperty("java.rmi.server.hostname", ipNameServer);
-
-            System.setSecurityManager(new SecurityManager());
-        }
         try {
             String name = "nodeNames";
-            //Registry registry = LocateRegistry.getRegistry(Port);
-            //INameServer = (NameServerInterface) registry.lookup(name);
             INameServer = (NameServerInterface) Naming.lookup("//"+ipNameServer+"/"+name);
         } catch (Exception e) {
             System.out.println("No nameserver found.");
@@ -38,6 +27,10 @@ public class RMIConnector {
     }
 
     public RMIConnector(NameServerInterface INameServer, String nodeName, int nodeCount) { //create own rmi
+        if (System.getSecurityManager() == null) {
+            System.setProperty("java.security.policy", "file:server.policy");
+            System.setSecurityManager(new SecurityManager());
+        }
         try {
             int hash = INameServer.getHashOfName(nodeName);
             INode = Main.INode;
@@ -45,6 +38,7 @@ public class RMIConnector {
             try {
                 Registry registry = LocateRegistry.getRegistry(NodePort);
                 registry.bind(connName, INode);
+
             } catch (Exception e) {
                 Registry registry = LocateRegistry.createRegistry(NodePort);
                 registry.bind(connName, INode);
@@ -64,10 +58,11 @@ public class RMIConnector {
         while(gettingConnection) {
             try {
                 String NodeIp = INameServer.getNodeIp(hash);
-
+                System.out.println("hash" + connName);
+                System.out.println("ip" + NodeIp);
                 INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);
-
                 Main.nodeMap.put(hash, INodeNew);
+                System.out.println("node ID " + INodeNew.getId());
                 INodeNew.addNodeToMap(Main.INode.getId(), Main.INode);
                 INode.addNodeToMap(hash, INodeNew);
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);

@@ -13,7 +13,6 @@ public class RMIConnector {
     //public static INode INodeNew;//was private
 
     private int NodePort = 1098;
-
     private String ipNameServer = "169.254.136.120"; //127.0.0.1
 
     public RMIConnector() { //to nameserver
@@ -27,14 +26,14 @@ public class RMIConnector {
     }
 
     public RMIConnector(NameServerInterface INameServer, String nodeName, int nodeCount) { //create own rmi
-        if (System.getSecurityManager() == null) {
-            System.setProperty("java.security.policy", "file:server.policy");
-            System.setSecurityManager(new SecurityManager());
-        }
         try {
             int hash = INameServer.getHashOfName(nodeName);
             INode = Main.INode;
             String connName = Integer.toString(hash);
+            if (System.getSecurityManager() == null) {
+                System.setProperty("java.security.policy", "file:server.policy"); //@todo CONNECTION REFUSED
+                System.setSecurityManager(new SecurityManager());
+            }
             try {
                 Registry registry = LocateRegistry.getRegistry(NodePort);
                 registry.bind(connName, INode);
@@ -73,7 +72,7 @@ public class RMIConnector {
                     replication.toNextNode(hash);
                 }
                 gettingConnection = false;
-            } catch (Exception e) {}
+            } catch (Exception e) {e.printStackTrace();}
         }
     }
 

@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class FileMap {
     private String filename;
-    private HashMap<Integer, String> FileLocation = new HashMap<>();
+    public HashMap<Integer, String> FileLocation = new HashMap<>();
 
     FileMap(String filename_, String localNodeip_, int localNodehash_){
         filename = filename_;

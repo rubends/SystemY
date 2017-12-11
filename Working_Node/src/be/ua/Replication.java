@@ -13,7 +13,7 @@ public class Replication {
     String sep = System.getProperty("file.separator");
     File localFolder = new File(rootPath + sep + "Files" + sep + "Local");
     File replicationFolder = new File(rootPath + sep + "Files" + sep + "Replication");
-    private int SOCKET_PORT = 7896;//7897
+    private int SOCKET_PORT = 7897;//7897
 
     public static volatile TreeMap<String, FileMap> fileMap;
 
@@ -35,7 +35,7 @@ public class Replication {
             String ownIp = INameServer.getNodeIp(ownHash);
             TCPSender tcpSender = new TCPSender(SOCKET_PORT);
 
-            int hash = 0;//TODO: ER MOET NOG EEN FUNCTIE GEMAAKT WORDEN OM HASHES OP TE HALEN!
+            int hash = INameServer.getHashOfIp(ip);//TODO: ER MOET NOG EEN FUNCTIE GEMAAKT WORDEN OM HASHES OP TE HALEN!
 
             if(!ip.equals(ownIp)){
                 //maak fiche voor nieuwe owner
@@ -44,7 +44,8 @@ public class Replication {
 
                 //nu fiche lokaal verwijderen ->is geen owner meer
                 System.out.println("REPLICATION: deleting '"+ fiche.getFilename() +"' from fichemap and sending to '"+ip+"'");
-                RMIConnector.INodeNew.sendFiche(fiche);
+                INode INodeNew = Main.nodeMap.get(hash);
+                INodeNew.sendFiche(fiche);
                 fileMap.remove(filename);
 
                 tcpSender.SendFile(ip, location);
@@ -152,7 +153,8 @@ public class Replication {
         try {
             int hash = 0; //HIER MOET DE HASH OPGEHAALD WORDEN DIE BIJ IP HOORT?
             fileMap.get(file).addLocation(ownerIp,hash);                  // add new owner to locations
-            RMIConnector.INodeNew.sendFiche(fileMap.get(file));                                        // send fiche to new owner
+            INode INodeNew = Main.nodeMap.get(hash);
+            INodeNew.sendFiche(fileMap.get(file));            // send fiche to new owner
             fileMap.remove(file); // remove fiche from own fichemap
         }
         catch(Exception e){

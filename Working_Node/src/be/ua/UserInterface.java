@@ -8,7 +8,6 @@ import java.util.TreeMap;
 public class UserInterface {
     private Scanner input;
     private NameServerInterface NameServerInterface;
-    public static TreeMap<String, Boolean> fileList;
 
     public UserInterface(NameServerInterface INameServer) {
         NameServerInterface = INameServer;

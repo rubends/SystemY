@@ -1,6 +1,8 @@
 package be.ua;
 
+import java.io.File;
 import java.io.Serializable;
+import java.rmi.Naming;
 import java.util.Iterator;
 import java.util.TreeMap;
 
@@ -8,7 +10,8 @@ public class FailureAgent implements Runnable, Serializable {
     public int failureNode;
     public int agentNode;
     NameServerInterface INameServer;
-    TreeMap<String, Boolean> fileList;
+    TreeMap<File, Boolean> fileList;
+    private int SOCKET_PORT = 7896;
 
     public FailureAgent(int failureN, int agentN, NameServerInterface nameServerInterface) {
         failureNode = failureN;
@@ -18,18 +21,25 @@ public class FailureAgent implements Runnable, Serializable {
 
     @Override
     public void run() {
-         fileList = UserInterface.fileList;
+         fileList = Node.fileList;
 
-        Iterator<String> keySetIterator = fileList.keySet().iterator();
+        Iterator<File> keySetIterator = fileList.keySet().iterator();
         while (keySetIterator.hasNext()) {
-            String name = keySetIterator.next();
+            File file = keySetIterator.next();
+            String name = file.getName();
             try {
                 String fileIP = INameServer.getFileIp(name);
                 String failureIP = INameServer.getNodeIp(failureNode);
                 if(fileIP.equals(failureIP)){
                     System.out.println(name + " is owned by " + failureNode + " at " + failureIP);
-                    //get new owner
-
+                    int newOwner = INameServer.getNeighbourNodes(failureNode).get(0);
+                    String newOwnerIP = INameServer.getNodeIp(newOwner);
+                    INode newOwnerNode = (INode) Naming.lookup("//" + newOwnerIP + "/" + newOwner);
+                    if(!newOwnerNode.hasFile(file)){
+                        TCPSender tcpSender = new TCPSender(SOCKET_PORT);
+                        tcpSender.SendFile(newOwnerIP, file.getAbsolutePath());
+                    }
+                    //@todo update nodefiche
                 }
             } catch (Exception e) {e.printStackTrace();}
         }

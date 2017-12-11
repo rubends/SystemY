@@ -1,5 +1,6 @@
 package be.ua;
 
+import java.io.File;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -12,12 +13,14 @@ public class Node extends UnicastRemoteObject implements INode{
     private volatile NameServerInterface INameServer;
     private volatile TreeMap<Integer, INode> nodeMap;
     private static volatile FileMap Filemap;
+    public static TreeMap<File, Boolean> fileList;
+    public static int nodeHash; //for local hash getting
 
 
     protected Node(int hash, TreeMap otherNodes, NameServerInterface ns) throws RemoteException
     {
         super();
-        mId = mPrevious = mNext = hash;
+        mId = mPrevious = mNext = nodeHash = hash;
         nodeMap = otherNodes;
         INameServer = ns;
     }
@@ -83,6 +86,14 @@ public class Node extends UnicastRemoteObject implements INode{
             tmpFiche.addLocation(ipLocation,id);
             Replication.fileMap.put(fileName,tmpFiche);
         }
+    }
+
+    public boolean hasFile(File file){
+        boolean hasFile = false;
+        if(fileList.containsKey(file)){
+            hasFile = true;
+        }
+        return hasFile;
     }
 
 }

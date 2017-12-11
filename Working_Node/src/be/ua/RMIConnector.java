@@ -66,7 +66,7 @@ public class RMIConnector {
                 String NodeIp = INameServer.getNodeIp(hash);
 
                 INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);
-
+                System.out.println(hash + "HASH -- DEBUG");
                 Main.nodeMap.put(hash, INodeNew);
                 INodeNew.addNodeToMap(Main.INode.getId(), Main.INode);
                 INode.addNodeToMap(hash, INodeNew);

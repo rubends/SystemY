@@ -45,7 +45,7 @@ public class Replication {
                 System.out.println("REPLICATION: deleting '"+ fiche.getFilename() +"' from fichemap and sending to '"+ip+"'");
                 INode INodeNew = Main.nodeMap.get(hash);
                 System.out.println("size = " + Main.nodeMap.size());
-                INodeNew.sendFiche(fiche);
+                INodeNew.sendFiche(fiche); //NULLPOINTER
                 fileMap.remove(filename);
 
                 tcpSender.SendFile(ip, location);
@@ -131,7 +131,7 @@ public class Replication {
 
     public void createFicheOnStartup(){
         try{
-            System.out.println("MAIN: creating fiches for local files");
+            System.out.println("REPLICATION: creating fiches for local files");
             fileMap = new TreeMap<>();
             File[] listOfFiles = localFolder.listFiles();
             for (File file : listOfFiles) {
@@ -141,7 +141,7 @@ public class Replication {
                     fileMap.put(file.getName(),f); // voeg toe aan eigen fichemap
                 }
             }
-            System.out.println("MAIN: fiches on startup <" +fileMap+ ">");
+            System.out.println("REPLICATION: fiches on startup <" +fileMap+ ">");
             fileMap.get("test7.txt").getIpOfLocation();
             fileMap.get("test7.txt").getHashOfLocation();
             fileMap.get("test7.txt").printLocation();
@@ -149,7 +149,7 @@ public class Replication {
         catch(Exception e){}
     }
     public void passFiche(String file, String ownerIp){
-        System.out.println("PASSFICHE OPEGROEPEN");
+        System.out.println("PASSFICHE OPGEROEPEN");
         try {
             int hash = 0; //HIER MOET DE HASH OPGEHAALD WORDEN DIE BIJ IP HOORT?
             fileMap.get(file).addLocation(ownerIp,hash);                  // add new owner to locations

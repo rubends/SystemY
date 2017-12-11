@@ -1,7 +1,6 @@
 package be.ua;
 
 import java.io.File;
-import java.io.IOException;
 import java.rmi.Naming;
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -45,6 +44,7 @@ public class Replication {
                 //nu fiche lokaal verwijderen ->is geen owner meer
                 System.out.println("REPLICATION: deleting '"+ fiche.getFilename() +"' from fichemap and sending to '"+ip+"'");
                 INode INodeNew = Main.nodeMap.get(hash);
+                System.out.println("size = " + Main.nodeMap.size());
                 INodeNew.sendFiche(fiche);
                 fileMap.remove(filename);
 

@@ -19,7 +19,7 @@ public class Main {
         String nodeName = new Scanner(System.in).next();
         try{
             int hash = NameServerInterface.getHashOfName(nodeName);
-            INode = new Node(hash, nodeMap, NameServerInterface);
+            INode = new Node(hash, NameServerInterface);
         }
         catch(Exception e){}
 

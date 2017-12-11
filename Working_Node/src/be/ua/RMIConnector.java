@@ -68,6 +68,7 @@ public class RMIConnector {
                 INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);
 
                 Main.nodeMap.put(hash, INodeNew);
+                INodeNew.addNodeToMap(Main.INode.getId(), Main.INode);
                 INode.addNodeToMap(hash, INodeNew);
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);
                 INodeNew.updateNeighbours(ids.get(0), ids.get(1));

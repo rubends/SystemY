@@ -5,8 +5,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
-import java.util.TreeMap;
-import java.rmi.Naming;
 
 public class RMIConnector {
 
@@ -64,7 +62,9 @@ public class RMIConnector {
         while(gettingConnection) {
             try {
                 String NodeIp = INameServer.getNodeIp(hash);
+
                 INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);
+
                 Main.nodeMap.put(hash, INodeNew);
                 INode.addNodeToMap(hash, INodeNew);
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);

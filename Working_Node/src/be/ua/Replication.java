@@ -52,9 +52,6 @@ public class Replication {
             } else {
                 ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(ownHash);
                 int neighbourHash = neighbours.get(0);
-                System.out.println("neighbourHash prev = "+ neighbourHash);
-                int neighbourHash2 = neighbours.get(1);
-                System.out.println("neighbourHash next = "+ neighbourHash2);
                 String prevIp = INameServer.getNodeIp(neighbourHash);
 
                 System.out.println("REPLICATION: this node is owner sending to previous node: "+ filename + " " + ip);

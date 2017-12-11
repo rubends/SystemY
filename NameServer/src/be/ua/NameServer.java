@@ -43,6 +43,7 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
         System.out.println("Filename: '" + fileName + "' is located at the node with IP: " + nodeMap.get(mapKey) + "\n");
         return nodeMap.get(mapKey);
     }
+
     public int getHashOfIp(String IP) throws RemoteException
     {
         int hash = 0;
@@ -52,7 +53,6 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
         {
             Map.Entry<Integer, String> key = keys.next();
             int keyHash = key.getKey();
-
             if(IP.equals(nodeMap.get(keyHash)))
             {
                 hash = keyHash;

@@ -10,15 +10,13 @@ public class Node extends UnicastRemoteObject implements INode{
     private volatile int mNext;
     private volatile int mId;
     private volatile NameServerInterface INameServer;
-    private volatile TreeMap<Integer, INode> nodeMap;
     private static volatile FileMap Filemap;
 
 
-    protected Node(int hash, TreeMap otherNodes, NameServerInterface ns) throws RemoteException
+    protected Node(int hash, NameServerInterface ns) throws RemoteException
     {
         super();
         mId = mPrevious = mNext = hash;
-        nodeMap = otherNodes;
         INameServer = ns;
     }
 
@@ -41,10 +39,10 @@ public class Node extends UnicastRemoteObject implements INode{
     }
 
     public void shutdown() throws RemoteException{
-        INode previousNode = nodeMap.get(mPrevious);
+        INode previousNode = Main.nodeMap.get(mPrevious);
         previousNode.updateNextNode(mNext);
 
-        INode nextNode = nodeMap.get(mNext);
+        INode nextNode = Main.nodeMap.get(mNext);
         nextNode.updatePrevNode(mPrevious);
 
         Replication replication = new Replication(INameServer);
@@ -55,7 +53,7 @@ public class Node extends UnicastRemoteObject implements INode{
     }
 
     public void addNodeToMap(int hash, INode node){
-        this.nodeMap.put(hash, node);
+        Main.nodeMap.put(hash, node);
     }
 
     private void setupRMI(String nodeName, int nodeCount) throws NotBoundException {

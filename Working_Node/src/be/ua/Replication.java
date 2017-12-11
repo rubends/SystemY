@@ -35,7 +35,7 @@ public class Replication {
             String ownIp = INameServer.getNodeIp(ownHash);
             TCPSender tcpSender = new TCPSender(SOCKET_PORT);
 
-            int hash = INameServer.getHashOfIp(location);//TODO: ER MOET NOG EEN FUNCTIE GEMAAKT WORDEN OM HASHES OP TE HALEN!
+            int hash = INameServer.getHashOfIp(ip);//TODO: ER MOET NOG EEN FUNCTIE GEMAAKT WORDEN OM HASHES OP TE HALEN!
 
             if(!ip.equals(ownIp)){
                 //maak fiche voor nieuwe owner

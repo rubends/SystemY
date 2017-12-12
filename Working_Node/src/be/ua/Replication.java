@@ -34,7 +34,7 @@ public class Replication {
             String ownIp = INameServer.getNodeIp(ownHash);
             TCPSender tcpSender = new TCPSender(SOCKET_PORT);
 
-            int hash = INameServer.getHashOfIp(ip);//TODO: ER MOET NOG EEN FUNCTIE GEMAAKT WORDEN OM HASHES OP TE HALEN!
+            int hash = INameServer.getHashOfIp(ip);
 
             if(!ip.equals(ownIp)){
                 //maak fiche voor nieuwe owner
@@ -61,7 +61,6 @@ public class Replication {
 
                 tcpSender.SendFile(prevIp, location);
             }
-            //@todo BESTANDSFICHE UPDATEN --> ZIE HIERBOVEN
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -77,7 +76,6 @@ public class Replication {
                 if(ipNextNode.equals(ipOwner)){
                     tcpSender.SendFile(ipNextNode, replicatedFiles[i].getAbsolutePath());
                     //replicatedFiles[i].delete(); nodig?
-                    //@todo BESTANDSFICHE UPDATEN --> ZIE HIERONDER
                     if(fileMap.containsKey(replicatedFiles[i].getName()))
                     {
                         //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
@@ -110,8 +108,8 @@ public class Replication {
         }
         File[] localFiles = localFolder.listFiles();
         for (int i = 0; i < localFiles.length; i++) {
-            String nodeIp = fileMap.get(localFiles[i]).getIpOfLocation();//@todo GET ALLE USER IP'S VAN FILE UIT BESTANDSFICHE --> ZIE Hiernaast
-            int nodeHash = fileMap.get(localFiles[i]).getHashOfLocation(); //@todo GET ALLE USER HASHED VAN FILE UIT BESTANDSFICHE --> ZIE hiernaast
+            String nodeIp = fileMap.get(localFiles[i]).getIpOfLocation();
+            int nodeHash = fileMap.get(localFiles[i]).getHashOfLocation();
 
             //FOR LOOP
             try {
@@ -137,7 +135,7 @@ public class Replication {
             for (File file : listOfFiles) {
                 if (file.isFile()) {
                     //file fiche aanmaken en toevoegen aan lijst
-                    FileMap f = new FileMap(file.getName(),"test",Main.INode.getId()); //TODO:NIET MET TEST_ EIGEN IP!
+                    FileMap f = new FileMap(file.getName(),"test",Main.INode.getId());
                     fileMap.put(file.getName(),f); // voeg toe aan eigen fichemap
                 }
             }

@@ -19,7 +19,7 @@ public class UserInterface {
         while(true) {
             Scanner input = new Scanner(System.in);
             System.out.println("\t __________________________________________ ");
-            System.out.print("Chose Action:\n" +
+            System.out.print("Choose Action:\n" +
                     "\t0. Shutdown\n" +
                     "\t1. Print neighbours\n" +
                     "\t2. Print system file list\n" +

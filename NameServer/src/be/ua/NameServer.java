@@ -22,6 +22,7 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
 
     public String getFileIp(String fileName) throws RemoteException
     {
+        while(nodeMap.size() < 1){}//no nodes in nodeMap
         int hash = getHashOfName(fileName);
         int mapKey = 0;
 
@@ -30,7 +31,6 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
         {
             mapKey = nodeMap.lastKey();                         //then it goes to the last node
         }
-
         while (keys.hasNext())
         {
             Map.Entry<Integer, String> key = keys.next();
@@ -44,6 +44,24 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
         return nodeMap.get(mapKey);
     }
 
+    public int getHashOfIp(String IP) throws RemoteException
+    {
+        int hash = 0;
+        Iterator<Map.Entry<Integer, String>> keys = nodeMap.entrySet().iterator();
+
+        while (keys.hasNext())
+        {
+            Map.Entry<Integer, String> key = keys.next();
+            int keyHash = key.getKey();
+            if(IP.equals(nodeMap.get(keyHash)))
+            {
+                hash = keyHash;
+            }
+        }
+        //System.out.println("IP: "+IP+ " has hash: " + hash + "\n");
+        return hash;
+    }
+
     public void addNode(String nodeName, String nodeIP)
     {
         try {
@@ -53,7 +71,7 @@ public class NameServer extends UnicastRemoteObject implements NameServerInterfa
                 ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("./nodeMap.ser"));
                 out.writeObject(nodeMap);
                 out.close();
-                System.out.println("Succesfully added: " + nodeName);
+                System.out.println("Succesfully added: " + nodeName + " (" + hash+")");
             } else {
                 System.out.println("This node already exists: "+ nodeName);
             }

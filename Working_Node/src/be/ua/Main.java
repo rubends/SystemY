@@ -19,10 +19,9 @@ public class Main {
         String nodeName = new Scanner(System.in).next();
         try{
             int hash = NameServerInterface.getHashOfName(nodeName);
-            INode = new Node(hash, nodeMap, NameServerInterface);
+            INode = new Node(hash, NameServerInterface);
         }
         catch(Exception e){}
-
 
         MulticastThread multicastThread = new MulticastThread(nodeName, NameServerInterface);
         multicastThread.start();
@@ -37,6 +36,8 @@ public class Main {
         replication.setNodeName(nodeName);
         replication.getFiles();
 
+
+        ui.startUI();
     }
 }
 

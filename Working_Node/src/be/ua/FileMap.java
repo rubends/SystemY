@@ -25,7 +25,7 @@ public class FileMap {
         Iterator<Integer> keySetIterator = FileLocation.keySet().iterator();
         while (keySetIterator.hasNext()) {
             int key = keySetIterator.next();
-            System.out.println("hash of location = " + key);
+            //System.out.println("hash of location = " + key);
             return key;
         }
         return 0;
@@ -35,7 +35,7 @@ public class FileMap {
         while(it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
             String location = (String)pair.getValue();
-            System.out.println("IP of location = " + location);
+            //System.out.println("IP of location = " + location);
             return location;
         }
         return null;
@@ -45,7 +45,7 @@ public class FileMap {
         Iterator<Integer> keySetIterator = FileLocation.keySet().iterator();
         while (keySetIterator.hasNext()) {
             int key = keySetIterator.next();
-            System.out.println(key + " - " + FileLocation.get(key));
+            //System.out.println(key + " - " + FileLocation.get(key));
         }
     }
 }

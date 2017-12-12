@@ -11,7 +11,6 @@ public class RMIConnector {
         String registryName = "nodeNames";
         if (System.getSecurityManager() == null) {
             System.setProperty("java.security.policy", "file:server.policy");
-            //System.setProperty("java.rmi.server.hostname", "127.0.0.0");
             System.setSecurityManager(new SecurityManager());
         }
         try
@@ -23,7 +22,7 @@ public class RMIConnector {
 
             // TEST !!!!!!!!!!!!!!!!!!!!!!!!!!
             //ns.addNode("testNode","192.168.1.1"); //For test
-              ns.getNodeCount();
+//            ns.getNodeCount();
 //            ns.addNode("secondnode","192.168.1.2");
 //            ns.addNode("nodefiles","192.168.1.2");
 //            ns.addNode("myfile","192.168.1.3");

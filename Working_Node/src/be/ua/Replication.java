@@ -1,7 +1,6 @@
 package be.ua;
 
 import java.io.File;
-import java.io.IOException;
 import java.rmi.Naming;
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -13,7 +12,7 @@ public class Replication {
     String sep = System.getProperty("file.separator");
     File localFolder = new File(rootPath + sep + "Files" + sep + "Local");
     File replicationFolder = new File(rootPath + sep + "Files" + sep + "Replication");
-    private int SOCKET_PORT = 7896;//7897
+    private int SOCKET_PORT = 7897;//7897
 
     public static volatile TreeMap<String, FileMap> fileMap;
 
@@ -35,7 +34,7 @@ public class Replication {
             String ownIp = INameServer.getNodeIp(ownHash);
             TCPSender tcpSender = new TCPSender(SOCKET_PORT);
 
-            int hash = 0;//TODO: ER MOET NOG EEN FUNCTIE GEMAAKT WORDEN OM HASHES OP TE HALEN!
+            int hash = INameServer.getHashOfIp(ip);//TODO: ER MOET NOG EEN FUNCTIE GEMAAKT WORDEN OM HASHES OP TE HALEN!
 
             if(!ip.equals(ownIp)){
                 //maak fiche voor nieuwe owner
@@ -43,8 +42,10 @@ public class Replication {
                 fiche.addLocation(ip, hash);
 
                 //nu fiche lokaal verwijderen ->is geen owner meer
-                System.out.println("REPLICATION: deleting '"+ fiche.getFilename() +"' from fichemap and sending to '"+ip+"'");
-                RMIConnector.INodeNew.sendFiche(fiche);
+                //System.out.println("REPLICATION: deleting '"+ fiche.getFilename() +"' from fichemap and sending to '"+ip+"'");
+                INode INodeNew = Main.nodeMap.get(hash);
+                System.out.println("size = " + Main.nodeMap.size());
+                INodeNew.sendFiche(fiche); //NULLPOINTER
                 fileMap.remove(filename);
 
                 tcpSender.SendFile(ip, location);
@@ -53,7 +54,7 @@ public class Replication {
                 int neighbourHash = neighbours.get(0);
                 String prevIp = INameServer.getNodeIp(neighbourHash);
 
-                System.out.println("REPLICATION: this node is owner sending to previous node: "+ filename + " " + ip);
+                //System.out.println("REPLICATION: this node is owner sending to previous node: "+ filename + " " + ip);
                 FileMap fiche = fileMap.get(filename);
                 fiche.addLocation(ip, hash);
                 fileMap.put(filename, fiche);
@@ -99,6 +100,7 @@ public class Replication {
                     ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(hashPrevNode);
                     String ipPrevPrevNode = INameServer.getNodeIp(neighbours.get(0));
                     tcpSender.SendFile(ipPrevPrevNode, replicatedFiles[i].getAbsolutePath());
+                    replicatedFiles[i].delete();
                 } else {
                     tcpSender.SendFile(ipPrevNode, replicatedFiles[i].getAbsolutePath());
                 }
@@ -110,7 +112,6 @@ public class Replication {
         for (int i = 0; i < localFiles.length; i++) {
             String nodeIp = fileMap.get(localFiles[i]).getIpOfLocation();//@todo GET ALLE USER IP'S VAN FILE UIT BESTANDSFICHE --> ZIE Hiernaast
             int nodeHash = fileMap.get(localFiles[i]).getHashOfLocation(); //@todo GET ALLE USER HASHED VAN FILE UIT BESTANDSFICHE --> ZIE hiernaast
-
 
             //FOR LOOP
             try {
@@ -130,7 +131,7 @@ public class Replication {
 
     public void createFicheOnStartup(){
         try{
-            System.out.println("MAIN: creating fiches for local files");
+            //System.out.println("MAIN: creating fiches for local files");
             fileMap = new TreeMap<>();
             File[] listOfFiles = localFolder.listFiles();
             for (File file : listOfFiles) {
@@ -140,19 +141,21 @@ public class Replication {
                     fileMap.put(file.getName(),f); // voeg toe aan eigen fichemap
                 }
             }
-            System.out.println("MAIN: fiches on startup <" +fileMap+ ">");
-            fileMap.get("test7.txt").getIpOfLocation();
-            fileMap.get("test7.txt").getHashOfLocation();
-            fileMap.get("test7.txt").printLocation();
+
+            //System.out.println("fiches on startup <" +fileMap+ ">");
+            //fileMap.get("test7.txt").getIpOfLocation();
+            //fileMap.get("test7.txt").getHashOfLocation();
+            //fileMap.get("test7.txt").printLocation();
         }
         catch(Exception e){}
     }
     public void passFiche(String file, String ownerIp){
-        System.out.println("PASSFICHE OPEGROEPEN");
+        //System.out.println("PASSFICHE OPEGROEPEN");
         try {
-            int hash = 0; //HIER MOET DE HASH OPGEHAALD WORDEN DIE BIJ IP HOORT?
+            int hash = INameServer.getHashOfIp(ownerIp);; //HIER MOET DE HASH OPGEHAALD WORDEN DIE BIJ IP HOORT?
             fileMap.get(file).addLocation(ownerIp,hash);                  // add new owner to locations
-            RMIConnector.INodeNew.sendFiche(fileMap.get(file));                                        // send fiche to new owner
+            INode INodeNew = Main.nodeMap.get(hash);
+            INodeNew.sendFiche(fileMap.get(file));            // send fiche to new owner
             fileMap.remove(file); // remove fiche from own fichemap
         }
         catch(Exception e){

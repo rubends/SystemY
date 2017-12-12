@@ -5,30 +5,21 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RMIConnector {
 
     private NameServerInterface INameServer;
     public INode INode;//was private
-    public static INode INodeNew;//was private
+    //public static INode INodeNew;//was private
 
-    private int Port = 1099;
     private int NodePort = 1098;
+    private String ipNameServer = "127.0.0.1"; //127.0.0.1
 
     public RMIConnector() { //to nameserver
-        if (System.getSecurityManager() == null) {
-            System.setProperty("java.security.policy", "file:server.policy");
-
-            System.setProperty("java.rmi.server.hostname", "127.0.0.1");
-            //System.setProperty("java.rmi.server.hostname", "169.254.62.119");
-
-            System.setSecurityManager(new SecurityManager());
-        }
         try {
             String name = "nodeNames";
-            Registry registry = LocateRegistry.getRegistry(Port);
-            INameServer = (NameServerInterface) registry.lookup(name);
-            //INameServer = (NameServerInterface) Naming.lookup("//169.254.62.119/nodeNames");
+            INameServer = (NameServerInterface) Naming.lookup("//"+ipNameServer+"/"+name);
         } catch (Exception e) {
             System.out.println("No nameserver found.");
             e.printStackTrace();
@@ -40,14 +31,18 @@ public class RMIConnector {
             int hash = INameServer.getHashOfName(nodeName);
             INode = Main.INode;
             String connName = Integer.toString(hash);
+            if (System.getSecurityManager() == null) {
+                System.setProperty("java.security.policy", "file:server.policy"); //@todo CONNECTION REFUSED
+                System.setSecurityManager(new SecurityManager());
+            }
             try {
                 Registry registry = LocateRegistry.getRegistry(NodePort);
-                registry.bind(connName, INode);
+                registry.rebind(connName, INode);
             } catch (Exception e) {
                 Registry registry = LocateRegistry.createRegistry(NodePort);
-                registry.bind(connName, INode);
+                registry.rebind(connName, INode);
             }
-            System.out.println("serverRMI bound to server");
+            System.out.println("Created own RMI server");
         } catch (Exception e) {
             System.err.println("Exception while setting up RMI:");
             e.printStackTrace();
@@ -61,10 +56,15 @@ public class RMIConnector {
         boolean gettingConnection = true;
         while(gettingConnection) {
             try {
-                String NodeIp = INameServer.getNodeIp(hash);
-                INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName); //@test this
+                Registry registry = LocateRegistry.getRegistry(NodePort);               // --- LOCALHOST ---
+                INode INodeNew = (INode) registry.lookup(connName);                     // _________________
+
+                //String NodeIp = INameServer.getNodeIp(hash);                          // ---- NETWORK ----
+                //INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);     // _________________
+
                 Main.nodeMap.put(hash, INodeNew);
-                INode.addNodeToMap(hash, INodeNew);
+                INodeNew.addNodeToMap(Main.INode.getId(), Main.INode);
+                Main.INode.addNodeToMap(hash, INodeNew);
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);
                 INodeNew.updateNeighbours(ids.get(0), ids.get(1));
                 System.out.println("New node id: " + INodeNew.getId());
@@ -73,7 +73,9 @@ public class RMIConnector {
                     replication.toNextNode(hash);
                 }
                 gettingConnection = false;
-            } catch (Exception e) {}
+            } catch (Exception e) {
+                // e.printStackTrace(); //not printing because searching for connection
+            }
         }
     }
 

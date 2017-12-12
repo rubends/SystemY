@@ -19,7 +19,7 @@ public class MulticastThread extends Thread{
     }
 
     public void run() {
-        String inetAddress = "224.0.1.6";
+        String inetAddress = "224.0.1.6"; //@todo WHY?
         int MulticastSocketPort = 6790;
         int DsocketPort = 6791;
         try {
@@ -42,7 +42,6 @@ public class MulticastThread extends Thread{
             String nodeCountS = new String(buf, 0, nodeCountPacket.getLength());
             nodeCount = Integer.parseInt(nodeCountS);
             Dsocket.close();
-
             //setup RMI connection
             setupRMI(name, nodeCount);
             //listen to new nodes

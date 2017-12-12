@@ -6,7 +6,7 @@ import java.net.Socket;
 
 public class TCPReceiverThread extends Thread {
 
-    private final static int SOCKET_PORT = 7897;//7897
+    private final static int SOCKET_PORT = 7896;//7897
     private ServerSocket socket;
 
     public TCPReceiverThread() { }

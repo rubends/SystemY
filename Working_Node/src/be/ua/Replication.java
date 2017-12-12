@@ -12,7 +12,7 @@ public class Replication {
     String sep = System.getProperty("file.separator");
     File localFolder = new File(rootPath + sep + "Files" + sep + "Local");
     File replicationFolder = new File(rootPath + sep + "Files" + sep + "Replication");
-    private int SOCKET_PORT = 7897;//7897
+    private int SOCKET_PORT = 7896;//7897
 
     public static volatile TreeMap<String, FileMap> fileMap;
 
@@ -100,6 +100,7 @@ public class Replication {
                     ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(hashPrevNode);
                     String ipPrevPrevNode = INameServer.getNodeIp(neighbours.get(0));
                     tcpSender.SendFile(ipPrevPrevNode, replicatedFiles[i].getAbsolutePath());
+                    replicatedFiles[i].delete();
                 } else {
                     tcpSender.SendFile(ipPrevNode, replicatedFiles[i].getAbsolutePath());
                 }
@@ -111,7 +112,6 @@ public class Replication {
         for (int i = 0; i < localFiles.length; i++) {
             String nodeIp = fileMap.get(localFiles[i]).getIpOfLocation();//@todo GET ALLE USER IP'S VAN FILE UIT BESTANDSFICHE --> ZIE Hiernaast
             int nodeHash = fileMap.get(localFiles[i]).getHashOfLocation(); //@todo GET ALLE USER HASHED VAN FILE UIT BESTANDSFICHE --> ZIE hiernaast
-
 
             //FOR LOOP
             try {

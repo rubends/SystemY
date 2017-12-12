@@ -23,7 +23,6 @@ public class Main {
         }
         catch(Exception e){}
 
-
         MulticastThread multicastThread = new MulticastThread(nodeName, NameServerInterface);
         multicastThread.start();
 
@@ -37,6 +36,8 @@ public class Main {
         replication.setNodeName(nodeName);
         replication.getFiles();
 
+
+        ui.startUI();
     }
 }
 

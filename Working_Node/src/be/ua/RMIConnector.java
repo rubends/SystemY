@@ -13,7 +13,7 @@ public class RMIConnector {
     //public static INode INodeNew;//was private
 
     private int NodePort = 1098;
-    private String ipNameServer = "169.254.136.120"; //127.0.0.1
+    private String ipNameServer = "127.0.0.1"; //127.0.0.1
 
     public RMIConnector() { //to nameserver
         try {
@@ -42,7 +42,7 @@ public class RMIConnector {
                 Registry registry = LocateRegistry.createRegistry(NodePort);
                 registry.bind(connName, INode);
             }
-            System.out.println("serverRMI bound to server");
+            System.out.println("Created own RMI server");
         } catch (Exception e) {
             System.err.println("Exception while setting up RMI:");
             e.printStackTrace();
@@ -57,9 +57,7 @@ public class RMIConnector {
         while(gettingConnection) {
             try {
                 String NodeIp = INameServer.getNodeIp(hash);
-                System.out.println("hash" + connName);
-                System.out.println("ip" + NodeIp);
-                INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);
+                INode INodeNew = (INode) Naming.lookup("rmi://"+NodeIp+"/"+connName); //@todo fix RMI
                 Main.nodeMap.put(hash, INodeNew);
                 System.out.println("node ID " + INodeNew.getId());
                 INodeNew.addNodeToMap(Main.INode.getId(), Main.INode);

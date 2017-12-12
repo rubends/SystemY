@@ -10,12 +10,13 @@ public class Node extends UnicastRemoteObject implements INode{
     private volatile int mNext;
     private volatile int mId;
     private volatile NameServerInterface INameServer;
+    public static int nodeHash; //for local hash getting
 
 
     protected Node(int hash, NameServerInterface ns) throws RemoteException
     {
         super();
-        mId = mPrevious = mNext = hash;
+        mId = mPrevious = mNext = nodeHash = hash;
         INameServer = ns;
     }
 

@@ -42,7 +42,6 @@ public class MulticastThread extends Thread{
             String nodeCountS = new String(buf, 0, nodeCountPacket.getLength());
             nodeCount = Integer.parseInt(nodeCountS);
             Dsocket.close();
-
             //setup RMI connection
             setupRMI(name, nodeCount);
             //listen to new nodes

@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RMIConnector {
 
@@ -36,11 +37,10 @@ public class RMIConnector {
             }
             try {
                 Registry registry = LocateRegistry.getRegistry(NodePort);
-                registry.bind(connName, INode);
-
+                registry.rebind(connName, INode);
             } catch (Exception e) {
                 Registry registry = LocateRegistry.createRegistry(NodePort);
-                registry.bind(connName, INode);
+                registry.rebind(connName, INode);
             }
             System.out.println("Created own RMI server");
         } catch (Exception e) {
@@ -56,12 +56,15 @@ public class RMIConnector {
         boolean gettingConnection = true;
         while(gettingConnection) {
             try {
-                String NodeIp = INameServer.getNodeIp(hash);
-                INode INodeNew = (INode) Naming.lookup("rmi://"+NodeIp+"/"+connName); //@todo fix RMI
+                Registry registry = LocateRegistry.getRegistry(NodePort);               // --- LOCALHOST ---
+                INode INodeNew = (INode) registry.lookup(connName);                     // _________________
+
+                //String NodeIp = INameServer.getNodeIp(hash);                          // ---- NETWORK ----
+                //INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);     // _________________
+
                 Main.nodeMap.put(hash, INodeNew);
-                System.out.println("node ID " + INodeNew.getId());
                 INodeNew.addNodeToMap(Main.INode.getId(), Main.INode);
-                INode.addNodeToMap(hash, INodeNew);
+                Main.INode.addNodeToMap(hash, INodeNew);
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);
                 INodeNew.updateNeighbours(ids.get(0), ids.get(1));
                 System.out.println("New node id: " + INodeNew.getId());
@@ -70,7 +73,9 @@ public class RMIConnector {
                     replication.toNextNode(hash);
                 }
                 gettingConnection = false;
-            } catch (Exception e) {e.printStackTrace();}
+            } catch (Exception e) {
+                // e.printStackTrace(); //not printing because searching for connection
+            }
         }
     }
 

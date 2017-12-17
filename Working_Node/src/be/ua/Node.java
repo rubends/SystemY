@@ -20,6 +20,7 @@ public class Node extends UnicastRemoteObject implements INode{
         super();
         mId = mPrevious = mNext = nodeHash = hash;
         INameServer = ns;
+        fileList = new TreeMap<>();
     }
 
     public void updateNeighbours(int newPrevious, int newNext)

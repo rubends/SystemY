@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class Replication {
-    NameServerInterface INameServer;
-    String nodeName;
-    String rootPath = new File("").getAbsolutePath();
-    String sep = System.getProperty("file.separator");
-    File localFolder = new File(rootPath + sep + "Files" + sep + "Local");
-    File replicationFolder = new File(rootPath + sep + "Files" + sep + "Replication");
+    private NameServerInterface INameServer;
+    private String nodeName;
+    private String rootPath = new File("").getAbsolutePath();
+    private String sep = System.getProperty("file.separator");
+    private File localFolder = new File(rootPath + sep + "Files" + sep + "Local");
+    private File replicationFolder = new File(rootPath + sep + "Files" + sep + "Replication");
     private int SOCKET_PORT = 7897;//7897
 
     public static volatile TreeMap<String, FileMap> fileMap;
@@ -108,8 +108,8 @@ public class Replication {
         }
         File[] localFiles = localFolder.listFiles();
         for (int i = 0; i < localFiles.length; i++) {
-            String nodeIp = fileMap.get(localFiles[i]).getIpOfLocation();
-            int nodeHash = fileMap.get(localFiles[i]).getHashOfLocation();
+            String nodeIp = fileMap.get(localFiles[i].getName()).getIpOfLocation();
+            int nodeHash = fileMap.get(localFiles[i].getName()).getHashOfLocation();
 
             //FOR LOOP
             try {

@@ -6,8 +6,6 @@ import java.util.TreeMap;
 
 public class FileAgent implements Runnable, Serializable {
 
-    private TreeMap<File, Boolean> fileList = new TreeMap<>();
-
     @Override
     public void run() {
         Node.fileList.clear();
@@ -19,14 +17,13 @@ public class FileAgent implements Runnable, Serializable {
         File[] replicationFiles = replicationFolder.listFiles();
         addToList(localFiles);
         addToList(replicationFiles);
-        Node.fileList = fileList;
         //@todo lock stuff
     }
 
     public void addToList(File[] files){
         for (int i = 0; i < files.length; i++) {
-            if(!fileList.containsKey(files[i])){
-                fileList.put(files[i], true);
+            if(!Node.fileList.containsKey(files[i])){
+                Node.fileList.put(files[i], true);
             }
         }
     }

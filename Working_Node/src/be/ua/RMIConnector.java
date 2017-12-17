@@ -32,7 +32,7 @@ public class RMIConnector {
             INode = Main.INode;
             String connName = Integer.toString(hash);
             if (System.getSecurityManager() == null) {
-                System.setProperty("java.security.policy", "file:server.policy"); //@todo CONNECTION REFUSED
+                System.setProperty("java.security.policy", "file:server.policy");
                 System.setSecurityManager(new SecurityManager());
             }
             try {
@@ -42,7 +42,6 @@ public class RMIConnector {
                 Registry registry = LocateRegistry.createRegistry(NodePort);
                 registry.rebind(connName, INode);
             }
-            System.out.println("Created own RMI server");
         } catch (Exception e) {
             System.err.println("Exception while setting up RMI:");
             e.printStackTrace();

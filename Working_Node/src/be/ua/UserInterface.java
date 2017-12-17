@@ -1,11 +1,9 @@
 package be.ua;
 
+import java.io.File;
 import java.rmi.Naming;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 import java.lang.String;
-import java.util.TreeMap;
 
 public class UserInterface {
     private NameServerInterface INameServer;
@@ -18,15 +16,14 @@ public class UserInterface {
     public void startUI() {
         while(true) {
             Scanner input = new Scanner(System.in);
-            System.out.println("\t __________________________________________ ");
+            System.out.println("__________________________________________ ");
             System.out.print("Choose Action:\n" +
                     "\t0. Shutdown\n" +
                     "\t1. Print neighbours\n" +
                     "\t2. Print system file list\n" +
                     "\t3. Print file fiches\n" +
-                    "\t4. Test failure\n" +
-                    "\t5. Open file: \n" +
-                    "\t6. Delete file: \n");
+                    "\t4. Open file \n" +
+                    "\t5. Delete file \n");
             System.out.println(" > ");
 
             //@todo MORE TESTS!
@@ -38,7 +35,34 @@ public class UserInterface {
                     ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(Node.nodeHash);
                     System.out.println("previous node: " + neighbours.get(0));
                     System.out.println("next node: " + neighbours.get(1));
-                } // .................................
+                } else if (action == 2) {
+                    if(Node.fileList.size() > 0) {
+                        for (Map.Entry<File, Boolean> entry : Node.fileList.entrySet()) {
+                            System.out.println("Name: " + entry.getKey().getName() + ". Locked: " + entry.getValue());
+                        }
+                    } else {
+                        System.out.println("No files found in the system file list.");
+                    }
+                } else if (action == 3) {
+                    if(Replication.fileMap.size() > 0) {
+                        for (Map.Entry<String, FileMap> entry : Replication.fileMap.entrySet()) {
+                            System.out.println("File: " + entry.getKey() + " on location: " + entry.getValue().getIpOfLocation() + " with hash " + entry.getValue().getHashOfLocation());
+                        }
+                    } else {
+                        System.out.println("No files found in the file fiches.");
+                    }
+                } else if (action == 4) {
+                    System.out.println("Give filename:");
+                    String file = input.next();
+                    String ip = INameServer.getFileIp(file);
+                    System.out.println("File is located at " + ip);
+                    //todo get file
+                } else if (action == 5) {
+                    System.out.println("Give filename:");
+                    String file = input.next();
+                    String ip = INameServer.getFileIp(file);
+                    //todo delete file
+                }
             } catch (Exception e){
                 e.printStackTrace();
             }
@@ -55,6 +79,9 @@ public class UserInterface {
                 String prevIp = INameServer.getNodeIp(prevHash);
                 INode prevNode = (INode) Naming.lookup("//"+prevIp+"/"+Integer.toString(prevHash));
                 prevNode.updateNextNode(nextHash);
+
+                Replication replication = new Replication(INameServer);
+                replication.toPrevNode(prevHash);
             }
             if(nextHash != Node.nodeHash)
             {
@@ -62,9 +89,6 @@ public class UserInterface {
                 INode nextNode = (INode) Naming.lookup("//"+nextIp+"/"+Integer.toString(nextHash));
                 nextNode.updatePrevNode(prevHash);
             }
-
-            Replication replication = new Replication(INameServer);
-            replication.toPrevNode(prevHash);
 
             INameServer.deleteNode(Node.nodeHash);
             System.exit(0);

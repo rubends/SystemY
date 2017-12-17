@@ -4,6 +4,7 @@ import java.io.File;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.TreeMap;
 
@@ -95,6 +96,18 @@ public class Node extends UnicastRemoteObject implements INode{
             hasFile = true;
         }
         return hasFile;
+    }
+
+    public void nodeFailure(int hash) //BIJ ELKE NODE EXCEPTION
+    { //@todo OPROEPEN BIJ EXCEPTIONS
+        try {
+            ArrayList<Integer> failbourNodes = INameServer.getNeighbourNodes(hash);
+            INameServer.deleteNode(hash);
+            INode prevNode = Main.nodeMap.get(failbourNodes.get(0));
+            prevNode.updateNextNode(failbourNodes.get(0));
+            INode nextNode = Main.nodeMap.get(failbourNodes.get(1));
+            nextNode.updatePrevNode(failbourNodes.get(2));
+        } catch (Exception e) { e.printStackTrace(); }
     }
 
 }

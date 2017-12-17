@@ -39,8 +39,7 @@ public class Main {
 
         FileAgent fileAgent = new FileAgent();
         Thread agentThread = new Thread(fileAgent);
-        agentThread.start();
-
+        agentThread.start(); //@todo voer RMIobject uit met deze agent oneindig lang doorheen het systeem van node naar node gaan
 
         ui.startUI();
     }

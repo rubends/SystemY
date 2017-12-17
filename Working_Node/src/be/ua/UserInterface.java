@@ -23,7 +23,8 @@ public class UserInterface {
                     "\t2. Print system file list\n" +
                     "\t3. Print file fiches\n" +
                     "\t4. Open file \n" +
-                    "\t5. Delete file \n");
+                    "\t5. Delete file \n" +
+                    "\t6. Node failure\n");
             System.out.println(" > ");
 
             //@todo MORE TESTS!
@@ -62,6 +63,10 @@ public class UserInterface {
                     String file = input.next();
                     String ip = INameServer.getFileIp(file);
                     //todo delete file
+                } else if (action == 6) {
+                    System.out.println("Give failed node hash:");
+                    int nodeHash = input.nextInt();
+                    failure(nodeHash);
                 }
             } catch (Exception e){
                 e.printStackTrace();
@@ -77,7 +82,7 @@ public class UserInterface {
             int nextHash = neighbours.get(1);
             if(prevHash != Node.nodeHash){
                 String prevIp = INameServer.getNodeIp(prevHash);
-                INode prevNode = (INode) Naming.lookup("//"+prevIp+"/"+Integer.toString(prevHash));
+                INode prevNode = (INode) Naming.lookup("//"+prevIp+"/"+Integer.toString(prevHash)); //todo NADENKEN OF DIT IN NODEMAP MOET OF NIET?
                 prevNode.updateNextNode(nextHash);
 
                 Replication replication = new Replication(INameServer);
@@ -96,5 +101,23 @@ public class UserInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void failure(int hash){
+        System.out.println("Node " + hash + " failed.");
+        try {
+            ArrayList<Integer> failbourNodes = INameServer.getNeighbourNodes(hash);
+            INode prevNode = Main.nodeMap.get(failbourNodes.get(0));
+            prevNode.updateNextNode(failbourNodes.get(0));
+            INode nextNode = Main.nodeMap.get(failbourNodes.get(1));
+            nextNode.updatePrevNode(failbourNodes.get(2));
+
+            INameServer.deleteNode(hash);
+
+            FailureAgent failureAgent = new FailureAgent(hash, INameServer);
+            Thread agentThread = new Thread(failureAgent);
+            agentThread.start();
+            //@todo voer RMIobject uit met deze agent oneindig lang doorheen het systeem van node naar node gaan
+        } catch (Exception e) { e.printStackTrace(); }
     }
 }

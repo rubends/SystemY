@@ -78,16 +78,5 @@ public class RMIConnector {
         }
     }
 
-    public void nodeFailure(NameServerInterface INameServer, int hash) //BIJ ELKE NODE EXCEPTION
-    { //@todo OPROEPEN BIJ EXCEPTIONS
-        try {
-            ArrayList<Integer> failbourNodes = INameServer.getNeighbourNodes(hash);
-            INameServer.deleteNode(hash);
-            INode prevNode = Main.nodeMap.get(failbourNodes.get(0));
-            prevNode.updateNextNode(failbourNodes.get(0));
-            INode nextNode = Main.nodeMap.get(failbourNodes.get(1));
-            nextNode.updatePrevNode(failbourNodes.get(2));
-        } catch (Exception e) { e.printStackTrace(); }
-    }
     public NameServerInterface getNameServer(){ return INameServer;}
 }

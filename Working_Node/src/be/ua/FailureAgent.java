@@ -13,9 +13,9 @@ public class FailureAgent implements Runnable, Serializable {
     TreeMap<File, Boolean> fileList;
     private int SOCKET_PORT = 7896;
 
-    public FailureAgent(int failureN, int agentN, NameServerInterface nameServerInterface) {
+    public FailureAgent(int failureN, NameServerInterface nameServerInterface) {
         failureNode = failureN;
-        agentNode = agentN;
+        agentNode = Node.nodeHash;
         INameServer = nameServerInterface;
     }
 

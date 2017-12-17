@@ -4,6 +4,7 @@ import java.io.File;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Comparator;
 import java.util.TreeMap;
 
 public class Node extends UnicastRemoteObject implements INode{
@@ -11,7 +12,7 @@ public class Node extends UnicastRemoteObject implements INode{
     public volatile int mNext;
     private volatile int mId;
     private volatile NameServerInterface INameServer;
-    public static TreeMap<File, Boolean> fileList;
+    public static TreeMap<File, Boolean> fileList; // file - locked
     public static int nodeHash; //for local hash getting
 
 
@@ -20,7 +21,8 @@ public class Node extends UnicastRemoteObject implements INode{
         super();
         mId = mPrevious = mNext = nodeHash = hash;
         INameServer = ns;
-        fileList = new TreeMap<>();
+        Comparator<File> fileListComp = Comparator.comparing(File::getName); // compares the file in de treemap by name
+        fileList = new TreeMap<>(fileListComp);
     }
 
     public void updateNeighbours(int newPrevious, int newNext)

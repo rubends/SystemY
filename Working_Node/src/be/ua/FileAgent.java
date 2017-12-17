@@ -23,7 +23,7 @@ public class FileAgent implements Runnable, Serializable {
     public void addToList(File[] files){
         for (int i = 0; i < files.length; i++) {
             if(!Node.fileList.containsKey(files[i])){
-                Node.fileList.put(files[i], true);
+                Node.fileList.put(files[i], false);
             }
         }
     }

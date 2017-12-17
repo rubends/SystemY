@@ -1,5 +1,6 @@
 package be.ua;
 
+import java.io.File;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -35,6 +36,10 @@ public class Main {
         replication.createFicheOnStartup();// Moet voor get files gebeuren
         replication.setNodeName(nodeName);
         replication.getFiles();
+
+        FileAgent fileAgent = new FileAgent();
+        Thread agentThread = new Thread(fileAgent);
+        agentThread.start();
 
 
         ui.startUI();

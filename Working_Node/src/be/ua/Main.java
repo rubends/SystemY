@@ -5,6 +5,7 @@ import java.util.TreeMap;
 
 public class Main {
     public static INode INode;
+    static FileAgent FileAgent;
     public static TreeMap<Integer, INode> nodeMap;
 
     public static void main(String[] args) {
@@ -36,8 +37,18 @@ public class Main {
         replication.setNodeName(nodeName);
         replication.getFiles();
 
+        System.out.println("HEREH");
+        FileAgent FileAgent = new FileAgent();
+
+        
+        Controller controller = new Controller(FileAgent);
+        View view = new View(FileAgent);
+        controller.createListeners(view);
+        view.setVisible(true);
+        FileAgent.addObserver(controller);
 
         ui.startUI();
+
     }
 }
 

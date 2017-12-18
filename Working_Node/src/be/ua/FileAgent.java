@@ -44,6 +44,10 @@ public class FileAgent extends Observable implements Runnable, Serializable {
         File[] replicationFiles = replicationFolder.listFiles();
         addToList(localFiles);
         addToList(replicationFiles);
+
+        //-----
+        //Al het bovenstaande moet niet, is voor testen van de gui
+
         return fileList;
     }
 }

@@ -37,10 +37,7 @@ public class Main {
         replication.setNodeName(nodeName);
         replication.getFiles();
 
-        System.out.println("HEREH");
         FileAgent FileAgent = new FileAgent();
-
-        
         Controller controller = new Controller(FileAgent);
         View view = new View(FileAgent);
         controller.createListeners(view);
@@ -48,7 +45,6 @@ public class Main {
         FileAgent.addObserver(controller);
 
         ui.startUI();
-
     }
 }
 

@@ -5,21 +5,17 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class RMIConnector {
 
     private NameServerInterface INameServer;
     public INode INode;//was private
-    //public static INode INodeNew;//was private
-
-    private int NodePort = 1098;
-    private String ipNameServer = "127.0.0.1"; //127.0.0.1
+    private int nodePort = 1098;
 
     public RMIConnector() { //to nameserver
         try {
             String name = "nodeNames";
-            INameServer = (NameServerInterface) Naming.lookup("//"+ipNameServer+"/"+name);
+            INameServer = (NameServerInterface) Naming.lookup("//"+Main.ipNameServer+"/"+name);
         } catch (Exception e) {
             System.out.println("No nameserver found.");
             e.printStackTrace();
@@ -36,10 +32,10 @@ public class RMIConnector {
                 System.setSecurityManager(new SecurityManager());
             }
             try {
-                Registry registry = LocateRegistry.getRegistry(NodePort);
+                Registry registry = LocateRegistry.getRegistry(nodePort);
                 registry.rebind(connName, INode);
             } catch (Exception e) {
-                Registry registry = LocateRegistry.createRegistry(NodePort);
+                Registry registry = LocateRegistry.createRegistry(nodePort);
                 registry.rebind(connName, INode);
             }
         } catch (Exception e) {
@@ -55,11 +51,11 @@ public class RMIConnector {
         boolean gettingConnection = true;
         while(gettingConnection) {
             try {
-                Registry registry = LocateRegistry.getRegistry(NodePort);               // --- LOCALHOST ---
-                INode INodeNew = (INode) registry.lookup(connName);                     // _________________
+                //Registry registry = LocateRegistry.getRegistry(nodePort);               // --- LOCALHOST ---
+                //INode INodeNew = (INode) registry.lookup(connName);                     // _________________
 
-                //String NodeIp = INameServer.getNodeIp(hash);                          // ---- NETWORK ----
-                //INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);     // _________________
+                String NodeIp = INameServer.getNodeIp(hash);                                // ---- NETWORK ----
+                INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);     // _________________
 
                 Main.nodeMap.put(hash, INodeNew);
                 INodeNew.addNodeToMap(Main.INode.getId(), Main.INode);

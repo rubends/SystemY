@@ -1,7 +1,6 @@
 package be.ua;
 
 import java.io.File;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;

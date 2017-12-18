@@ -21,7 +21,7 @@ public class Main {
         try{
             int hash = NameServerInterface.getHashOfName(nodeName);
             INode = new Node(hash, NameServerInterface);
-            new RMIConnector(NameServerInterface, nodeName);
+            new RMIConnector(NameServerInterface, nodeName, INode);
         }
         catch(Exception e){e.printStackTrace();}
 

@@ -68,6 +68,7 @@ public class Replication {
 
     public void toNextNode(int hashNextNode){ //Nieuwe node komt erbij
         File[] replicatedFiles = replicationFolder.listFiles();
+        File[] localFiles = localFolder.listFiles();
         try {
             String ipNextNode = INameServer.getNodeIp(hashNextNode);
             TCPSender tcpSender = new TCPSender(SOCKET_PORT);
@@ -75,12 +76,19 @@ public class Replication {
                 String ipOwner = INameServer.getFileIp(replicatedFiles[i].getName());
                 if(ipNextNode.equals(ipOwner)){
                     tcpSender.SendFile(ipNextNode, replicatedFiles[i].getAbsolutePath());
-                    //replicatedFiles[i].delete(); nodig?
-                    if(fileMap.containsKey(replicatedFiles[i].getName()))
-                    {
-                        //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
-                        passFiche(replicatedFiles[i].getName(),ipNextNode);
-                    }
+                    replicatedFiles[i].delete();
+                    passFiche(replicatedFiles[i].getName(),ipNextNode);
+//                    if(fileMap.containsKey(replicatedFiles[i].getName()))
+//                    {
+//                        //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
+//                    }
+                }
+            }
+            for (int i = 0; i < localFiles.length; i++) {
+                String ipOwner = INameServer.getFileIp(localFiles[i].getName());
+                if(ipNextNode.equals(ipOwner)){
+                    tcpSender.SendFile(ipNextNode, localFiles[i].getAbsolutePath());
+                    passFiche(localFiles[i].getName(),ipNextNode); //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
                 }
             }
         } catch (Exception e) {

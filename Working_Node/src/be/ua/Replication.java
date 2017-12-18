@@ -77,12 +77,12 @@ public class Replication {
                 String ipOwner = INameServer.getFileIp(replicatedFiles[i].getName());
                 if(ipNextNode.equals(ipOwner)){
                     tcpSender.SendFile(ipNextNode, replicatedFiles[i].getAbsolutePath());
-                    replicatedFiles[i].delete();
-                    passFiche(replicatedFiles[i].getName(),ipNextNode);
-//                    if(fileMap.containsKey(replicatedFiles[i].getName()))
-//                    {
-//                        //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
-//                    }
+                    if(fileMap.containsKey(replicatedFiles[i].getName()))
+                    {
+                        passFiche(replicatedFiles[i].getName(),ipNextNode);
+                        replicatedFiles[i].delete();
+                       //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
+                    }
                 }
             }
             for (int i = 0; i < localFiles.length; i++) {
@@ -161,6 +161,7 @@ public class Replication {
     public void passFiche(String file, String ownerIp){
         try {
             int hash = INameServer.getHashOfIp(ownerIp); //HIER MOET DE HASH OPGEHAALD WORDEN DIE BIJ IP HOORT?
+            System.out.println("file: " + file);
             System.out.println("getting file from filemap: " + fileMap.get(file).getFilename());
             fileMap.get(file).addLocation(ownerIp,hash);                  // add new owner to locations
             String newIp = INameServer.getNodeIp(hash);

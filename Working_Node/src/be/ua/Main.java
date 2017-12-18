@@ -36,8 +36,12 @@ public class Main {
         replication.getFiles();
 
         FileAgent fileAgent = new FileAgent();
-        Thread agentThread = new Thread(fileAgent);
-        agentThread.start(); //@todo voer RMIobject uit met deze agent oneindig lang doorheen het systeem van node naar node gaan
+        try {
+            //RMIAgent rmiAgent = new RMIAgent(INode, NameServerInterface);
+            //rmiAgent.passFileAgent(fileAgent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         ui.startUI();
     }

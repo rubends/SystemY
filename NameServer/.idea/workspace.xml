@@ -2,20 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8fd0497e-93eb-4adb-80d6-01022e3c198e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Working_Node/Files/Local/successR.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Working_Node/Files/Local/testR.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Working_Node/Files/Replication/textsam.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Working_Node/Files/Local/successRuben.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Working_Node/Files/Local/testRuben.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Working_Node/Files/Replication/successRuben.jpg" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/INode.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/INode.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Main.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Node.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Node.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/RMIConnector.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/RMIConnector.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/RMIAgent.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/RMIAgent.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Replication.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Replication.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/UserInterface.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/UserInterface.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/INode.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/INode.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Main.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Node.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Node.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/RMIConnector.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/RMIConnector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/RMIAgent.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/RMIAgent.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Replication.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Replication.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/UserInterface.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/UserInterface.java" />
     </list>
@@ -305,6 +305,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="974" height="1057" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />

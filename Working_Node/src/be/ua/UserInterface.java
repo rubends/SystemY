@@ -20,7 +20,7 @@ public class UserInterface {
             System.out.print("Choose Action:\n" +
                     "\t0. Shutdown\n" +
                     "\t1. Print neighbours\n" +
-                    "\t2. Print system file list\n" +
+                    "\t2. Print local file list\n" +
                     "\t3. Print file fiches\n" +
                     "\t4. Open file \n" +
                     "\t5. Delete file \n" +
@@ -47,7 +47,7 @@ public class UserInterface {
                 } else if (action == 3) {
                     if(Replication.fileMap.size() > 0) {
                         for (Map.Entry<String, FileMap> entry : Replication.fileMap.entrySet()) {
-                            System.out.println("File: " + entry.getKey() + " on location: " + entry.getValue().getIpOfLocation() + " with hash " + entry.getValue().getHashOfLocation());
+                            System.out.println("File: " + entry.getKey() + "/" + INameServer.getHashOfName(entry.getKey()) + " on location: " + entry.getValue().getIpOfLocation() + " with hash " + entry.getValue().getHashOfLocation());
                         }
                     } else {
                         System.out.println("No files found in the file fiches.");
@@ -128,9 +128,12 @@ public class UserInterface {
             INameServer.deleteNode(hash);
 
             FailureAgent failureAgent = new FailureAgent(hash, INameServer);
-            Thread agentThread = new Thread(failureAgent);
-            agentThread.start();
-            //@todo voer RMIobject uit met deze agent oneindig lang doorheen het systeem van node naar node gaan
+            try {
+                //RMIAgent rmiAgent = new RMIAgent(Main.INode, INameServer);
+                //rmiAgent.passFailureAgent(failureAgent);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } catch (Exception e) { e.printStackTrace(); }
     }
 }

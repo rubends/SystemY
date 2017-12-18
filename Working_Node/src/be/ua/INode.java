@@ -9,6 +9,8 @@ public interface INode extends Remote {
     void updatePrevNode(int newPrev) throws RemoteException;
     void updateNextNode(int newNext) throws RemoteException;
     int getId() throws RemoteException;
+    int getNextNode() throws RemoteException;
+    int getPrevNode() throws RemoteException;
     void nodeShutdownFiles(int hash) throws RemoteException;
     boolean hasFile(File file) throws RemoteException;
 

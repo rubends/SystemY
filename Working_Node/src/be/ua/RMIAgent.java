@@ -9,8 +9,8 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface{
     int nextNodeId;
     NameServerInterface ns;
 
-    public RMIAgent(Node node, NameServerInterface ns) throws RemoteException {
-        nextNodeId = node.mNext;
+    public RMIAgent(INode iNode, NameServerInterface ns) throws RemoteException {
+        nextNodeId = iNode.getNextNode();
         this.ns = ns;
     }
 

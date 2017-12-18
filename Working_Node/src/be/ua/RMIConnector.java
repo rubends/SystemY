@@ -10,7 +10,6 @@ public class RMIConnector {
 
     private NameServerInterface INameServer;
     public INode INode;//was private
-    private int nodePort = 1098;
 
     public RMIConnector() { //to nameserver
         try {
@@ -30,8 +29,8 @@ public class RMIConnector {
             if (System.getSecurityManager() == null) {
                 System.setSecurityManager(new SecurityManager());
             }
-            Registry registry = LocateRegistry.createRegistry(nodePort);
-            registry.bind(connName, iNode);
+            Registry registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+            registry.rebind(connName, iNode);
             System.out.println("Created own RMI server");
         } catch (Exception e) {
             System.err.println("Exception while setting up RMI:");
@@ -46,12 +45,11 @@ public class RMIConnector {
         boolean gettingConnection = true;
         while(gettingConnection) {
             try {
-                //Registry registry = LocateRegistry.getRegistry(nodePort);               // --- LOCALHOST ---
-                //INode INodeNew = (INode) registry.lookup(connName);                     // _________________
-                String NodeIp = INameServer.getNodeIp(hash);                                // ---- NETWORK ----
-                System.out.println("searching node " + hash + ", ip: " + NodeIp);
+                //Registry registry = LocateRegistry.getRegistry(nodePort);                     // --- LOCALHOST ---
+                //INode INodeNew = (INode) registry.lookup(connName);                           // _________________
+
+                String NodeIp = INameServer.getNodeIp(hash);                                    // ---- NETWORK ----
                 INode INodeNew = (INode) Naming.lookup("rmi://"+NodeIp+"/"+connName);     // _________________
-                System.out.println("got node");
                 Main.nodeMap.put(hash, INodeNew);
                 INodeNew.addNodeToMap(Main.INode.getId(), Main.INode);
                 Main.INode.addNodeToMap(hash, INodeNew);
@@ -59,7 +57,6 @@ public class RMIConnector {
                 INodeNew.updateNeighbours(ids.get(0), ids.get(1));
                 System.out.println("New node id: " + INodeNew.getId());
                 if(ids.get(0) == INameServer.getHashOfName(nodeName)){
-                    System.out.println("To next node");
                     Replication replication = new Replication(INameServer);
                     replication.toNextNode(hash);
                 }

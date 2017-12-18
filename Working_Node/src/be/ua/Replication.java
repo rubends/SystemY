@@ -157,7 +157,6 @@ public class Replication {
         catch(Exception e){}
     }
     public void passFiche(String file, String ownerIp){
-        //System.out.println("PASSFICHE OPEGROEPEN");
         try {
             int hash = INameServer.getHashOfIp(ownerIp);; //HIER MOET DE HASH OPGEHAALD WORDEN DIE BIJ IP HOORT?
             fileMap.get(file).addLocation(ownerIp,hash);                  // add new owner to locations

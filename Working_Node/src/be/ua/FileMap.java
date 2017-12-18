@@ -1,12 +1,13 @@
 package be.ua;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.TreeMap;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class FileMap {
+public class FileMap implements Serializable {
     private String filename;
     public HashMap<Integer, String> FileLocation = new HashMap<>();
 

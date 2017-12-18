@@ -49,10 +49,7 @@ public class RMIConnector {
                 //INode INodeNew = (INode) registry.lookup(connName);                           // _________________
 
                 String NodeIp = INameServer.getNodeIp(hash);                                    // ---- NETWORK ----
-                INode INodeNew = (INode) Naming.lookup("rmi://"+NodeIp+"/"+connName);     // _________________
-                Main.nodeMap.put(hash, INodeNew);
-                INodeNew.addNodeToMap(Main.INode.getId(), Main.INode);
-                Main.INode.addNodeToMap(hash, INodeNew);
+                INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);         // _________________
                 ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);
                 INodeNew.updateNeighbours(ids.get(0), ids.get(1));
                 System.out.println("New node id: " + INodeNew.getId());

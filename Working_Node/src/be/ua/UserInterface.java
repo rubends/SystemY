@@ -82,7 +82,7 @@ public class UserInterface {
             int nextHash = neighbours.get(1);
             if(prevHash != Node.nodeHash){
                 String prevIp = INameServer.getNodeIp(prevHash);
-                INode prevNode = (INode) Naming.lookup("//"+prevIp+"/"+Integer.toString(prevHash)); //todo NADENKEN OF DIT IN NODEMAP MOET OF NIET?
+                INode prevNode = (INode) Naming.lookup("//"+prevIp+"/"+Integer.toString(prevHash));
                 prevNode.updateNextNode(nextHash);
 
                 Replication replication = new Replication(INameServer);
@@ -106,11 +106,24 @@ public class UserInterface {
     public void failure(int hash){
         System.out.println("Node " + hash + " failed.");
         try {
-            ArrayList<Integer> failbourNodes = INameServer.getNeighbourNodes(hash);
-            INode prevNode = Main.nodeMap.get(failbourNodes.get(0));
-            prevNode.updateNextNode(failbourNodes.get(0));
-            INode nextNode = Main.nodeMap.get(failbourNodes.get(1));
-            nextNode.updatePrevNode(failbourNodes.get(2));
+            ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(hash);
+            int prevHash = neighbours.get(0);
+            int nextHash = neighbours.get(1);
+            if(prevHash != Node.nodeHash){
+                String prevIp = INameServer.getNodeIp(prevHash);
+                INode prevNode = (INode) Naming.lookup("//"+prevIp+"/"+Integer.toString(prevHash));
+                prevNode.updateNextNode(nextHash);
+            } else {
+                //update own next node
+            }
+            if(nextHash != Node.nodeHash)
+            {
+                String nextIp = INameServer.getNodeIp(nextHash);
+                INode nextNode = (INode) Naming.lookup("//"+nextIp+"/"+Integer.toString(nextHash));
+                nextNode.updatePrevNode(prevHash);
+            } else {
+                //update own prev node
+            }
 
             INameServer.deleteNode(hash);
 

@@ -117,6 +117,8 @@ public class Replication {
         }
         File[] localFiles = localFolder.listFiles();
         for (int i = 0; i < localFiles.length; i++) {
+            System.out.println("name: "+ localFiles[i].getName());
+            System.out.println("in map: "+ fileMap.get(localFiles[i].getName()));
             String nodeIp = fileMap.get(localFiles[i].getName()).getIpOfLocation();
             int nodeHash = fileMap.get(localFiles[i].getName()).getHashOfLocation();
 
@@ -144,12 +146,12 @@ public class Replication {
             for (File file : listOfFiles) {
                 if (file.isFile()) {
                     //file fiche aanmaken en toevoegen aan lijst
-                    FileMap f = new FileMap(file.getName(),"test",Main.INode.getId());
+                    FileMap f = new FileMap(file.getName(),INameServer.getNodeIp(Node.nodeHash),Main.INode.getId());
                     fileMap.put(file.getName(),f); // voeg toe aan eigen fichemap
                 }
             }
 
-            //System.out.println("fiches on startup <" +fileMap+ ">");
+            System.out.println("fiches on startup <" +fileMap+ ">");
             //fileMap.get("test7.txt").getIpOfLocation();
             //fileMap.get("test7.txt").getHashOfLocation();
             //fileMap.get("test7.txt").printLocation();
@@ -158,9 +160,11 @@ public class Replication {
     }
     public void passFiche(String file, String ownerIp){
         try {
-            int hash = INameServer.getHashOfIp(ownerIp);; //HIER MOET DE HASH OPGEHAALD WORDEN DIE BIJ IP HOORT?
+            int hash = INameServer.getHashOfIp(ownerIp); //HIER MOET DE HASH OPGEHAALD WORDEN DIE BIJ IP HOORT?
+            System.out.println("getting file from filemap: " + fileMap.get(file).getFilename());
             fileMap.get(file).addLocation(ownerIp,hash);                  // add new owner to locations
-            INode INodeNew = Main.nodeMap.get(hash);
+            String newIp = INameServer.getNodeIp(hash);
+            INode INodeNew = (INode) Naming.lookup("//"+newIp+"/"+Integer.toString(hash));
             INodeNew.sendFiche(fileMap.get(file));            // send fiche to new owner
             fileMap.remove(file); // remove fiche from own fichemap
         }

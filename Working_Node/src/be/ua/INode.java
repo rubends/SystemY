@@ -8,10 +8,8 @@ public interface INode extends Remote {
     void updateNeighbours(int newPrevious, int newNext) throws RemoteException;
     void updatePrevNode(int newPrev) throws RemoteException;
     void updateNextNode(int newNext) throws RemoteException;
-    void addNodeToMap(int hash, INode node) throws RemoteException;
     int getId() throws RemoteException;
     void nodeShutdownFiles(int hash) throws RemoteException;
-    void shutdown() throws RemoteException;
     boolean hasFile(File file) throws RemoteException;
 
 

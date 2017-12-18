@@ -42,7 +42,6 @@ public class Replication {
                 fiche.addLocation(ip, hash);
 
                 //nu fiche lokaal verwijderen ->is geen owner meer
-                //System.out.println("REPLICATION: deleting '"+ fiche.getFilename() +"' from fichemap and sending to '"+ip+"'");
                 String nodeIp = INameServer.getNodeIp(hash);
                 INode INodeNew = (INode) Naming.lookup("//"+nodeIp+"/"+Integer.toString(hash));
                 INodeNew.sendFiche(fiche);
@@ -52,14 +51,15 @@ public class Replication {
             } else {
                 ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(ownHash);
                 int neighbourHash = neighbours.get(0);
-                String prevIp = INameServer.getNodeIp(neighbourHash);
 
-                //System.out.println("REPLICATION: this node is owner sending to previous node: "+ filename + " " + ip);
-                FileMap fiche = fileMap.get(filename);
-                fiche.addLocation(ip, hash);
-                fileMap.put(filename, fiche);
+                if(ownHash != neighbourHash){
+                    String prevIp = INameServer.getNodeIp(neighbourHash);
+                    FileMap fiche = fileMap.get(filename);
+                    fiche.addLocation(ip, hash);
+                    fileMap.put(filename, fiche);
 
-                tcpSender.SendFile(prevIp, location);
+                    tcpSender.SendFile(prevIp, location);
+                }
             }
         } catch (Exception e){
             e.printStackTrace();

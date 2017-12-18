@@ -9,8 +9,8 @@ public class RMIConnector {
 
     public RMIConnector(NameServerInterface ns) {
         String registryName = "nodeNames";
+        System.setProperty("java.security.policy", "file:server.policy");
         if (System.getSecurityManager() == null) {
-            System.setProperty("java.security.policy", "file:server.policy");
             System.setSecurityManager(new SecurityManager());
         }
         try

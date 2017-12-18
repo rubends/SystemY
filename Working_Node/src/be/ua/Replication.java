@@ -44,6 +44,7 @@ public class Replication {
                 //nu fiche lokaal verwijderen ->is geen owner meer
                 String nodeIp = INameServer.getNodeIp(hash);
                 INode INodeNew = (INode) Naming.lookup("//"+nodeIp+"/"+Integer.toString(hash));
+                System.out.println("file replicated to " + nodeIp);
                 INodeNew.sendFiche(fiche);
                 fileMap.remove(filename);
 

@@ -6,7 +6,7 @@ import java.util.TreeMap;
 public class Main {
     public static INode INode;
     public static TreeMap<Integer, INode> nodeMap;
-    public static String ipNameServer = "169.254.84.38"; //127.0.0.1
+    public static String ipNameServer = "169.254.79.222"; //127.0.0.1
 
     public static void main(String[] args) {
         nodeMap = new TreeMap<>();

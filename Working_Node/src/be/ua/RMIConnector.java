@@ -26,17 +26,13 @@ public class RMIConnector {
         try {
             int hash = INameServer.getHashOfName(nodeName);
             String connName = Integer.toString(hash);
+            System.setProperty("java.security.policy", "file:server.policy");
             if (System.getSecurityManager() == null) {
-                System.setProperty("java.security.policy", "file:server.policy");
                 System.setSecurityManager(new SecurityManager());
             }
-            try {
-                Registry registry = LocateRegistry.getRegistry(nodePort);
-                registry.bind(connName, iNode);
-            } catch (Exception e) {
-                Registry registry = LocateRegistry.createRegistry(nodePort);
-                registry.bind(connName, iNode);
-            }
+            Registry registry = LocateRegistry.createRegistry(nodePort);
+            registry.bind(connName, iNode);
+            System.out.println("Created own RMI server");
         } catch (Exception e) {
             System.err.println("Exception while setting up RMI:");
             e.printStackTrace();
@@ -54,7 +50,7 @@ public class RMIConnector {
                 //INode INodeNew = (INode) registry.lookup(connName);                     // _________________
                 String NodeIp = INameServer.getNodeIp(hash);                                // ---- NETWORK ----
                 System.out.println("searching node " + hash + ", ip: " + NodeIp);
-                INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);     // _________________
+                INode INodeNew = (INode) Naming.lookup("rmi://"+NodeIp+"/"+connName);     // _________________
                 System.out.println("got node");
                 Main.nodeMap.put(hash, INodeNew);
                 INodeNew.addNodeToMap(Main.INode.getId(), Main.INode);

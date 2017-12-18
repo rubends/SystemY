@@ -22,7 +22,7 @@ public class RMIConnector {
         }
     }
 
-    public RMIConnector(NameServerInterface INameServer, String nodeName, int nodeCount) { //create own rmi
+    public RMIConnector(NameServerInterface INameServer, String nodeName) { //create own rmi
         try {
             int hash = INameServer.getHashOfName(nodeName);
             INode = Main.INode;

@@ -6,7 +6,7 @@ import java.util.TreeMap;
 public class Main {
     public static INode INode;
     public static TreeMap<Integer, INode> nodeMap;
-    public static String ipNameServer = "169.254.189.16"; //127.0.0.1
+    public static String ipNameServer = "169.254.84.38"; //127.0.0.1
 
     public static void main(String[] args) {
         nodeMap = new TreeMap<>();
@@ -21,8 +21,9 @@ public class Main {
         try{
             int hash = NameServerInterface.getHashOfName(nodeName);
             INode = new Node(hash, NameServerInterface);
+            new RMIConnector(NameServerInterface, nodeName);
         }
-        catch(Exception e){}
+        catch(Exception e){e.printStackTrace();}
 
         MulticastThread multicastThread = new MulticastThread(nodeName, NameServerInterface);
         multicastThread.start();

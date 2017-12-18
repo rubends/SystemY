@@ -42,8 +42,6 @@ public class MulticastThread extends Thread{
             String nodeCountS = new String(buf, 0, nodeCountPacket.getLength());
             nodeCount = Integer.parseInt(nodeCountS);
             Dsocket.close();
-            //setup RMI connection
-            setupRMI(name, nodeCount);
             //listen to new nodes
             while(true){
                 byte[] bufN = new byte[1000];
@@ -60,13 +58,9 @@ public class MulticastThread extends Thread{
         }
     }
 
-    private void setupRMI(String nodeName, int nodeCount) throws NotBoundException {
-        RMIConnector connectorNode = new RMIConnector(INameServer, nodeName, nodeCount);
-    }
-
     private void listenNodeRMi(String newName, String name) {
         try{
-            RMIConnector connector = new RMIConnector(INameServer, newName, name);
+            new RMIConnector(INameServer, newName, name);
         }
         catch (RemoteException e){
             e.printStackTrace();

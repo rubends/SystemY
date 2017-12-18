@@ -63,10 +63,6 @@ public class Node extends UnicastRemoteObject implements INode{
         Main.nodeMap.put(hash, node);
     }
 
-    private void setupRMI(String nodeName, int nodeCount) throws NotBoundException {
-        RMIConnector connectorNode = new RMIConnector(INameServer, nodeName, nodeCount);
-    }
-
     public void nodeShutdownFiles(int hash) {
         //@todo replication shutdown: update in filemap dat de eigenaar van 'hash' er niet meer is
         //updateFiche( fileName,  hash,  ipLocation)

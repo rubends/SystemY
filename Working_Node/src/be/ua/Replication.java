@@ -76,12 +76,14 @@ public class Replication {
             for (int i = 0; i < replicatedFiles.length; i++) {
                 String ipOwner = INameServer.getFileIp(replicatedFiles[i].getName());
                 if(ipNextNode.equals(ipOwner)){
-                    tcpSender.SendFile(ipNextNode, replicatedFiles[i].getAbsolutePath());
-                    if(fileMap.containsKey(replicatedFiles[i].getName()))
-                    {
-                        passFiche(replicatedFiles[i].getName(),ipNextNode);
-                        replicatedFiles[i].delete();
-                       //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
+                    INode NextNode = (INode) Naming.lookup("//"+ipNextNode+"/"+Integer.toString(hashNextNode));
+                    if(!NextNode.hasFile(replicatedFiles[i])) { //if next node doesnt have the file already (locally)
+                        tcpSender.SendFile(ipNextNode, replicatedFiles[i].getAbsolutePath()); //todo: NIET TERUG STUREN NAAR DE OG EIGENAAR
+                        if (fileMap.containsKey(replicatedFiles[i].getName())) {
+                            passFiche(replicatedFiles[i].getName(), ipNextNode);
+                            replicatedFiles[i].delete();
+                            //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
+                        }
                     }
                 }
             }

@@ -22,8 +22,9 @@ public class Node extends UnicastRemoteObject implements INode{
         super();
         mId = mPrevious = mNext = nodeHash = hash;
         INameServer = ns;
-        Comparator<File> fileListComp = Comparator.comparing(File::getName); // compares the file in de treemap by name
-        fileList = new TreeMap<>(fileListComp);
+        //Comparator<File> fileListComp = Comparator.comparing(File::getName); // compares the file in de treemap by name
+        //fileList = new TreeMap<>(fileListComp);
+        fileList = new TreeMap<>();
     }
 
     public void updateNeighbours(int newPrevious, int newNext)
@@ -75,9 +76,9 @@ public class Node extends UnicastRemoteObject implements INode{
         }
     }
 
-    public boolean hasFile(File file){
+    public boolean hasFile(String fileName){
         boolean hasFile = false;
-        if(fileList.containsKey(file)){
+        if(Replication.fileMap.containsKey(fileName)){
             hasFile = true;
         }
         return hasFile;

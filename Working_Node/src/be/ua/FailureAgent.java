@@ -36,7 +36,7 @@ public class FailureAgent implements Runnable, Serializable {
                     int newOwner = INameServer.getNeighbourNodes(failureNode).get(0);
                     String newOwnerIP = INameServer.getNodeIp(newOwner);
                     INode newOwnerNode = (INode) Naming.lookup("//" + newOwnerIP + "/" + newOwner);
-                    if(!newOwnerNode.hasFile(file)){
+                    if(!newOwnerNode.hasFile(name)){
                         TCPSender tcpSender = new TCPSender(SOCKET_PORT);
                         tcpSender.SendFile(newOwnerIP, file.getAbsolutePath());
                     }

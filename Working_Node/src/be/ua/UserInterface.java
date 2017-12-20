@@ -33,9 +33,8 @@ public class UserInterface {
                 if (action == 0) {
                     Main.INode.shutdown();
                 } else if (action == 1) {
-                    ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(Node.nodeHash);
-                    System.out.println("previous node: " + neighbours.get(0));
-                    System.out.println("next node: " + neighbours.get(1));
+                    System.out.println("previous node: " + Main.INode.getPrevNode());
+                    System.out.println("next node: " + Main.INode.getNextNode());
                 } else if (action == 2) {
                     if(Node.fileList.size() > 0) {
                         for (Map.Entry<File, Boolean> entry : Node.fileList.entrySet()) {

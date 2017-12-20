@@ -33,9 +33,9 @@ public class UserInterface {
                 if (action == 0) {
                     shutdown();
                 } else if (action == 1) {
-                    ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(Node.nodeHash);
-                    System.out.println("previous node: " + neighbours.get(0));
-                    System.out.println("next node: " + neighbours.get(1));
+                    //ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(Node.nodeHash);
+                    System.out.println("previous node: " + Main.INode.getNextNode());
+                    System.out.println("next node: " + Main.INode.getNextNode());
                 } else if (action == 2) {
                     if(Node.fileList.size() > 0) {
                         for (Map.Entry<File, Boolean> entry : Node.fileList.entrySet()) {
@@ -77,9 +77,9 @@ public class UserInterface {
     public void shutdown(){
         System.out.println("Shutting down node");
         try {
-            ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(Node.nodeHash);
-            int prevHash = neighbours.get(0);
-            int nextHash = neighbours.get(1);
+            //ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(Node.nodeHash);
+            int prevHash = Main.INode.getPrevNode();
+            int nextHash = Main.INode.getNextNode();
             if(prevHash != Node.nodeHash){
                 String prevIp = INameServer.getNodeIp(prevHash);
                 INode prevNode = (INode) Naming.lookup("//"+prevIp+"/"+Integer.toString(prevHash));

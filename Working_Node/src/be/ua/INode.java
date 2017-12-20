@@ -12,7 +12,7 @@ public interface INode extends Remote {
     int getNextNode() throws RemoteException;
     int getPrevNode() throws RemoteException;
     void nodeShutdownFiles(int hash) throws RemoteException;
-    boolean hasFile(File file) throws RemoteException;
+    boolean hasFile(String fileName) throws RemoteException;
 
 
     void sendFiche(FileMap fiche) throws RemoteException;

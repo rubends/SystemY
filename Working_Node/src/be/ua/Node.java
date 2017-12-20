@@ -74,9 +74,9 @@ public class Node extends UnicastRemoteObject implements INode{
         }
     }
 
-    public boolean hasFile(File file){
+    public boolean hasFile(String fileName){
         boolean hasFile = false;
-        if(Replication.fileMap.containsKey(file)){
+        if(Replication.fileMap.containsKey(fileName)){
             hasFile = true;
         }
         return hasFile;

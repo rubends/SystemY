@@ -50,8 +50,8 @@ public class Replication {
 
                 tcpSender.SendFile(ip, location);
             } else {
-                ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(ownHash);
-                int neighbourHash = neighbours.get(0);
+                //ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(ownHash);
+                int neighbourHash = Main.INode.getPrevNode();
 
                 if(ownHash != neighbourHash){
                     String prevIp = INameServer.getNodeIp(neighbourHash);
@@ -72,14 +72,15 @@ public class Replication {
         File[] localFiles = localFolder.listFiles();
         try {
             String ipNextNode = INameServer.getNodeIp(hashNextNode);
+            String ownIp = INameServer.getNodeIp(Main.INode.getId());
             System.out.println("REPLICATION ip sam: " + ipNextNode);
             TCPSender tcpSender = new TCPSender(SOCKET_PORT);
             for (int i = 0; i < replicatedFiles.length; i++) {
                 String ipOwner = INameServer.getFileIp(replicatedFiles[i].getName());
                 if(ipNextNode.equals(ipOwner)){
                     INode NextNode = (INode) Naming.lookup("//"+ipNextNode+"/"+Integer.toString(hashNextNode));
-                    if(!NextNode.hasFile(replicatedFiles[i])) { //if next node doesnt have the file already (locally)
-                        System.out.println("REPLICATION sending replicated file: " + replicatedFiles[i].getName());
+                    if(!NextNode.hasFile(replicatedFiles[i].getName())) { //if next node doesnt have the file already
+                        System.out.println("REPLICATION sending replicated file: " + replicatedFiles[i].getName() + " to " + ipNextNode + " if it equals " + ipOwner);
                         tcpSender.SendFile(ipNextNode, replicatedFiles[i].getAbsolutePath());
                         if (fileMap.containsKey(replicatedFiles[i].getName())) {
                             passFiche(replicatedFiles[i].getName(), ipNextNode);
@@ -92,9 +93,15 @@ public class Replication {
             for (int i = 0; i < localFiles.length; i++) {
                 String ipOwner = INameServer.getFileIp(localFiles[i].getName());
                 if(ipNextNode.equals(ipOwner)){
-                    System.out.println("REPLICATION sending local file: " + localFiles[i].getName());
+                    System.out.println("REPLICATION sending local file: " + localFiles[i].getName() + " to " + ipNextNode + " if it equals " + ipOwner);
                     tcpSender.SendFile(ipNextNode, localFiles[i].getAbsolutePath());
                     passFiche(localFiles[i].getName(),ipNextNode); //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
+                } else if (ownIp.equals(ipOwner)) { // !!!! WHEN LOCAL FILES ARE BELONGING TO OWN NODE, THEY ARE REPLICATED TO NEW NODE
+                    String prevIp = INameServer.getNodeIp(Main.INode.getPrevNode());
+                    System.out.println("REPLICATION sending local file: " + localFiles[i].getName() + " to " + prevIp);
+                    tcpSender.SendFile(prevIp, localFiles[i].getAbsolutePath());
+                    passFiche(localFiles[i].getName(),prevIp);
+                    //if Ip is from own node, send to prev node
                 }
             }
         } catch (Exception e) {

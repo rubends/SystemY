@@ -1,7 +1,6 @@
 package be.ua;
 
 import java.io.File;
-import java.rmi.Naming;
 import java.util.*;
 import java.lang.String;
 

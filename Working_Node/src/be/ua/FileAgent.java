@@ -2,7 +2,6 @@ package be.ua;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.TreeMap;
 
 public class FileAgent implements Runnable, Serializable {
 

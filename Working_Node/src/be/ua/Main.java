@@ -38,14 +38,20 @@ public class Main {
         replication.setNodeName(nodeName);
         replication.getFiles();
 
+
+        //implementation of agents
+        /*
         FileAgent fileAgent = new FileAgent();
         try {
-           // RMIAgent rmiAgent = new RMIAgent(INode, NameServerInterface);
-           // rmiAgent.passFileAgent(fileAgent);
+            RMIAgentInterface rmiAgent = (RMIAgentInterface) new RMIAgent(INode, NameServerInterface);
+            System.out.println(rmiAgent);
+            connector.bindRMIAgent(rmiAgent);
+            rmiAgent.passFileAgent(fileAgent);
 
         } catch (Exception e) {
+            System.out.println("Agents created error:");
             e.printStackTrace();
-        }
+        }*/
 
         ui.startUI();
     }

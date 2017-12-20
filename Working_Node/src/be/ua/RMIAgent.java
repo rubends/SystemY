@@ -7,10 +7,12 @@ import java.rmi.server.UnicastRemoteObject;
 public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface{
 
     int nextNodeId;
+    int myNodeId;
     NameServerInterface ns;
 
     public RMIAgent(INode iNode, NameServerInterface ns) throws RemoteException {
         nextNodeId = iNode.getNextNode();
+        myNodeId = iNode.getId();
         this.ns = ns;
     }
 
@@ -27,6 +29,7 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface{
 
     public void passFileAgent(FileAgent fileAgent){
         try {
+
             System.out.println("RMI-AGENT: File agent passing to " + ns.getNodeIp(nextNodeId));
             RMIAgentInterface rmiAgent = (RMIAgentInterface) Naming.lookup( "//"+ ns.getNodeIp(nextNodeId)+"/RMIAgent");
             FileAgent passedAgent = rmiAgent.startFileAgent(fileAgent);
@@ -54,7 +57,7 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface{
         try {
             if((nextNodeId != failureAgent.agentNode)){
                 System.out.println("RMI-AGENT: Failure-agent passing to " + ns.getNodeIp(nextNodeId));
-                RMIAgentInterface rmiAgent = (RMIAgentInterface) Naming.lookup( "//"+ ns.getNodeIp(nextNodeId)+"/AgentRMI");
+                RMIAgentInterface rmiAgent = (RMIAgentInterface) Naming.lookup( "//"+ ns.getNodeIp(nextNodeId)+"/RMIAgent");
                 FailureAgent passedAgent = rmiAgent.startFailureAgent(failureAgent);
                 rmiAgent.passFailureAgent(passedAgent);
             }
@@ -65,5 +68,14 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "RMIAgent{" +
+                "nextNodeId=" + nextNodeId +
+                ", myNodeId=" + myNodeId +
+                ", ns=" + ns +
+                '}';
     }
 }

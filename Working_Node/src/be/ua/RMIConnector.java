@@ -50,7 +50,7 @@ public class RMIConnector {
 
                 String NodeIp = INameServer.getNodeIp(hash);                                    // ---- NETWORK ----
                 INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);         // _________________
-                updateNewNode(INodeNew, hash);
+                updateNewNode(INameServer, INodeNew, hash);
                 System.out.println("New node id: " + INodeNew.getId());
                 gettingConnection = false;
             } catch (Exception e) {
@@ -59,15 +59,15 @@ public class RMIConnector {
         }
     }
 
-    private void updateNewNode(INode INodeNew, int hash){
+    private void updateNewNode(NameServerInterface INameServer, INode INodeNew, int hash){
         try {
-            if (INodeNew.getPrevNode() == Main.INode.getId()) {
-                Replication replication = new Replication(INameServer);
-                replication.toNextNode(hash);
-                Main.INode.updateNextNode(INodeNew.getId());
-            }
             if (INodeNew.getNextNode() == Main.INode.getId()) {
                 Main.INode.updatePrevNode(INodeNew.getId());
+            }
+            if (INodeNew.getPrevNode() == Main.INode.getId()) {
+                Main.INode.updateNextNode(INodeNew.getId());
+                Replication replication = new Replication(INameServer);
+                replication.toNextNode(hash);
             }
         } catch (Exception e){ e.printStackTrace(); }
     }

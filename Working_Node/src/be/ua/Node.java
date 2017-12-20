@@ -1,8 +1,10 @@
 package be.ua;
 
 import java.io.File;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.TreeMap;
 
@@ -82,4 +84,68 @@ public class Node extends UnicastRemoteObject implements INode{
         return hasFile;
     }
 
+    public void shutdown() throws RemoteException{
+        System.out.println("Shutting down node...");
+        try {
+            int prevHash = mPrevious;
+            int nextHash = mNext;
+
+            //inform previous node + replicate files to previous node
+            if(prevHash != Node.nodeHash){
+                String prevIp = INameServer.getNodeIp(prevHash);
+                INode prevNode = (INode) Naming.lookup("//"+prevIp+"/"+Integer.toString(prevHash));
+                prevNode.updateNextNode(nextHash);
+
+                Replication replication = new Replication(INameServer);
+                replication.toPrevNode(prevHash);
+            }
+
+            //inform next node
+            if(nextHash != Node.nodeHash)
+            {
+                String nextIp = INameServer.getNodeIp(nextHash);
+                INode nextNode = (INode) Naming.lookup("//"+nextIp+"/"+Integer.toString(nextHash));
+                nextNode.updatePrevNode(prevHash);
+            }
+
+            INameServer.deleteNode(Node.nodeHash);
+            System.exit(0);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void failure(int hashOfFailedNode) throws RemoteException{
+        System.out.println("Node " + mId + " is taking care of node " + hashOfFailedNode + " that failed.");
+        try {
+            ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(hashOfFailedNode);
+            int prevHashOfFailedNode = neighbours.get(0);
+            int nextHashOfFailedNode = neighbours.get(1);
+
+            //node lifecycle
+            if(prevHashOfFailedNode != Node.nodeHash){ //check that previous node of the failed node is not you
+                String prevIp = INameServer.getNodeIp(prevHashOfFailedNode);
+                INode prevNode = (INode) Naming.lookup("//"+prevIp+"/"+Integer.toString(prevHashOfFailedNode));
+                prevNode.updateNextNode(nextHashOfFailedNode);
+            } else {
+                updateNextNode(nextHashOfFailedNode);
+            }
+            if(nextHashOfFailedNode != Node.nodeHash) //check that next node of the failed node is not you
+            {
+                String nextIp = INameServer.getNodeIp(nextHashOfFailedNode);
+                INode nextNode = (INode) Naming.lookup("//"+nextIp+"/"+Integer.toString(nextHashOfFailedNode));
+                nextNode.updatePrevNode(prevHashOfFailedNode);
+            } else {
+                updatePrevNode(prevHashOfFailedNode);
+            }
+            INameServer.deleteNode(hashOfFailedNode);
+
+            //start agent
+            FailureAgent failureAgent = new FailureAgent(hashOfFailedNode, INameServer);
+            RMIAgent rmiAgent = new RMIAgent(Main.INode, INameServer);
+            rmiAgent.passFailureAgent(failureAgent);
+
+        } catch (Exception e) { e.printStackTrace(); }
+    }
 }

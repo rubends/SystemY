@@ -40,8 +40,9 @@ public class Main {
 
         FileAgent fileAgent = new FileAgent();
         try {
-            //RMIAgent rmiAgent = new RMIAgent(INode, NameServerInterface);
-            //rmiAgent.passFileAgent(fileAgent);
+           // RMIAgent rmiAgent = new RMIAgent(INode, NameServerInterface);
+           // rmiAgent.passFileAgent(fileAgent);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

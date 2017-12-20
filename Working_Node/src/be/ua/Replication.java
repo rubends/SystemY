@@ -87,6 +87,7 @@ public class Replication {
                             passFiche(replicatedFiles[i].getName(), ipNextNode);
                             if (replicatedFiles[i].isFile()) replicatedFiles[i].delete();
                             //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
+                            fileMap.remove(replicatedFiles[i].getName()); // remove fiche from own fichemap
                         }
                     }
                 } else if (prevIp.equals(ipOwner)) { //files die op deze node staan, omdat hun hash overeen komt met de node waar ze lokaal op stonden, moeten ook gecheckt worden
@@ -179,7 +180,6 @@ public class Replication {
             String newIp = INameServer.getNodeIp(hash);
             INode INodeNew = (INode) Naming.lookup("//"+newIp+"/"+Integer.toString(hash));
             INodeNew.sendFiche(fileMap.get(file));            // send fiche to new owner
-            fileMap.remove(file); // remove fiche from own fichemap
         }
         catch(Exception e){
             e.printStackTrace();

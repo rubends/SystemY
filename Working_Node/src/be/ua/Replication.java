@@ -85,7 +85,7 @@ public class Replication {
                         tcpSender.SendFile(ipNextNode, replicatedFiles[i].getAbsolutePath());
                         if (fileMap.containsKey(replicatedFiles[i].getName())) {
                             passFiche(replicatedFiles[i].getName(), ipNextNode);
-                            boolean deleted = replicatedFiles[i].delete();
+                            if (replicatedFiles[i].isFile()) replicatedFiles[i].delete();
                             //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
                         }
                     }
@@ -121,7 +121,7 @@ public class Replication {
                     ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(hashPrevNode);
                     String ipPrevPrevNode = INameServer.getNodeIp(neighbours.get(0));
                     tcpSender.SendFile(ipPrevPrevNode, replicatedFiles[i].getAbsolutePath());
-                    boolean deleted = replicatedFiles[i].delete();
+                    if (replicatedFiles[i].isFile()) replicatedFiles[i].delete();
                 } else {
                     tcpSender.SendFile(ipPrevNode, replicatedFiles[i].getAbsolutePath());
                 }

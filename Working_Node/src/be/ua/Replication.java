@@ -44,7 +44,7 @@ public class Replication {
                 //nu fiche lokaal verwijderen ->is geen owner meer
                 String nodeIp = INameServer.getNodeIp(hash);
                 INode INodeNew = (INode) Naming.lookup("//"+nodeIp+"/"+Integer.toString(hash));
-                System.out.println("file replicated to " + nodeIp);
+                System.out.println("REPLICATION file replicated to " + nodeIp);
                 INodeNew.sendFiche(fiche);
                 fileMap.remove(filename);
 
@@ -72,13 +72,15 @@ public class Replication {
         File[] localFiles = localFolder.listFiles();
         try {
             String ipNextNode = INameServer.getNodeIp(hashNextNode);
+            System.out.println("REPLICATION ip sam: " + ipNextNode);
             TCPSender tcpSender = new TCPSender(SOCKET_PORT);
             for (int i = 0; i < replicatedFiles.length; i++) {
                 String ipOwner = INameServer.getFileIp(replicatedFiles[i].getName());
                 if(ipNextNode.equals(ipOwner)){
                     INode NextNode = (INode) Naming.lookup("//"+ipNextNode+"/"+Integer.toString(hashNextNode));
                     if(!NextNode.hasFile(replicatedFiles[i])) { //if next node doesnt have the file already (locally)
-                        tcpSender.SendFile(ipNextNode, replicatedFiles[i].getAbsolutePath()); //todo: NIET TERUG STUREN NAAR DE OG EIGENAAR
+                        System.out.println("REPLICATION sending replicated file: " + replicatedFiles[i].getName());
+                        tcpSender.SendFile(ipNextNode, replicatedFiles[i].getAbsolutePath());
                         if (fileMap.containsKey(replicatedFiles[i].getName())) {
                             passFiche(replicatedFiles[i].getName(), ipNextNode);
                             replicatedFiles[i].delete();
@@ -90,6 +92,7 @@ public class Replication {
             for (int i = 0; i < localFiles.length; i++) {
                 String ipOwner = INameServer.getFileIp(localFiles[i].getName());
                 if(ipNextNode.equals(ipOwner)){
+                    System.out.println("REPLICATION sending local file: " + localFiles[i].getName());
                     tcpSender.SendFile(ipNextNode, localFiles[i].getAbsolutePath());
                     passFiche(localFiles[i].getName(),ipNextNode); //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
                 }
@@ -119,8 +122,8 @@ public class Replication {
         }
         File[] localFiles = localFolder.listFiles();
         for (int i = 0; i < localFiles.length; i++) {
-            System.out.println("name: "+ localFiles[i].getName());
-            System.out.println("in map: "+ fileMap.get(localFiles[i].getName()));
+            System.out.println("REPLICATION name: "+ localFiles[i].getName());
+            System.out.println("REPLICATION in map: "+ fileMap.get(localFiles[i].getName()));
             String nodeIp = fileMap.get(localFiles[i].getName()).getIpOfLocation();
             int nodeHash = fileMap.get(localFiles[i].getName()).getHashOfLocation();
 
@@ -153,7 +156,7 @@ public class Replication {
                 }
             }
 
-            System.out.println("fiches on startup <" +fileMap+ ">");
+            System.out.println("REPLICATION fiches on startup <" +fileMap+ ">");
             //fileMap.get("test7.txt").getIpOfLocation();
             //fileMap.get("test7.txt").getHashOfLocation();
             //fileMap.get("test7.txt").printLocation();
@@ -163,8 +166,6 @@ public class Replication {
     public void passFiche(String file, String ownerIp){
         try {
             int hash = INameServer.getHashOfIp(ownerIp); //HIER MOET DE HASH OPGEHAALD WORDEN DIE BIJ IP HOORT?
-            System.out.println("file: " + file);
-            System.out.println("getting file from filemap: " + fileMap.get(file).getFilename());
             fileMap.get(file).addLocation(ownerIp,hash);                  // add new owner to locations
             String newIp = INameServer.getNodeIp(hash);
             INode INodeNew = (INode) Naming.lookup("//"+newIp+"/"+Integer.toString(hash));

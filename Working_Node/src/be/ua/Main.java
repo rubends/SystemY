@@ -1,17 +1,59 @@
 package be.ua;
 
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
+    public static INode INode;
+    public static String ipNameServer = "169.254.254.168"; //127.0.0.1
 
     public static void main(String[] args) {
-        if(args.length>0) {
-            UserInterface ui = new UserInterface(args[0]);
+        RMIConnector connector = new RMIConnector();
+        NameServerInterface NameServerInterface = connector.getNameServer();
+
+        UserInterface ui = new UserInterface(NameServerInterface);
+
+        System.out.println("\t Enter the name for the new node");
+        System.out.print("> ");
+        String nodeName = new Scanner(System.in).next();
+        try{
+            int hash = NameServerInterface.getHashOfName(nodeName);
+            INode = new Node(hash, NameServerInterface);
+            ArrayList<Integer> ids = NameServerInterface.getNeighbourNodes(hash); //get own neighbours
+            INode.updateNeighbours(ids.get(0), ids.get(1));
+            new RMIConnector(NameServerInterface, nodeName, INode);
         }
-        else {
-            //default
-            UserInterface ui = new UserInterface("127.0.0.1");
-        }
+        catch(Exception e){e.printStackTrace();}
+
+        MulticastThread multicastThread = new MulticastThread(nodeName, NameServerInterface);
+        multicastThread.start();
+
+        TCPReceiverThread tcpReceiverThread = new TCPReceiverThread();
+        tcpReceiverThread.start();
+        UpdateFileMapThread updateFileMapThread = new UpdateFileMapThread(nodeName, NameServerInterface);
+        updateFileMapThread.start();
+
+        Replication replication = new Replication(NameServerInterface);
+        replication.createFicheOnStartup();// Moet voor get files gebeuren
+        replication.setNodeName(nodeName);
+        replication.getFiles();
+
+
+        //implementation of agents
+        /*
+        FileAgent fileAgent = new FileAgent();
+        try {
+            RMIAgentInterface rmiAgent = (RMIAgentInterface) new RMIAgent(INode, NameServerInterface);
+            System.out.println(rmiAgent);
+            connector.bindRMIAgent(rmiAgent);
+            rmiAgent.passFileAgent(fileAgent);
+
+        } catch (Exception e) {
+            System.out.println("Agents created error:");
+            e.printStackTrace();
+        }*/
+
+        ui.startUI();
     }
 }
+

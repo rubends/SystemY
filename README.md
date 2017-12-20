@@ -1,9 +1,14 @@
 # SystemY
+A java distributed file system
 
-Made by
+## Set up
+Node
+- Main.java: Put the right nameserver IP adres in the variable.
+
+##Made by
 - Ruben De Swaef
-	- Name Server: RMI server
+	- RMI server, Multicast, RMI-connection between nodes, Failure, Replication startup and shutdown, Agents, User Interface
 - Sam Peetermans
-	- Name Server: RMI client
+	- RMI client, Node order, Node interface, Replication previous node, file fiche, documentation, GUI
 - Stijn Dirickx
-	- Name server: Node mapping
+	- Node list mapping, Node placement, Node Shutdown, TCP connection, testing, Replication update, Agent RMI

@@ -5,16 +5,16 @@ import java.io.FileInputStream;
 import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class NameServer implements NameServerInterface {
+public class NameServer extends UnicastRemoteObject implements NameServerInterface {
 
     private TreeMap<Integer, String> nodeMap;
+
 
     protected NameServer() throws RemoteException
     {
@@ -24,6 +24,7 @@ public class NameServer implements NameServerInterface {
 
     public String getFileIp(String fileName) throws RemoteException
     {
+        while(nodeMap.size() < 1){}//no nodes in nodeMap
         int hash = getHashOfName(fileName);
         int mapKey = 0;
 
@@ -32,7 +33,6 @@ public class NameServer implements NameServerInterface {
         {
             mapKey = nodeMap.lastKey();                         //then it goes to the last node
         }
-
         while (keys.hasNext())
         {
             Map.Entry<Integer, String> key = keys.next();
@@ -42,23 +42,40 @@ public class NameServer implements NameServerInterface {
                 mapKey = keyHash;
             }
         }
-        System.out.println("IP of node: " + nodeMap.get(mapKey) + "\n");
+        System.out.println("Filename: '" + fileName + "' is located at the node with IP: " + nodeMap.get(mapKey) + "\n");
         return nodeMap.get(mapKey);
     }
 
-    public void loadTreeMap()
-    {
+    public void loadTreeMap() {
         FileInputStream fs;
         ObjectInputStream is;
-        try
-        {
+        try {
             fs = new FileInputStream("./nodeMap.ser");
             is = new ObjectInputStream(fs);
             nodeMap = (TreeMap<Integer, String>) is.readObject();
             fs.close();
             is.close();
 
-        }catch(Exception e){}
+        } catch (Exception e) {
+        }
+    }
+
+    public int getHashOfIp(String IP) throws RemoteException
+    {
+        int hash = 0;
+        Iterator<Map.Entry<Integer, String>> keys = nodeMap.entrySet().iterator();
+
+        while (keys.hasNext())
+        {
+            Map.Entry<Integer, String> key = keys.next();
+            int keyHash = key.getKey();
+            if(IP.equals(nodeMap.get(keyHash)))
+            {
+                hash = keyHash;
+            }
+        }
+        //System.out.println("IP: "+IP+ " has hash: " + hash + "\n");
+        return hash;
     }
 
     public void addNode(String nodeName, String nodeIP)
@@ -70,7 +87,7 @@ public class NameServer implements NameServerInterface {
                 ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("./nodeMap.ser"));
                 out.writeObject(nodeMap);
                 out.close();
-                System.out.println("Succesfully added: " + nodeName);
+                System.out.println("Succesfully added: " + nodeName + " (" + hash+")");
             } else {
                 System.out.println("This node already exists: "+ nodeName);
             }
@@ -79,19 +96,22 @@ public class NameServer implements NameServerInterface {
             e.printStackTrace();
         }
     }
-
-    public void deleteNode(String nodeName)
+    public String getNodeIp(int hash)
+    {
+        String nodeIP = nodeMap.get(hash);
+        return nodeIP;
+    }
+    public void deleteNode(int hash)
     {
         try {
-            int hash = getHashOfName(nodeName);
             if (nodeMap.get(hash) != null) {                    //the to be deleted file exists
                 nodeMap.remove(hash);
                 ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("./nodeMap.ser"));
                 out.writeObject(nodeMap);
                 out.close();
-                System.out.println("Succesfully deleted: " + nodeName);
+                System.out.println("Succesfully deleted: " + hash);
             }else  {
-                System.out.println("This node doesn't exist and therefore can't be deleted: " + nodeName);
+                System.out.println("This node doesn't exist and therefore can't be deleted: " + hash);
             }
         }
         catch( Exception e){
@@ -108,34 +128,56 @@ public class NameServer implements NameServerInterface {
             int key = keySetIterator.next();
             System.out.println("Hash: " + key + "\tIP: " + nodeMap.get(key));
         }
+        System.out.println(); //extra line for clean format
     }
 
-    public static int getHashOfName(String name) {
+    public int getNodeCount()
+    {
+        int nodeCount = nodeMap.size();
+        System.out.println("Number of nodes: " + nodeCount);
+        return nodeCount;
+    }
+
+    public int getHashOfName(String name) {
         return Math.abs(name.hashCode() % 32769);
     }
 
-    public static void main(String[] args)
-    {
-        String registryName = "nodeNames";
-        if (System.getSecurityManager() == null) {
-            System.setProperty("java.security.policy", "file:src/server.policy");
-            System.setProperty("java.rmi.server.hostname", "127.0.0.1");
-            System.setSecurityManager(new SecurityManager());
+    public ArrayList<Integer> getNeighbourNodes(int hash) throws RemoteException{
+        ArrayList<Integer> neighbours = new ArrayList<>();
+
+        //hash is the first node
+        if (nodeMap.lowerKey(hash) == null && nodeMap.higherKey(hash) != null){
+            neighbours.add(getLastId());
+            neighbours.add(nodeMap.higherKey(hash));
         }
-        try
-        {
-            NameServerInterface ns = new NameServer();
-            NameServerInterface stub = (NameServerInterface) UnicastRemoteObject.exportObject(ns, 0);
-            Registry registry = LocateRegistry.createRegistry(1099);
-            registry.bind(registryName, stub);
-            System.out.println("Nameserver bound");
+
+        //hash is the last node
+        else if(nodeMap.lowerKey(hash) != null && nodeMap.higherKey(hash) == null){
+            neighbours.add(nodeMap.lowerKey(hash));
+            neighbours.add(getFirstId());
+        }
+
+        //hash is the only node
+        else if(nodeMap.lowerKey(hash) == null && nodeMap.higherKey(hash) == null){
+            neighbours.add(hash);
+            neighbours.add(hash);
+        }
+
+        //hash is in the middle of nodemap
+        else{
+            neighbours.add(nodeMap.lowerKey(hash)); //hash is in the middle
+            neighbours.add(nodeMap.higherKey(hash));
+        }
 
 
-        }
-        catch (Exception e)
-        {
-            System.out.println("Nameserver error: " + e.getMessage());
-            e.printStackTrace();
-        }
+        return neighbours;
+    }
+
+    public int getLastId() throws RemoteException {
+        return  nodeMap.lastKey();
+    }
+
+    public int getFirstId() throws RemoteException {
+        return  nodeMap.firstKey();
     }
 }

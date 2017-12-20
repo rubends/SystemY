@@ -31,7 +31,7 @@ public class UserInterface {
             int action = input.nextInt();
             try {
                 if (action == 0) {
-                    shutdown();
+                    Main.INode.shutdown();
                 } else if (action == 1) {
                     ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(Node.nodeHash);
                     System.out.println("previous node: " + neighbours.get(0));
@@ -66,74 +66,11 @@ public class UserInterface {
                 } else if (action == 6) {
                     System.out.println("Give failed node hash:");
                     int nodeHash = input.nextInt();
-                    failure(nodeHash);
+                    Main.INode.failure(nodeHash);
                 }
             } catch (Exception e){
                 e.printStackTrace();
             }
         }
-    }
-
-    public void shutdown(){
-        System.out.println("Shutting down node");
-        try {
-            ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(Node.nodeHash);
-            int prevHash = neighbours.get(0);
-            int nextHash = neighbours.get(1);
-            if(prevHash != Node.nodeHash){
-                String prevIp = INameServer.getNodeIp(prevHash);
-                INode prevNode = (INode) Naming.lookup("//"+prevIp+"/"+Integer.toString(prevHash));
-                prevNode.updateNextNode(nextHash);
-
-                Replication replication = new Replication(INameServer);
-                replication.toPrevNode(prevHash);
-            }
-            if(nextHash != Node.nodeHash)
-            {
-                String nextIp = INameServer.getNodeIp(nextHash);
-                INode nextNode = (INode) Naming.lookup("//"+nextIp+"/"+Integer.toString(nextHash));
-                nextNode.updatePrevNode(prevHash);
-            }
-
-            INameServer.deleteNode(Node.nodeHash);
-            System.exit(0);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void failure(int hash){
-        System.out.println("Node " + hash + " failed.");
-        try {
-            ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(hash);
-            int prevHash = neighbours.get(0);
-            int nextHash = neighbours.get(1);
-            if(prevHash != Node.nodeHash){
-                String prevIp = INameServer.getNodeIp(prevHash);
-                INode prevNode = (INode) Naming.lookup("//"+prevIp+"/"+Integer.toString(prevHash));
-                prevNode.updateNextNode(nextHash);
-            } else {
-                //update own next node
-            }
-            if(nextHash != Node.nodeHash)
-            {
-                String nextIp = INameServer.getNodeIp(nextHash);
-                INode nextNode = (INode) Naming.lookup("//"+nextIp+"/"+Integer.toString(nextHash));
-                nextNode.updatePrevNode(prevHash);
-            } else {
-                //update own prev node
-            }
-
-            INameServer.deleteNode(hash);
-
-            FailureAgent failureAgent = new FailureAgent(hash, INameServer);
-            try {
-                //RMIAgent rmiAgent = new RMIAgent(Main.INode, INameServer);
-                //rmiAgent.passFailureAgent(failureAgent);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } catch (Exception e) { e.printStackTrace(); }
     }
 }

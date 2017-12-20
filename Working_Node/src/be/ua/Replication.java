@@ -44,9 +44,9 @@ public class Replication {
                 //nu fiche lokaal verwijderen ->is geen owner meer
                 String nodeIp = INameServer.getNodeIp(hash);
                 INode INodeNew = (INode) Naming.lookup("//"+nodeIp+"/"+Integer.toString(hash));
-                System.out.println("REPLICATION file replicated to " + nodeIp);
+                System.out.println("REPLICATION file " + filename + " replicated to " + nodeIp);
                 INodeNew.sendFiche(fiche);
-                fileMap.remove(filename);
+                //fileMap.remove(filename); // dont remove local file fiches
 
                 tcpSender.SendFile(ip, location);
             } else {

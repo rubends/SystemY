@@ -1,10 +1,11 @@
 package be.ua;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static INode INode;
-    public static String ipNameServer = "169.254.205.99"; //127.0.0.1
+    public static String ipNameServer = "169.254.126.14"; //127.0.0.1
 
     public static void main(String[] args) {
         RMIConnector connector = new RMIConnector();
@@ -18,6 +19,8 @@ public class Main {
         try{
             int hash = NameServerInterface.getHashOfName(nodeName);
             INode = new Node(hash, NameServerInterface);
+            ArrayList<Integer> ids = NameServerInterface.getNeighbourNodes(hash); //get own neighbours
+            INode.updateNeighbours(ids.get(0), ids.get(1));
             new RMIConnector(NameServerInterface, nodeName, INode);
         }
         catch(Exception e){e.printStackTrace();}

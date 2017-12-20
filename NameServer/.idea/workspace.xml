@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8fd0497e-93eb-4adb-80d6-01022e3c198e" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Working_Node/Files/Replication/Stijn.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Working_Node/Files/Replication/samfoto.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Working_Node/Files/Replication/samtext.txt" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Main.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Replication.class" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Replication.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/FailureAgent.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/FailureAgent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Main.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/MulticastThread.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/MulticastThread.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/RMIConnector.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/RMIConnector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Replication.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Replication.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,11 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="NameServer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NameServer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/be/ua/NameServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="22" column="27" lean-forward="false" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="27" />
+            <state relative-caret-position="-595">
+              <caret line="13" column="44" lean-forward="false" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -59,7 +68,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MulticastThread.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MulticastThread.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/be/ua/MulticastThread.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
@@ -707,14 +716,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/be/ua/MulticastThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="13" column="23" lean-forward="false" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/NameServerInterface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -753,11 +754,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/NameServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="22" column="27" lean-forward="false" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="27" />
+        <state relative-caret-position="-595">
+          <caret line="13" column="44" lean-forward="false" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/be/ua/MulticastThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="13" column="23" lean-forward="false" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -41,7 +41,7 @@ public class RMIConnector {
     }
 
 
-    public RMIConnector(NameServerInterface INameServer, String newNodeName, String nodeName) throws RemoteException{ //get node RMI
+    public RMIConnector(NameServerInterface INameServer, String newNodeName) throws RemoteException{ //get node RMI
         int hash = INameServer.getHashOfName(newNodeName);
         String connName = Integer.toString(hash);
         boolean gettingConnection = true;
@@ -52,18 +52,26 @@ public class RMIConnector {
 
                 String NodeIp = INameServer.getNodeIp(hash);                                    // ---- NETWORK ----
                 INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);         // _________________
-                ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);
-                INodeNew.updateNeighbours(ids.get(0), ids.get(1));
+                updateNewNode(INameServer, INodeNew, hash);
                 System.out.println("New node id: " + INodeNew.getId());
-                if(ids.get(0) == INameServer.getHashOfName(nodeName)){
-                    Replication replication = new Replication(INameServer);
-                    replication.toNextNode(hash);
-                }
                 gettingConnection = false;
             } catch (Exception e) {
                 e.printStackTrace(); //not printing because searching for connection
             }
         }
+    }
+
+    private void updateNewNode(NameServerInterface INameServer, INode INodeNew, int hash){
+        try {
+            if (INodeNew.getNextNode() == Main.INode.getId()) {
+                Main.INode.updatePrevNode(INodeNew.getId());
+            }
+            if (INodeNew.getPrevNode() == Main.INode.getId()) {
+                Main.INode.updateNextNode(INodeNew.getId());
+                Replication replication = new Replication(INameServer);
+                replication.toNextNode(hash);
+            }
+        } catch (Exception e){ e.printStackTrace(); }
     }
 
     public NameServerInterface getNameServer(){ return INameServer;}

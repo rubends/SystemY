@@ -44,9 +44,9 @@ public class Replication {
                 //nu fiche lokaal verwijderen ->is geen owner meer
                 String nodeIp = INameServer.getNodeIp(hash);
                 INode INodeNew = (INode) Naming.lookup("//"+nodeIp+"/"+Integer.toString(hash));
-                System.out.println("REPLICATION file replicated to " + nodeIp);
+                System.out.println("REPLICATION file " + filename + " replicated to " + nodeIp);
                 INodeNew.sendFiche(fiche);
-                fileMap.remove(filename);
+                //fileMap.remove(filename); // dont remove local file fiches
 
                 tcpSender.SendFile(ip, location);
             } else {
@@ -98,6 +98,7 @@ public class Replication {
                     passFiche(localFiles[i].getName(),ipNextNode); //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
                 } else if (ownIp.equals(ipOwner)) { // !!!! WHEN LOCAL FILES ARE BELONGING TO OWN NODE, THEY ARE REPLICATED TO NEW NODE
                     String prevIp = INameServer.getNodeIp(Main.INode.getPrevNode());
+                    System.out.println("REPLICATION prev neighb" + Main.INode.getPrevNode());
                     System.out.println("REPLICATION sending local file: " + localFiles[i].getName() + " to " + prevIp);
                     tcpSender.SendFile(prevIp, localFiles[i].getAbsolutePath());
                     passFiche(localFiles[i].getName(),prevIp);

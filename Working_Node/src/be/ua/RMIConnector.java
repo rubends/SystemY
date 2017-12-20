@@ -10,6 +10,8 @@ public class RMIConnector {
 
     private NameServerInterface INameServer;
     public INode INode;//was private
+    //public RMIAgentInterface rmiAgentInterface;
+    Registry registry;
 
     public RMIConnector() { //to nameserver
         try {
@@ -29,7 +31,7 @@ public class RMIConnector {
             if (System.getSecurityManager() == null) {
                 System.setSecurityManager(new SecurityManager());
             }
-            Registry registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+            registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
             registry.rebind(connName, iNode);
             System.out.println("Created own RMI server");
         } catch (Exception e) {
@@ -65,4 +67,16 @@ public class RMIConnector {
     }
 
     public NameServerInterface getNameServer(){ return INameServer;}
+
+
+
+    public void bindRMIAgent(RMIAgentInterface rmiAgentInterface){ //TODO: work in progress
+
+        try{
+            //Registry register = LocateRegistry.getRegistry(Registry.REGISTRY_PORT);
+            registry.rebind("RMIAgent", rmiAgentInterface);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

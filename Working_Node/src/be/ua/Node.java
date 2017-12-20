@@ -5,12 +5,11 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.TreeMap;
 
 public class Node extends UnicastRemoteObject implements INode{
     private volatile int mPrevious;
-    public volatile int mNext;
+    private volatile int mNext;
     private volatile int mId;
     private volatile NameServerInterface INameServer;
     public static TreeMap<File, Boolean> fileList; // file - locked

@@ -15,13 +15,13 @@ public class FailureAgent implements Runnable, Serializable {
 
     public FailureAgent(int failureN, NameServerInterface nameServerInterface) {
         failureNode = failureN;
-        agentNode = Node.nodeHash;
         INameServer = nameServerInterface;
     }
 
     @Override
     public void run() {
          fileList = Node.fileList;
+        agentNode = Node.nodeHash;
 
         Iterator<File> keySetIterator = fileList.keySet().iterator();
         while (keySetIterator.hasNext()) {

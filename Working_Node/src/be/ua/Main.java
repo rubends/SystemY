@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
     public static INode INode;
-    public static String ipNameServer = "169.254.254.168"; //127.0.0.1
+    public static String ipNameServer = "127.0.0.1"; //127.0.0.1
 
     public static void main(String[] args) {
         RMIConnector connector = new RMIConnector();

@@ -85,9 +85,9 @@ public class Replication {
                         tcpSender.SendFile(ipNextNode, replicatedFiles[i].getAbsolutePath());
                         if (fileMap.containsKey(replicatedFiles[i].getName())) {
                             passFiche(replicatedFiles[i].getName(), ipNextNode);
+                            fileMap.remove(replicatedFiles[i].getName()); // remove fiche from own fichemap
                             if (replicatedFiles[i].isFile()) replicatedFiles[i].delete();
                             //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
-                            fileMap.remove(replicatedFiles[i].getName()); // remove fiche from own fichemap
                         }
                     }
                 } else if (prevIp.equals(ipOwner)) { //files die op deze node staan, omdat hun hash overeen komt met de node waar ze lokaal op stonden, moeten ook gecheckt worden
@@ -161,7 +161,7 @@ public class Replication {
             for (File file : listOfFiles) {
                 if (file.isFile()) {
                     //file fiche aanmaken en toevoegen aan lijst
-                    FileMap f = new FileMap(file.getName(),INameServer.getNodeIp(Node.nodeHash),Main.INode.getId());
+                    FileMap f = new FileMap(file.getName(),INameServer.getNodeIp(Main.INode.getId()),Main.INode.getId());
                     fileMap.put(file.getName(),f); // voeg toe aan eigen fichemap
                 }
             }

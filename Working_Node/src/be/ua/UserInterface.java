@@ -1,6 +1,8 @@
 package be.ua;
 
+import java.awt.*;
 import java.io.File;
+import java.rmi.Naming;
 import java.util.*;
 import java.lang.String;
 
@@ -53,13 +55,11 @@ public class UserInterface {
                 } else if (action == 4) {
                     System.out.println("Give filename:");
                     String file = input.next();
-                    String ip = INameServer.getFileIp(file);
-                    System.out.println("File is located at " + ip);
+                    openFile(file);
                     //todo get file
                 } else if (action == 5) {
                     System.out.println("Give filename:");
                     String file = input.next();
-                    String ip = INameServer.getFileIp(file);
                     //todo delete file
                 } else if (action == 6) {
                     System.out.println("Give failed node hash:");
@@ -70,5 +70,58 @@ public class UserInterface {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void openFile(String filename){
+        try {
+            String ip = INameServer.getFileIp(filename);
+            String ownIp = INameServer.getNodeIp(Main.INode.getId());
+            System.out.println("File is located at " + ip);
+            if(ip.equals(ownIp)) { //file is on own system
+                //node is zelf owner van het bestand, dus het kan geopend worden
+                Desktop.getDesktop().open(getFile(filename).getAbsoluteFile());
+            } else {
+                // set lock
+                INode fileNode = (INode) Naming.lookup( "//"+ip + "/" + INameServer.getHashOfIp(ip));
+                // fileNode FileMap.getIpOfLocation
+                fileNode.sendFile(ownIp, filename);
+                // fileNode update FileMap(ownIp)
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteFile(String filename){
+        System.out.println("Deleting file " + filename);
+        try {
+            String ownIp = INameServer.getNodeIp(Main.INode.getId());
+            String fileOwnerIp = INameServer.getFileIp(filename);
+            if(fileOwnerIp.equals(ownIp)){ //file is on own system
+
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private File getFile(String filename){
+        String rootPath = new File("").getAbsolutePath();
+        String sep = System.getProperty("file.separator");
+        File localFolder = new File(rootPath + sep + "Files" + sep + "Local");
+        File replicationFolder = new File(rootPath + sep + "Files" + sep + "Replication");
+        File[] localFiles = localFolder.listFiles();
+        File[] replicationFiles = replicationFolder.listFiles();
+        for(File file : localFiles){
+            if(file.getName().equals(filename)){
+                return file;
+            }
+        }
+        for(File file : replicationFiles){
+            if(file.getName().equals(filename)){
+                return file;
+            }
+        }
+        return null;
     }
 }

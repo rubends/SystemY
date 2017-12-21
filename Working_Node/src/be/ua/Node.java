@@ -59,7 +59,6 @@ public class Node extends UnicastRemoteObject implements INode{
 
     public void sendFiche(FileMap fiche) {
         Replication.fileMap.put(fiche.getFilename(),fiche);
-        System.out.println("nieuwe item toegevoegd aan map" + fiche.getFilename());
     }
 
     public void updateFiche(String fileName, int id, String ipLocation){
@@ -90,7 +89,7 @@ public class Node extends UnicastRemoteObject implements INode{
             int nextHash = mNext;
 
             //inform previous node + replicate files to previous node
-            if(prevHash != Node.nodeHash){
+            if(prevHash != mId){
                 String prevIp = INameServer.getNodeIp(prevHash);
                 INode prevNode = (INode) Naming.lookup("//"+prevIp+"/"+Integer.toString(prevHash));
                 prevNode.updateNextNode(nextHash);
@@ -100,14 +99,14 @@ public class Node extends UnicastRemoteObject implements INode{
             }
 
             //inform next node
-            if(nextHash != Node.nodeHash)
+            if(nextHash != mId)
             {
                 String nextIp = INameServer.getNodeIp(nextHash);
                 INode nextNode = (INode) Naming.lookup("//"+nextIp+"/"+Integer.toString(nextHash));
                 nextNode.updatePrevNode(prevHash);
             }
 
-            INameServer.deleteNode(Node.nodeHash);
+            INameServer.deleteNode(mId);
             System.exit(0);
 
         } catch (Exception e) {
@@ -123,14 +122,14 @@ public class Node extends UnicastRemoteObject implements INode{
             int nextHashOfFailedNode = neighbours.get(1);
 
             //node lifecycle
-            if(prevHashOfFailedNode != Node.nodeHash){ //check that previous node of the failed node is not you
+            if(prevHashOfFailedNode != mId){ //check that previous node of the failed node is not you
                 String prevIp = INameServer.getNodeIp(prevHashOfFailedNode);
                 INode prevNode = (INode) Naming.lookup("//"+prevIp+"/"+Integer.toString(prevHashOfFailedNode));
                 prevNode.updateNextNode(nextHashOfFailedNode);
             } else {
                 updateNextNode(nextHashOfFailedNode);
             }
-            if(nextHashOfFailedNode != Node.nodeHash) //check that next node of the failed node is not you
+            if(nextHashOfFailedNode != mId) //check that next node of the failed node is not you
             {
                 String nextIp = INameServer.getNodeIp(nextHashOfFailedNode);
                 INode nextNode = (INode) Naming.lookup("//"+nextIp+"/"+Integer.toString(nextHashOfFailedNode));
@@ -146,5 +145,10 @@ public class Node extends UnicastRemoteObject implements INode{
             rmiAgent.passFailureAgent(failureAgent);
 
         } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    public void sendFile(String ip, String filename){
+        TCPSender tcpSender = new TCPSender(8445);
+        tcpSender.downloadRequest(filename, ip);
     }
 }

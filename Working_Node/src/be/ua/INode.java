@@ -16,4 +16,5 @@ public interface INode extends Remote {
     boolean hasFile(String fileName) throws RemoteException;
     void sendFiche(FileMap fiche) throws RemoteException;
     void updateFiche(String fileName, int id, String ipLocation) throws RemoteException;
+    void sendFile(String ip, String filename) throws RemoteException;
 }

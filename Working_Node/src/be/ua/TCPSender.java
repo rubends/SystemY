@@ -25,4 +25,34 @@ public class TCPSender {
             e.printStackTrace();
         }
     }
+
+    public void downloadRequest(String filename, String ip) {
+        File tmpFile = getFile(filename);
+        String tmpPath = tmpFile.getAbsolutePath();
+        try {
+            SendFile(ip, tmpPath);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private File getFile(String filename){
+        String rootPath = new File("").getAbsolutePath();
+        String sep = System.getProperty("file.separator");
+        File localFolder = new File(rootPath + sep + "Files" + sep + "Local");
+        File replicationFolder = new File(rootPath + sep + "Files" + sep + "Replication");
+        File[] localFiles = localFolder.listFiles();
+        File[] replicationFiles = replicationFolder.listFiles();
+        for(File file : localFiles){
+            if(file.getName().equals(filename)){
+                return file;
+            }
+        }
+        for(File file : replicationFiles){
+            if(file.getName().equals(filename)){
+                return file;
+            }
+        }
+        return null;
+    }
 }

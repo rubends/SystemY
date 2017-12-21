@@ -46,7 +46,8 @@ public class Replication {
                 INode INodeNew = (INode) Naming.lookup("//"+nodeIp+"/"+Integer.toString(hash));
                 System.out.println("REPLICATION file " + filename + " replicated to " + nodeIp);
                 INodeNew.sendFiche(fiche);
-                //fileMap.remove(filename); // dont remove local file fiches
+                fileMap.remove(filename); // dont remove local file fiches
+                //TODO: CHECK IF FICHE MAP IS CORRECT
 
                 tcpSender.SendFile(ip, location);
             } else {
@@ -85,7 +86,7 @@ public class Replication {
                         tcpSender.SendFile(ipNextNode, replicatedFiles[i].getAbsolutePath());
                         if (fileMap.containsKey(replicatedFiles[i].getName())) {
                             passFiche(replicatedFiles[i].getName(), ipNextNode);
-                            fileMap.remove(replicatedFiles[i].getName()); // remove fiche from own fichemap
+                            //TODO: CHECK IF FICHE MAP IS CORRECT
                             if (replicatedFiles[i].isFile()) replicatedFiles[i].delete();
                             //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
                         }
@@ -160,26 +161,22 @@ public class Replication {
             File[] listOfFiles = localFolder.listFiles();
             for (File file : listOfFiles) {
                 if (file.isFile()) {
-                    //file fiche aanmaken en toevoegen aan lijst
                     FileMap f = new FileMap(file.getName(),INameServer.getNodeIp(Main.INode.getId()),Main.INode.getId());
                     fileMap.put(file.getName(),f); // voeg toe aan eigen fichemap
                 }
             }
 
             System.out.println("REPLICATION fiches on startup <" +fileMap+ ">");
-            //fileMap.get("test7.txt").getIpOfLocation();
-            //fileMap.get("test7.txt").getHashOfLocation();
-            //fileMap.get("test7.txt").printLocation();
         }
         catch(Exception e){}
     }
     public void passFiche(String file, String ownerIp){
         try {
-            int hash = INameServer.getHashOfIp(ownerIp); //HIER MOET DE HASH OPGEHAALD WORDEN DIE BIJ IP HOORT?
+            int hash = INameServer.getHashOfIp(ownerIp);
             fileMap.get(file).addLocation(ownerIp,hash);                  // add new owner to locations
-            String newIp = INameServer.getNodeIp(hash);
-            INode INodeNew = (INode) Naming.lookup("//"+newIp+"/"+Integer.toString(hash));
-            INodeNew.sendFiche(fileMap.get(file));            // send fiche to new owner
+            INode INodeNew = (INode) Naming.lookup("//"+ownerIp+"/"+Integer.toString(hash));
+            INodeNew.sendFiche(fileMap.get(file));                          // send fiche to new owner
+            fileMap.remove(file); // remove fiche from own fichemap
         }
         catch(Exception e){
             e.printStackTrace();

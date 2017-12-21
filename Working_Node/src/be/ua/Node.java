@@ -15,7 +15,6 @@ public class Node extends UnicastRemoteObject implements INode{
     public static TreeMap<File, Boolean> fileList; // file - locked
     public static int nodeHash; //for local hash getting
 
-
     protected Node(int hash, NameServerInterface ns) throws RemoteException
     {
         super();

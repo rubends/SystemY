@@ -71,6 +71,7 @@ public class UpdateFileMapThread extends Thread{
                         Replication replication = new Replication(INameServer);
                         replication.setNodeName(nodeName);
                         replication.getFiles();
+                        //TODO: CHECK IF WORKING? NIET OVERBODIG OM VOLLEDIGE getFiles terug te doen?
                     }
                     catch (Exception e){e.printStackTrace();}
 

@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import static be.ua.Replication.fileMap;
+
 public class UpdateFileMapThread extends Thread{
 
     public UpdateFileMapThread(String nodeName, NameServerInterface INameServer) {
@@ -56,9 +58,22 @@ public class UpdateFileMapThread extends Thread{
                 if (!currentKeys.equals(prevKeys)){
                     System.out.println("Change in local/replications files is detected by UpdateFileMapThread.java" +
                             "\n Starting replication.");
-                    Replication replication = new Replication(INameServer);
-                    replication.setNodeName(nodeName);
-                    replication.getFiles();
+
+                    try{
+                        //ADDED NEW FILE
+                        if (currentKeys.size() > prevKeys.size()){
+                            currentKeys.removeAll(prevKeys);
+                            for (String filename : currentKeys) {
+                                fileMap.put(filename, new FileMap(filename,INameServer.getNodeIp(Node.nodeHash),Main.INode.getId()));
+                            }
+                        }
+
+                        Replication replication = new Replication(INameServer);
+                        replication.setNodeName(nodeName);
+                        replication.getFiles();
+                    }
+                    catch (Exception e){e.printStackTrace();}
+
                 }
             }
 

@@ -79,8 +79,11 @@ public class Replication {
             String prevIp = INameServer.getNodeIp(Main.INode.getPrevNode());
             int prevPrevHash = INameServer.getNeighbourNodes(Main.INode.getPrevNode()).get(0);
             TCPSender tcpSender = new TCPSender(SOCKET_PORT);
+            System.out.println("Sending to next node " + ipNextNode);
             for (int i = 0; i < replicatedFiles.length; i++) {
                 String ipOwner = INameServer.getFileIp(replicatedFiles[i].getName());
+                System.out.println("file owner= " + ipOwner);
+                System.out.println("file next node= " + ipNextNode);
                 if(ipNextNode.equals(ipOwner)){
                     INode NextNode = (INode) Naming.lookup("//"+ipNextNode+"/"+Integer.toString(hashNextNode));
                     if(!NextNode.hasFile(replicatedFiles[i].getName())) { //if next node doesnt have the file already
@@ -93,7 +96,17 @@ public class Replication {
                             //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
                         }
                     }
-                } //TODO: if file hoort bij lokale file naar juiste
+                } else if(hashNextNode == prevPrevHash && ipOwner.equals(prevIp)) { //if new node is prev node from prev node fix replicated files belonging to prev prev node
+                    String prevPrevIp = INameServer.getNodeIp(prevPrevHash);
+                    INode newNode = (INode) Naming.lookup("//"+prevPrevIp+"/"+prevPrevHash);
+                    if(!newNode.hasFile(replicatedFiles[i].getName())) {
+                        System.out.println("REPLICATION sending replicated file: " + replicatedFiles[i].getName() + " to rightful owner " + prevPrevIp);
+                        tcpSender.SendFile(ipNextNode, replicatedFiles[i].getAbsolutePath());
+                        if (fileMap.containsKey(replicatedFiles[i].getName())) {
+                            passFiche(replicatedFiles[i].getName(), ipNextNode);
+                        }
+                    }
+                }
             }
             if(Main.INode.getPrevNode() != Main.INode.getId() && Main.INode.getPrevNode() == Main.INode.getNextNode()) { // WEL LOCAL FILES CHECKEN WANNEER ER 1 BUUR IS.
                 for (int i = 0; i < localFiles.length; i++) {

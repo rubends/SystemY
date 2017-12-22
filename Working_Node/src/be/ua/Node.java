@@ -57,6 +57,7 @@ public class Node extends UnicastRemoteObject implements INode{
     }
 
     public void sendFiche(FileMap fiche) {
+        System.out.println("Getting fiche from " + fiche.getFilename());
         Replication.fileMap.put(fiche.getFilename(),fiche);
     }
 

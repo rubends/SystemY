@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
     public static INode INode;
-    public static String ipNameServer = "169.254.234.139"; //127.0.0.1
+    public static String ipNameServer = "192.168.0.102"; //127.0.0.1
 
     public static void main(String[] args) {
         RMIConnector connector = new RMIConnector();
@@ -39,13 +39,12 @@ public class Main {
 
 
         //implementation of agents
-
+        FileAgent fileAgent = new FileAgent();
         if(MulticastThread.nodeCount == 1) {
-            FileAgent fileAgent = new FileAgent();
             try {
-                RMIAgentInterface rmiAgent = new RMIAgent(NameServerInterface);
-                connector.bindRMIAgent(rmiAgent);
-                rmiAgent.passFileAgent(fileAgent);
+                //RMIAgentInterface rmiAgent = new RMIAgent(NameServerInterface);
+                //connector.bindRMIAgent(rmiAgent);
+                //rmiAgent.passFileAgent(fileAgent);
             } catch (Exception e) {
                 System.out.println("Agents created error:");
                 e.printStackTrace();

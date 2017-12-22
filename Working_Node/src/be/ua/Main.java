@@ -12,7 +12,6 @@ public class Main {
         NameServerInterface NameServerInterface = connector.getNameServer();
 
         UserInterface ui = new UserInterface(NameServerInterface);
-
         System.out.println("\t Enter the name for the new node");
         System.out.print("> ");
         String nodeName = new Scanner(System.in).next();
@@ -40,20 +39,26 @@ public class Main {
 
 
         //implementation of agents
-        /*
+
         FileAgent fileAgent = new FileAgent();
         try {
-            RMIAgentInterface rmiAgent = (RMIAgentInterface) new RMIAgent(INode, NameServerInterface);
+            RMIAgentInterface rmiAgent = new RMIAgent(INode, NameServerInterface);
             System.out.println(rmiAgent);
+            //output from rmiAgent: RMIAgent{nextNodeId=15324, myNodeId=21591, ns=Proxy[NameServerInterface,RemoteObjectInvocationHandler
+            // [UnicastRef [liveRef: [endpoint:[169.254.234.139:49167](remote),objID:[5ce6daa0:1607db91471:-7fff, -7627599808127725904]]]]]}
+
+            /*
             connector.bindRMIAgent(rmiAgent);
             rmiAgent.passFileAgent(fileAgent);
+            */
 
         } catch (Exception e) {
             System.out.println("Agents created error:");
             e.printStackTrace();
-        }*/
+        }
 
         ui.startUI();
+
     }
 }
 

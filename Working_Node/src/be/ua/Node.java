@@ -156,7 +156,7 @@ public class Node extends UnicastRemoteObject implements INode{
     }
 
     public void sendFile(String ip, String filename){
-        TCPSender tcpSender = new TCPSender(8445);
+        TCPSender tcpSender = new TCPSender(7897);
         tcpSender.downloadRequest(filename, ip);
     }
 

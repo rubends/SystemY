@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 public class MulticastThread extends Thread{
     MulticastSocket MCsocket;
     DatagramSocket Dsocket;
-    public int nodeCount = 0;
+    public static int nodeCount = 0;
     public INode INode;
 
     String name;

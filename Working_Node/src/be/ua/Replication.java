@@ -95,17 +95,21 @@ public class Replication {
 
                 }
             }
-            for (int i = 0; i < localFiles.length; i++) {
-                String ipOwner = INameServer.getFileIp(localFiles[i].getName());
-                if(ipNextNode.equals(ipOwner)){
-                    System.out.println("REPLICATION sending local file: " + localFiles[i].getName() + " to " + ipNextNode + " if it equals " + ipOwner);
-                    tcpSender.SendFile(ipNextNode, localFiles[i].getAbsolutePath());
-                    passFiche(localFiles[i].getName(),ipNextNode); //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
-                } else if (ownIp.equals(ipOwner)) { // !!!! WHEN LOCAL FILES ARE BELONGING TO OWN NODE, THEY ARE REPLICATED TO NEW NODE
-                    System.out.println("REPLICATION sending local file: " + localFiles[i].getName() + " to " + prevIp);
-                    tcpSender.SendFile(prevIp, localFiles[i].getAbsolutePath());
-                    passFiche(localFiles[i].getName(),prevIp);
-                    //if Ip is from own node, send to prev node
+            if(MulticastThread.nodeCount == 2) { // WEL LOCAL FILES CHECKEN WANNEER ER 1 BUUR IS.
+                for (int i = 0; i < localFiles.length; i++) {
+                    String ipOwner = INameServer.getFileIp(localFiles[i].getName());
+                    if (ipNextNode.equals(ipOwner)) {
+                        System.out.println("REPLICATION sending local file: " + localFiles[i].getName() + " to " + ipNextNode + " if it equals " + ipOwner);
+                        tcpSender.SendFile(ipNextNode, localFiles[i].getAbsolutePath());
+                        if (fileMap.containsKey(replicatedFiles[i].getName())) {
+                            passFiche(localFiles[i].getName(), ipNextNode); //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
+                        }
+                    } else if (ownIp.equals(ipOwner)) { // !!!! WHEN LOCAL FILES ARE BELONGING TO OWN NODE, THEY ARE REPLICATED TO NEW NODE
+                        System.out.println("REPLICATION sending local file: " + localFiles[i].getName() + " to " + prevIp);
+                        tcpSender.SendFile(prevIp, localFiles[i].getAbsolutePath());
+                        passFiche(localFiles[i].getName(), prevIp);
+                        //if Ip is from own node, send to prev node
+                    }
                 }
             }
         } catch (Exception e) {

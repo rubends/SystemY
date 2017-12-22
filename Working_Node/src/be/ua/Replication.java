@@ -56,9 +56,11 @@ public class Replication {
                 if(ownHash != neighbourHash){
                     String prevIp = INameServer.getNodeIp(neighbourHash);
                     System.out.println("REPLICATION file " + filename + " replicated to previous node " + prevIp);
+                    INode INodePrev = (INode) Naming.lookup("//"+prevIp+"/"+neighbourHash);
                     FileMap fiche = fileMap.get(filename);
-                    fiche.addLocation(ip, hash);
-                    fileMap.put(filename, fiche);
+                    fiche.addLocation(ownIp, ownHash);
+                    //fileMap.put(filename, fiche);
+                    INodePrev.sendFiche(fiche);
 
                     tcpSender.SendFile(prevIp, location);
                 }

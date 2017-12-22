@@ -95,7 +95,7 @@ public class Replication {
 
                 }
             }
-            if(MulticastThread.nodeCount == 2) { // WEL LOCAL FILES CHECKEN WANNEER ER 1 BUUR IS.
+            if(Main.INode.getPrevNode() != Main.INode.getId() && Main.INode.getPrevNode() == Main.INode.getNextNode()) { // WEL LOCAL FILES CHECKEN WANNEER ER 1 BUUR IS.
                 for (int i = 0; i < localFiles.length; i++) {
                     String ipOwner = INameServer.getFileIp(localFiles[i].getName());
                     if (ipNextNode.equals(ipOwner)) {

@@ -57,18 +57,19 @@ public class UpdateFileMapThread extends Thread{
                             "\n Starting replication.");
 
                     try{
+                        Replication replication = new Replication(INameServer);
+                        replication.setNodeName(nodeName);
+
                         //ADDED NEW FILE
                         if (currentKeys.size() > prevKeys.size()){
                             currentKeys.removeAll(prevKeys);
+
                             for (File file : currentKeys) {
-                                fileMap.put(filename, new FileMap(filename,INameServer.getNodeIp(Node.nodeHash),Main.INode.getId()));
+                                int ownHash = Main.INode.getId();
+                                fileMap.put(file.getName(), new FileMap(file.getName(),INameServer.getNodeIp(ownHash),ownHash));
+                                replication.replicate(file.getName(), file.getAbsolutePath());
                             }
                         }
-
-                        Replication replication = new Replication(INameServer);
-                        replication.setNodeName(nodeName);
-                        replication.getFiles();
-                        //TODO: CHECK IF WORKING? NIET OVERBODIG OM VOLLEDIGE getFiles terug te doen?
                     }
                     catch (Exception e){e.printStackTrace();}
 
@@ -88,9 +89,9 @@ public class UpdateFileMapThread extends Thread{
         fileList.clear();
         fileList.addAll(Arrays.asList(fileDir.listFiles()));
         while (nodeFileList.values().remove(isOwner));
-        for (File f: fileList){
-            if (f.isFile()){
-                nodeFileList.put(f.getName(), isOwner);
+        for (File file: fileList){
+            if (file.isFile()){
+                nodeFileList.put(file, isOwner);
             }
         }
     }

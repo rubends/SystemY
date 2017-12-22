@@ -107,6 +107,7 @@ public class UserInterface {
             String fileOwnerIp = INameServer.getFileIp(filename);
             if(fileOwnerIp.equals(ownIp)){ //file is on own system
                 Replication.fileMap.remove(filename);
+                getFile(filename).delete();
             } else {
                 INode fileNode = (INode) Naming.lookup( "//"+fileOwnerIp + "/" + INameServer.getHashOfIp(fileOwnerIp));
                 fileNode.deleteFile(filename);

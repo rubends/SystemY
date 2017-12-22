@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56534b84-34bf-49d2-90ea-98236a27a95b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Replication.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Replication.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/UpdateFileMapThread.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/UpdateFileMapThread.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

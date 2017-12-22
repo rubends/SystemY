@@ -7,6 +7,7 @@ public class FileAgent implements Runnable, Serializable {
 
     @Override
     public void run() {
+        System.out.println("INSIDE FILEAGENT");
         Node.fileList.clear();
         String rootPath = new File("").getAbsolutePath();
         String sep = System.getProperty("file.separator"); //OS dependable

@@ -79,11 +79,8 @@ public class Replication {
             String prevIp = INameServer.getNodeIp(Main.INode.getPrevNode());
             int prevPrevHash = INameServer.getNeighbourNodes(Main.INode.getPrevNode()).get(0);
             TCPSender tcpSender = new TCPSender(SOCKET_PORT);
-            System.out.println("Sending to next node " + ipNextNode);
             for (int i = 0; i < replicatedFiles.length; i++) {
                 String ipOwner = INameServer.getFileIp(replicatedFiles[i].getName());
-                System.out.println("file owner= " + ipOwner);
-                System.out.println("file next node= " + ipNextNode);
                 if(ipNextNode.equals(ipOwner)){
                     INode NextNode = (INode) Naming.lookup("//"+ipNextNode+"/"+Integer.toString(hashNextNode));
                     if(!NextNode.hasFile(replicatedFiles[i].getName())) { //if next node doesnt have the file already
@@ -142,7 +139,13 @@ public class Replication {
                     ArrayList<Integer> neighbours = INameServer.getNeighbourNodes(hashPrevNode);
                     String ipPrevPrevNode = INameServer.getNodeIp(neighbours.get(0));
                     tcpSender.SendFile(ipPrevPrevNode, replicatedFiles[i].getAbsolutePath());
-                    if (replicatedFiles[i].isFile()) replicatedFiles[i].delete();
+
+                    String fileName = replicatedFiles[i].getName();
+                    String nodeIp = INameServer.getFileIp(fileName);
+                    int nodeHash = INameServer.getHashOfIp(nodeIp);
+                    INode nodeRMI = (INode) Naming.lookup("//"+nodeIp+"/"+nodeHash);
+                    nodeRMI.nodeShutdownFiles(fileName, Main.INode.getId());
+
                 } else {
                     tcpSender.SendFile(ipPrevNode, replicatedFiles[i].getAbsolutePath());
                 }
@@ -152,16 +155,12 @@ public class Replication {
         }
         File[] localFiles = localFolder.listFiles();
         for (int i = 0; i < localFiles.length; i++) { //TODO GET IP of file --> delete own ip in fileMap
-            System.out.println("REPLICATION name: "+ localFiles[i].getName());
-            System.out.println("REPLICATION in map: "+ fileMap.get(localFiles[i].getName()));
-            String nodeIp = fileMap.get(localFiles[i].getName()).getIpOfLocation();
-            int nodeHash = fileMap.get(localFiles[i].getName()).getHashOfLocation();
-
-            //FOR LOOP
             try {
+                String fileName = localFiles[i].getName();
+                String nodeIp = INameServer.getFileIp(fileName);
+                int nodeHash = INameServer.getHashOfIp(nodeIp);
                 INode nodeRMI = (INode) Naming.lookup("//"+nodeIp+"/"+nodeHash);
-                int fileHash = INameServer.getHashOfName(localFiles[i].getName());
-                nodeRMI.nodeShutdownFiles(fileHash);
+                nodeRMI.nodeShutdownFiles(fileName, Main.INode.getId());
             } catch (Exception e){
                 e.printStackTrace();
             }

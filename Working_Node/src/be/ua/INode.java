@@ -10,7 +10,6 @@ public interface INode extends Remote {
     int getId() throws RemoteException;
     int getNextNode() throws RemoteException;
     int getPrevNode() throws RemoteException;
-    void nodeShutdownFiles(int hash) throws RemoteException;
     void shutdown() throws RemoteException;
     void failure(int hash) throws RemoteException;
     boolean hasFile(String fileName) throws RemoteException;
@@ -19,4 +18,5 @@ public interface INode extends Remote {
     void sendFile(String ip, String filename) throws RemoteException;
     void deleteFile(String fileName) throws  RemoteException;
     String getDownloadLocation(String filename) throws RemoteException;
+    void nodeShutdownFiles(String filename, int nodeHash) throws RemoteException;
 }

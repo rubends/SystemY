@@ -77,7 +77,7 @@ public class RMIConnector {
 
     public NameServerInterface getNameServer(){ return INameServer;}
 
-    public void bindRMIAgent(RMIAgentInterface rmiAgentInterface){ //TODO: work in progress
+    public void createRMIAgent(RMIAgentInterface rmiAgentInterface){ //TODO: work in progress
 
         try{
             Registry register = LocateRegistry.createRegistry(2000);

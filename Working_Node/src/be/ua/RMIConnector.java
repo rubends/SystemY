@@ -69,9 +69,9 @@ public class RMIConnector {
             }
             if (INodeNew.getPrevNode() == Main.INode.getId()) {
                 Main.INode.updateNextNode(INodeNew.getId());
-                Replication replication = new Replication(INameServer);
-                replication.toNextNode(hash);
             }
+            Replication replication = new Replication(INameServer);
+            replication.toNextNode(hash);
         } catch (Exception e){ e.printStackTrace(); }
     }
 

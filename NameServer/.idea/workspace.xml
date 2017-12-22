@@ -2,33 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56534b84-34bf-49d2-90ea-98236a27a95b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/FailureAgent.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/FileAgent.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/FileMap.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/INode.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Main.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/MulticastThread.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/NameServerInterface.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Node.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/RMIAgent.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/RMIAgentInterface.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/RMIConnector.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/Replication.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/TCPReceiverThread.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/TCPSender.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/UpdateFileMapThread.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Working_Node/out/production/Working_Node/be/ua/UserInterface.class" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Working_Node/Files/Local/kkk.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Working_Node/Files/Local/sss.jpg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Working_Node/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/FileMap.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/FileMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/INode.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/INode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Main.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/Node.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/Node.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/RMIConnector.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/RMIConnector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Working_Node/src/be/ua/UserInterface.java" afterPath="$PROJECT_DIR$/../Working_Node/src/be/ua/UserInterface.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../Working_Node/Files/Replication/Ruben.txt" afterPath="$PROJECT_DIR$/../Working_Node/Files/Local/Ruben.txt" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

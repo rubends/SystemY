@@ -31,12 +31,17 @@ public class FileMap implements Serializable {
     }
     public String getIpOfLocation() {
         Iterator it = FileLocation.entrySet().iterator();
-        //todo random location
+        int randomLocation = (int)(Math.random()*(FileLocation.size()-1));
+        int i = 0;
+
         while(it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            String location = (String)pair.getValue();
-            //System.out.println("IP of location = " + location);
-            return location;
+            if(i == randomLocation) {
+                Map.Entry pair = (Map.Entry)it.next();
+                String location = (String)pair.getValue();
+                //System.out.println("IP of location = " + location);
+                return location;
+            }
+            i++;
         }
         return null;
     }

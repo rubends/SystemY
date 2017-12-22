@@ -44,7 +44,6 @@ public class TCPReceiverThread extends Thread {
 
             }catch(Exception e){
             }
-
         }
     }
 }

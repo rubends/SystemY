@@ -42,9 +42,9 @@ public class Main {
         FileAgent fileAgent = new FileAgent();
         if(MulticastThread.nodeCount == 1) {
             try {
-                //RMIAgentInterface rmiAgent = new RMIAgent(NameServerInterface);
-                //connector.bindRMIAgent(rmiAgent);
-                //rmiAgent.passFileAgent(fileAgent);
+                RMIAgentInterface rmiAgent = new RMIAgent(NameServerInterface);
+                connector.bindRMIAgent(rmiAgent);
+                rmiAgent.passFileAgent(fileAgent);
             } catch (Exception e) {
                 System.out.println("Agents created error:");
                 e.printStackTrace();

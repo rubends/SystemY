@@ -51,7 +51,7 @@ public class Node extends UnicastRemoteObject implements INode{
         return mId;
     }
 
-    public void nodeShutdownFiles(String filename, int nodeHash) {
+    public void deleteFileLocation(String filename, int nodeHash) {
         Replication.fileMap.get(filename).removeLocation(nodeHash);
     }
 

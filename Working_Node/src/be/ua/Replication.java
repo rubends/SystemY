@@ -56,12 +56,13 @@ public class Replication {
                 if(ownHash != neighbourHash){
                     String prevIp = INameServer.getNodeIp(neighbourHash);
                     System.out.println("REPLICATION file " + filename + " replicated to previous node " + prevIp);
-                    INode INodePrev = (INode) Naming.lookup("//"+prevIp+"/"+neighbourHash);
                     FileMap fiche = fileMap.get(filename);
-                    fiche.addLocation(ownIp, ownHash);
+                    //INode INodePrev = (INode) Naming.lookup("//"+prevIp+"/"+neighbourHash); // DELETED LINE BECAUSE LOCAL FILES BELONG TO OWNER
+                    //fiche.addLocation(ownIp, ownHash);
                     //fileMap.put(filename, fiche);
-                    INodePrev.sendFiche(fiche);
-                    fileMap.remove(filename);
+                    //INodePrev.sendFiche(fiche);
+                    //fileMap.remove(filename);
+                    fiche.addLocation(prevIp, neighbourHash);
                     tcpSender.SendFile(prevIp, location);
                 }
             }
@@ -88,8 +89,6 @@ public class Replication {
                         tcpSender.SendFile(ipNextNode, replicatedFiles[i].getAbsolutePath());
                         if (fileMap.containsKey(replicatedFiles[i].getName())) {
                             passFiche(replicatedFiles[i].getName(), ipNextNode);
-                            //TODO: CHECK IF FICHE MAP IS CORRECT
-                            //if (replicatedFiles[i].isFile()) replicatedFiles[i].delete(); //NO DELETE, NEW DOWNLOADLOCATION
                             //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
                         }
                     }
@@ -117,10 +116,8 @@ public class Replication {
                     } else if (ownIp.equals(ipOwner)) { // !!!! WHEN LOCAL FILES ARE BELONGING TO OWN NODE, THEY ARE REPLICATED TO NEW NODE
                         System.out.println("REPLICATION sending local file: " + localFiles[i].getName() + " to " + prevIp);
                         tcpSender.SendFile(prevIp, localFiles[i].getAbsolutePath());
-                        if (fileMap.containsKey(localFiles[i].getName())) {
-                            passFiche(localFiles[i].getName(), prevIp);
-                        }
-                        //if Ip is from own node, send to prev node
+                        int fileHash = INameServer.getHashOfName(localFiles[i].getName());
+                        fileMap.get(fileHash).addLocation(prevIp, Main.INode.getPrevNode());
                     }
                 }
             }
@@ -144,7 +141,7 @@ public class Replication {
                     String nodeIp = INameServer.getFileIp(fileName);
                     int nodeHash = INameServer.getHashOfIp(nodeIp);
                     INode nodeRMI = (INode) Naming.lookup("//"+nodeIp+"/"+nodeHash);
-                    nodeRMI.nodeShutdownFiles(fileName, Main.INode.getId());
+                    nodeRMI.deleteFileLocation(fileName, Main.INode.getId());
 
                 } else {
                     tcpSender.SendFile(ipPrevNode, replicatedFiles[i].getAbsolutePath());
@@ -160,7 +157,7 @@ public class Replication {
                 String nodeIp = INameServer.getFileIp(fileName);
                 int nodeHash = INameServer.getHashOfIp(nodeIp);
                 INode nodeRMI = (INode) Naming.lookup("//"+nodeIp+"/"+nodeHash);
-                nodeRMI.nodeShutdownFiles(fileName, Main.INode.getId());
+                nodeRMI.deleteFileLocation(fileName, Main.INode.getId());
             } catch (Exception e){
                 e.printStackTrace();
             }

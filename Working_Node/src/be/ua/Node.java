@@ -145,7 +145,7 @@ public class Node extends UnicastRemoteObject implements INode{
 
             //start agent
             FailureAgent failureAgent = new FailureAgent(hashOfFailedNode, INameServer);
-            RMIAgent rmiAgent = new RMIAgent(Main.INode, INameServer);
+            RMIAgent rmiAgent = new RMIAgent(INameServer);
             rmiAgent.passFailureAgent(failureAgent);
 
         } catch (Exception e) { e.printStackTrace(); }

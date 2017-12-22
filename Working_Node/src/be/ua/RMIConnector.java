@@ -31,8 +31,8 @@ public class RMIConnector {
             if (System.getSecurityManager() == null) {
                 System.setSecurityManager(new SecurityManager());
             }
-            //registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
-            registry = LocateRegistry.getRegistry(Registry.REGISTRY_PORT);
+            registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT); // NETWORK
+            //registry = LocateRegistry.getRegistry(Registry.REGISTRY_PORT); // LOCAL
             registry.rebind(connName, iNode);
             System.out.println("Created own RMI server");
         } catch (Exception e) {

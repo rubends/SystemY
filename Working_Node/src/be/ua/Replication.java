@@ -87,7 +87,7 @@ public class Replication {
                         if (fileMap.containsKey(replicatedFiles[i].getName())) {
                             passFiche(replicatedFiles[i].getName(), ipNextNode);
                             //TODO: CHECK IF FICHE MAP IS CORRECT
-                            if (replicatedFiles[i].isFile()) replicatedFiles[i].delete();
+                            //if (replicatedFiles[i].isFile()) replicatedFiles[i].delete(); //NO DELETE, NEW DOWNLOADLOCATION
                             //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
                         }
                     }

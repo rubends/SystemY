@@ -31,6 +31,7 @@ public class FileMap implements Serializable {
     }
     public String getIpOfLocation() {
         Iterator it = FileLocation.entrySet().iterator();
+        //todo random location
         while(it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
             String location = (String)pair.getValue();

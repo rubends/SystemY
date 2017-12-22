@@ -146,8 +146,16 @@ public class Node extends UnicastRemoteObject implements INode{
         } catch (Exception e) { e.printStackTrace(); }
     }
 
+    public String getDownloadLocation(String filename){
+        return Replication.fileMap.get(filename).getIpOfLocation();
+    }
+
     public void sendFile(String ip, String filename){
         TCPSender tcpSender = new TCPSender(8445);
         tcpSender.downloadRequest(filename, ip);
+    }
+
+    public void deleteFile(String filename){
+
     }
 }

@@ -75,6 +75,7 @@ public class Replication {
             String ipNextNode = INameServer.getNodeIp(hashNextNode);
             String ownIp = INameServer.getNodeIp(Main.INode.getId());
             String prevIp = INameServer.getNodeIp(Main.INode.getPrevNode());
+            int prevPrevHash = INameServer.getNeighbourNodes(Main.INode.getPrevNode()).get(0);
             System.out.println("REPLICATION ip sam: " + ipNextNode);
             TCPSender tcpSender = new TCPSender(SOCKET_PORT);
             for (int i = 0; i < replicatedFiles.length; i++) {
@@ -91,23 +92,33 @@ public class Replication {
                             //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
                         }
                     }
-                } else if (prevIp.equals(ipOwner)) { //files die op deze node staan, omdat hun hash overeen komt met de node waar ze lokaal op stonden, moeten ook gecheckt worden
-
+                } else if (prevPrevHash == hashNextNode && prevIp.equals(ipOwner) && prevPrevHash != Main.INode.getId()){
+                    String prevPrevIp = INameServer.getNodeIp(prevPrevHash);
+                    INode PrevPrevNode = (INode) Naming.lookup("//"+prevPrevIp+"/"+Integer.toString(prevPrevHash));
+                    if(!PrevPrevNode.hasFile(replicatedFiles[i].getName())) {
+                        System.out.println("REPLICATION sending replicated file " + replicatedFiles[i].getName() + " to real previous node: " + prevPrevIp);
+                        tcpSender.SendFile(prevPrevIp, replicatedFiles[i].getAbsolutePath());
+                        if (fileMap.containsKey(replicatedFiles[i].getName())) {
+                            passFiche(replicatedFiles[i].getName(), prevPrevIp);
+                        }
+                    }
                 }
-            }
+            } // @TODO bestand hoort bij prev maar kon niet bij zichzelf dus is naar deze gestuurd, moet nu naar prev van vorige
             if(Main.INode.getPrevNode() != Main.INode.getId() && Main.INode.getPrevNode() == Main.INode.getNextNode()) { // WEL LOCAL FILES CHECKEN WANNEER ER 1 BUUR IS.
                 for (int i = 0; i < localFiles.length; i++) {
                     String ipOwner = INameServer.getFileIp(localFiles[i].getName());
                     if (ipNextNode.equals(ipOwner)) {
                         System.out.println("REPLICATION sending local file: " + localFiles[i].getName() + " to " + ipNextNode + " if it equals " + ipOwner);
                         tcpSender.SendFile(ipNextNode, localFiles[i].getAbsolutePath());
-                        if (fileMap.containsKey(replicatedFiles[i].getName())) {
+                        if (fileMap.containsKey(localFiles[i].getName())) {
                             passFiche(localFiles[i].getName(), ipNextNode); //FICHE DOORSTUREN + TOEVOEGEN AAN LIJST
                         }
                     } else if (ownIp.equals(ipOwner)) { // !!!! WHEN LOCAL FILES ARE BELONGING TO OWN NODE, THEY ARE REPLICATED TO NEW NODE
                         System.out.println("REPLICATION sending local file: " + localFiles[i].getName() + " to " + prevIp);
                         tcpSender.SendFile(prevIp, localFiles[i].getAbsolutePath());
-                        passFiche(localFiles[i].getName(), prevIp);
+                        if (fileMap.containsKey(localFiles[i].getName())) {
+                            passFiche(localFiles[i].getName(), prevIp);
+                        }
                         //if Ip is from own node, send to prev node
                     }
                 }

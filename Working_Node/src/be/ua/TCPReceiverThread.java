@@ -33,9 +33,11 @@ public class TCPReceiverThread extends Thread {
                 FileOutputStream fos = new FileOutputStream(receivedFile);
                 int bufferLength = is.available();
                 while(receivedSocket.isConnected()){ //max size TCP packet is 64kb
-                    byte[] data = new byte[bufferLength];
-                    int length = is.read(data);
-                    fos.write(data, 0, length);
+                    if(bufferLength > 0) {
+                        byte[] data = new byte[bufferLength];
+                        int length = is.read(data);
+                        fos.write(data, 0, length);
+                    }
                 }
                 System.out.println("TCPReceiverThread: filename: " + fileName);
                 //receivedSocket.close();

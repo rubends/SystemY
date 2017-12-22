@@ -51,9 +51,8 @@ public class Node extends UnicastRemoteObject implements INode{
         return mId;
     }
 
-    public void nodeShutdownFiles(int hash) {
-        //@todo replication shutdown: update in filemap dat de eigenaar van 'hash' er niet meer is
-        //updateFiche( fileName,  hash,  ipLocation)
+    public void nodeShutdownFiles(String filename, int nodeHash) {
+        Replication.fileMap.get(filename).removeLocation(nodeHash);
     }
 
     public void sendFiche(FileMap fiche) {

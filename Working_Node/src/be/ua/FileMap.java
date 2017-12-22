@@ -20,6 +20,9 @@ public class FileMap implements Serializable {
     public void addLocation(String ip,int hash){
         FileLocation.put(hash,ip);
     }
+    public void removeLocation(int hash){
+        FileLocation.remove(hash);
+    }
     public int getHashOfLocation() {
         Iterator<Integer> keySetIterator = FileLocation.keySet().iterator();
         while (keySetIterator.hasNext()) {

@@ -60,18 +60,18 @@ public class UpdateFileMapThread extends Thread{
                             "\n Starting replication.");
 
                     try{
+                        Replication replication = new Replication(INameServer);
+                        replication.setNodeName(nodeName);
+
                         //ADDED NEW FILE
                         if (currentKeys.size() > prevKeys.size()){
                             currentKeys.removeAll(prevKeys);
                             for (String filename : currentKeys) {
-                                fileMap.put(filename, new FileMap(filename,INameServer.getNodeIp(Node.nodeHash),Main.INode.getId()));
+                                int ownHash = Main.INode.getId();
+                                fileMap.put(filename, new FileMap(filename,INameServer.getNodeIp(ownHash),ownHash));
+                                replication.replicate(filename, fileLocDir.getAbsolutePath()+sep+filename);
                             }
                         }
-
-                        Replication replication = new Replication(INameServer);
-                        replication.setNodeName(nodeName);
-                        replication.getFiles();
-                        //TODO: CHECK IF WORKING? NIET OVERBODIG OM VOLLEDIGE getFiles terug te doen?
                     }
                     catch (Exception e){e.printStackTrace();}
 

@@ -15,8 +15,8 @@ public class UpdateFileMapThread extends Thread{
 
     private static final int WAITTIME = 3;
     public List<File> fileList = new ArrayList<>();
-    public TreeMap<String, Boolean> nodeFileList = new TreeMap<>(); //filename + isOwner/ornot
-    public TreeMap<String, Boolean> prevNodeFileList = new TreeMap<>();
+    public TreeMap<File, Boolean> nodeFileList = new TreeMap<>(); //filename + isOwner/ornot
+    public TreeMap<File, Boolean> prevNodeFileList = new TreeMap<>();
     NameServerInterface INameServer;
     String nodeName;
 
@@ -25,32 +25,29 @@ public class UpdateFileMapThread extends Thread{
 
         String rootPath = new File("").getAbsolutePath();
         String sep = System.getProperty("file.separator");
-
-        //File fileReplDir = new File(rootPath + sep + "Files" + sep + "Replication" + sep);
         File fileLocDir = new File(rootPath + sep + "Files" + sep + "Local" + sep);
 
         while(true){
 
             //fill previous node file list with keys of node file list.
             prevNodeFileList.clear();
-            for (Map.Entry<String, Boolean> entry : nodeFileList.entrySet()) {
+            for (Map.Entry<File, Boolean> entry : nodeFileList.entrySet()) {
                 prevNodeFileList.put(entry.getKey(), entry.getValue());
             }
 
             //get new content for node file list
-            //fillListWithFiles(fileReplDir, false);
             fillListWithFiles(fileLocDir, true);
 
             //Compare if previous is different than current node file list.
-            List<String> currentKeys = new ArrayList<>();
-            List<String> prevKeys = new ArrayList<>();
+            List<File> currentKeys = new ArrayList<>();
+            List<File> prevKeys = new ArrayList<>();
             if(prevNodeFileList.size() > 0) //first prev node file list will be different - because node list gets filld
             {
                 //fill lists with content
-                for (Map.Entry<String, Boolean> entry : nodeFileList.entrySet()) {
+                for (Map.Entry<File, Boolean> entry : nodeFileList.entrySet()) {
                     currentKeys.add(entry.getKey());
                 }
-                for (Map.Entry<String, Boolean> entry : prevNodeFileList.entrySet()) {
+                for (Map.Entry<File, Boolean> entry : prevNodeFileList.entrySet()) {
                     prevKeys.add(entry.getKey());
                 }
 
@@ -63,7 +60,7 @@ public class UpdateFileMapThread extends Thread{
                         //ADDED NEW FILE
                         if (currentKeys.size() > prevKeys.size()){
                             currentKeys.removeAll(prevKeys);
-                            for (String filename : currentKeys) {
+                            for (File file : currentKeys) {
                                 fileMap.put(filename, new FileMap(filename,INameServer.getNodeIp(Node.nodeHash),Main.INode.getId()));
                             }
                         }

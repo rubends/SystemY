@@ -80,8 +80,8 @@ public class RMIConnector {
     public void bindRMIAgent(RMIAgentInterface rmiAgentInterface){ //TODO: work in progress
 
         try{
-            //Registry register = LocateRegistry.getRegistry(Registry.REGISTRY_PORT);
-            registry.rebind("RMIAgent", rmiAgentInterface);
+            Registry register = LocateRegistry.createRegistry(2000);
+            register.rebind("RMIAgent", rmiAgentInterface);
         } catch (Exception e) {
             e.printStackTrace();
         }

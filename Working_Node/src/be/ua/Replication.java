@@ -138,7 +138,7 @@ public class Replication {
             e.printStackTrace();
         }
         File[] localFiles = localFolder.listFiles();
-        for (int i = 0; i < localFiles.length; i++) {
+        for (int i = 0; i < localFiles.length; i++) { //TODO GET IP of file --> delete own ip in fileMap
             System.out.println("REPLICATION name: "+ localFiles[i].getName());
             System.out.println("REPLICATION in map: "+ fileMap.get(localFiles[i].getName()));
             String nodeIp = fileMap.get(localFiles[i].getName()).getIpOfLocation();

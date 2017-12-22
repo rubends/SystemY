@@ -47,10 +47,9 @@ public class Main {
             //output from rmiAgent: RMIAgent{nextNodeId=15324, myNodeId=21591, ns=Proxy[NameServerInterface,RemoteObjectInvocationHandler
             // [UnicastRef [liveRef: [endpoint:[169.254.234.139:49167](remote),objID:[5ce6daa0:1607db91471:-7fff, -7627599808127725904]]]]]}
 
-            /*
             connector.bindRMIAgent(rmiAgent);
             rmiAgent.passFileAgent(fileAgent);
-            */
+
 
         } catch (Exception e) {
             System.out.println("Agents created error:");

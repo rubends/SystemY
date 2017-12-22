@@ -72,7 +72,8 @@ public class UserInterface {
 
     private void openFile(String filename){
         try {
-            String ip = INameServer.getFileIp(filename);
+            //String ip = INameServer.getFileIp(filename); //todo CREATE WORKING getFileIp
+            String ip = "192.168.0.103";
             String ownIp = INameServer.getNodeIp(Main.INode.getId());
             System.out.println("File is located at " + ip);
             if(ip.equals(ownIp)) { //file is on own system
@@ -82,9 +83,11 @@ public class UserInterface {
                 // todo set lock
                 INode fileNode = (INode) Naming.lookup( "//"+ip + "/" + INameServer.getHashOfIp(ip));
                 String downloadIp = fileNode.getDownloadLocation(filename);
+                System.out.println("download ip: " + downloadIp);
                 INode downloadNode = (INode) Naming.lookup( "//"+downloadIp + "/" + INameServer.getHashOfIp(downloadIp));
                 downloadNode.sendFile(ownIp, filename);
                 fileNode.updateFiche(filename,Main.INode.getId(),ownIp);
+                System.out.println("opening file " + filename);
                 Desktop.getDesktop().open(getFile(filename).getAbsoluteFile());
             }
         } catch (Exception e){
@@ -103,6 +106,7 @@ public class UserInterface {
                 INode fileNode = (INode) Naming.lookup( "//"+fileOwnerIp + "/" + INameServer.getHashOfIp(fileOwnerIp));
                 fileNode.deleteFile(filename);
             }
+            //TODO delete from everywhere
         } catch (Exception e){
             e.printStackTrace();
         }

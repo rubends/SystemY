@@ -4,18 +4,18 @@ import java.io.Serializable;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.concurrent.TimeUnit;
 
 import static be.ua.Main.rmiAgent;
 
 public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface,Runnable, Serializable {
 
-    int nextNodeId;
-    int myNodeId;
+    private static final int WAITTIME = 5;
+    int nextNodeId = Main.INode.getNextNode();
+    int myNodeId = Main.INode.getId();
     NameServerInterface ns;
 
     public RMIAgent(NameServerInterface ns) throws RemoteException {
-        nextNodeId = Main.INode.getNextNode();
-        myNodeId = Main.INode.getId();
         this.ns = ns;
     }
 
@@ -55,9 +55,8 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface,R
             System.out.println("RMI-AGENT: File agent passing to " + ipNextNode );
             RMIAgentInterface rmiAgent = (RMIAgentInterface) Naming.lookup( "//"+ipNextNode+":2000/RMIAgent");
             fileAgent.run();
+            TimeUnit.SECONDS.sleep(WAITTIME);
             FileAgent passedAgent = rmiAgent.startFileAgent(fileAgent);
-            Thread.sleep(5000);
-
             rmiAgent.passFileAgent(passedAgent);
         } catch (Exception e) {
             e.printStackTrace();

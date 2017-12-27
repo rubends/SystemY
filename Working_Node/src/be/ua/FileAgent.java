@@ -5,16 +5,13 @@ import java.io.Serializable;
 
 public class FileAgent implements Runnable, Serializable {
     public FileAgent() { }
-    String rootPath = new File("").getAbsolutePath();
-    String sep = System.getProperty("file.separator"); //OS dependable
-    String pathToFiles = rootPath + sep + "Files" + sep;
 
     @Override
     public void run() {
 
         //adding local and replication files to Node.fileList
         for (String foldername: new String[]{"Local", "Replication"}) {
-            File folder = new File(pathToFiles + foldername);
+            File folder = new File(Main.pathToFiles+ foldername);
             addToList(folder.listFiles());
         }
 

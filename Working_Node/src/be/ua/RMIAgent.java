@@ -52,10 +52,10 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface,R
             String ipNextNode = ns.getNodeIp(nextNodeId);
             System.out.println("RMI-AGENT: File agent passing to " + ipNextNode );
             RMIAgentInterface rmiAgent = (RMIAgentInterface) Naming.lookup( "//"+ipNextNode+":2000/RMIAgent");
-            fileagent.run();
+            fileAgent.run();
             FileAgent passedAgent = rmiAgent.startFileAgent(fileAgent);
-            //Thread.sleep(5000);
-            //rmiAgent.passFileAgent(passedAgent);
+            Thread.sleep(5000);
+            rmiAgent.passFileAgent(passedAgent);
             System.out.println("exit pass file agent");
         } catch (Exception e) {
             e.printStackTrace();

@@ -39,8 +39,11 @@ public class Main {
 
 
         //implementation of agents
-        rmiAgent.run();
-
+        try {
+            rmiAgent = new RMIAgent(NameServerInterface);
+            rmiAgent.run();
+        }catch(Exception e){e.printStackTrace();
+        }
 
         ui.startUI();
 

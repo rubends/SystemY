@@ -8,5 +8,5 @@ public interface RMIAgentInterface extends Remote {
     void passFileAgent(FileAgent fileAgent) throws RemoteException;
     FailureAgent startFailureAgent(FailureAgent failureAgent) throws RemoteException;
     void passFailureAgent(FailureAgent failureAgent) throws RemoteException;
-    void run();
+    void run() throws RemoteException;
 }

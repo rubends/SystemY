@@ -19,7 +19,7 @@ public class MulticastThread extends Thread{
     }
 
     public void run() {
-        String inetAddress = "224.0.1.6"; //@todo WHY?
+        String inetAddress = "224.0.1.6";
         int MulticastSocketPort = 6790;
         int DsocketPort = 6791;
         try {

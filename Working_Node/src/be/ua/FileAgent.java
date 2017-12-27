@@ -27,11 +27,9 @@ public class FileAgent implements Runnable, Serializable {
         }
     }
 
-    public void lockFile(File file){
-        for (int i = 0; i < Node.fileList.size(); i++) {
-            if(Node.fileList.containsKey(file)){
-                Node.fileList.put(file, true);
-            }
-        }
+    public static void setLock(String fileName, Boolean lock){
+        File file = UserInterface.getFile(fileName);
+        Node.fileList.remove(file);
+        Node.fileList.put(file, lock);
     }
 }

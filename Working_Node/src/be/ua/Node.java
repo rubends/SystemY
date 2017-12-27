@@ -161,7 +161,12 @@ public class Node extends UnicastRemoteObject implements INode{
     }
 
     public void deleteFile(String filename){
+        Replication.deleteFile(filename);
         Replication.fileMap.remove(filename);
-        //TODO delete from all owners
+    }
+
+    public void deleteLocalFile(String filename){
+        File file = UserInterface.getFile(filename);
+        file.delete();
     }
 }

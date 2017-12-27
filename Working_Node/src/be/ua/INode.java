@@ -19,4 +19,5 @@ public interface INode extends Remote {
     void deleteFile(String fileName) throws  RemoteException;
     String getDownloadLocation(String filename) throws RemoteException;
     void deleteFileLocation(String filename, int nodeHash) throws RemoteException;
+    void deleteLocalFile(String filename) throws RemoteException;
 }

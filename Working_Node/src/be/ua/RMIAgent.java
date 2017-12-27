@@ -12,7 +12,7 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface,R
     int nextNodeId;
     int myNodeId;
     NameServerInterface ns;
-    FileAgent fileagent;
+
     public RMIAgent(NameServerInterface ns) throws RemoteException {
         nextNodeId = Main.INode.getNextNode();
         myNodeId = Main.INode.getId();

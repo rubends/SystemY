@@ -82,6 +82,7 @@ public class RMIConnector {
         try{
             Registry register = LocateRegistry.createRegistry(2000);
             register.rebind("RMIAgent", rmiAgentInterface);
+            System.setProperty("java.security.policy", "file:server.policy");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.Serializable;
 
 public class FileAgent implements Runnable, Serializable {
+    public FileAgent() {
+    }
 
     @Override
     public void run() {

@@ -17,7 +17,6 @@ public class FileAgent implements Runnable, Serializable {
         File[] replicationFiles = replicationFolder.listFiles();
         addToList(localFiles);
         addToList(replicationFiles);
-        //@todo lock stuff
     }
 
     public void addToList(File[] files){
@@ -26,5 +25,11 @@ public class FileAgent implements Runnable, Serializable {
                 Node.fileList.put(files[i], false);
             }
         }
+    }
+
+    public static void setLock(String fileName, Boolean lock){
+        File file = UserInterface.getFile(fileName);
+        Node.fileList.remove(file);
+        Node.fileList.put(file, lock);
     }
 }

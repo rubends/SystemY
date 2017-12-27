@@ -41,16 +41,16 @@ public class Main {
         //implementation of agents
         FileAgent fileAgent = new FileAgent();
 
-        try {
-            rmiAgent = new RMIAgent(NameServerInterface);
-            if(MulticastThread.nodeCount == 1) {
-                connector.createRMIAgent(rmiAgent);
-            }
-            rmiAgent.passFileAgent(fileAgent);
-        } catch (Exception e) {
-            System.out.println("Agents created error:");
-            e.printStackTrace();
-        }
+//        try {
+//            rmiAgent = new RMIAgent(NameServerInterface);
+//            if(MulticastThread.nodeCount == 1) {
+//                connector.createRMIAgent(rmiAgent);
+//            }
+//            rmiAgent.passFileAgent(fileAgent);
+//        } catch (Exception e) {
+//            System.out.println("Agents created error:");
+//            e.printStackTrace();
+//        }
 
         ui.startUI();
 

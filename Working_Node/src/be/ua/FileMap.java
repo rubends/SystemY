@@ -49,11 +49,7 @@ public class FileMap implements Serializable {
         return null;
     }
 
-    public void printLocation(){
-        Iterator<Integer> keySetIterator = FileLocation.keySet().iterator();
-        while (keySetIterator.hasNext()) {
-            int key = keySetIterator.next();
-            //System.out.println(key + " - " + FileLocation.get(key));
-        }
+    public HashMap<Integer, String> getFileLocations(){
+        return FileLocation;
     }
 }

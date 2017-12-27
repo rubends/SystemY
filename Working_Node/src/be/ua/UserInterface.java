@@ -85,6 +85,8 @@ public class UserInterface {
                 Desktop.getDesktop().open(getFile(filename).getAbsoluteFile());
             } else {
                 // todo set lock on agent
+                FileAgent.setLock(filename, true);
+
                 INode fileNode = (INode) Naming.lookup( "//"+ip + "/" + INameServer.getHashOfIp(ip));
                 String downloadIp = fileNode.getDownloadLocation(filename);
                 System.out.println("download ip: " + downloadIp);
@@ -93,7 +95,9 @@ public class UserInterface {
                 fileNode.updateFiche(filename,Main.INode.getId(),ownIp);
                 System.out.println("opening file " + filename);
                 Desktop.getDesktop().open(getFile(filename).getAbsoluteFile());
+
                 // todo stop lock on agent
+                FileAgent.setLock(filename, false);
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -106,13 +110,12 @@ public class UserInterface {
             String ownIp = INameServer.getNodeIp(Main.INode.getId());
             String fileOwnerIp = INameServer.getFileIp(filename);
             if(fileOwnerIp.equals(ownIp)){ //file is on own system
+                Replication.deleteFile(filename);
                 Replication.fileMap.remove(filename);
-                getFile(filename).delete();
             } else {
                 INode fileNode = (INode) Naming.lookup( "//"+fileOwnerIp + "/" + INameServer.getHashOfIp(fileOwnerIp));
                 fileNode.deleteFile(filename);
             }
-            //TODO delete from everywhere
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -130,7 +133,7 @@ public class UserInterface {
         }
     }
 
-    private File getFile(String filename){
+    public static File getFile(String filename){
         String rootPath = new File("").getAbsolutePath();
         String sep = System.getProperty("file.separator");
         File localFolder = new File(rootPath + sep + "Files" + sep + "Local");

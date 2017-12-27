@@ -3,6 +3,8 @@ package be.ua;
 import java.io.File;
 import java.rmi.Naming;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.TreeMap;
 
 public class Replication {
@@ -47,7 +49,6 @@ public class Replication {
                 System.out.println("REPLICATION file " + filename + " replicated to " + nodeIp);
                 INodeNew.sendFiche(fiche);
                 fileMap.remove(filename); // dont remove local file fiches
-                //TODO: CHECK IF FICHE MAP IS CORRECT
 
                 tcpSender.SendFile(ip, location);
             } else {
@@ -151,7 +152,7 @@ public class Replication {
             e.printStackTrace();
         }
         File[] localFiles = localFolder.listFiles();
-        for (int i = 0; i < localFiles.length; i++) { //TODO GET IP of file --> delete own ip in fileMap
+        for (int i = 0; i < localFiles.length; i++) {
             try {
                 String fileName = localFiles[i].getName();
                 String nodeIp = INameServer.getFileIp(fileName);
@@ -195,6 +196,25 @@ public class Replication {
         }
         catch(Exception e){
             e.printStackTrace();
+        }
+    }
+
+    public static void deleteFile(String filename){
+        HashMap<Integer, String> locations =  fileMap.get(filename).getFileLocations();
+        Iterator<Integer> keySetIterator = locations.keySet().iterator();
+        while (keySetIterator.hasNext()) {
+            int hash = keySetIterator.next();
+            try {
+                if(hash != Main.INode.getId()){
+                    String ip = locations.get(hash);
+                    INode INodeOwner = (INode) Naming.lookup("//"+ip+"/"+hash);
+                    INodeOwner.deleteLocalFile(filename);
+                } else {
+                    UserInterface.getFile(filename).delete();
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 }

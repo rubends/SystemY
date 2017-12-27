@@ -149,4 +149,10 @@ public class UserInterface {
         }
         return null;
     }
+
+    private void lockFile(File file){
+
+        //todo - no new file agent, but the one going around the nodes
+        new FileAgent().lockFile(file);
+    }
 }

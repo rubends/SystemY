@@ -19,13 +19,20 @@ public class FileAgent implements Runnable, Serializable {
         File[] replicationFiles = replicationFolder.listFiles();
         addToList(localFiles);
         addToList(replicationFiles);
-        //@todo lock stuff
     }
 
     public void addToList(File[] files){
         for (int i = 0; i < files.length; i++) {
             if(!Node.fileList.containsKey(files[i])){
                 Node.fileList.put(files[i], false);
+            }
+        }
+    }
+
+    public void lockFile(File file){
+        for (int i = 0; i < Node.fileList.size(); i++) {
+            if(Node.fileList.containsKey(file)){
+                Node.fileList.put(file, true);
             }
         }
     }

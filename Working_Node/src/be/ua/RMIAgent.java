@@ -20,6 +20,8 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface,R
     }
 
     public void run(){
+
+        //todo, get agent to pass to eachother
         FileAgent fileAgent = new FileAgent();
         RMIConnector connector = new RMIConnector();
         try {
@@ -55,8 +57,8 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface,R
             fileAgent.run();
             FileAgent passedAgent = rmiAgent.startFileAgent(fileAgent);
             Thread.sleep(5000);
+
             rmiAgent.passFileAgent(passedAgent);
-            System.out.println("exit pass file agent");
         } catch (Exception e) {
             e.printStackTrace();
         }

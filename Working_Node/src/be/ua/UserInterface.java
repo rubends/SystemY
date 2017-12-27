@@ -150,9 +150,9 @@ public class UserInterface {
         return null;
     }
 
-    private void lockFile(File file){
+    private void lockFile(String filename){
 
         //todo - no new file agent, but the one going around the nodes
-        new FileAgent().lockFile(file);
+        new FileAgent().lockFile(getFile(filename));
     }
 }

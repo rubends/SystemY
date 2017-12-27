@@ -8,6 +8,8 @@ public class Main {
     public static String ipNameServer = "192.168.0.190"; //127.0.0.1
     public static RMIAgentInterface rmiAgent;
     public static void main(String[] args) {
+
+
         RMIConnector connector = new RMIConnector();
         NameServerInterface NameServerInterface = connector.getNameServer();
 
@@ -40,10 +42,8 @@ public class Main {
 
         //implementation of agents
         try {
-            rmiAgent = new RMIAgent(NameServerInterface);
-            rmiAgent.run();
-        }catch(Exception e){e.printStackTrace();
-        }
+            new RMIAgent(NameServerInterface).run();
+        }catch(Exception e){e.printStackTrace(); }
 
         ui.startUI();
 

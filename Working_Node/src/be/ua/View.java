@@ -16,6 +16,7 @@ public class View extends JFrame{
     {
         JPanel panel = new JPanel();
         setSize(500, 330);
+        this.setTitle("System Y");
 
         //init components
         removeButton = new java.awt.Button();

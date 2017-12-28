@@ -7,13 +7,21 @@ import java.util.TreeMap;
 public class FileAgent implements Runnable, Serializable {
     private static TreeMap<String, Boolean> fileList;
     public FileAgent() { fileList = new TreeMap<>(); }
+    private String owner = "";
 
     @Override
     public void run() {
+        System.out.println("owner " + owner);
         //adding local and replication files to Node.fileList
         for (String foldername: new String[]{"Local", "Replication"}) {
             File folder = new File(Main.pathToFiles+ foldername);
             addToList(folder.listFiles());
+        }
+        owner = "Ruben";
+        try {
+            Main.INode.setLocalFileList(fileList);
+        } catch (Exception e){
+            e.printStackTrace();
         }
         //Node.localFileList = fileList;
         //Node.localFileList.putAll(fileList);
@@ -38,9 +46,5 @@ public class FileAgent implements Runnable, Serializable {
         } catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-    public static TreeMap<String, Boolean> getFileList () {
-        return fileList;
     }
 }

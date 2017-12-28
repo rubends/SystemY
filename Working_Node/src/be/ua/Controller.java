@@ -12,10 +12,11 @@ public class Controller implements Observer{
     private TreeMap<String, Boolean> fileList;
     private DefaultListModel listModel = new DefaultListModel();
     private static JList list;
-    UserInterface ui = new UserInterface(Main.NameServerInterface);
+    UserInterface ui;
 
-    Controller(FileAgent fileAgent){
+    Controller(FileAgent fileAgent, UserInterface ui){
         this.fileAgent = fileAgent;
+        this.ui = ui;
         this.list = new JList(listModel);
         this.fileList = new TreeMap<>();
         fillListModel();
@@ -94,7 +95,6 @@ public class Controller implements Observer{
     {
         //emptyListModel();
         fillListModel();
-        view.writeLogs("Refreshed list.");
         setList(new JList(listModel));
         //todo use listmodel?
     }
@@ -117,6 +117,9 @@ public class Controller implements Observer{
                 //System.out.println("GUI: Key: "+entry.getKey()+". Value: " + entry.getValue());
                 if(!listModel.contains(entry.getKey())){
                     listModel.addElement(entry.getKey());
+                    if(view != null){
+                        view.writeLogs("Refreshed list.");
+                    }
                 }
             }
         }

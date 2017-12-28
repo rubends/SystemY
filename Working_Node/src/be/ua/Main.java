@@ -71,7 +71,7 @@ public class Main {
 
 
 
-        controller = new Controller(fileAgent);
+        controller = new Controller(fileAgent, ui);
         View view = new View();
         controller.createListeners(view);
         view.setVisible(true);

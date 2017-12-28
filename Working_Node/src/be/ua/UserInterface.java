@@ -37,9 +37,9 @@ public class UserInterface {
                     System.out.println("previous node: " + Main.INode.getPrevNode());
                     System.out.println("next node: " + Main.INode.getNextNode());
                 } else if (action == 2) {
-                    if(Node.fileList.size() > 0) {
-                        for (Map.Entry<File, Boolean> entry : Node.fileList.entrySet()) {
-                            System.out.println("Name: " + entry.getKey().getName() + ". Locked: " + entry.getValue());
+                    if(Node.localFileList.size() > 0) {
+                        for (Map.Entry<String, Boolean> entry : Node.localFileList.entrySet()) {
+                            System.out.println("Name: " + entry.getKey() + ". Locked: " + entry.getValue());
                         }
                     } else {
                         System.out.println("No files found in the system file list.");

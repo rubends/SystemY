@@ -12,7 +12,7 @@ public class Node extends UnicastRemoteObject implements INode{
     private volatile int mNext;
     private volatile int mId;
     private volatile NameServerInterface INameServer;
-    public static TreeMap<File, Boolean> fileList; // file - locked
+    public static TreeMap<String, Boolean> localFileList; // filename - locked
     public static int nodeHash; //for local hash getting
 
     protected Node(int hash, NameServerInterface ns) throws RemoteException
@@ -20,9 +20,7 @@ public class Node extends UnicastRemoteObject implements INode{
         super();
         mId = mPrevious = mNext = nodeHash = hash;
         INameServer = ns;
-        //Comparator<File> fileListComp = Comparator.comparing(File::getName); // compares the file in de treemap by name
-        //fileList = new TreeMap<>(fileListComp);
-        fileList = new TreeMap<>();
+        localFileList = new TreeMap<>();
     }
 
     public void updateNeighbours(int newPrevious, int newNext)

@@ -16,7 +16,7 @@ public class FailureAgent implements Runnable, Serializable {
     public int agentNode; //hash of the node that started the failureagent
 
     NameServerInterface INameServer; //from constructor
-    TreeMap<File, Boolean> fileList; //global filelist, FORMAT: file - isLocked
+    TreeMap<String, Boolean> fileList; //global filelist, FORMAT: filename - isLocked
 
     public FailureAgent(int failureN, NameServerInterface nameServerInterface) {
         failureNode = failureN;
@@ -40,13 +40,12 @@ public class FailureAgent implements Runnable, Serializable {
 
     @Override
     public void run() {
-        fileList = Node.fileList;
+        fileList = Node.localFileList;
         agentNode = Node.nodeHash;
         
-        Iterator<File> keySetIterator = fileList.keySet().iterator();
+        Iterator<String> keySetIterator = fileList.keySet().iterator();
         while (keySetIterator.hasNext()) {
-            File file = keySetIterator.next();
-            String fileName = file.getName();
+            String fileName = keySetIterator.next();
             try {
                 String fileIP = INameServer.getFileIp(fileName);
                 int fileHash = INameServer.getHashOfName(fileName);
@@ -58,7 +57,7 @@ public class FailureAgent implements Runnable, Serializable {
                     INode newOwnerNode = (INode) Naming.lookup("//" + newOwnerIP + "/" + newOwner);
                     if(!newOwnerNode.hasFile(fileName)){
                         TCPSender tcpSender = new TCPSender(SOCKET_PORT);
-                        tcpSender.SendFile(newOwnerIP, file.getAbsolutePath());
+                        tcpSender.SendFile(newOwnerIP, UserInterface.getFile(fileName).getAbsolutePath());
                     }
                     newOwnerNode.updateFiche(fileName, fileHash, newOwnerIP);
                 }

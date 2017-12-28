@@ -20,7 +20,7 @@ public class FileAgent implements Runnable, Serializable {
         Node.localFileList = fileList;
 
         //debugline: check filelist size
-        System.out.println("file agent ran on node, here is filelist size: " + fileList.size());
+        //System.out.println("file agent ran on node, here is filelist size: " + fileList.size());
     }
 
     public void addToList(File[] files){

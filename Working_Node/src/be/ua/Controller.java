@@ -95,7 +95,7 @@ public class Controller implements Observer{
     {
         //emptyListModel();
         fillListModel();
-        setList(new JList(listModel));
+        //setList(new JList(listModel));
         //todo use listmodel?
     }
 

@@ -3,6 +3,7 @@ package be.ua;
 import java.io.File;
 import java.io.Serializable;
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.TreeMap;
 
@@ -46,7 +47,7 @@ public class FailureAgent implements Runnable, Serializable {
         } catch (Exception e){
             e.printStackTrace();
         }
-        
+
         Iterator<String> keySetIterator = fileList.keySet().iterator();
         while (keySetIterator.hasNext()) {
             String fileName = keySetIterator.next();

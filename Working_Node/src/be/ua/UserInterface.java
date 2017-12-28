@@ -31,6 +31,7 @@ public class UserInterface {
             System.out.println(" > ");
 
             int action = input.nextInt();
+
             try {
                 if (action == 0) {
                     Main.INode.shutdown();
@@ -77,7 +78,8 @@ public class UserInterface {
         }
     }
 
-    private void openFile(String filename){
+
+    public void openFile(String filename){
         try {
             String ip = INameServer.getFileIp(filename);
             String ownIp = INameServer.getNodeIp(Main.INode.getId());
@@ -107,7 +109,7 @@ public class UserInterface {
         }
     }
 
-    private void deleteFile(String filename){ // TODO delete from FileAgent/Node.filelist
+    public void deleteFile(String filename){ // TODO delete from FileAgent/Node.filelist
         try {
             if (Main.INode.getLocalFileList().get(filename)) {
                 System.out.println("File " + filename + " is locked.");
@@ -133,7 +135,7 @@ public class UserInterface {
         }
     }
 
-    private void deleteLocalFile(String filename){
+    public void deleteLocalFile(String filename){
         System.out.println("Deleting local file " + filename);
         try {
             String fileOwnerIp = INameServer.getFileIp(filename);

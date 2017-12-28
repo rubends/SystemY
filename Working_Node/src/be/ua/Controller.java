@@ -3,6 +3,7 @@ package be.ua;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.*;
 
 public class Controller implements Observer{
@@ -11,6 +12,7 @@ public class Controller implements Observer{
     private TreeMap<String, Boolean> fileList;
     private DefaultListModel listModel = new DefaultListModel();
     private static JList list;
+    UserInterface ui = new UserInterface(Main.NameServerInterface);
 
     Controller(FileAgent fileAgent){
         this.fileAgent = fileAgent;
@@ -48,29 +50,32 @@ public class Controller implements Observer{
     {
         public void actionPerformed(ActionEvent e)
         {
-            System.out.println("Open selected: "+ list.getSelectedValue());
+            ui.openFile(list.getSelectedValue().toString());
         }
     }
     class removeSelectionListener implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
         {
-            System.out.println("Remove selected: "+ list.getSelectedValue());
+            ui.deleteFile(list.getSelectedValue().toString());
         }
     }
-
     class logoutSelectionListener implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
         {
-            System.out.println("logout");
+            try {
+                Main.INode.shutdown();
+            } catch (RemoteException e1) {
+                e1.printStackTrace();
+            }
         }
     }
     class removeLocalSelectionListener implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
         {
-            System.out.println("Remove local file, selected: " + list.getSelectedValue());
+            ui.deleteLocalFile(list.getSelectedValue().toString());
         }
     }
 
@@ -96,7 +101,10 @@ public class Controller implements Observer{
 
     public void fillListModel()
     {
-        fileList = fileAgent.getFileList();
+        try{
+        fileList = Main.INode.getLocalFileList();
+        }catch(Exception e){e.printStackTrace();}
+
         if(fileList!=null){
             //System.out.println("GUI: filelist" + fileList);
             for(Map.Entry<String, Boolean> entry : fileList.entrySet())

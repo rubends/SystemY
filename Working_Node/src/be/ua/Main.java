@@ -15,12 +15,13 @@ public class Main {
     public static String pathToFiles = rootPath + sep + "Files" + sep;
     public static String pathToLocalFiles = rootPath + sep + "Files" + sep + "Local" + sep;
     public static String pathToReplFiles = rootPath + sep + "Files" + sep + "Replication" + sep;
-
+    public static NameServerInterface NameServerInterface;
+    public static Controller controller;
 
     public static void main(String[] args) {
 
         RMIConnector connector = new RMIConnector();
-        NameServerInterface NameServerInterface = connector.getNameServer();
+        NameServerInterface = connector.getNameServer();
 
         UserInterface ui = new UserInterface(NameServerInterface);
         System.out.println("\t Enter the name for the new node");
@@ -50,7 +51,7 @@ public class Main {
 
 
         FileAgent fileAgent = new FileAgent();
-        Controller controller = new Controller(fileAgent);
+        controller = new Controller(fileAgent);
         View view = new View();
         controller.createListeners(view);
         view.setVisible(true);
@@ -71,7 +72,7 @@ public class Main {
             }
         }).start();
 
-        //ui.startUI();
+        ui.startUI();
     }
 }
 

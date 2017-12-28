@@ -16,7 +16,8 @@ public class GuiPanel extends javax.swing.JPanel {
         downloadButton = new java.awt.Button();
         logText = new java.awt.TextArea();
         jScrollPane = new javax.swing.JScrollPane();
-        fileList = new javax.swing.JList<>();
+        fileList = new javax.swing.JList<>(controller.getListModel());
+        jScrollPane.setViewportView(controller.getList());
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("System Y"));
         setName("SystemY"); // NOI18N
@@ -56,13 +57,6 @@ public class GuiPanel extends javax.swing.JPanel {
                 downloadButtonActionPerformed(evt);
             }
         });
-
-        fileList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {};
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane.setViewportView(fileList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -119,6 +113,7 @@ public class GuiPanel extends javax.swing.JPanel {
 
     private void downloadButtonActionPerformed(java.awt.event.ActionEvent evt) {
         controller.downloadButtonClicked(fileList.getSelectedValue());
+        System.out.println(fileList.getModel());
     }
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {

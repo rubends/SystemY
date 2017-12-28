@@ -40,8 +40,12 @@ public class FailureAgent implements Runnable, Serializable {
 
     @Override
     public void run() {
-        fileList = Node.localFileList;
-        agentNode = Node.nodeHash;
+        try {
+            fileList = Main.INode.getLocalFileList();
+            agentNode = Main.INode.getId();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         
         Iterator<String> keySetIterator = fileList.keySet().iterator();
         while (keySetIterator.hasNext()) {

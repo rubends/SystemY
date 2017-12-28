@@ -53,7 +53,9 @@ public class Main {
         //implementation of agents
         try {
             FileAgent fileAgent = new FileAgent();
-            new RMIAgent(NameServerInterface).startFileAgent(fileAgent);
+            RMIAgentInterface IRMIAgent = new RMIAgent(NameServerInterface);
+            new RMIConnector().createRMIAgent(IRMIAgent);
+            IRMIAgent.startFileAgent(fileAgent);
         }catch(Exception e){e.printStackTrace(); }
 
         ui.startUI();

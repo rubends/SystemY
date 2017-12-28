@@ -78,9 +78,8 @@ public class RMIConnector {
     public NameServerInterface getNameServer(){ return INameServer;}
 
     public void createRMIAgent(RMIAgentInterface rmiAgentInterface){
-
         try{
-            Registry register = LocateRegistry.createRegistry(2000);
+            Registry register = LocateRegistry.createRegistry(1100);
             register.rebind("RMIAgent", rmiAgentInterface);
             System.setProperty("java.security.policy", "file:server.policy");
         } catch (Exception e) {

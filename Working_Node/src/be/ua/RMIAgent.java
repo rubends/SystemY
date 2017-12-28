@@ -13,6 +13,9 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface {
     }
 
     public void startFileAgent(FileAgent fileAgent) {
+        if(fileAgent.getFileList().size() > 0) {
+            System.out.println("first file is " + fileAgent.getFileList().firstKey() + " and last key " + fileAgent.getFileList().lastKey() + " with size " + fileAgent.getFileList().size());
+        }
         Thread at = new Thread(fileAgent);
         at.start();
         //System.out.println("RMIAGENT.java: File agent started.");

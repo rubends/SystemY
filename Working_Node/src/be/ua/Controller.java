@@ -3,7 +3,6 @@ package be.ua;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Timestamp;
 import java.util.*;
 
 public class Controller implements Observer{
@@ -41,7 +40,6 @@ public class Controller implements Observer{
         view.openButtonListener(new openSelectionListener());
         view.removeButtonListener(new removeSelectionListener());
         view.removeLocalButtonListener(new removeLocalSelectionListener());
-        view.downloadButtonListener(new downloadSelectionListener());
         view.logoutButtonListener(new logoutSelectionListener());
     }
 
@@ -61,13 +59,6 @@ public class Controller implements Observer{
         }
     }
 
-    class downloadSelectionListener implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            System.out.println("Download selected: " + list.getSelectedValue());
-        }
-    }
     class logoutSelectionListener implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -94,6 +85,8 @@ public class Controller implements Observer{
         emptyListModel();
         fillListModel();
         view.writeLogs("Refreshed list.");
+        setList(new JList(listModel));
+        //todo use listmodel?
     }
 
     public void emptyListModel()
@@ -105,19 +98,16 @@ public class Controller implements Observer{
     {
         fileList = fileAgent.getFileList();
         if(fileList!=null){
-            System.out.println("GUI: filelist" + fileList);
+            //System.out.println("GUI: filelist" + fileList);
             for(Map.Entry<String, Boolean> entry : fileList.entrySet())
             {
-                System.out.println("GUI: Key: "+entry.getKey()+". Value: " + entry.getValue());
+                //System.out.println("GUI: Key: "+entry.getKey()+". Value: " + entry.getValue());
                 listModel.addElement(entry.getKey());
             }
         }
         else{
             System.out.println("Nothing in the file list");
         }
+        System.out.println(listModel);
     }
-
-
-
-
 }

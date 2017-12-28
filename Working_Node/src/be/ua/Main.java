@@ -45,17 +45,21 @@ public class Main {
         view.setVisible(true);
         fileAgent.addObserver(controller);
 
-        System.out.println(fileAgent.getFileList().size());
 
-        TreeMap<String, Boolean> map = new TreeMap<String, Boolean>();
+        TreeMap<String, Boolean> map = new TreeMap<>();
         map.put("observe.txt", true);
-        fileAgent.setFileList(map);
+        //fileAgent.setFileList(map);
 
         try{
-            Thread.sleep(5000);
+            Thread.sleep(1000);
         }catch (Exception e){e.printStackTrace();}
 
-        map.put("newtext.txt", true);
+
+        for (int i = 0; i < 10; i++){
+            map.put("newtext.txt"+i, true);
+        }
+        //map.put("newtext.txt", true);
+
         fileAgent.setFileList(map);
         //ui.startUI();
     }

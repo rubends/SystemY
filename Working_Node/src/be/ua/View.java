@@ -2,30 +2,26 @@ package be.ua;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
-
 import static be.ua.Main.controller;
 
 public class View extends JFrame{
 
     //declared for making listeners
-    private java.awt.Button logoutButton,openButton,removeButton,removeLocalButton, downloadButton;
+    private java.awt.Button logoutButton,openButton,removeButton,removeLocalButton;
     private java.awt.TextArea logText;
     private javax.swing.JScrollPane jScrollPane;
 
     public View()
     {
         JPanel panel = new JPanel();
-        setSize(500, 400);
+        setSize(500, 330);
 
         //init components
         removeButton = new java.awt.Button();
         openButton = new java.awt.Button();
         removeLocalButton = new java.awt.Button();
         logoutButton = new java.awt.Button();
-        downloadButton = new java.awt.Button();
         logText = new java.awt.TextArea();
         jScrollPane = new JScrollPane(controller.getList());
 
@@ -34,7 +30,6 @@ public class View extends JFrame{
         openButton.setLabel("Open File");
         removeLocalButton.setLabel("Remove Local File");
         logoutButton.setLabel("Logout");
-        downloadButton.setLabel("Download File");
 
         //GUI border
         panel.setBorder(javax.swing.BorderFactory.createTitledBorder("System Y"));
@@ -56,7 +51,6 @@ public class View extends JFrame{
                                                         .addComponent(removeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(removeLocalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(downloadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(openButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                 .addGap(20, 20, 20))
         );
@@ -67,8 +61,6 @@ public class View extends JFrame{
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(openButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(downloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -94,18 +86,14 @@ public class View extends JFrame{
     {
         this.removeButton.addActionListener(event);
     }
-    public void downloadButtonListener(ActionListener event)
-    {
-        this.downloadButton.addActionListener(event);
-    }
     public void removeLocalButtonListener(ActionListener event) {this.removeLocalButton.addActionListener(event);}
     public void logoutButtonListener(ActionListener event) {this.logoutButton.addActionListener(event);}
 
     public void writeLogs(String logText){this.logText.append(printStamp() + logText + "\n");}
     public String printStamp(){
         LocalDateTime now = LocalDateTime.now();
-        return "[" + ((now.getHour() < 10 ? "0" : "") + now.getHour()) + ":" +
-                ((now.getMinute() < 10 ? "0" : "") + now.getMinute()) + ":"
+        return "[" + ((now.getHour() < 10 ? "0" : "") + now.getHour()) + ":"
+                + ((now.getMinute() < 10 ? "0" : "") + now.getMinute()) + ":"
                 + ((now.getSecond() < 10 ? "0" : "") + now.getSecond()) + "]\t";
     }
 }

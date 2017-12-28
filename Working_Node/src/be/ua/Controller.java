@@ -1,9 +1,7 @@
 package be.ua;
 
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -14,7 +12,7 @@ public class Controller implements Observer{
     FileAgent fileAgent;
     private TreeMap<String, Boolean> fileList;
     private DefaultListModel listModel = new DefaultListModel();
-    private static JList list;
+    public static JList list;
 
     Controller(FileAgent fileAgent){
         this.fileAgent = fileAgent;
@@ -22,42 +20,13 @@ public class Controller implements Observer{
         this.fileList = new TreeMap<String,Boolean>();
         fillListModel();
     }
+
+
     public void createListeners(View view_){
         view = view_;
-        view.openButtonListener(new openSelectionListener());
-        view.removeButtonListener(new removeSelectionListener());
-        view.removeLocalButtonListener(new removeLocalSelectionListener());
-        view.downloadButtonListener(new downloadSelectionListener());
     }
 
-    class openSelectionListener implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            System.out.println("Open selected: "+ list.getSelectedValue());
-        }
-    }
-    class removeSelectionListener implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            System.out.println("Remove selected: "+ list.getSelectedValue());
-        }
-    }
 
-    class removeLocalSelectionListener implements ActionListener{
-        public void actionPerformed(ActionEvent e){
-            System.out.println("Remove local file: " + list.getSelectedValue());
-        }
-    }
-
-    class downloadSelectionListener implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            System.out.println("Download selected: " + list.getSelectedValue());
-        }
-    }
 
     public void update(Observable o, Object arg){
         refreshListModel();
@@ -72,7 +41,6 @@ public class Controller implements Observer{
     }
 
     public static JList getList() {
-        System.out.println("list = " + list);
         return list;
     }
 
@@ -90,6 +58,8 @@ public class Controller implements Observer{
             {
                 System.out.println("GUI: Key: "+entry.getKey()+". Value: " + entry.getValue());
                 listModel.addElement(entry.getKey());
+
+                //newList.add(entry.getKey());
             }
         }
         else{
@@ -97,7 +67,6 @@ public class Controller implements Observer{
         }
 
     }
-
 
     public void emptyListModel()
     {
@@ -108,5 +77,25 @@ public class Controller implements Observer{
     {
         emptyListModel();
         fillListModel();
+    }
+
+    //Actions when buttons are clicked
+    public void openButtonClicked(String filename){
+        System.out.println("open file: " + filename);
+    }
+    public void removeButtonClicked(String filename){
+        System.out.println("remove file: " + filename);
+    }
+    public void removeLocalButtonClicked(String filename){
+        System.out.println("remove local file: " + filename);
+    }
+    public void downloadButtonClicked(String filename){
+        System.out.println("download file: " + filename);
+    }
+
+    public void logoutButtonClicked(){
+        System.out.println("--");
+        System.out.println(getList());
+        System.out.println(getListModel());
     }
 }

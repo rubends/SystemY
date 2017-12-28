@@ -13,6 +13,8 @@ public class Main {
     public static String rootPath = new File("").getAbsolutePath();
     public static String sep = System.getProperty("file.separator"); //OS dependable
     public static String pathToFiles = rootPath + sep + "Files" + sep;
+    public static String pathToLocalFiles = rootPath + sep + "Files" + sep + "Local" + sep;
+    public static String pathToReplFiles = rootPath + sep + "Files" + sep + "Replication" + sep;
 
 
     public static void main(String[] args) {

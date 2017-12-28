@@ -17,7 +17,7 @@ public class UpdateFileMapThread extends Thread{
     String nodeName;
 
     //get filepath
-    File fileLocDir = new File(Main.pathToFiles + "Local" + Main.sep);
+    File fileLocDir = new File(Main.pathToLocalFiles);
 
     public UpdateFileMapThread(String nodeName, NameServerInterface INameServer) {
         this.INameServer = INameServer;

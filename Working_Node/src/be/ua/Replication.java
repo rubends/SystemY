@@ -10,10 +10,8 @@ import java.util.TreeMap;
 public class Replication {
     private NameServerInterface INameServer;
     private String nodeName;
-    private String rootPath = new File("").getAbsolutePath();
-    private String sep = System.getProperty("file.separator");
-    private File localFolder = new File(rootPath + sep + "Files" + sep + "Local");
-    private File replicationFolder = new File(rootPath + sep + "Files" + sep + "Replication");
+    private File localFolder = new File(Main.pathToLocalFiles);
+    private File replicationFolder = new File(Main.pathToReplFiles);
     private int SOCKET_PORT = 7897;//7897
 
     public static volatile TreeMap<String, FileMap> fileMap;

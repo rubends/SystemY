@@ -134,10 +134,8 @@ public class UserInterface {
     }
 
     public static File getFile(String filename){
-        String rootPath = new File("").getAbsolutePath();
-        String sep = System.getProperty("file.separator");
-        File localFolder = new File(rootPath + sep + "Files" + sep + "Local");
-        File replicationFolder = new File(rootPath + sep + "Files" + sep + "Replication");
+        File localFolder = new File(Main.pathToLocalFiles);
+        File replicationFolder = new File(Main.pathToReplFiles);
         File[] localFiles = localFolder.listFiles();
         File[] replicationFiles = replicationFolder.listFiles();
         for(File file : localFiles){

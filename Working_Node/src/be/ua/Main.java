@@ -40,7 +40,7 @@ public class Main {
         */
         FileAgent fileAgent = new FileAgent();
         controller = new Controller(fileAgent);
-        View view = new View(fileAgent);
+        View view = new View();
         controller.createListeners(view);
         view.setVisible(true);
         fileAgent.addObserver(controller);

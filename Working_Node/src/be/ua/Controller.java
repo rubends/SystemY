@@ -3,10 +3,8 @@ package be.ua;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.TreeMap;
+import java.sql.Timestamp;
+import java.util.*;
 
 public class Controller implements Observer{
     View view;
@@ -95,6 +93,7 @@ public class Controller implements Observer{
     {
         emptyListModel();
         fillListModel();
+        view.writeLogs("Refreshed list.");
     }
 
     public void emptyListModel()

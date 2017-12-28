@@ -2,27 +2,25 @@ package be.ua;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 import static be.ua.Main.controller;
 
 public class View extends JFrame{
-    FileAgent fileAgent;
-    JPanel panel;
 
-    private java.awt.Button downloadButton;
-    private javax.swing.JScrollPane jScrollPane;
+    //declared for making listeners
+    private java.awt.Button logoutButton,openButton,removeButton,removeLocalButton, downloadButton;
     private java.awt.TextArea logText;
-    private java.awt.Button logoutButton;
-    private java.awt.Button openButton;
-    private java.awt.Button removeButton;
-    private java.awt.Button removeLocalButton;
+    private javax.swing.JScrollPane jScrollPane;
 
-    public View(FileAgent fileAgent)
+    public View()
     {
-        this.fileAgent = fileAgent; //todo FileAgent
+        JPanel panel = new JPanel();
         setSize(500, 400);
-        panel = new JPanel();
 
+        //init components
         removeButton = new java.awt.Button();
         openButton = new java.awt.Button();
         removeLocalButton = new java.awt.Button();
@@ -30,15 +28,19 @@ public class View extends JFrame{
         downloadButton = new java.awt.Button();
         logText = new java.awt.TextArea();
         jScrollPane = new JScrollPane(controller.getList());
+
+        //add labels
         removeButton.setLabel("Remove File");
         openButton.setLabel("Open File");
         removeLocalButton.setLabel("Remove Local File");
         logoutButton.setLabel("Logout");
         downloadButton.setLabel("Download File");
 
+        //GUI border
         panel.setBorder(javax.swing.BorderFactory.createTitledBorder("System Y"));
         setName("SystemY"); // NOI18N
 
+        //make layout attached to panel
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(panel);
         panel.setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,10 +81,11 @@ public class View extends JFrame{
                                 .addContainerGap())
         );
 
+        //add panel to the view
         add(panel);
     }
 
-
+    //the listeners
     public void openButtonListener(ActionListener event)
     {
         this.openButton.addActionListener(event);
@@ -97,4 +100,12 @@ public class View extends JFrame{
     }
     public void removeLocalButtonListener(ActionListener event) {this.removeLocalButton.addActionListener(event);}
     public void logoutButtonListener(ActionListener event) {this.logoutButton.addActionListener(event);}
+
+    public void writeLogs(String logText){this.logText.append(printStamp() + logText + "\n");}
+    public String printStamp(){
+        LocalDateTime now = LocalDateTime.now();
+        return "[" + ((now.getHour() < 10 ? "0" : "") + now.getHour()) + ":" +
+                ((now.getMinute() < 10 ? "0" : "") + now.getMinute()) + ":"
+                + ((now.getSecond() < 10 ? "0" : "") + now.getSecond()) + "]\t";
+    }
 }

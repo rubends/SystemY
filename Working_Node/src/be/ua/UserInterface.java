@@ -106,7 +106,7 @@ public class UserInterface {
         }
     }
 
-    private void deleteFile(String filename){
+    private void deleteFile(String filename){ //TODO force remove files
         System.out.println("Deleting file " + filename);
         try {
             String ownIp = INameServer.getNodeIp(Main.INode.getId());

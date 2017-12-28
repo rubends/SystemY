@@ -61,7 +61,7 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface {
             }
             else{
                 System.out.println("RMI-AGENT: node failed: "+ failureAgent.failureNode +" verwijderd uit name server.");
-                ns.deleteNode(failureAgent.failureNode);
+                //ns.deleteNode(failureAgent.failureNode);
             }
         } catch (Exception e) {
             e.printStackTrace();

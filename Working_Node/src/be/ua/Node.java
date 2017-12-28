@@ -50,7 +50,7 @@ public class Node extends UnicastRemoteObject implements INode{
     }
 
     public void deleteFileLocation(String filename, int nodeHash) {
-        Replication.fileMap.get(filename).removeLocation(nodeHash);
+        Replication.fileMap.get(filename).removeLocation(nodeHash); // TODO NOT FOUND NULLPOINTER
     }
 
     public void sendFiche(FileMap fiche) {
@@ -129,6 +129,7 @@ public class Node extends UnicastRemoteObject implements INode{
             } else {
                 updateNextNode(nextHashOfFailedNode);
             }
+
             if(nextHashOfFailedNode != mId) //check that next node of the failed node is not you
             {
                 String nextIp = INameServer.getNodeIp(nextHashOfFailedNode);
@@ -142,7 +143,7 @@ public class Node extends UnicastRemoteObject implements INode{
             //start agent
             FailureAgent failureAgent = new FailureAgent(hashOfFailedNode, INameServer);
             RMIAgent rmiAgent = new RMIAgent(INameServer);
-            rmiAgent.passFailureAgent(failureAgent);
+            rmiAgent.startFailureAgent(failureAgent);
 
         } catch (Exception e) { e.printStackTrace(); }
     }

@@ -143,6 +143,9 @@ public class Replication {
 
                 } else {
                     tcpSender.SendFile(ipPrevNode, replicatedFiles[i].getAbsolutePath());
+                    if (fileMap.containsKey(replicatedFiles[i].getName())) {
+                        passFiche(replicatedFiles[i].getName(), ipPrevNode);
+                    }
                 }
             }
         } catch (Exception e) {

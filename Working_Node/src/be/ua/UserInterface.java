@@ -107,17 +107,26 @@ public class UserInterface {
         }
     }
 
-    private void deleteFile(String filename){ //TODO force remove files
-        System.out.println("Deleting file " + filename);
+    private void deleteFile(String filename){ // TODO delete from FileAgent/Node.filelist
         try {
-            String ownIp = INameServer.getNodeIp(Main.INode.getId());
-            String fileOwnerIp = INameServer.getFileIp(filename);
-            if(fileOwnerIp.equals(ownIp)){ //file is on own system
-                Replication.deleteFile(filename);
-                Replication.fileMap.remove(filename);
-            } else {
-                INode fileNode = (INode) Naming.lookup( "//"+fileOwnerIp + "/" + INameServer.getHashOfIp(fileOwnerIp));
-                fileNode.deleteFile(filename);
+            if (Main.INode.getLocalFileList().get(filename)) {
+                System.out.println("File " + filename + " is locked.");
+            }
+            else {
+                System.out.println("Deleting file " + filename);
+                try {
+                    String ownIp = INameServer.getNodeIp(Main.INode.getId());
+                    String fileOwnerIp = INameServer.getFileIp(filename);
+                    if (fileOwnerIp.equals(ownIp)) { //file is on own system
+                        Replication.deleteFile(filename);
+                        Replication.fileMap.remove(filename);
+                    } else {
+                        INode fileNode = (INode) Naming.lookup("//" + fileOwnerIp + "/" + INameServer.getHashOfIp(fileOwnerIp));
+                        fileNode.deleteFile(filename); //TODO check if file is locked
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         } catch (Exception e){
             e.printStackTrace();

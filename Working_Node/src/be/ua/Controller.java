@@ -1,7 +1,6 @@
 package be.ua;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -87,15 +86,25 @@ public class Controller implements Observer{
     }
 
 
+    //observer pattern
     public void update(Observable o, Object arg){
         refreshListModel();
     }
 
+    public void refreshListModel()
+    {
+        emptyListModel();
+        fillListModel();
+    }
 
+    public void emptyListModel()
+    {
+        listModel.removeAllElements();
+    }
 
     public void fillListModel()
     {
-        fileList = FileAgent.getFileList();
+        fileList = fileAgent.getFileList();
         if(fileList!=null){
             System.out.println("GUI: filelist" + fileList);
             for(Map.Entry<String, Boolean> entry : fileList.entrySet())
@@ -109,14 +118,7 @@ public class Controller implements Observer{
         }
     }
 
-    public void emptyListModel()
-    {
-        listModel.removeAllElements();
-    }
 
-    public void refreshListModel()
-    {
-        emptyListModel();
-        fillListModel();
-    }
+
+
 }

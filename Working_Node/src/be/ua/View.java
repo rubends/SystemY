@@ -17,7 +17,7 @@ public class View extends JFrame{
     private java.awt.Button removeButton;
     private java.awt.Button removeLocalButton;
 
-    private View(FileAgent fileAgent)
+    public View(FileAgent fileAgent)
     {
         this.fileAgent = fileAgent; //todo FileAgent
         setSize(500, 400);
@@ -82,22 +82,19 @@ public class View extends JFrame{
         add(panel);
     }
 
+
     public void openButtonListener(ActionListener event)
     {
         this.openButton.addActionListener(event);
     }
-
     public void removeButtonListener(ActionListener event)
     {
         this.removeButton.addActionListener(event);
     }
-
     public void downloadButtonListener(ActionListener event)
     {
         this.downloadButton.addActionListener(event);
     }
-
     public void removeLocalButtonListener(ActionListener event) {this.removeLocalButton.addActionListener(event);}
-
     public void logoutButtonListener(ActionListener event) {this.logoutButton.addActionListener(event);}
 }

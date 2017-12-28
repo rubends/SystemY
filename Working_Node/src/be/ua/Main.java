@@ -38,13 +38,25 @@ public class Main {
         replication.setNodeName(nodeName);
         replication.getFiles();
         */
-        FileAgent FileAgent = new FileAgent();
-        controller = new Controller(FileAgent);
-        View view = new View(FileAgent);
+        FileAgent fileAgent = new FileAgent();
+        controller = new Controller(fileAgent);
+        View view = new View(fileAgent);
         controller.createListeners(view);
         view.setVisible(true);
-        FileAgent.addObserver(controller);
+        fileAgent.addObserver(controller);
 
+        System.out.println(fileAgent.getFileList().size());
+
+        TreeMap<String, Boolean> map = new TreeMap<String, Boolean>();
+        map.put("observe.txt", true);
+        fileAgent.setFileList(map);
+
+        try{
+            Thread.sleep(5000);
+        }catch (Exception e){e.printStackTrace();}
+
+        map.put("newtext.txt", true);
+        fileAgent.setFileList(map);
         //ui.startUI();
     }
 }

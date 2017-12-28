@@ -18,7 +18,7 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface {
         //System.out.println("RMIAGENT.java: File agent started.");
         try {
             at.join();
-            Thread.sleep(500);
+            Thread.sleep(3000);
             passFileAgent(fileAgent);
         } catch (Exception e){
             e.printStackTrace();
@@ -30,11 +30,22 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface {
             int nextNodeId = Main.INode.getNextNode();
             String ipNextNode = ns.getNodeIp(nextNodeId);
             if(!ipNextNode.equals(ns.getNodeIp(Main.INode.getId()))){
-                //System.out.println("RMI-AGENT: File agent passing to " + ipNextNode );
+                System.out.println("RMI-AGENT: File agent passing to " + ipNextNode );
                 RMIAgentInterface rmiAgent = (RMIAgentInterface) Naming.lookup( "//"+ipNextNode+":1101/RMIAgent");
                 rmiAgent.startFileAgent(fileAgent);
             }
         } catch (Exception e) {
+            try{
+                Thread.sleep(2500);
+                int nextNodeId = ns.getNeighbourNodes(Main.INode.getId()).get(1);
+                String ipNextNode = ns.getNodeIp(nextNodeId);
+                if(!ipNextNode.equals(ns.getNodeIp(Main.INode.getId()))){
+                    System.out.println("RMI-AGENT: File agent passing to " + ipNextNode );
+                    RMIAgentInterface rmiAgent = (RMIAgentInterface) Naming.lookup( "//"+ipNextNode+":1101/RMIAgent");
+                    rmiAgent.startFileAgent(fileAgent);
+                }
+            }catch (Exception ex){}
+
             e.printStackTrace();
         }
     }

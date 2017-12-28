@@ -88,7 +88,7 @@ public class Controller implements Observer{
     }
 
     public void update(){
-        refreshListModel();
+        fillListModel();
     }
 
     public void refreshListModel()

@@ -2,6 +2,8 @@ package be.ua;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -24,6 +26,32 @@ public class Controller implements Observer{
 
     public void createListeners(View view_){
         view = view_;
+        //view.openButtonListener(new openSelectionListener());
+        //view.removeButtonListener(new removeSelectionListener());
+        //view.downloadButtonListener(new downloadSelectionListener());
+    }
+
+    class openSelectionListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            System.out.println("Open selected: "+ list.getSelectedValue());
+        }
+    }
+    class removeSelectionListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            System.out.println("Remove selected: "+ list.getSelectedValue());
+        }
+    }
+
+    class downloadSelectionListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            System.out.println("Download selected: " + list.getSelectedValue());
+        }
     }
 
 

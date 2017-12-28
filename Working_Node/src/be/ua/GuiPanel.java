@@ -1,5 +1,7 @@
 package be.ua;
 
+import javax.swing.*;
+
 import static be.ua.Main.controller;
 
 public class GuiPanel extends javax.swing.JPanel {
@@ -15,9 +17,10 @@ public class GuiPanel extends javax.swing.JPanel {
         logoutButton = new java.awt.Button();
         downloadButton = new java.awt.Button();
         logText = new java.awt.TextArea();
-        jScrollPane = new javax.swing.JScrollPane();
-        fileList = new javax.swing.JList<>(controller.getListModel());
-        jScrollPane.setViewportView(controller.getList());
+        /*jScrollPane = new javax.swing.JScrollPane();
+        fileList = new javax.swing.JList<>();
+        jScrollPane.setViewportView(controller.getList());*/
+        jScrollPane = new JScrollPane(controller.getList());
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("System Y"));
         setName("SystemY"); // NOI18N
@@ -112,8 +115,10 @@ public class GuiPanel extends javax.swing.JPanel {
     }
 
     private void downloadButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        controller.downloadButtonClicked(fileList.getSelectedValue());
-        System.out.println(fileList.getModel());
+        //controller.downloadButtonClicked();
+        //System.out.println(jScrollPane);
+        //System.out.println(fileList.getSelectedValue());
+        //System.out.println(fileList.getModel());
     }
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {

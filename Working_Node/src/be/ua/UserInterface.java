@@ -84,22 +84,23 @@ public class UserInterface {
                 //node is zelf owner van het bestand, dus het kan geopend worden
                 Desktop.getDesktop().open(getFile(filename).getAbsoluteFile());
             } else {
-                // todo set lock on agent
                 FileAgent.setLock(filename, true);
 
                 INode fileNode = (INode) Naming.lookup( "//"+ip + "/" + INameServer.getHashOfIp(ip));
                 String downloadIp = fileNode.getDownloadLocation(filename);
                 System.out.println("download ip: " + downloadIp);
+
                 INode downloadNode = (INode) Naming.lookup( "//"+downloadIp + "/" + INameServer.getHashOfIp(downloadIp));
                 downloadNode.sendFile(ownIp, filename);
+
                 fileNode.updateFiche(filename,Main.INode.getId(),ownIp);
                 System.out.println("opening file " + filename);
                 Desktop.getDesktop().open(getFile(filename).getAbsoluteFile());
 
-                // todo stop lock on agent
                 FileAgent.setLock(filename, false);
             }
         } catch (Exception e){
+            System.out.println("ERROR: file not found");
             e.printStackTrace();
         }
     }

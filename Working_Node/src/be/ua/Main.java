@@ -50,8 +50,8 @@ public class Main {
         replication.getFiles();
 
 
-        //implementation of agents.
-        (new Thread(){
+        //implementation of agents
+        (new Thread(){ // keep going without interrupting application
             public void run() {
                 try {
                     FileAgent fileAgent = new FileAgent();
@@ -65,7 +65,6 @@ public class Main {
         }).start();
 
         ui.startUI();
-
     }
 }
 

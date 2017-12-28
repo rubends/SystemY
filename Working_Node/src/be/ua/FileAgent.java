@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.TreeMap;
 
 public class FileAgent implements Runnable, Serializable {
-    private TreeMap<String, Boolean> fileList;
+    private static TreeMap<String, Boolean> fileList;
     public FileAgent() { fileList = new TreeMap<>(); }
 
     @Override
@@ -32,7 +32,9 @@ public class FileAgent implements Runnable, Serializable {
     }
 
     public static void setLock(String fileName, Boolean lock){
-        Node.localFileList.remove(fileName);
-        Node.localFileList.put(fileName, lock);
+        if(fileList.containsKey(fileName)){
+            fileList.remove(fileName);
+        }
+        fileList.put(fileName, lock);
     }
 }

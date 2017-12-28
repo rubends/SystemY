@@ -12,10 +12,8 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface {
         this.ns = ns;
     }
 
-    public void startFileAgent(FileAgent fileAgent) {
-        if(fileAgent.getFileList().size() > 0) {
-            System.out.println("first file is " + fileAgent.getFileList().firstKey() + " and last key " + fileAgent.getFileList().lastKey() + " with size " + fileAgent.getFileList().size());
-        }
+    public void startFileAgent(FileAgent fileAgent, String owner) {
+        System.out.println(owner);
         Thread at = new Thread(fileAgent);
         at.start();
         //System.out.println("RMIAGENT.java: File agent started.");
@@ -35,7 +33,7 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface {
             if(!ipNextNode.equals(ns.getNodeIp(Main.INode.getId()))){
                 //System.out.println("RMI-AGENT: File agent passing to " + ipNextNode );
                 RMIAgentInterface rmiAgent = (RMIAgentInterface) Naming.lookup( "//"+ipNextNode+":1101/RMIAgent");
-                rmiAgent.startFileAgent(fileAgent);
+                rmiAgent.startFileAgent(fileAgent, "Ruben");
             }
         } catch (Exception e) {
             e.printStackTrace();

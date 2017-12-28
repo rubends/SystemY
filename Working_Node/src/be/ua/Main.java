@@ -10,7 +10,6 @@ public class Main {
     public static String ipNameServer = "169.254.91.69"; //127.0.0.1
 
     public static INode INode;
-    public static RMIAgentInterface rmiAgent;
     public static String rootPath = new File("").getAbsolutePath();
     public static String sep = System.getProperty("file.separator"); //OS dependable
     public static String pathToFiles = rootPath + sep + "Files" + sep;
@@ -57,7 +56,7 @@ public class Main {
                     FileAgent fileAgent = new FileAgent();
                     RMIAgentInterface IRMIAgent = new RMIAgent(NameServerInterface);
                     new RMIConnector().createRMIAgent(IRMIAgent);
-                    IRMIAgent.startFileAgent(fileAgent);
+                    IRMIAgent.startFileAgent(fileAgent, "Mezelf");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

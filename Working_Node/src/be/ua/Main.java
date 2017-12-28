@@ -18,7 +18,7 @@ public class Main {
     public static NameServerInterface NameServerInterface;
     public static Controller controller;
     private static FileAgent fileAgent;
-
+    public static String nodeName;
     public static void main(String[] args) {
 
         RMIConnector connector = new RMIConnector();
@@ -27,7 +27,7 @@ public class Main {
         UserInterface ui = new UserInterface(NameServerInterface);
         System.out.println("\t Enter the name for the new node");
         System.out.print("> ");
-        String nodeName = new Scanner(System.in).next();
+        nodeName = new Scanner(System.in).next();
         try{
             int hash = NameServerInterface.getHashOfName(nodeName);
             INode = new Node(hash, NameServerInterface);

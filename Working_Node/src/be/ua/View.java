@@ -29,10 +29,10 @@ public class View extends JFrame{
         removeButton.setLabel("Remove File");
         openButton.setLabel("Open File");
         removeLocalButton.setLabel("Remove Local File");
-        logoutButton.setLabel("Logout");
+        logoutButton.setLabel("EXIT");
 
         //GUI border
-        panel.setBorder(javax.swing.BorderFactory.createTitledBorder("System Y"));
+        panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Project: System Y - Node name: " + Main.nodeName));
         setName("SystemY"); // NOI18N
 
         //make layout attached to panel

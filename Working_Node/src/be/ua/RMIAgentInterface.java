@@ -4,9 +4,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface RMIAgentInterface extends Remote {
-    FileAgent startFileAgent(FileAgent fileAgent) throws RemoteException;
+    void startFileAgent(FileAgent fileAgent) throws RemoteException;
     void passFileAgent(FileAgent fileAgent) throws RemoteException;
-    FailureAgent startFailureAgent(FailureAgent failureAgent) throws RemoteException;
+    void startFailureAgent(FailureAgent failureAgent) throws RemoteException;
     void passFailureAgent(FailureAgent failureAgent) throws RemoteException;
-    void run() throws RemoteException;
 }

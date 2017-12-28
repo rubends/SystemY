@@ -7,8 +7,9 @@ import java.util.Scanner;
 public class Main {
 
     //global variables
+    public static String ipNameServer = "169.254.91.69"; //127.0.0.1
+
     public static INode INode;
-    public static String ipNameServer = "192.168.0.190"; //127.0.0.1
     public static RMIAgentInterface rmiAgent;
     public static String rootPath = new File("").getAbsolutePath();
     public static String sep = System.getProperty("file.separator"); //OS dependable
@@ -51,7 +52,8 @@ public class Main {
 
         //implementation of agents
         try {
-            new RMIAgent(NameServerInterface).run();
+            FileAgent fileAgent = new FileAgent();
+            new RMIAgent(NameServerInterface).startFileAgent(fileAgent);
         }catch(Exception e){e.printStackTrace(); }
 
         ui.startUI();

@@ -44,15 +44,14 @@ public class RMIConnector {
 
     public RMIConnector(NameServerInterface INameServer, String newNodeName) throws RemoteException{ //get node RMI
         int hash = INameServer.getHashOfName(newNodeName);
-        String connName = Integer.toString(hash);
         boolean gettingConnection = true;
         while(gettingConnection) {
             try {
                 //Registry registry = LocateRegistry.getRegistry(nodePort);                     // --- LOCALHOST ---
                 //INode INodeNew = (INode) registry.lookup(connName);                           // _________________
 
-                String NodeIp = INameServer.getNodeIp(hash);                                    // ---- NETWORK ----
-                INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);         // _________________
+                String NodeIp = INameServer.getNodeIp(hash);                                 // ---- NETWORK ----
+                INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+hash);         // _________________
                 updateNewNode(INameServer, INodeNew, hash);
                 System.out.println("New node id: " + INodeNew.getId());
                 gettingConnection = false;
@@ -79,9 +78,12 @@ public class RMIConnector {
 
     public void createRMIAgent(RMIAgentInterface rmiAgentInterface){
         try{
-            Registry register = LocateRegistry.createRegistry(1100);
-            register.rebind("RMIAgent", rmiAgentInterface);
             System.setProperty("java.security.policy", "file:server.policy");
+            if (System.getSecurityManager() == null) {
+                System.setSecurityManager(new SecurityManager());
+            }
+            registry = LocateRegistry.createRegistry(1101);
+            registry.rebind("RMIAgent", rmiAgentInterface);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -115,8 +115,7 @@ public class Replication {
                     } else if (ownIp.equals(ipOwner)) { // !!!! WHEN LOCAL FILES ARE BELONGING TO OWN NODE, THEY ARE REPLICATED TO NEW NODE
                         System.out.println("REPLICATION sending local file: " + localFiles[i].getName() + " to " + prevIp);
                         tcpSender.SendFile(prevIp, localFiles[i].getAbsolutePath());
-                        int fileHash = INameServer.getHashOfName(localFiles[i].getName());
-                        fileMap.get(fileHash).addLocation(prevIp, Main.INode.getPrevNode());
+                        fileMap.get(localFiles[i].getName()).addLocation(prevIp, Main.INode.getPrevNode());
                     }
                 }
             }

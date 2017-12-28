@@ -50,13 +50,19 @@ public class Main {
         replication.getFiles();
 
 
-        //implementation of agents
-        try {
-            FileAgent fileAgent = new FileAgent();
-            RMIAgentInterface IRMIAgent = new RMIAgent(NameServerInterface);
-            new RMIConnector().createRMIAgent(IRMIAgent);
-            IRMIAgent.startFileAgent(fileAgent);
-        }catch(Exception e){e.printStackTrace(); }
+        //implementation of agents.
+        (new Thread(){
+            public void run() {
+                try {
+                    FileAgent fileAgent = new FileAgent();
+                    RMIAgentInterface IRMIAgent = new RMIAgent(NameServerInterface);
+                    new RMIConnector().createRMIAgent(IRMIAgent);
+                    IRMIAgent.startFileAgent(fileAgent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
         ui.startUI();
 

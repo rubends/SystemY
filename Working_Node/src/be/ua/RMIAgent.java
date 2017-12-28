@@ -18,7 +18,7 @@ public class RMIAgent extends UnicastRemoteObject implements RMIAgentInterface {
         //System.out.println("RMIAGENT.java: File agent started.");
         try {
             at.join();
-            Thread.sleep(500);
+            Thread.sleep(3000);
             passFileAgent(fileAgent);
         } catch (Exception e){
             e.printStackTrace();

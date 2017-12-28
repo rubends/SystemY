@@ -49,9 +49,6 @@ public class UpdateFileMapThread extends Thread{
                         for (File file : newFileList) {
                             int ownHash = Main.INode.getId();
                             String ownIp = INameServer.getNodeIp(ownHash);
-                            while(ownIp == null){
-                                ownIp = INameServer.getNodeIp(ownHash);
-                            }
                             fileMap.put(file.getName(), new FileMap(file.getName(),ownIp,ownHash));
                             replication.replicate(file.getName(), file.getAbsolutePath());
                         }

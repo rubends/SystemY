@@ -26,6 +26,7 @@ public class Controller implements Observer{
         view = view_;
         view.openButtonListener(new openSelectionListener());
         view.removeButtonListener(new removeSelectionListener());
+        view.removeLocalButtonListener(new removeLocalSelectionListener());
         view.downloadButtonListener(new downloadSelectionListener());
     }
 
@@ -41,6 +42,12 @@ public class Controller implements Observer{
         public void actionPerformed(ActionEvent e)
         {
             System.out.println("Remove selected: "+ list.getSelectedValue());
+        }
+    }
+
+    class removeLocalSelectionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            System.out.println("Remove local file: " + list.getSelectedValue());
         }
     }
 

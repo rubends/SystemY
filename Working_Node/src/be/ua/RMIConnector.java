@@ -14,7 +14,7 @@ public class RMIConnector {
     //public static INode INodeNew;//was private
 
     private int NodePort = 1098;
-    private String ipNameServer = "127.0.0.1"; //127.0.0.1
+    private String ipNameServer = "169.254.91.69"; //127.0.0.1
 
     public RMIConnector() { //to nameserver
         try {

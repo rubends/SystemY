@@ -17,7 +17,7 @@ public class View extends JFrame{
     FileAgent fileAgent;
     Controller Controller;
     JLabel label3 = new JLabel("        Swing GUI       ");
-    private JButton openButton, removeButton, downloadButton,logoutButton;
+    private JButton openButton, removeButton, removeLocalButton, downloadButton,logoutButton;
 
     public View(FileAgent fileAgent)
     {
@@ -32,12 +32,14 @@ public class View extends JFrame{
         //pane.createVerticalScrollBar();
         openButton = new JButton("Open File");
         removeButton = new JButton("Remove File");
+        removeLocalButton = new JButton("Remove local file");
         downloadButton = new JButton("Download File");
         logoutButton = new JButton("Logout");
 
         add(label3, BorderLayout.CENTER);
         add(openButton, BorderLayout.WEST);
         add(removeButton, BorderLayout.EAST);
+        add(removeLocalButton, BorderLayout.EAST);
         add(logoutButton, BorderLayout.SOUTH);
         add(pane, BorderLayout.CENTER);
     }
@@ -53,6 +55,8 @@ public class View extends JFrame{
     {
         this.removeButton.addActionListener(event);
     }
+    public void removeLocalButtonListener(ActionListener event){this.removeLocalButton.addActionListener(event);}
+
 
     public void downloadButtonListener(ActionListener event)
     {

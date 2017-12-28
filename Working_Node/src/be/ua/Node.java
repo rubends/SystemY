@@ -12,7 +12,7 @@ public class Node extends UnicastRemoteObject implements INode{
     private volatile int mNext;
     private volatile int mId;
     private volatile NameServerInterface INameServer;
-    public static TreeMap<String, Boolean> localFileList; // filename - locked
+    private volatile TreeMap<String, Boolean> localFileList; // filename - locked
     public static int nodeHash; //for local hash getting
 
     protected Node(int hash, NameServerInterface ns) throws RemoteException
@@ -164,5 +164,13 @@ public class Node extends UnicastRemoteObject implements INode{
     public void deleteLocalFile(String filename){
         File file = UserInterface.getFile(filename);
         file.delete();
+    }
+
+
+    public void setLocalFileList( TreeMap<String, Boolean> fileList){
+        this.localFileList = fileList;
+    }
+    public TreeMap<String, Boolean> getLocalFileList(){
+        return this.localFileList;
     }
 }

@@ -10,13 +10,14 @@ public class FileAgent implements Runnable, Serializable {
 
     @Override
     public void run() {
-        Node.localFileList.clear();
         //adding local and replication files to Node.fileList
         for (String foldername: new String[]{"Local", "Replication"}) {
             File folder = new File(Main.pathToFiles+ foldername);
             addToList(folder.listFiles());
         }
-        Node.localFileList = fileList;
+        //Node.localFileList = fileList;
+        //Node.localFileList.putAll(fileList);
+        //fileList.putAll(Node.localFileList);
     }
 
     public void addToList(File[] files){
@@ -32,7 +33,11 @@ public class FileAgent implements Runnable, Serializable {
             fileList.remove(fileName);
         }
         fileList.put(fileName, lock);
-        Node.localFileList = fileList;
+        try {
+            Main.INode.setLocalFileList(fileList);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static TreeMap<String, Boolean> getFileList () {

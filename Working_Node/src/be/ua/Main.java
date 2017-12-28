@@ -56,7 +56,7 @@ public class Main {
                     FileAgent fileAgent = new FileAgent();
                     RMIAgentInterface IRMIAgent = new RMIAgent(NameServerInterface);
                     new RMIConnector().createRMIAgent(IRMIAgent);
-                    IRMIAgent.startFileAgent(fileAgent, "Mezelf");
+                    IRMIAgent.startFileAgent(fileAgent);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

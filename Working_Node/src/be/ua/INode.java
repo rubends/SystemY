@@ -2,6 +2,7 @@ package be.ua;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.TreeMap;
 
 public interface INode extends Remote {
     void updateNeighbours(int newPrevious, int newNext) throws RemoteException;
@@ -20,4 +21,6 @@ public interface INode extends Remote {
     String getDownloadLocation(String filename) throws RemoteException;
     void deleteFileLocation(String filename, int nodeHash) throws RemoteException;
     void deleteLocalFile(String filename) throws RemoteException;
+    void setLocalFileList( TreeMap<String, Boolean> fileList) throws RemoteException;
+    TreeMap<String, Boolean> getLocalFileList() throws RemoteException;
 }

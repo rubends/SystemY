@@ -1,5 +1,7 @@
 package be.ua;
 
+import sun.reflect.generics.tree.Tree;
+
 import java.awt.*;
 import java.io.File;
 import java.rmi.Naming;
@@ -37,8 +39,9 @@ public class UserInterface {
                     System.out.println("previous node: " + Main.INode.getPrevNode());
                     System.out.println("next node: " + Main.INode.getNextNode());
                 } else if (action == 2) {
-                    if(Node.localFileList.size() > 0) {
-                        for (Map.Entry<String, Boolean> entry : Node.localFileList.entrySet()) {
+                    TreeMap<String, Boolean> localFileList = Main.INode.getLocalFileList();
+                    if(localFileList.size() > 0) {
+                        for (Map.Entry<String, Boolean> entry : localFileList.entrySet()) {
                             System.out.println("Name: " + entry.getKey() + ". Locked: " + entry.getValue());
                         }
                     } else {

@@ -18,8 +18,18 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/be/ua/Main.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="0">
               <caret line="0" column="14" lean-forward="true" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
+=======
+<<<<<<< HEAD
+            <state relative-caret-position="272">
+              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+=======
+            <state relative-caret-position="387">
+              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
+>>>>>>> 3861be543b322ad079608d43d02699b0b5bbefed
               <folding />
             </state>
           </provider>
@@ -40,8 +50,18 @@
       <file leaf-file-name="UserInterface.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/be/ua/UserInterface.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="101">
               <caret line="132" column="9" lean-forward="false" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
+=======
+<<<<<<< HEAD
+            <state relative-caret-position="153">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+=======
+            <state relative-caret-position="276">
+              <caret line="144" column="28" lean-forward="true" selection-start-line="144" selection-start-column="28" selection-end-line="144" selection-end-column="28" />
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
+>>>>>>> 3861be543b322ad079608d43d02699b0b5bbefed
               <folding />
             </state>
           </provider>
@@ -50,8 +70,17 @@
       <file leaf-file-name="FailureAgent.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/be/ua/FailureAgent.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="646">
+=======
+<<<<<<< HEAD
+            <state relative-caret-position="-5">
+              <caret line="67" column="18" lean-forward="false" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
+=======
+            <state relative-caret-position="387">
+>>>>>>> 3861be543b322ad079608d43d02699b0b5bbefed
               <caret line="42" column="77" lean-forward="false" selection-start-line="42" selection-start-column="77" selection-end-line="42" selection-end-column="77" />
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -59,6 +88,13 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+      <file leaf-file-name="UserInterface.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/be/ua/UserInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2499">
+              <caret line="151" column="0" lean-forward="false" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+=======
       <file leaf-file-name="FileAgent.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/be/ua/FileAgent.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -96,6 +132,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
               <caret line="12" column="43" lean-forward="false" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
               <folding />
             </state>
           </provider>
@@ -104,8 +141,18 @@
       <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/be/ua/Node.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="408">
               <caret line="29" column="29" lean-forward="false" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+=======
+<<<<<<< HEAD
+            <state relative-caret-position="-1042">
+              <caret line="15" column="32" lean-forward="false" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
+=======
+            <state relative-caret-position="136">
+              <caret line="29" column="29" lean-forward="true" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
+>>>>>>> 3861be543b322ad079608d43d02699b0b5bbefed
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -113,11 +160,19 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+      <file leaf-file-name="FailureAgent.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/be/ua/FailureAgent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="522">
+              <caret line="44" column="8" lean-forward="false" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+=======
       <file leaf-file-name="RMIConnector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/be/ua/RMIConnector.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1275">
               <caret line="79" column="68" lean-forward="false" selection-start-line="79" selection-start-column="68" selection-end-line="79" selection-end-column="68" />
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -125,15 +180,36 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+      <file leaf-file-name="TCPSender.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/be/ua/TCPSender.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="36" column="5" lean-forward="false" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
+>>>>>>> 3861be543b322ad079608d43d02699b0b5bbefed
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>HEAD</find>
+<<<<<<< HEAD
+      <find>fileli</find>
+      <find>filedi</find>
+=======
       <find>prevIp</find>
       <find>getFil</find>
       <find>getFile</find>
       <find>fileList</find>
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -146,6 +222,29 @@
         <option value="$PROJECT_DIR$/src/be/ua/TCPSender.java" />
         <option value="$PROJECT_DIR$/src/be/ua/INode.java" />
         <option value="$PROJECT_DIR$/src/be/ua/Node.java" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/src/be/ua/RMIAgentInterface.java" />
+        <option value="$PROJECT_DIR$/src/be/ua/RMIConnector.java" />
+        <option value="$PROJECT_DIR$/src/be/ua/UserInterface.java" />
+        <option value="$PROJECT_DIR$/src/be/ua/FileAgent.java" />
+        <option value="$PROJECT_DIR$/src/be/ua/UpdateFileMapThread.java" />
+        <option value="$PROJECT_DIR$/src/be/ua/Main.java" />
+        <option value="$PROJECT_DIR$/src/be/ua/RMIAgent.java" />
+        <option value="$PROJECT_DIR$/src/be/ua/FailureAgent.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="width" value="683" />
+    <option name="height" value="728" />
+  </component>
+=======
         <option value="$PROJECT_DIR$/src/be/ua/MulticastThread.java" />
         <option value="$PROJECT_DIR$/src/be/ua/Replication.java" />
         <option value="$PROJECT_DIR$/src/be/ua/Main.java" />
@@ -154,6 +253,7 @@
       </list>
     </option>
   </component>
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -169,8 +269,19 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
+=======
       <pane id="Scope" />
       <pane id="Scratches" />
+<<<<<<< HEAD
+=======
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+>>>>>>> 3861be543b322ad079608d43d02699b0b5bbefed
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -324,6 +435,43 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="TaskManager">
+<<<<<<< HEAD
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9366eb54-c109-4930-929e-a7fd43af6ebc" name="Default" comment="" />
+      <created>1514367197898</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1514367197898</updated>
+      <workItem from="1514392749627" duration="824000" />
+      <workItem from="1514393882736" duration="889000" />
+      <workItem from="1514395656559" duration="6720000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="13267000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.03448276" sideWeight="0.4969743" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843652" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18181819" sideWeight="0.29425114" order="7" side_tool="true" content_ui="tabs" />
+=======
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -335,14 +483,28 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32948583" sideWeight="0.50625" order="7" side_tool="true" content_ui="tabs" />
+=======
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32948583" sideWeight="0.50416666" order="7" side_tool="true" content_ui="tabs" />
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
+>>>>>>> 3861be543b322ad079608d43d02699b0b5bbefed
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31479537" sideWeight="0.7171875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18181819" sideWeight="0.70574886" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16868381" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+=======
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24427083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32838982" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -358,7 +520,12 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+<<<<<<< HEAD
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 3861be543b322ad079608d43d02699b0b5bbefed
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -366,9 +533,13 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19809322" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32948583" sideWeight="0.49583334" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843652" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+=======
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
+>>>>>>> 3861be543b322ad079608d43d02699b0b5bbefed
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0140625" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31479537" sideWeight="0.7171875" order="2" side_tool="false" content_ui="tabs" />
@@ -528,7 +699,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="45" lean-forward="true" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -582,6 +752,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="14" column="43" lean-forward="false" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
+<<<<<<< HEAD
+=======
           <folding />
         </state>
       </provider>
@@ -590,7 +762,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="343">
           <caret line="62" column="40" lean-forward="false" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
+<<<<<<< HEAD
           <folding />
+=======
+          <folding>
+            <marker date="1513937141351" expanded="true" signature="3680:3721" ph="{...}" />
+          </folding>
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
+>>>>>>> 3861be543b322ad079608d43d02699b0b5bbefed
         </state>
       </provider>
     </entry>
@@ -602,6 +781,17 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/be/ua/FileMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="39" column="29" lean-forward="false" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/be/ua/TCPReceiverThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+=======
     <entry file="file://$PROJECT_DIR$/src/be/ua/TCPReceiverThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -614,6 +804,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/FileMap.java">
       <provider selected="true" editor-type-id="text-editor">
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
         <state relative-caret-position="102">
           <caret line="9" column="48" lean-forward="false" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="48" />
           <folding>
@@ -639,7 +830,27 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/be/ua/UserInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2499">
+          <caret line="151" column="0" lean-forward="false" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/be/ua/FileAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/be/ua/RMIAgentInterface.java">
+=======
     <entry file="file://$PROJECT_DIR$/src/be/ua/MulticastThread.java">
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="21" column="41" lean-forward="false" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
@@ -649,24 +860,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/RMIConnector.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="1275">
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="-5">
+          <caret line="67" column="18" lean-forward="false" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
+=======
+        <state relative-caret-position="359">
+>>>>>>> 3861be543b322ad079608d43d02699b0b5bbefed
           <caret line="79" column="68" lean-forward="false" selection-start-line="79" selection-start-column="68" selection-end-line="79" selection-end-column="68" />
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/be/ua/UpdateFileMapThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="56" lean-forward="true" selection-start-line="12" selection-start-column="56" selection-end-line="12" selection-end-column="56" />
+=======
     <entry file="file://$PROJECT_DIR$/src/be/ua/Replication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="731">
           <caret line="50" column="74" lean-forward="false" selection-start-line="50" selection-start-column="74" selection-end-line="50" selection-end-column="74" />
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#UpdateFileMapThread#0;class#UpdateFileMapThread#0" expanded="false" />
+            <element signature="method#run#0;class#UpdateFileMapThread#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/be/ua/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/be/ua/RMIAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+=======
     <entry file="file://$PROJECT_DIR$/src/be/ua/FailureAgent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
@@ -674,13 +917,34 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/be/ua/INode.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="255">
+          <caret line="16" column="9" lean-forward="false" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/be/ua/Node.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="408">
           <caret line="29" column="29" lean-forward="false" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+=======
+        <state relative-caret-position="-1042">
+          <caret line="15" column="32" lean-forward="false" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+=======
+        <state relative-caret-position="136">
+          <caret line="29" column="29" lean-forward="true" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+>>>>>>> 3861be543b322ad079608d43d02699b0b5bbefed
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -692,13 +956,26 @@
         <state relative-caret-position="0">
           <caret line="0" column="14" lean-forward="true" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
           <folding />
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/be/ua/FileAgent.java">
+    <entry file="file://$PROJECT_DIR$/src/be/ua/FailureAgent.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="476">
           <caret line="29" column="5" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="522">
+          <caret line="44" column="8" lean-forward="false" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+=======
+        <state relative-caret-position="353">
+          <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+>>>>>>> 3861be543b322ad079608d43d02699b0b5bbefed
           <folding />
         </state>
       </provider>
@@ -708,6 +985,7 @@
         <state relative-caret-position="101">
           <caret line="132" column="9" lean-forward="false" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
           <folding />
+>>>>>>> 60035c6fc2478f48131d65b8fb740edb2ff9d1f1
         </state>
       </provider>
     </entry>

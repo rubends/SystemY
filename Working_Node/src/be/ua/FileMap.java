@@ -1,14 +1,13 @@
 package be.ua;
 
-import java.io.File;
-import java.util.TreeMap;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class FileMap {
+public class FileMap implements Serializable {
     private String filename;
-    private HashMap<Integer, String> FileLocation = new HashMap<>();
+    public HashMap<Integer, String> FileLocation = new HashMap<>();
 
     FileMap(String filename_, String localNodeip_, int localNodehash_){
         filename = filename_;
@@ -21,6 +20,9 @@ public class FileMap {
     public void addLocation(String ip,int hash){
         FileLocation.put(hash,ip);
     }
+    public void removeLocation(int hash){
+        FileLocation.remove(hash);
+    }
     public int getHashOfLocation() {
         Iterator<Integer> keySetIterator = FileLocation.keySet().iterator();
         while (keySetIterator.hasNext()) {
@@ -32,20 +34,22 @@ public class FileMap {
     }
     public String getIpOfLocation() {
         Iterator it = FileLocation.entrySet().iterator();
+        int randomLocation = (int)(Math.random()*(FileLocation.size()-1));
+        int i = 0;
+
         while(it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            String location = (String)pair.getValue();
-            //System.out.println("IP of location = " + location);
-            return location;
+            if(i == randomLocation) {
+                Map.Entry pair = (Map.Entry)it.next();
+                String location = (String)pair.getValue();
+                //System.out.println("IP of location = " + location);
+                return location;
+            }
+            i++;
         }
         return null;
     }
 
-    public void printLocation(){
-        Iterator<Integer> keySetIterator = FileLocation.keySet().iterator();
-        while (keySetIterator.hasNext()) {
-            int key = keySetIterator.next();
-            //System.out.println(key + " - " + FileLocation.get(key));
-        }
+    public HashMap<Integer, String> getFileLocations(){
+        return FileLocation;
     }
 }

@@ -7,58 +7,50 @@ import java.util.Observable;
 
 public class FileAgent extends Observable implements Runnable, Serializable {
 
-    private TreeMap<String, Boolean> fileList = new TreeMap<>();
-    public FileAgent ()   {
-    }
+    private TreeMap<String, Boolean> fileList;
+    public FileAgent() { fileList = new TreeMap<>(); }
 
-    public void setFileList(TreeMap<String, Boolean> fileList) {
-        this.fileList = fileList;
-        setChanged();
-        notifyObservers();
-    }
+    private static final long serialVersionUID = 6529685098267757690L; // set the serializable class ID
+
 
     @Override
     public void run() {
-        UserInterface.fileList.clear();
-        String rootPath = new File("").getAbsolutePath();
-        String sep = System.getProperty("file.separator"); //OS dependable
-        File localFolder = new File(rootPath + sep + "Files" + sep + "Local");
-        File[] localFiles = localFolder.listFiles();
-        File replicationFolder = new File(rootPath + sep + "Files" + sep + "Replication");
-        File[] replicationFiles = replicationFolder.listFiles();
-        addToList(localFiles);
-        addToList(replicationFiles);
-        UserInterface.fileList = fileList;
+        //adding local and replication files to Node.fileList
+        for (String foldername: new String[]{"Local", "Replication"}) {
+            File folder = new File(Main.pathToFiles+ foldername);
+            addToList(folder.listFiles());
+        }
+        try {
+            Main.INode.setLocalFileList(fileList);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        setChanged();
+        notifyObservers();
+        //Node.localFileList = fileList;
+        //Node.localFileList.putAll(fileList);
+        //fileList.putAll(Node.localFileList);
     }
 
     public void addToList(File[] files){
-        for (int i = 0; i < files.length; i++) {
-            String filename = files[i].getName();
-            if(!fileList.containsKey(filename)){
-                fileList.put(filename, true);
-                System.out.println("adding to file list: " + filename);
+        for (File file : files) {
+            if(!fileList.containsKey(file.getName())){
+                fileList.put(file.getName(), false);
             }
         }
     }
 
-    public TreeMap<String, Boolean> getFileList()
-    {
-        /*
-        String rootPath = new File("").getAbsolutePath();
-        String sep = System.getProperty("file.separator"); //OS dependable
-        File localFolder = new File(rootPath + sep + "Files" + sep + "Local");
-        File[] localFiles = localFolder.listFiles();
-        File replicationFolder = new File(rootPath + sep + "Files" + sep + "Replication");
-        File[] replicationFiles = replicationFolder.listFiles();
-        addToList(localFiles);
-        addToList(replicationFiles);
-        */
-        //-----
-        //Al het bovenstaande moet niet, is voor testen van de gui
-
-        //setFileList(fileList);
-        return fileList;
+    public void setLock(String fileName, Boolean lock){
+        if(fileList.containsKey(fileName)){
+            fileList.remove(fileName);
+        }
+        fileList.put(fileName, lock);
+        try {
+            Main.INode.setLocalFileList(fileList); //todo-setfilelist
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        setChanged();
+        notifyObservers();
     }
-
-
 }

@@ -5,43 +5,35 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class RMIConnector {
 
     private NameServerInterface INameServer;
     public INode INode;//was private
-    //public static INode INodeNew;//was private
-
-    private int NodePort = 1098;
-    private String ipNameServer = "169.254.91.69"; //127.0.0.1
+    //public RMIAgentInterface rmiAgentInterface;
+    Registry registry;
 
     public RMIConnector() { //to nameserver
         try {
             String name = "nodeNames";
-            INameServer = (NameServerInterface) Naming.lookup("//"+ipNameServer+"/"+name);
+            INameServer = (NameServerInterface) Naming.lookup("//"+Main.ipNameServer+"/"+name);
         } catch (Exception e) {
             System.out.println("No nameserver found.");
             e.printStackTrace();
         }
     }
 
-    public RMIConnector(NameServerInterface INameServer, String nodeName, int nodeCount) { //create own rmi
+    public RMIConnector(NameServerInterface INameServer, String nodeName, INode iNode) { //create own rmi
         try {
             int hash = INameServer.getHashOfName(nodeName);
-            INode = Main.INode;
             String connName = Integer.toString(hash);
+            System.setProperty("java.security.policy", "file:server.policy");
             if (System.getSecurityManager() == null) {
-                System.setProperty("java.security.policy", "file:server.policy"); //@todo CONNECTION REFUSED
                 System.setSecurityManager(new SecurityManager());
             }
-            try {
-                Registry registry = LocateRegistry.getRegistry(NodePort);
-                registry.rebind(connName, INode);
-            } catch (Exception e) {
-                Registry registry = LocateRegistry.createRegistry(NodePort);
-                registry.rebind(connName, INode);
-            }
+            registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT); // NETWORK
+            //registry = LocateRegistry.getRegistry(Registry.REGISTRY_PORT); // LOCAL
+            registry.rebind(connName, iNode);
             System.out.println("Created own RMI server");
         } catch (Exception e) {
             System.err.println("Exception while setting up RMI:");
@@ -50,45 +42,50 @@ public class RMIConnector {
     }
 
 
-    public RMIConnector(NameServerInterface INameServer, String newNodeName, String nodeName) throws RemoteException{ //get node RMI
+    public RMIConnector(NameServerInterface INameServer, String newNodeName) throws RemoteException{ //get node RMI
         int hash = INameServer.getHashOfName(newNodeName);
-        String connName = Integer.toString(hash);
         boolean gettingConnection = true;
         while(gettingConnection) {
             try {
-                Registry registry = LocateRegistry.getRegistry(NodePort);               // --- LOCALHOST ---
-                INode INodeNew = (INode) registry.lookup(connName);                     // _________________
+                //Registry registry = LocateRegistry.getRegistry(nodePort);                     // --- LOCALHOST ---
+                //INode INodeNew = (INode) registry.lookup(connName);                           // _________________
 
-                //String NodeIp = INameServer.getNodeIp(hash);                          // ---- NETWORK ----
-                //INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);     // _________________
-
-                Main.nodeMap.put(hash, INodeNew);
-                INodeNew.addNodeToMap(Main.INode.getId(), Main.INode);
-                Main.INode.addNodeToMap(hash, INodeNew);
-                ArrayList<Integer> ids = INameServer.getNeighbourNodes(hash);
-                INodeNew.updateNeighbours(ids.get(0), ids.get(1));
+                String NodeIp = INameServer.getNodeIp(hash);                                 // ---- NETWORK ----
+                INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+hash);         // _________________
+                updateNewNode(INameServer, INodeNew, hash);
                 System.out.println("New node id: " + INodeNew.getId());
-                if(ids.get(0) == INameServer.getHashOfName(nodeName)){
-                    Replication replication = new Replication(INameServer);
-                    replication.toNextNode(hash);
-                }
                 gettingConnection = false;
             } catch (Exception e) {
-                // e.printStackTrace(); //not printing because searching for connection
+                e.printStackTrace(); //not printing because searching for connection
             }
         }
     }
 
-    public void nodeFailure(NameServerInterface INameServer, int hash) //BIJ ELKE NODE EXCEPTION
-    { //@todo OPROEPEN BIJ EXCEPTIONS
+    private void updateNewNode(NameServerInterface INameServer, INode INodeNew, int hash){
         try {
-            ArrayList<Integer> failbourNodes = INameServer.getNeighbourNodes(hash);
-            INameServer.deleteNode(hash);
-            INode prevNode = Main.nodeMap.get(failbourNodes.get(0));
-            prevNode.updateNextNode(failbourNodes.get(0));
-            INode nextNode = Main.nodeMap.get(failbourNodes.get(1));
-            nextNode.updatePrevNode(failbourNodes.get(2));
-        } catch (Exception e) { e.printStackTrace(); }
+            if (INodeNew.getNextNode() == Main.INode.getId()) {
+                Main.INode.updatePrevNode(INodeNew.getId());
+            }
+            if (INodeNew.getPrevNode() == Main.INode.getId()) {
+                Main.INode.updateNextNode(INodeNew.getId());
+            }
+            Replication replication = new Replication(INameServer);
+            replication.toNextNode(hash);
+        } catch (Exception e){ e.printStackTrace(); }
     }
+
     public NameServerInterface getNameServer(){ return INameServer;}
+
+    public void createRMIAgent(RMIAgentInterface rmiAgentInterface){
+        try{
+            System.setProperty("java.security.policy", "file:server.policy");
+            if (System.getSecurityManager() == null) {
+                System.setSecurityManager(new SecurityManager());
+            }
+            registry = LocateRegistry.createRegistry(1101);
+            registry.rebind("RMIAgent", rmiAgentInterface);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

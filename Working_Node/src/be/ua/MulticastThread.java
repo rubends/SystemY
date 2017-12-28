@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 public class MulticastThread extends Thread{
     MulticastSocket MCsocket;
     DatagramSocket Dsocket;
-    public int nodeCount = 0;
+    public static int nodeCount = 0;
     public INode INode;
 
     String name;
@@ -19,7 +19,7 @@ public class MulticastThread extends Thread{
     }
 
     public void run() {
-        String inetAddress = "224.0.1.6"; //@todo WHY?
+        String inetAddress = "224.0.1.6";
         int MulticastSocketPort = 6790;
         int DsocketPort = 6791;
         try {
@@ -42,8 +42,6 @@ public class MulticastThread extends Thread{
             String nodeCountS = new String(buf, 0, nodeCountPacket.getLength());
             nodeCount = Integer.parseInt(nodeCountS);
             Dsocket.close();
-            //setup RMI connection
-            setupRMI(name, nodeCount);
             //listen to new nodes
             while(true){
                 byte[] bufN = new byte[1000];
@@ -51,7 +49,7 @@ public class MulticastThread extends Thread{
                 MCsocket.receive(newNode);
                 String newNodeName = new String(bufN, 0, newNode.getLength());
                 if(!newNodeName.equals(name)) {
-                    listenNodeRMi(newNodeName, name);
+                    getNewNodeRMi(newNodeName);
                 }
             }
         } catch(Exception e) {
@@ -60,13 +58,9 @@ public class MulticastThread extends Thread{
         }
     }
 
-    private void setupRMI(String nodeName, int nodeCount) throws NotBoundException {
-        RMIConnector connectorNode = new RMIConnector(INameServer, nodeName, nodeCount);
-    }
-
-    private void listenNodeRMi(String newName, String name) {
+    private void getNewNodeRMi(String newName) {
         try{
-            RMIConnector connector = new RMIConnector(INameServer, newName, name);
+            new RMIConnector(INameServer, newName);
         }
         catch (RemoteException e){
             e.printStackTrace();

@@ -25,4 +25,14 @@ public class TCPSender {
             e.printStackTrace();
         }
     }
+
+    public void downloadRequest(String filename, String ip) {
+        File tmpFile = UserInterface.getFile(filename);
+        String tmpPath = tmpFile.getAbsolutePath();
+        try {
+            SendFile(ip, tmpPath);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

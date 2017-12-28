@@ -85,7 +85,7 @@ public class UserInterface {
                 //node is zelf owner van het bestand, dus het kan geopend worden
                 Desktop.getDesktop().open(getFile(filename).getAbsoluteFile());
             } else {
-                FileAgent.setLock(filename, true);
+                //FileAgent.setLock(filename, true);
 
                 INode fileNode = (INode) Naming.lookup( "//"+ip + "/" + INameServer.getHashOfIp(ip));
                 String downloadIp = fileNode.getDownloadLocation(filename);
@@ -98,7 +98,7 @@ public class UserInterface {
                 System.out.println("opening file " + filename);
                 Desktop.getDesktop().open(getFile(filename).getAbsoluteFile());
 
-                FileAgent.setLock(filename, false);
+                //FileAgent.setLock(filename, false);
             }
         } catch (Exception e){
             System.out.println("ERROR: file not found");

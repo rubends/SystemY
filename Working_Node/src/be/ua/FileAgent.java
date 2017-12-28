@@ -5,19 +5,18 @@ import java.io.Serializable;
 import java.util.TreeMap;
 
 public class FileAgent implements Runnable, Serializable {
-    private static TreeMap<String, Boolean> fileList;
+    private TreeMap<String, Boolean> fileList;
     public FileAgent() { fileList = new TreeMap<>(); }
-    private String owner = "";
+
+    private static final long serialVersionUID = 6529685098267757690L; // set the serializable class ID
 
     @Override
     public void run() {
-        System.out.println("owner " + owner);
         //adding local and replication files to Node.fileList
         for (String foldername: new String[]{"Local", "Replication"}) {
             File folder = new File(Main.pathToFiles+ foldername);
             addToList(folder.listFiles());
         }
-        owner = "Ruben";
         try {
             Main.INode.setLocalFileList(fileList);
         } catch (Exception e){
@@ -36,7 +35,7 @@ public class FileAgent implements Runnable, Serializable {
         }
     }
 
-    public static void setLock(String fileName, Boolean lock){
+    public void setLock(String fileName, Boolean lock){
         if(fileList.containsKey(fileName)){
             fileList.remove(fileName);
         }

@@ -88,14 +88,14 @@ public class Controller implements Observer{
     }
 
     public void update(){
-        refreshListModel();
+        fillListModel();
     }
 
     public void refreshListModel()
     {
         //emptyListModel();
         fillListModel();
-        setList(new JList(listModel));
+        //setList(new JList(listModel));
         //todo use listmodel?
     }
 

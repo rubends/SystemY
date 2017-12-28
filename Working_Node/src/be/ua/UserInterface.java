@@ -87,7 +87,9 @@ public class UserInterface {
             if(ip.equals(ownIp)) { //file is on own system
                 //node is zelf owner van het bestand, dus het kan geopend worden
                 Desktop.getDesktop().open(getFile(filename).getAbsoluteFile());
-            } else {
+            } else if(Main.INode.hasFile(filename)) {
+                Desktop.getDesktop().open(getFile(filename).getAbsoluteFile());
+            }else {
                 //FileAgent.setLock(filename, true);
 
                 INode fileNode = (INode) Naming.lookup( "//"+ip + "/" + INameServer.getHashOfIp(ip));

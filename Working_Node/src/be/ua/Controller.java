@@ -14,7 +14,7 @@ public class Controller implements Observer{
     FileAgent fileAgent;
     private TreeMap<String, Boolean> fileList;
     private DefaultListModel listModel = new DefaultListModel();
-    public static JList list;
+    private static JList list;
 
     Controller(FileAgent fileAgent){
         this.fileAgent = fileAgent;
@@ -23,14 +23,32 @@ public class Controller implements Observer{
         fillListModel();
     }
 
-
-    public void createListeners(View view_){
-        view = view_;
-        //view.openButtonListener(new openSelectionListener());
-        //view.removeButtonListener(new removeSelectionListener());
-        //view.downloadButtonListener(new downloadSelectionListener());
+    //setters & getters
+    public DefaultListModel getListModel() {
+        return listModel;
+    }
+    public void setListModel(DefaultListModel listModel) {
+        this.listModel = listModel;
+    }
+    public static JList getList() {
+        return list;
+    }
+    public void setList(JList list) {
+        this.list = list;
     }
 
+
+    //Initialize listeners
+    public void createListeners(View view_){
+        view = view_;
+        view.openButtonListener(new openSelectionListener());
+        view.removeButtonListener(new removeSelectionListener());
+        view.removeLocalButtonListener(new removeLocalSelectionListener());
+        view.downloadButtonListener(new downloadSelectionListener());
+        view.logoutButtonListener(new logoutSelectionListener());
+    }
+
+    //Every listener:
     class openSelectionListener implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -53,32 +71,30 @@ public class Controller implements Observer{
             System.out.println("Download selected: " + list.getSelectedValue());
         }
     }
-
+    class logoutSelectionListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            System.out.println("logout");
+        }
+    }
+    class removeLocalSelectionListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            System.out.println("Remove local file, selected: " + list.getSelectedValue());
+        }
+    }
 
 
     public void update(Observable o, Object arg){
         refreshListModel();
     }
 
-    public DefaultListModel getListModel() {
-        return listModel;
-    }
 
-    public void setListModel(DefaultListModel listModel) {
-        this.listModel = listModel;
-    }
-
-    public static JList getList() {
-        return list;
-    }
-
-    public void setList(JList list) {
-        this.list = list;
-    }
 
     public void fillListModel()
     {
-
         fileList = FileAgent.getFileList();
         if(fileList!=null){
             System.out.println("GUI: filelist" + fileList);
@@ -86,14 +102,11 @@ public class Controller implements Observer{
             {
                 System.out.println("GUI: Key: "+entry.getKey()+". Value: " + entry.getValue());
                 listModel.addElement(entry.getKey());
-
-                //newList.add(entry.getKey());
             }
         }
         else{
             System.out.println("Nothing in the file list");
         }
-
     }
 
     public void emptyListModel()
@@ -105,25 +118,5 @@ public class Controller implements Observer{
     {
         emptyListModel();
         fillListModel();
-    }
-
-    //Actions when buttons are clicked
-    public void openButtonClicked(String filename){
-        System.out.println("open file: " + filename);
-    }
-    public void removeButtonClicked(String filename){
-        System.out.println("remove file: " + filename);
-    }
-    public void removeLocalButtonClicked(String filename){
-        System.out.println("remove local file: " + filename);
-    }
-    public void downloadButtonClicked(String filename){
-        System.out.println("download file: " + filename);
-    }
-
-    public void logoutButtonClicked(){
-        System.out.println("--");
-        System.out.println(getList());
-        System.out.println(getListModel());
     }
 }

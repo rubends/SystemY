@@ -7,17 +7,53 @@ import static be.ua.Main.controller;
 
 public class View extends JFrame{
 
+    //var
+    public String ipNameserver = "";
+    public String nodename = "";
+    public String getIpNameserver() {
+        return ipNameserver;
+    }
+
+    public void setIpNameserver(String ipNameserver) {
+        this.ipNameserver = ipNameserver;
+    }
+
+    public String getNodename() {
+        return nodename;
+    }
+
+    public void setNodename(String nodename) {
+        this.nodename = nodename;
+    }
+
+
     //declared for making listeners
     private java.awt.Button logoutButton,openButton,removeButton,removeLocalButton;
     private java.awt.TextArea logText;
     private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JTextField nodenameTextField, nameserverTextField;
+    private javax.swing.JLabel nodenameLabel, nameserverLabel;
 
-    public View()
+    public View(boolean firstLogin)
     {
-        JPanel panel = new JPanel();
-        setSize(500, 330);
+        JPanel panel1 = new JPanel();
+        JPanel panel2 = new JPanel();
 
-        //init components
+        //PANEL 1
+        loginButton = new javax.swing.JButton();
+        nodenameTextField = new javax.swing.JTextField();
+        nameserverTextField = new javax.swing.JTextField();
+        nodenameLabel = new javax.swing.JLabel();
+        nameserverLabel = new javax.swing.JLabel();
+
+        nodenameTextField.setText("");
+        nameserverTextField.setText(Main.recommendedNameServer);
+        nodenameLabel.setText("nodename:");
+        nameserverLabel.setText("nameserver:");
+        loginButton.setText("Enter");
+
+        //init components - panel 2
         removeButton = new java.awt.Button();
         openButton = new java.awt.Button();
         removeLocalButton = new java.awt.Button();
@@ -32,12 +68,53 @@ public class View extends JFrame{
         logoutButton.setLabel("EXIT");
 
         //GUI border
-        panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Project: System Y - Node name: " + Main.nodeName));
+        panel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Project: System Y - Node name: " + Main.nodeName));
         setName("SystemY"); // NOI18N
 
-        //make layout attached to panel
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(panel);
-        panel.setLayout(layout);
+
+
+        //panel 1 layout
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(panel1);
+        panel1.setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(nodenameLabel)
+                                                        .addComponent(nameserverLabel))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(nameserverTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(nodenameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(nodenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(nodenameLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(nameserverTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(nameserverLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(loginButton)
+                                .addGap(5, 5, 5))
+        );
+
+
+
+
+
+        //panel 2 layout
+        layout = new javax.swing.GroupLayout(panel2);
+        panel2.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -74,7 +151,14 @@ public class View extends JFrame{
         );
 
         //add panel to the view
-        add(panel);
+        if (firstLogin){
+            setSize(250, 150);
+            add(panel1);
+        }
+        else{
+            setSize(500, 330);
+            add(panel2);
+        }
     }
 
     //the listeners
@@ -88,6 +172,11 @@ public class View extends JFrame{
     }
     public void removeLocalButtonListener(ActionListener event) {this.removeLocalButton.addActionListener(event);}
     public void logoutButtonListener(ActionListener event) {this.logoutButton.addActionListener(event);}
+    public void loginButtonListener(ActionListener event) {
+        setIpNameserver(nameserverTextField.getText());
+        setNodename(nodenameTextField.getText());
+        this.loginButton.addActionListener(event);
+    }
 
     public void writeLogs(String logText){this.logText.append(printStamp() + logText + "\n");}
     public String printStamp(){

@@ -43,6 +43,7 @@ public class Controller implements Observer{
         view.removeButtonListener(new removeSelectionListener());
         view.removeLocalButtonListener(new removeLocalSelectionListener());
         view.logoutButtonListener(new logoutSelectionListener());
+        view.loginButtonListener(new loginSelectionListener());
     }
 
     //Every listener:
@@ -78,7 +79,13 @@ public class Controller implements Observer{
             ui.deleteLocalFile(list.getSelectedValue().toString());
         }
     }
-
+    class loginSelectionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            System.out.println("hi");
+            Main.nodeName = view.getNodename();
+            Main.ipNameServer = view.getIpNameserver();
+        }
+    }
 
     //observer pattern
     public void update(Observable o, Object arg){

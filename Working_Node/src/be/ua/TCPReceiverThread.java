@@ -26,19 +26,25 @@ public class TCPReceiverThread extends Thread {
             try {
                 Socket receivedSocket = socket.accept();
                 InputStream is = receivedSocket.getInputStream();
-                String fileName = new DataInputStream(is).readUTF(); //get name from sender
+                DataInputStream inputStream = new DataInputStream(is);
+                String fileName = inputStream.readUTF(); //get name from sender
+                long fileLength = inputStream.readLong();
                 File receivedFile = new File(Main.pathToReplFiles + fileName);
                 FileOutputStream fos = new FileOutputStream(receivedFile);
                 int bufferLength = is.available();
-                while(receivedSocket.isConnected()){ //max size TCP packet is 64kb
+                int received = 0;
+                while(fileLength > received){ //max size TCP packet is 64kb
                     if(bufferLength > 0) {
                         byte[] data = new byte[bufferLength];
                         int length = is.read(data);
                         fos.write(data, 0, length);
+                        received = received + length;
+                    } else {
+                        break;
                     }
                 }
                 System.out.println("TCPReceiverThread: filename: " + fileName);
-                //receivedSocket.close();
+                receivedSocket.close();
                 fos.close();
                 is.close();
 

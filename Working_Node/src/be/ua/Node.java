@@ -50,7 +50,11 @@ public class Node extends UnicastRemoteObject implements INode{
     }
 
     public void deleteFileLocation(String filename, int nodeHash) {
-        Replication.fileMap.get(filename).removeLocation(nodeHash); // TODO NOT FOUND NULLPOINTER
+        try {
+            Replication.fileMap.get(filename).removeLocation(nodeHash);
+        } catch (Exception e){
+            System.out.println("Delete file not found");
+        }
     }
 
     public void sendFiche(FileMap fiche) {

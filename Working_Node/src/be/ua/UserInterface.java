@@ -6,6 +6,7 @@ import java.rmi.Naming;
 import java.util.*;
 import java.lang.String;
 
+
 public class UserInterface {
     private NameServerInterface INameServer;
 

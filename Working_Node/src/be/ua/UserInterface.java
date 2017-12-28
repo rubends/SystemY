@@ -1,7 +1,5 @@
 package be.ua;
 
-import sun.reflect.generics.tree.Tree;
-
 import java.awt.*;
 import java.io.File;
 import java.rmi.Naming;

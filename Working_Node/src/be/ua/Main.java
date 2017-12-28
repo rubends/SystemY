@@ -17,6 +17,7 @@ public class Main {
     public static String pathToReplFiles = rootPath + sep + "Files" + sep + "Replication" + sep;
     public static NameServerInterface NameServerInterface;
     public static Controller controller;
+    private static FileAgent fileAgent;
 
     public static void main(String[] args) {
 
@@ -50,19 +51,15 @@ public class Main {
         replication.getFiles();
 
 
-        FileAgent fileAgent = new FileAgent();
-        controller = new Controller(fileAgent);
-        View view = new View();
-        controller.createListeners(view);
-        view.setVisible(true);
-        fileAgent.addObserver(controller);
+        //FileAgent fileAgent = new FileAgent();
+
 
 
         //implementation of agents
         (new Thread(){ // keep going without interrupting application
             public void run() {
                 try {
-                    FileAgent fileAgent = new FileAgent();
+                    fileAgent = new FileAgent();
                     RMIAgentInterface IRMIAgent = new RMIAgent(NameServerInterface);
                     new RMIConnector().createRMIAgent(IRMIAgent);
                     IRMIAgent.startFileAgent(fileAgent);
@@ -71,6 +68,14 @@ public class Main {
                 }
             }
         }).start();
+
+
+
+        controller = new Controller(fileAgent);
+        View view = new View();
+        controller.createListeners(view);
+        view.setVisible(true);
+        fileAgent.addObserver(controller);
 
         ui.startUI();
     }

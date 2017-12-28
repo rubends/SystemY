@@ -115,12 +115,14 @@ public class Controller implements Observer{
             for(Map.Entry<String, Boolean> entry : fileList.entrySet())
             {
                 //System.out.println("GUI: Key: "+entry.getKey()+". Value: " + entry.getValue());
-                listModel.addElement(entry.getKey());
+                if(!listModel.contains(entry.getKey())){
+                    listModel.addElement(entry.getKey());
+                }
             }
         }
         else{
             System.out.println("Nothing in the file list");
         }
-        System.out.println(listModel);
+        //System.out.println(listModel);
     }
 }

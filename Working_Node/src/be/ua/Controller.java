@@ -17,7 +17,7 @@ public class Controller implements Observer{
     Controller(FileAgent fileAgent){
         this.fileAgent = fileAgent;
         this.list = new JList(listModel);
-        this.fileList = new TreeMap<String,Boolean>();
+        this.fileList = new TreeMap<>();
         fillListModel();
     }
 
@@ -82,12 +82,17 @@ public class Controller implements Observer{
 
     //observer pattern
     public void update(Observable o, Object arg){
+        System.out.println("Update observer");
+        refreshListModel();
+    }
+
+    public void update(){
         refreshListModel();
     }
 
     public void refreshListModel()
     {
-        emptyListModel();
+        //emptyListModel();
         fillListModel();
         view.writeLogs("Refreshed list.");
         setList(new JList(listModel));

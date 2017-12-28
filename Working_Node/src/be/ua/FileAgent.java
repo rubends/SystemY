@@ -25,11 +25,11 @@ public class FileAgent extends Observable implements Runnable, Serializable {
         } catch (Exception e){
             e.printStackTrace();
         }
-        setChanged();
+        if(Main.controller != null){
+            Main.controller.update(); //bad fix for observable update
+        }
+        hasChanged();
         notifyObservers();
-        //Node.localFileList = fileList;
-        //Node.localFileList.putAll(fileList);
-        //fileList.putAll(Node.localFileList);
     }
 
     public void addToList(File[] files){
@@ -46,11 +46,9 @@ public class FileAgent extends Observable implements Runnable, Serializable {
         }
         fileList.put(fileName, lock);
         try {
-            Main.INode.setLocalFileList(fileList); //todo-setfilelist
+            Main.INode.setLocalFileList(fileList);
         } catch (Exception e){
             e.printStackTrace();
         }
-        setChanged();
-        notifyObservers();
     }
 }

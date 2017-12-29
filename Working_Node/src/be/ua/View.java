@@ -28,30 +28,30 @@ public class View extends JFrame{
 
 
     //declared for making listeners
-    private java.awt.Button logoutButton,openButton,removeButton,removeLocalButton;
+    private java.awt.Button logoutButton,openButton,removeButton,removeLocalButton, loginButton;
     private java.awt.TextArea logText;
     private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JButton loginButton;
     private javax.swing.JTextField nodenameTextField, nameserverTextField;
     private javax.swing.JLabel nodenameLabel, nameserverLabel;
 
     public View(boolean firstLogin)
     {
+        setTitle("System Y");
+        setResizable(false);
         JPanel panel1 = new JPanel();
         JPanel panel2 = new JPanel();
 
-        //PANEL 1
-        loginButton = new javax.swing.JButton();
+        //init components - panel 1
+        loginButton = new java.awt.Button();
         nodenameTextField = new javax.swing.JTextField();
         nameserverTextField = new javax.swing.JTextField();
         nodenameLabel = new javax.swing.JLabel();
         nameserverLabel = new javax.swing.JLabel();
-
         nodenameTextField.setText("");
         nameserverTextField.setText(Main.recommendedNameServer);
         nodenameLabel.setText("nodename:");
         nameserverLabel.setText("nameserver:");
-        loginButton.setText("Enter");
+        loginButton.setLabel("Enter");
 
         //init components - panel 2
         removeButton = new java.awt.Button();
@@ -60,8 +60,6 @@ public class View extends JFrame{
         logoutButton = new java.awt.Button();
         logText = new java.awt.TextArea();
         jScrollPane = new JScrollPane(controller.getList());
-
-        //add labels
         removeButton.setLabel("Remove File");
         openButton.setLabel("Open File");
         removeLocalButton.setLabel("Remove Local File");
@@ -152,7 +150,7 @@ public class View extends JFrame{
 
         //add panel to the view
         if (firstLogin){
-            setSize(250, 150);
+            setSize(250, 140);
             add(panel1);
         }
         else{

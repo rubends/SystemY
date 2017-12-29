@@ -24,9 +24,11 @@ public class Main {
     public static void main(String[] args) {
 
         View viewPanel1 = new View(true);
+        controller = new Controller(true);
+        controller.createListeners(viewPanel1);
         viewPanel1.setVisible(true);
         while(nodeName == ""){
-            nodeName = nodeName;
+            //nodeName = nodeName;
         }
         viewPanel1.setVisible(false);
 
@@ -75,7 +77,7 @@ public class Main {
             }
         }).start();
 
-        controller = new Controller(fileAgent);
+
         View viewPanel2 = new View(false);
         controller.createListeners(viewPanel2);
         viewPanel2.setVisible(true);

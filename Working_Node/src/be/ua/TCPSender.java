@@ -21,7 +21,6 @@ public class TCPSender {
             outToServer.write(fileArray);
             socket.close();
         } catch (Exception e){
-            System.out.println("Something went wrong.");
             e.printStackTrace();
         }
     }

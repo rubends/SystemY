@@ -7,26 +7,6 @@ import static be.ua.Main.controller;
 
 public class View extends JFrame{
 
-    //var
-    public String ipNameserver = "";
-    public String nodename = "";
-    public String getIpNameserver() {
-        return ipNameserver;
-    }
-
-    public void setIpNameserver(String ipNameserver) {
-        this.ipNameserver = ipNameserver;
-    }
-
-    public String getNodename() {
-        return nodename;
-    }
-
-    public void setNodename(String nodename) {
-        this.nodename = nodename;
-    }
-
-
     //declared for making listeners
     private java.awt.Button logoutButton,openButton,removeButton,removeLocalButton, loginButton;
     private java.awt.TextArea logText;
@@ -40,6 +20,7 @@ public class View extends JFrame{
         setResizable(false);
         JPanel panel1 = new JPanel();
         JPanel panel2 = new JPanel();
+
 
         //init components - panel 1
         loginButton = new java.awt.Button();
@@ -171,10 +152,15 @@ public class View extends JFrame{
     public void removeLocalButtonListener(ActionListener event) {this.removeLocalButton.addActionListener(event);}
     public void logoutButtonListener(ActionListener event) {this.logoutButton.addActionListener(event);}
     public void loginButtonListener(ActionListener event) {
-        setIpNameserver(nameserverTextField.getText());
-        setNodename(nodenameTextField.getText());
         this.loginButton.addActionListener(event);
     }
+    public String getIpNameserver() {
+        return nameserverTextField.getText();
+    }
+    public String getNodename() {
+        return nodenameTextField.getText();
+    }
+
 
     public void writeLogs(String logText){this.logText.append(printStamp() + logText + "\n");}
     public String printStamp(){

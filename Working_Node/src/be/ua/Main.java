@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Main {
 
     //global variables
-    public static String recommendedNameServer = "169.254.91.69";
+    public static String recommendedNameServer = "192.168.0.170";
     public static String ipNameServer = "";
     public static INode INode;
     public static String rootPath = new File("").getAbsolutePath();
@@ -24,23 +24,17 @@ public class Main {
     public static void main(String[] args) {
 
         View viewPanel1 = new View(true);
-        controller = new Controller(true);
+        controller = new Controller(true, null);
         controller.createListeners(viewPanel1);
         viewPanel1.setVisible(true);
         while(nodeName == ""){
-            //nodeName = nodeName;
+            nodeName = nodeName;
         }
         viewPanel1.setVisible(false);
 
         RMIConnector connector = new RMIConnector();
         NameServerInterface = connector.getNameServer();
-
-
-        /*
         UserInterface ui = new UserInterface(NameServerInterface);
-        System.out.println("\t Enter the name for the new node");
-        System.out.print("> ");
-        nodeName = new Scanner(System.in).next();*/
         try{
             int hash = NameServerInterface.getHashOfName(nodeName);
             INode = new Node(hash, NameServerInterface);
@@ -78,12 +72,12 @@ public class Main {
         }).start();
 
 
+        controller = new Controller(false, ui);
         View viewPanel2 = new View(false);
         controller.createListeners(viewPanel2);
         viewPanel2.setVisible(true);
         fileAgent.addObserver(controller);
-
-        //ui.startUI();
+        ui.startUI();
     }
 }
 

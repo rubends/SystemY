@@ -46,7 +46,7 @@ public class FileMap implements Serializable {
             }
             i++;
         }
-        return null;
+        return "GEEN LOCATIE";
     }
 
     public HashMap<Integer, String> getFileLocations(){

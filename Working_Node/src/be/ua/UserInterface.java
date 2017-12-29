@@ -87,8 +87,10 @@ public class UserInterface {
             if(ip.equals(ownIp)) { //file is on own system
                 //node is zelf owner van het bestand, dus het kan geopend worden
                 Desktop.getDesktop().open(getFile(filename).getAbsoluteFile());
-            } else {
-                //FileAgent.setLock(filename, true);
+            } else if(Main.INode.hasFile(filename)) {
+                Desktop.getDesktop().open(getFile(filename).getAbsoluteFile());
+            }else {
+                //FileAgent.setLock(filename, true); // todo set lock
 
                 INode fileNode = (INode) Naming.lookup( "//"+ip + "/" + INameServer.getHashOfIp(ip));
                 String downloadIp = fileNode.getDownloadLocation(filename);
@@ -109,7 +111,7 @@ public class UserInterface {
         }
     }
 
-    public void deleteFile(String filename){ // TODO delete from FileAgent/Node.filelist
+    public void deleteFile(String filename){ // TODO delete from FileAgent/Node.filelist lists
         try {
             if (Main.INode.getLocalFileList().get(filename)) {
                 System.out.println("File " + filename + " is locked.");

@@ -11,12 +11,13 @@ public class Controller implements Observer{
     private TreeMap<String, Boolean> fileList;
     private DefaultListModel listModel = new DefaultListModel();
     private static JList list;
-    UserInterface ui = new UserInterface(Main.NameServerInterface);
+    UserInterface ui;
 
-    Controller(boolean firstLogin){
-        if (!firstLogin){
+    Controller(boolean firstLogin, UserInterface ui) {
+        if (!firstLogin) {
+            this.ui = ui;
             this.list = new JList(listModel);
-            this.fileList = new TreeMap<String,Boolean>();
+            this.fileList = new TreeMap<String, Boolean>();
             fillListModel();
         }
     }
@@ -86,15 +87,19 @@ public class Controller implements Observer{
 
     //observer pattern
     public void update(Observable o, Object arg){
+        System.out.println("Update observer");
         refreshListModel();
+    }
+
+    public void update(){
+        fillListModel();
     }
 
     public void refreshListModel()
     {
-        emptyListModel();
+        //emptyListModel();
         fillListModel();
-        view.writeLogs("Refreshed list.");
-        setList(new JList(listModel));
+        //setList(new JList(listModel));
         //todo use listmodel?
     }
 
@@ -114,7 +119,12 @@ public class Controller implements Observer{
             for(Map.Entry<String, Boolean> entry : fileList.entrySet())
             {
                 //System.out.println("GUI: Key: "+entry.getKey()+". Value: " + entry.getValue());
-                listModel.addElement(entry.getKey());
+                if(!listModel.contains(entry.getKey())){
+                    listModel.addElement(entry.getKey());
+                    if(view != null){
+                        view.writeLogs("Refreshed list.");
+                    }
+                }
             }
         }
         else{

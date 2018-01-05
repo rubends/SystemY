@@ -8,18 +8,18 @@ import java.util.*;
 
 public class Controller implements Observer{
     View view;
-    FileAgent fileAgent;
     private TreeMap<String, Boolean> fileList;
     private DefaultListModel listModel = new DefaultListModel();
     private static JList list;
     UserInterface ui;
 
-    Controller(FileAgent fileAgent, UserInterface ui){
-        this.fileAgent = fileAgent;
-        this.ui = ui;
-        this.list = new JList(listModel);
-        this.fileList = new TreeMap<>();
-        fillListModel();
+    Controller(boolean firstLogin, UserInterface ui) {
+        if (!firstLogin) {
+            this.ui = ui;
+            this.list = new JList(listModel);
+            this.fileList = new TreeMap<String, Boolean>();
+            fillListModel();
+        }
     }
 
     //setters & getters
@@ -44,27 +44,26 @@ public class Controller implements Observer{
         view.removeButtonListener(new removeSelectionListener());
         view.removeLocalButtonListener(new removeLocalSelectionListener());
         view.logoutButtonListener(new logoutSelectionListener());
+        view.loginButtonListener(new loginSelectionListener());
     }
 
     //Every listener:
-    class openSelectionListener implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            ui.openFile(list.getSelectedValue().toString());
+    class openSelectionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String selectedFilename = list.getSelectedValue().toString();
+            ui.openFile(selectedFilename);
+            view.writeLogs("Opened " + selectedFilename + ".");
         }
     }
-    class removeSelectionListener implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            ui.deleteFile(list.getSelectedValue().toString());
+    class removeSelectionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String selectedFilename = list.getSelectedValue().toString();
+            ui.deleteFile(selectedFilename);
+            view.writeLogs("Deleted " + selectedFilename + ".");
         }
     }
-    class logoutSelectionListener implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
+    class logoutSelectionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
             try {
                 Main.INode.shutdown();
             } catch (RemoteException e1) {
@@ -72,14 +71,19 @@ public class Controller implements Observer{
             }
         }
     }
-    class removeLocalSelectionListener implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            ui.deleteLocalFile(list.getSelectedValue().toString());
+    class removeLocalSelectionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String selectedFilename = list.getSelectedValue().toString();
+            ui.deleteLocalFile(selectedFilename);
+            view.writeLogs("Deleted " + selectedFilename + " local.");
         }
     }
-
+    class loginSelectionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            Main.nodeName = view.getNodename();
+            Main.ipNameServer = view.getIpNameserver();
+        }
+    }
 
     //observer pattern
     public void update(Observable o, Object arg){
@@ -107,7 +111,7 @@ public class Controller implements Observer{
     public void fillListModel()
     {
         try{
-        fileList = Main.INode.getLocalFileList();
+            fileList = Main.INode.getLocalFileList();
         }catch(Exception e){e.printStackTrace();}
 
         if(fileList!=null){
@@ -126,6 +130,5 @@ public class Controller implements Observer{
         else{
             System.out.println("Nothing in the file list");
         }
-        //System.out.println(listModel);
     }
 }

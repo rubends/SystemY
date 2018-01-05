@@ -4,7 +4,6 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.ArrayList;
 
 public class RMIConnector {
 
@@ -31,7 +30,8 @@ public class RMIConnector {
             if (System.getSecurityManager() == null) {
                 System.setSecurityManager(new SecurityManager());
             }
-            registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+            registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT); // NETWORK
+            //registry = LocateRegistry.getRegistry(Registry.REGISTRY_PORT); // LOCAL
             registry.rebind(connName, iNode);
             System.out.println("Created own RMI server");
         } catch (Exception e) {
@@ -43,15 +43,14 @@ public class RMIConnector {
 
     public RMIConnector(NameServerInterface INameServer, String newNodeName) throws RemoteException{ //get node RMI
         int hash = INameServer.getHashOfName(newNodeName);
-        String connName = Integer.toString(hash);
         boolean gettingConnection = true;
         while(gettingConnection) {
             try {
                 //Registry registry = LocateRegistry.getRegistry(nodePort);                     // --- LOCALHOST ---
                 //INode INodeNew = (INode) registry.lookup(connName);                           // _________________
 
-                String NodeIp = INameServer.getNodeIp(hash);                                    // ---- NETWORK ----
-                INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+connName);         // _________________
+                String NodeIp = INameServer.getNodeIp(hash);                                 // ---- NETWORK ----
+                INode INodeNew = (INode) Naming.lookup("//"+NodeIp+"/"+hash);         // _________________
                 updateNewNode(INameServer, INodeNew, hash);
                 System.out.println("New node id: " + INodeNew.getId());
                 gettingConnection = false;
@@ -68,20 +67,21 @@ public class RMIConnector {
             }
             if (INodeNew.getPrevNode() == Main.INode.getId()) {
                 Main.INode.updateNextNode(INodeNew.getId());
-                Replication replication = new Replication(INameServer);
-                replication.toNextNode(hash);
             }
+            Replication replication = new Replication(INameServer);
+            replication.toNextNode(hash);
         } catch (Exception e){ e.printStackTrace(); }
     }
 
     public NameServerInterface getNameServer(){ return INameServer;}
 
-
-
-    public void bindRMIAgent(RMIAgentInterface rmiAgentInterface){ //TODO: work in progress
-
+    public void createRMIAgent(RMIAgentInterface rmiAgentInterface){
         try{
-            //Registry register = LocateRegistry.getRegistry(Registry.REGISTRY_PORT);
+            System.setProperty("java.security.policy", "file:server.policy");
+            if (System.getSecurityManager() == null) {
+                System.setSecurityManager(new SecurityManager());
+            }
+            registry = LocateRegistry.createRegistry(1101);
             registry.rebind("RMIAgent", rmiAgentInterface);
         } catch (Exception e) {
             e.printStackTrace();

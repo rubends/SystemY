@@ -1,21 +1,40 @@
 package be.ua;
 
+import javax.swing.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Main {
+
+    //global variables
+    public static String recommendedNameServer = "192.168.0.170";
+    public static String ipNameServer = "";
     public static INode INode;
-    public static String ipNameServer = "169.254.254.168"; //127.0.0.1
-
+    public static String rootPath = new File("").getAbsolutePath();
+    public static String sep = System.getProperty("file.separator"); //OS dependable
+    public static String pathToFiles = rootPath + sep + "Files" + sep;
+    public static String pathToLocalFiles = rootPath + sep + "Files" + sep + "Local" + sep;
+    public static String pathToReplFiles = rootPath + sep + "Files" + sep + "Replication" + sep;
+    public static NameServerInterface NameServerInterface;
+    public static Controller controller;
+    private static FileAgent fileAgent;
+    public static String nodeName = "";
     public static void main(String[] args) {
+
+        View viewPanel1 = new View(true);
+        controller = new Controller(true, null);
+        controller.createListeners(viewPanel1);
+        viewPanel1.setVisible(true);
+        while(nodeName == ""){
+            nodeName = nodeName;
+        }
+        viewPanel1.setVisible(false);
+
         RMIConnector connector = new RMIConnector();
-        NameServerInterface NameServerInterface = connector.getNameServer();
-
+        NameServerInterface = connector.getNameServer();
         UserInterface ui = new UserInterface(NameServerInterface);
-
-        System.out.println("\t Enter the name for the new node");
-        System.out.print("> ");
-        String nodeName = new Scanner(System.in).next();
         try{
             int hash = NameServerInterface.getHashOfName(nodeName);
             INode = new Node(hash, NameServerInterface);
@@ -38,21 +57,26 @@ public class Main {
         replication.setNodeName(nodeName);
         replication.getFiles();
 
-
         //implementation of agents
-        /*
-        FileAgent fileAgent = new FileAgent();
-        try {
-            RMIAgentInterface rmiAgent = (RMIAgentInterface) new RMIAgent(INode, NameServerInterface);
-            System.out.println(rmiAgent);
-            connector.bindRMIAgent(rmiAgent);
-            rmiAgent.passFileAgent(fileAgent);
+        (new Thread(){ // keep going without interrupting application
+            public void run() {
+                try {
+                    fileAgent = new FileAgent();
+                    RMIAgentInterface IRMIAgent = new RMIAgent(NameServerInterface);
+                    new RMIConnector().createRMIAgent(IRMIAgent);
+                    IRMIAgent.startFileAgent(fileAgent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
-        } catch (Exception e) {
-            System.out.println("Agents created error:");
-            e.printStackTrace();
-        }*/
 
+        controller = new Controller(false, ui);
+        View viewPanel2 = new View(false);
+        controller.createListeners(viewPanel2);
+        viewPanel2.setVisible(true);
+        fileAgent.addObserver(controller);
         ui.startUI();
     }
 }

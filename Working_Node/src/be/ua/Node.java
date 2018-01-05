@@ -12,18 +12,15 @@ public class Node extends UnicastRemoteObject implements INode{
     private volatile int mNext;
     private volatile int mId;
     private volatile NameServerInterface INameServer;
-    public static TreeMap<File, Boolean> fileList; // file - locked
+    private volatile TreeMap<String, Boolean> localFileList; // filename - locked
     public static int nodeHash; //for local hash getting
-
 
     protected Node(int hash, NameServerInterface ns) throws RemoteException
     {
         super();
         mId = mPrevious = mNext = nodeHash = hash;
         INameServer = ns;
-        //Comparator<File> fileListComp = Comparator.comparing(File::getName); // compares the file in de treemap by name
-        //fileList = new TreeMap<>(fileListComp);
-        fileList = new TreeMap<>();
+        localFileList = new TreeMap<>();
     }
 
     public void updateNeighbours(int newPrevious, int newNext)
@@ -52,14 +49,17 @@ public class Node extends UnicastRemoteObject implements INode{
         return mId;
     }
 
-    public void nodeShutdownFiles(int hash) {
-        //@todo replication shutdown: update in filemap dat de eigenaar van 'hash' er niet meer is
-        //updateFiche( fileName,  hash,  ipLocation)
+    public void deleteFileLocation(String filename, int nodeHash) {
+        try {
+            Replication.fileMap.get(filename).removeLocation(nodeHash);
+        } catch (Exception e){
+            System.out.println("Delete file not found");
+        }
     }
 
     public void sendFiche(FileMap fiche) {
+        System.out.println("Getting fiche from " + fiche.getFilename());
         Replication.fileMap.put(fiche.getFilename(),fiche);
-        System.out.println("nieuwe item toegevoegd aan map" + fiche.getFilename());
     }
 
     public void updateFiche(String fileName, int id, String ipLocation){
@@ -79,6 +79,9 @@ public class Node extends UnicastRemoteObject implements INode{
         boolean hasFile = false;
         if(Replication.fileMap.containsKey(fileName)){
             hasFile = true;
+        } else {
+            File localFolder = new File(Main.pathToLocalFiles);
+            hasFile = new File(localFolder, fileName).exists();
         }
         return hasFile;
     }
@@ -90,7 +93,7 @@ public class Node extends UnicastRemoteObject implements INode{
             int nextHash = mNext;
 
             //inform previous node + replicate files to previous node
-            if(prevHash != Node.nodeHash){
+            if(prevHash != mId){
                 String prevIp = INameServer.getNodeIp(prevHash);
                 INode prevNode = (INode) Naming.lookup("//"+prevIp+"/"+Integer.toString(prevHash));
                 prevNode.updateNextNode(nextHash);
@@ -100,14 +103,14 @@ public class Node extends UnicastRemoteObject implements INode{
             }
 
             //inform next node
-            if(nextHash != Node.nodeHash)
+            if(nextHash != mId)
             {
                 String nextIp = INameServer.getNodeIp(nextHash);
                 INode nextNode = (INode) Naming.lookup("//"+nextIp+"/"+Integer.toString(nextHash));
                 nextNode.updatePrevNode(prevHash);
             }
 
-            INameServer.deleteNode(Node.nodeHash);
+            INameServer.deleteNode(mId);
             System.exit(0);
 
         } catch (Exception e) {
@@ -123,14 +126,15 @@ public class Node extends UnicastRemoteObject implements INode{
             int nextHashOfFailedNode = neighbours.get(1);
 
             //node lifecycle
-            if(prevHashOfFailedNode != Node.nodeHash){ //check that previous node of the failed node is not you
+            if(prevHashOfFailedNode != mId){ //check that previous node of the failed node is not you
                 String prevIp = INameServer.getNodeIp(prevHashOfFailedNode);
                 INode prevNode = (INode) Naming.lookup("//"+prevIp+"/"+Integer.toString(prevHashOfFailedNode));
                 prevNode.updateNextNode(nextHashOfFailedNode);
             } else {
                 updateNextNode(nextHashOfFailedNode);
             }
-            if(nextHashOfFailedNode != Node.nodeHash) //check that next node of the failed node is not you
+
+            if(nextHashOfFailedNode != mId) //check that next node of the failed node is not you
             {
                 String nextIp = INameServer.getNodeIp(nextHashOfFailedNode);
                 INode nextNode = (INode) Naming.lookup("//"+nextIp+"/"+Integer.toString(nextHashOfFailedNode));
@@ -142,9 +146,36 @@ public class Node extends UnicastRemoteObject implements INode{
 
             //start agent
             FailureAgent failureAgent = new FailureAgent(hashOfFailedNode, INameServer);
-            RMIAgent rmiAgent = new RMIAgent(Main.INode, INameServer);
-            rmiAgent.passFailureAgent(failureAgent);
+            RMIAgent rmiAgent = new RMIAgent(INameServer);
+            rmiAgent.startFailureAgent(failureAgent);
 
         } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    public String getDownloadLocation(String filename){
+        return Replication.fileMap.get(filename).getIpOfLocation();
+    }
+
+    public void sendFile(String ip, String filename){
+        TCPSender tcpSender = new TCPSender(7897);
+        tcpSender.downloadRequest(filename, ip);
+    }
+
+    public void deleteFile(String filename){
+        Replication.deleteFile(filename);
+        Replication.fileMap.remove(filename);
+    }
+
+    public void deleteLocalFile(String filename){
+        File file = UserInterface.getFile(filename);
+        file.delete();
+    }
+
+
+    public void setLocalFileList( TreeMap<String, Boolean> fileList){
+        this.localFileList = fileList;
+    }
+    public TreeMap<String, Boolean> getLocalFileList(){
+        return this.localFileList;
     }
 }

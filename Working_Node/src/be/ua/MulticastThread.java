@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 public class MulticastThread extends Thread{
     MulticastSocket MCsocket;
     DatagramSocket Dsocket;
-    public int nodeCount = 0;
+    public static int nodeCount = 0;
     public INode INode;
 
     String name;
@@ -19,7 +19,7 @@ public class MulticastThread extends Thread{
     }
 
     public void run() {
-        String inetAddress = "224.0.1.6"; //@todo WHY?
+        String inetAddress = "224.0.1.6";
         int MulticastSocketPort = 6790;
         int DsocketPort = 6791;
         try {

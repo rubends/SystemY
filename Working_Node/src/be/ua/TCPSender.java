@@ -21,7 +21,16 @@ public class TCPSender {
             outToServer.write(fileArray);
             socket.close();
         } catch (Exception e){
-            System.out.println("Something went wrong.");
+            e.printStackTrace();
+        }
+    }
+
+    public void downloadRequest(String filename, String ip) {
+        File tmpFile = UserInterface.getFile(filename);
+        String tmpPath = tmpFile.getAbsolutePath();
+        try {
+            SendFile(ip, tmpPath);
+        } catch (Exception e){
             e.printStackTrace();
         }
     }

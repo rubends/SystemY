@@ -2,13 +2,17 @@
 A java distributed file system
 
 ## Set up
-Node
-- Main.java: Put the right nameserver IP adres in the variable.
+- Make sure there is a "Local" and "Replication" folder in the "Files" directory. Put some existing files in the "Local" folder.
 
-##Made by
+### Nameserver
+- Start Main.java
+
+### Node
+- The application will ask for the IP adres of the nameserver and the name of the node in the first UI screen.
+- The node will try to connect with the running nameserver on the given IP adres and has the ID equals the hashed given name.
+- If it succeeds, the next UI will open and all of the systems functions are shown.
+
+## Made by
 - Ruben De Swaef
-	- RMI server, Multicast, RMI-connection between nodes, Failure, Replication startup and shutdown, Agents, User Interface
 - Sam Peetermans
-	- RMI client, Node order, Node interface, Replication previous node, file fiche, documentation, GUI
 - Stijn Dirickx
-	- Node list mapping, Node placement, Node Shutdown, TCP connection, testing, Replication update, Agent RMI

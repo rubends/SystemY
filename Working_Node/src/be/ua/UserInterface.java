@@ -121,6 +121,7 @@ public class UserInterface {
                 try {
                     String ownIp = INameServer.getNodeIp(Main.INode.getId());
                     String fileOwnerIp = INameServer.getFileIp(filename);
+                    //FileAgent.setLock(filename, true);
                     if (fileOwnerIp.equals(ownIp)) { //file is on own system
                         Replication.deleteFile(filename);
                         Replication.fileMap.remove(filename);
@@ -128,6 +129,7 @@ public class UserInterface {
                         INode fileNode = (INode) Naming.lookup("//" + fileOwnerIp + "/" + INameServer.getHashOfIp(fileOwnerIp));
                         fileNode.deleteFile(filename); //TODO check if file is locked
                     }
+                    //FileAgent.setLock(filename, false);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
